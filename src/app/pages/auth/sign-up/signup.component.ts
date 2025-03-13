@@ -19,8 +19,26 @@ export class SigUpComponent {
   @ViewChild('lastname') lastnameModel!: NgModel;
   @ViewChild('email') emailModel!: NgModel;
   @ViewChild('password') passwordModel!: NgModel;
+  //@ViewChild('confPassword') confPasswordModel!: NgModel;
 
   public user: IUser = {};
+
+  confPasswordValue = '';
+
+  // Variables para mostrar/ocultar contraseña
+  showPassword = false;
+  showConfirmPassword = false;
+
+  // Método para alternar la visibilidad de la contraseña
+  toggleShowPassword() {
+    this.showPassword = !this.showPassword;
+  }
+
+  // Método para alternar la visibilidad de la confirmación de contraseña
+  toggleShowConfirmPassword() {
+    this.showConfirmPassword = !this.showConfirmPassword;
+  }
+
 
   constructor(private router: Router, 
     private authService: AuthService
@@ -40,6 +58,9 @@ export class SigUpComponent {
     if (!this.passwordModel.valid) {
       this.passwordModel.control.markAsTouched();
     }
+    /*if (!this.confPasswordModel.valid) {
+      this.confPasswordModel.control.markAsTouched();
+    }*/
     if (this.emailModel.valid && this.passwordModel.valid) {
       this.authService.signup(this.user).subscribe({
         next: () => this.validSignup = true,

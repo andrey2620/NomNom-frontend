@@ -4,7 +4,7 @@
   background-position: left;
   background-size: cover;
   background-repeat: no-repeat;
-  padding: 20px 20%;
+  padding: 20px 10% !important;
   position: relative;
   &::before {
     content: '';
@@ -20,11 +20,15 @@
     position: relative;
     z-index: 2;
     width: 50%;
-    padding: 40px;
+    padding: 50px 180px;
     border-radius: 10px;
     box-shadow: 0 0 37px rgba(8, 21, 66, 0.05);
     margin: 0 auto;
     background-color: #fff;
+  }
+  .invalid-feedback {
+    position: absolute;
+    margin-top: 0px;
   }
   @media screen and (min-width: 801px) and (max-width: 1500px) {
     padding: 20px 5%;
@@ -43,5 +47,25 @@
         padding: 0px;
       }
     }
+  }
+
+  .btn-signIn{
+    width: 20%;
+    border-radius: 50px !important;
+  }
+
+  .input-down-border{
+    border: none;
+    border-bottom: 1px solid red;
+    outline: none;
+    padding: 5px;
+  }
+
+  .forgotPass{
+    margin-left: 30%;
+  }
+
+  .passEye{
+    margin-right: 2vw;
   }
 }

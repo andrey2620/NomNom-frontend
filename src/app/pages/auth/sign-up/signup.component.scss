@@ -19,7 +19,7 @@
   .login-card {
     position: relative;
     z-index: 2;
-    width: 50%;
+    width: 40% !important;
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0 0 37px rgba(8, 21, 66, 0.05);
@@ -47,5 +47,19 @@
         padding: 0px;
       }
     }
+  }
+
+  .btn-signUp{
+    width: 20%;
+    border-radius: 50px !important;
+  }
+
+  .btn-primary{
+    background-color: #2c5530;
+    border-color: #2c5530;
+  }
+
+  .passEye{
+    margin-right: 2vw;
   }
 }
