@@ -1,8 +1,8 @@
 :root {
-  --theme-default: #7366ff;
-  --theme-secondary: #f73164;
+  --theme-default: #bb0a21;
+  --theme-secondary: #2c5530;
   --light-background: rgba(242, 243, 247, 0.7);
-  --body-font-color: #2f2f3b;
+  --body-font-color: #2c5530;
   --chart-border: #ecf3fa;
   --recent-chart-bg: #fcfcfd;
   --light-bg: #f6f7f9;
@@ -10,7 +10,7 @@
   --light2: #f5f6f9;
   --sidebar-border: rgba(0, 0, 0, 0.1);
   --chart-text-color: rgba(82, 82, 108, 0.8);
-  --recent-dashed-border: rgba(82, 82, 108, 0.3);
+  --recent-dashed-border: #daefb3;
   --chart-dashed-border: rgba(82, 82, 108, 0.2);
   --chart-progress-light: rgba(82, 82, 108, 0.1);
   --recent-box-bg: #f2f4f7;
@@ -49,11 +49,22 @@ body[class="dark-only"] {
 //start template styles
 @import "./assets/layout/layout.scss";
 //end template styles
+@import "./assets/utils/nomnomColors";
+//Nom Nom colors styles
 
-html, body { 
-  height: 100%; 
+html, body {
+  height: 100%;
 }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif; // Usa Poppins como principal
+}
+
+// Si quieres alternar a Montserrat:
+.alt-font {
+  font-family: 'Montserrat', sans-serif;
+}
 
 .error-snackbar .mdc-snackbar__surface{
   background-color: rgb(197, 49, 49) !important;
