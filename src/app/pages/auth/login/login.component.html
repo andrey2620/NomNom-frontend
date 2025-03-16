@@ -4,25 +4,14 @@
       <div class="w-100">
         <div class="text-center">
           <a class="logo text-center" routerLink="/">
-            <img
-              width="250"
-              class="img-fluid mb-4"
-              src="../../../../assets/icons/logo@2x.png"
-              alt="Logo"
-            />
+            <img width="250" class="img-fluid mb-4" src="../../../../assets/icons/logo@2x.png" alt="Logo" />
           </a>
         </div>
         <div class="login-main">
-          <form
-            (ngSubmit)="handleLogin($event)"
-            autocomplete="off"
-            #frm="ngForm"
-          >
+          <form (ngSubmit)="handleLogin($event)" autocomplete="off" #frm="ngForm">
             <div class="mb-3">
               <h4>Sign in to account</h4>
-              <small style="color: #4f4f4f">
-                Enter your email & password to login
-              </small>
+              <small style="color: #4f4f4f"> Enter your email & password to login </small>
             </div>
 
             <div class="form-group mb-3">
@@ -37,13 +26,10 @@
                 [(ngModel)]="loginForm.email"
                 [ngClass]="{
                   'is-invalid': email.invalid && email.touched,
-                  'is-valid': email.valid && email.touched
+                  'is-valid': email.valid && email.touched,
                 }"
-                required
-              />
-              <div *ngIf="email.invalid" class="invalid-feedback">
-                Please add a valid email
-              </div>
+                required />
+              <div *ngIf="email.invalid" class="invalid-feedback">Please add a valid email</div>
             </div>
 
             <div class="form-group mb-4">
@@ -59,13 +45,10 @@
                   [(ngModel)]="loginForm.password"
                   [ngClass]="{
                     'is-invalid': password.invalid && password.touched,
-                    'is-valid': password.valid && password.touched
+                    'is-valid': password.valid && password.touched,
                   }"
-                  required
-                />
-                <div *ngIf="password.invalid" class="invalid-feedback">
-                  Please add a valid password
-                </div>
+                  required />
+                <div *ngIf="password.invalid" class="invalid-feedback">Please add a valid password</div>
               </div>
             </div>
             <div class="login-button">
@@ -74,16 +57,14 @@
                   src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png"
                   alt="Google"
                   class="google-icon"
-                />
+                  width="42" />
                 Sign in with Google
               </button>
             </div>
             <div class="form-group mb-0">
-              <button class="btn btn-primary btn-block w-100" type="submit">
-                Sign in
-              </button>
-              @if(loginError) {
-              <p class="text-danger">{{ loginError }}</p>
+              <button class="btn btn-primary btn-block w-100" type="submit">Sign in</button>
+              @if (loginError) {
+                <p class="text-danger">{{ loginError }}</p>
               }
             </div>
             <a href="/signup">Go SignUp</a>
