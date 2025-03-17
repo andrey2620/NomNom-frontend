@@ -20,7 +20,7 @@ export class ForgotPasswordComponent {
   @ViewChild('email') emailModel!: NgModel;
 
   public forgotForm : { email: string } = {
-    email: 'gcaravacag@ucenfotec.ac.cr'
+    email: ''
   };
 
   constructor(
