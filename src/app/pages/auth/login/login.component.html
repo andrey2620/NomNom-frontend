@@ -2,26 +2,21 @@
   <div class="d-flex align-items-center justify-content-center h-100">
     <div class="login-card">
       <div class="w-100">
-        <!--<div class="text-center">
+        <div class="text-center">
           <a class="logo text-center" routerLink="/">
-            <img
-              width="250"
-              class="img-fluid mb-4"
-              src="../../../../assets/icons/logo@2x.png"
-              alt="Logo"
-            />
+            <img width="200" class="img-fluid mb-1" src="../../../../assets/LogoNomNom/4.png" alt="Logo" />
           </a>
-        </div>-->
+        </div>
         <div class="login-main">
           <form (ngSubmit)="handleLogin($event)" autocomplete="off" #frm="ngForm">
             <div class="mb-4">
-              <h1 class="text-center">Inicio de Sesión</h1>
+              <h1 class="text-center" style="color: #2c5530; font-weight: bold;">Inicio de Sesión</h1>
               <!--<small style="color: #4f4f4f">
                 Enter your email & password to login
               </small>-->
             </div>
 
-            <div class="form-group mb-3">
+            <div class="form-group mb-4">
               <label for="email" class="form-label mb-2">
                 Correo Electrónico
               </label>
@@ -38,12 +33,14 @@
             <div class="form-group mb-4">
               <label for="password" class="form-label mb-2">Contraseña</label>
               <div class="form-input position-relative">
-                <input #password="ngModel" [type]="showPassword ? 'text' : 'password'" class="form-control" id="password" name="password"
-                placeholder="Entra al menos 8 caracteres" [(ngModel)]="loginForm.password" [ngClass]="{
+                <input #password="ngModel" [type]="showPassword ? 'text' : 'password'" class="form-control"
+                  id="password" name="password" placeholder="Entra al menos 8 caracteres"
+                  [(ngModel)]="loginForm.password" [ngClass]="{
                   'is-invalid': password.invalid && password.touched,
                   'is-valid': password.valid && password.touched
                 }" required />
-                <span class="position-absolute top-50 end-0 translate-middle-y passEye" (click)="toggleShowPassword()" style="cursor: pointer;">
+                <span class="position-absolute top-50 end-0 translate-middle-y passEye" (click)="toggleShowPassword()"
+                  style="cursor: pointer;">
                   <i [class]="showPassword ? 'bi bi-eye' : 'bi bi-eye-slash'"></i>
                 </span>
                 <div *ngIf="password.invalid" class="invalid-feedback">
@@ -52,20 +49,27 @@
               </div>
             </div>
 
-            <div>
-              <a href="/signup">Registro de sesión</a>
-              <a class="forgotPass" href="/signup">Olvidé Contraseña</a>
-            </div> 
+            <div class="d-flex small">
+              <a class="light-green text-decoration-none hrefA" href="/signup">Registro de sesión</a>
+              <a class="ms-auto light-green text-decoration-none hrefA" href="/forgotPassword">Olvidé Contraseña</a>
+            </div>
 
-            <div class="form-group mb-0 text-center">
-              <button class="btn btn-primary btn-block btn-signIn text" type="submit">
+            <div class="form-group mb-4 text-center">
+              <button class="btn btn-primary btn-signIn red" type="submit">
                 Inicio
               </button>
               @if(loginError) {
-                <p class="text-danger">{{loginError}}</p>
+              <p class="text-danger">{{loginError}}</p>
               }
             </div>
-            
+
+            <div class="text-center mb-1">
+              <a class="light-green text-decoration-none" href="">O ingrese con
+                <br>
+                <img width="40" class="img-fluid" src="../../../../assets/icons/google.png" alt="Logo" />
+              </a>
+            </div>
+
           </form>
         </div>
       </div>
