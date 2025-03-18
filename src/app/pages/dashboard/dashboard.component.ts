@@ -18,14 +18,10 @@ export class DashboardComponent {
     private authService: AuthService
   ) {
     this.user = this.authService.getUser();
-    console.log('User loaded in Dashboard:', this.user);
   }
 
   logOut() {
-    console.log('Logging out user:', this.user?.email);
     this.authService.logout();
-    sessionStorage.clear();
-    localStorage.clear();
     this.router.navigate(['/login']);
   }
 }

@@ -22,7 +22,6 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit(): void {
     this.permittedRoutes = this.getPermittedRoutes();
-    console.log('Permitted Routes:', this.permittedRoutes);
   }
 
   private getPermittedRoutes(): any[] {
@@ -31,8 +30,6 @@ export class SidebarComponent implements OnInit {
       console.warn('No user found or no authorities assigned.');
       return [];
     }
-
-    console.log('User Authorities:', user['authorities']);
 
     return (
       routes

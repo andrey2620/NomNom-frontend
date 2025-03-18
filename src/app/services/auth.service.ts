@@ -50,8 +50,6 @@ export class AuthService {
           return;
         }
 
-        console.log('Login Response:', response);
-
         this.accessToken = response.token;
         this.user = response.authUser;
         this.expiresIn = response.expiresIn;
@@ -61,8 +59,6 @@ export class AuthService {
         localStorage.setItem('auth_user', JSON.stringify(this.user));
         localStorage.setItem('access_token', response.token);
         localStorage.setItem('expiresIn', JSON.stringify(this.expiresIn));
-
-        console.log('User stored:', this.user);
       })
     );
   }
@@ -74,8 +70,6 @@ export class AuthService {
 
     localStorage.setItem('access_token', token);
     localStorage.setItem('auth_user', JSON.stringify(authUser));
-
-    console.log('Usuario autenticado guardado:', authUser);
   }
 
   public isAuthenticated(): boolean {
@@ -87,10 +81,6 @@ export class AuthService {
     if (!user || !user.authorities) {
       return false;
     }
-
-    console.log('Checking role:', role);
-    console.log('User roles:', user.authorities);
-
     return user.authorities.some(authority => authority.authority === role);
   }
 
@@ -143,8 +133,7 @@ export class AuthService {
 
   public logout(): void {
     this.accessToken = '';
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('expiresIn');
-    localStorage.removeItem('auth_user');
+    sessionStorage.clear();
+    localStorage.clear();
   }
 }

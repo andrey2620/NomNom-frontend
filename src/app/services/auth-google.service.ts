@@ -17,7 +17,7 @@ export class AuthGoogleService {
   constructor(
     private oauthService: OAuthService,
     private http: HttpClient,
-    private authService : AuthService
+    private authService: AuthService
   ) {
     this.oauthService.configure(authConfig);
     this.oauthService.loadDiscoveryDocumentAndTryLogin();
@@ -32,11 +32,10 @@ export class AuthGoogleService {
     return this.http.post<IGoogleLoginResponse>('http://localhost:8080/auth/google-auth', { email }).pipe(
       tap((response: IGoogleLoginResponse) => {
         if (!response.accessToken) {
-          console.error("No accessToken received from backend", response);
+          console.error('No accessToken received from backend', response);
           return;
         }
 
-        console.log("Google login successful, storing token:", response.accessToken);
         this.accessToken = response.accessToken;
         this.user = response.authUser;
         this.save();
@@ -53,8 +52,7 @@ export class AuthGoogleService {
 
   public logout(): void {
     this.accessToken = '';
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('expiresIn');
-    localStorage.removeItem('auth_user');
+    sessionStorage.clear();
+    localStorage.clear();
   }
 }
