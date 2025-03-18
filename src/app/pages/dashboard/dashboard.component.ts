@@ -11,12 +11,12 @@ import { AuthService } from "../../services/auth.service";
   styleUrl: "./dashboard.component.scss",
 })
 export class DashboardComponent {
-  constructor(private router: Router, private authGoogleService: AuthService) {}
+  constructor(private router: Router, private authService: AuthService) {}
 
-  profile = this.authGoogleService.profile();
+  user = this.authService.getUser();
 
   logOut() {
-    this.authGoogleService.logout();
+    this.authService.logout();
     this.router.navigate(["/login"]);
   }
 }

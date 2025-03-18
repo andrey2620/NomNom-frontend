@@ -9,8 +9,6 @@ import { AuthGoogleService } from '../../../services/auth-google.service';
   standalone: true,
 })
 export class CallbackComponent implements OnInit {
-  userEmail!: string | null; // 🔹 Variable para almacenar el email
-
   constructor(
     private router: Router,
     private authGoogleService: AuthGoogleService,
@@ -23,28 +21,94 @@ export class CallbackComponent implements OnInit {
     }, 1000);
   }
 
-  private handleGoogleAuthentication(): void {
+/*   private handleGoogleAuthentication(): void {
     this.oauthService.loadDiscoveryDocumentAndTryLogin().then(() => {
       if (this.oauthService.hasValidAccessToken()) {
-        const identityClaims = this.oauthService.getIdentityClaims(); // 🔹 Obtener datos del usuario
-        this.userEmail = identityClaims?.['email'] || null;
+        const identityClaims = this.oauthService.getIdentityClaims();
+        const userEmail = identityClaims?.['email'] || null;
 
-        console.log("Google User Email:", this.userEmail); // 🔹 Imprimir el email en consola
+        console.log("Google User Email:", userEmail);
 
-        if (!this.userEmail) {
+        if (!userEmail) {
           console.error("No se encontró un email válido de Google.");
           return;
         }
 
-        // 🔹 Enviar solo el correo al backend
-        this.authGoogleService.loginWithGoogle(this.userEmail).subscribe({
-          next: () => this.router.navigate(['/app/dashboard']),
-          error: () => this.router.navigate(['/login']),
+        this.authGoogleService.loginWithGoogle(userEmail).subscribe({
+          next: (response) => {
+            console.log("Respuesta del backend:", response);
+
+            if (response.accessToken) {
+              localStorage.setItem("access_token", response.accessToken);
+              this.router.navigate(['/app/dashboard']);
+            } else {
+              console.error("No se recibió un access token válido.");
+              this.router.navigate(['/login']);
+            }
+          },
+          error: () => {
+            console.error("Error en Google login, redirigiendo a /login");
+            this.router.navigate(['/login']);
+          },
         });
       } else {
-        console.error('No valid access token found');
+        console.error("No se encontró un token válido de Google");
         this.router.navigate(['/login']);
       }
+    }).catch(err => {
+      console.error("Error en Google OAuth:", err);
+      this.router.navigate(['/login']);
     });
-  }
+  } */
+
+    private handleGoogleAuthentication(): void {
+      this.oauthService.loadDiscoveryDocumentAndTryLogin()
+        .then(() => {
+          if (!this.oauthService.hasValidAccessToken()) {
+            console.error("No se encontró un token válido de Google");
+            this.router.navigate(['/login']);
+            return;
+          }
+
+          const identityClaims = this.oauthService.getIdentityClaims();
+          const userEmail = identityClaims?.['email'] || null;
+
+          console.log("Google User Email:", userEmail);
+
+          if (!userEmail) {
+            console.error("No se encontró un email válido de Google.");
+            this.router.navigate(['/login']);
+            return;
+          }
+
+          this.authGoogleService.loginWithGoogle(userEmail).subscribe({
+            next: (response) => this.handleLoginResponse(response, userEmail),
+            error: () => this.handleLoginError(),
+          });
+        })
+        .catch(err => {
+          console.error("Error en Google OAuth:", err);
+          this.router.navigate(['/login']);
+        });
+    }
+
+    /** 🔹 Manejar la respuesta del backend */
+    private handleLoginResponse(response: any, userEmail: string): void {
+      console.log("Respuesta del backend:", response);
+
+      if (!response.exists) {
+        console.warn("Usuario no encontrado, redirigiendo a registro...");
+        this.router.navigate(['/signup'], { queryParams: { email: userEmail } });
+        return;
+      }
+
+      localStorage.setItem("access_token", response.accessToken);
+      this.router.navigate(['/app/dashboard']);
+    }
+
+    /** 🔹 Manejar errores en el login */
+    private handleLoginError(): void {
+      console.error("Error en Google login, redirigiendo a /login");
+      this.router.navigate(['/login']);
+    }
 }

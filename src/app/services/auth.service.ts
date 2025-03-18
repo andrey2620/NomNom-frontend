@@ -56,9 +56,26 @@ export class AuthService {
         this.user = response.authUser;
         this.expiresIn = response.expiresIn;
         this.save();
+        this.setAuthData(response.authUser, response.token, true);
       })
     );
   }
+
+  public setAuthData(authUser: IUser, token: string, exists: boolean): void {
+    this.user = authUser;
+    this.accessToken = token;
+    this.expiresIn = 3600; // 🔹 Definir tiempo de expiración manualmente si el backend no lo devuelve
+
+    localStorage.setItem("access_token", token);
+    localStorage.setItem("auth_user", JSON.stringify(authUser));
+
+    console.log("Usuario autenticado guardado:", authUser);
+  }
+
+  public isAuthenticated(): boolean {
+    return !!this.getAccessToken();
+  }
+
   public hasRole(role: string): boolean {
     return this.user.authorities ? this.user?.authorities.some(authority => authority.authority == role) : false;
   }

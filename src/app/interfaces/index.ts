@@ -6,7 +6,8 @@ export interface ILoginResponse {
 
 export interface IGoogleLoginResponse {
   accessToken: string;
-  expiresIn: number;
+  authUser: IUser;
+  exists: boolean;
 }
 
 export interface IResponse<T> {

@@ -4,6 +4,7 @@ import { Observable, tap } from 'rxjs';
 import { IGoogleLoginResponse, ILoginResponse, IUser } from '../interfaces';
 import { authConfig } from '../pages/auth/login/auth-config'; // Commented out as the module does not exist
 import { OAuthService } from 'angular-oauth2-oidc';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +16,8 @@ export class AuthGoogleService {
 
   constructor(
     private oauthService: OAuthService,
-    private http: HttpClient
+    private http: HttpClient,
+    private authService : AuthService
   ) {
     this.oauthService.configure(authConfig);
     this.oauthService.loadDiscoveryDocumentAndTryLogin();
@@ -36,12 +38,12 @@ export class AuthGoogleService {
 
         console.log("Google login successful, storing token:", response.accessToken);
         this.accessToken = response.accessToken;
-        this.expiresIn = response.expiresIn;
+        this.user = response.authUser;
         this.save();
+        this.authService.setAuthData(response.authUser, response.accessToken, response.exists);
       })
     );
   }
-
 
   private save(): void {
     if (this.user) localStorage.setItem('auth_user', JSON.stringify(this.user));

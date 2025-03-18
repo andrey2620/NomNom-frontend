@@ -1,50 +1,63 @@
-import { CommonModule } from '@angular/common';
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, inject, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule, NgModel } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { IUser } from '../../../interfaces';
+import { CommonModule } from '@angular/common'; // 🔹 Importar CommonModule para `*ngIf` y `ngClass`
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [FormsModule, CommonModule], // 🔹 Agregar CommonModule aquí
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss'
 })
-export class SigUpComponent {
-  public signUpError!: String;
+export class SignUpComponent implements OnInit {
+  public signUpError!: string;
   public validSignup!: boolean;
   @ViewChild('name') nameModel!: NgModel;
   @ViewChild('lastname') lastnameModel!: NgModel;
   @ViewChild('email') emailModel!: NgModel;
   @ViewChild('password') passwordModel!: NgModel;
 
-  public user: IUser = {};
+  public user: IUser = { email: '', name: '', lastname: '', password: '' };
+  public isGoogleSignUp = false; // 🔹 Saber si viene de Google
 
-  constructor(private router: Router, 
-    private authService: AuthService
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private route: ActivatedRoute
   ) {}
+
+  ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      if (params['email']) {
+        this.user.email = params['email'];
+        this.isGoogleSignUp = true; // 🔹 Indicar que viene de Google
+      }
+    });
+  }
 
   public handleSignup(event: Event) {
     event.preventDefault();
-    if (!this.nameModel.valid) {
+
+    if (!this.nameModel.valid || !this.lastnameModel.valid || (!this.passwordModel.valid && !this.isGoogleSignUp)) {
       this.nameModel.control.markAsTouched();
-    }
-    if (!this.lastnameModel.valid) {
       this.lastnameModel.control.markAsTouched();
+      if (!this.isGoogleSignUp) {
+        this.passwordModel.control.markAsTouched();
+      }
+      return;
     }
-    if (!this.emailModel.valid) {
-      this.emailModel.control.markAsTouched();
-    }
-    if (!this.passwordModel.valid) {
-      this.passwordModel.control.markAsTouched();
-    }
-    if (this.emailModel.valid && this.passwordModel.valid) {
-      this.authService.signup(this.user).subscribe({
-        next: () => this.validSignup = true,
-        error: (err: any) => (this.signUpError = err.description),
-      });
-    }
+
+    this.authService.signup(this.user).subscribe({
+      next: () => {
+        this.validSignup = true;
+        this.router.navigate(['/login']);
+      },
+      error: (err: any) => {
+        this.signUpError = err.description || 'Error en el registro.';
+      },
+    });
   }
 }

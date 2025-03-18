@@ -1,7 +1,11 @@
 <div class="dashboard">
-  <h1>Dashboard - user has logged in</h1>
+  <h1>Dashboard - User is logged in</h1>
 
-  <p>{{ profile | json }}</p>  <!-- 🔹 Asegurar que esta línea está bien cerrada -->
+  <div *ngIf="user">
+    <h2>Bienvenido, {{ user.name }}</h2>
+    <p>Email: {{ user.email }}</p>
+    <img *ngIf="user.picture" [src]="user.picture" alt="User Picture" width="100">
+  </div>
 
   <button (click)="logOut()">LogOut</button>
 </div>
