@@ -1,7 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { Component, inject } from "@angular/core";
 import { Router } from "@angular/router";
-import { AuthGoogleService } from "../../services/auth-google.service";
+import { AuthService } from "../../services/auth.service";
 
 @Component({
   selector: "app-dashboard",
@@ -11,13 +11,12 @@ import { AuthGoogleService } from "../../services/auth-google.service";
   styleUrl: "./dashboard.component.scss",
 })
 export class DashboardComponent {
-  private authService = inject(AuthGoogleService);
-  private router = inject(Router);
+  constructor(private router: Router, private authGoogleService: AuthService) {}
 
-  profile = this.authService.profile;
+  profile = this.authGoogleService.profile();
 
   logOut() {
-    this.authService.logout();
+    this.authGoogleService.logout();
     this.router.navigate(["/login"]);
   }
 }

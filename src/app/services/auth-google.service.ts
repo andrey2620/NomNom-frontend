@@ -1,65 +1,58 @@
-import { Injectable, inject, signal } from "@angular/core"
-
-import { Router } from "@angular/router"
-
-import { OAuthService } from "angular-oauth2-oidc"
-
-import { authConfig } from "../pages/auth/login/auth-config"
-
-import { HttpClient } from "@angular/common/http"
-import { Observable, tap } from "rxjs"
+import { Injectable, inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, tap } from 'rxjs';
+import { IGoogleLoginResponse, ILoginResponse, IUser } from '../interfaces';
+import { authConfig } from '../pages/auth/login/auth-config'; // Commented out as the module does not exist
+import { OAuthService } from 'angular-oauth2-oidc';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class AuthGoogleService {
-  private oAuthService = inject(OAuthService)
+  private accessToken!: string;
+  private expiresIn!: number;
+  private user: IUser = { email: '', authorities: [] };
 
-  private router = inject(Router)
-
-  profile = signal<any>(null)
-  private http = inject(HttpClient)
-
-  constructor() {
-    this.initConfiguration()
+  constructor(
+    private oauthService: OAuthService,
+    private http: HttpClient
+  ) {
+    this.oauthService.configure(authConfig);
+    this.oauthService.loadDiscoveryDocumentAndTryLogin();
   }
 
-  initConfiguration() {
-    this.oAuthService.configure(authConfig)
-    this.oAuthService.setupAutomaticSilentRefresh()
-    this.oAuthService.loadDiscoveryDocumentAndTryLogin().then(() => {
-      if (this.oAuthService.hasValidIdToken()) {
-        this.profile.set(this.oAuthService.getIdentityClaims())
-      }
-    })
+  public async getToken(): Promise<string | null> {
+    await this.oauthService.tryLoginImplicitFlow();
+    return this.oauthService.getIdToken();
   }
 
-  // Envía el token de Google a tu backend para que éste genere un JWT
-  loginWithGoogle(googleToken: string): Observable<any> {
-    console.log(" loginWithGoogle")
-    const headers = { "Content-Type": "application/json" }
-    return this.http
-      .post<any>("http://localhost:8080/auth/google/login", { token: googleToken }, { headers })
-      .pipe(
-        tap((response: any) => {
-          if (response.token) {
-            this.profile.set(this.oAuthService.getIdentityClaims())
-          }
-        })
-      )
+  public loginWithGoogle(email: string): Observable<IGoogleLoginResponse> {
+    return this.http.post<IGoogleLoginResponse>('http://localhost:8080/auth/google-auth', { email }).pipe(
+      tap((response: IGoogleLoginResponse) => {
+        if (!response.accessToken) {
+          console.error("No accessToken received from backend", response);
+          return;
+        }
+
+        console.log("Google login successful, storing token:", response.accessToken);
+        this.accessToken = response.accessToken;
+        this.expiresIn = response.expiresIn;
+        this.save();
+      })
+    );
   }
 
-  login() {
-    this.oAuthService.initImplicitFlow()
+
+  private save(): void {
+    if (this.user) localStorage.setItem('auth_user', JSON.stringify(this.user));
+    if (this.accessToken) localStorage.setItem('access_token', this.accessToken);
+    if (this.expiresIn) localStorage.setItem('expiresIn', this.expiresIn.toString());
   }
 
-  logout() {
-    this.oAuthService.revokeTokenAndLogout()
-    this.oAuthService.logOut()
-    this.profile.set(null)
-  }
-
-  getProfile() {
-    return this.profile()
+  public logout(): void {
+    this.accessToken = '';
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('expiresIn');
+    localStorage.removeItem('auth_user');
   }
 }

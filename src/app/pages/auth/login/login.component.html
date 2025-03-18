@@ -51,24 +51,27 @@
                 <div *ngIf="password.invalid" class="invalid-feedback">Please add a valid password</div>
               </div>
             </div>
-            <div class="login-button">
-              <button mat-raised-button (click)="signInWithGoogle()">
-                <img
-                  src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png"
-                  alt="Google"
-                  class="google-icon"
-                  width="42" />
-                Sign in with Google
-              </button>
-            </div>
+
             <div class="form-group mb-0">
               <button class="btn btn-primary btn-block w-100" type="submit">Sign in</button>
               @if (loginError) {
                 <p class="text-danger">{{ loginError }}</p>
               }
             </div>
-            <a href="/signup">Go SignUp</a>
           </form>
+
+          <div class="login-button">
+            <button mat-raised-button (click)="signInWithGoogle()">
+              <img
+                src="https://cdn1.iconfinder.com/data/icons/google-s-logo/150/Google_Icons-09-512.png"
+                alt="Google"
+                class="google-icon"
+                width="42" />
+              Sign in with Google
+            </button>
+          </div>
+
+          <a href="/signup">Go SignUp</a>
         </div>
       </div>
     </div>

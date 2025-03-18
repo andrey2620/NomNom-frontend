@@ -1,7 +1,7 @@
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
-import { IAuthority, ILoginResponse, IRoleType, IUser } from '../interfaces';
+import { ILoginResponse, IUser, IAuthority, IRoleType } from '../interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -16,19 +16,17 @@ export class AuthService {
     this.load();
   }
 
-  public save(): void {
+  private save(): void {
     if (this.user) localStorage.setItem('auth_user', JSON.stringify(this.user));
-
-    if (this.accessToken) localStorage.setItem('access_token', JSON.stringify(this.accessToken));
-
-    if (this.expiresIn) localStorage.setItem('expiresIn', JSON.stringify(this.expiresIn));
+    if (this.accessToken) localStorage.setItem('access_token', this.accessToken);
+    if (this.expiresIn) localStorage.setItem('expiresIn', this.expiresIn.toString());
   }
 
   private load(): void {
     const token = localStorage.getItem('access_token');
     if (token) this.accessToken = token;
     const exp = localStorage.getItem('expiresIn');
-    if (exp) this.expiresIn = JSON.parse(exp);
+    if (exp) this.expiresIn = Number(exp);
     const user = localStorage.getItem('auth_user');
     if (user) this.user = JSON.parse(user);
   }
@@ -42,25 +40,25 @@ export class AuthService {
   }
 
   public check(): boolean {
-    if (!this.accessToken) {
-      return false;
-    } else {
-      return true;
-    }
+    return !!this.accessToken;
   }
 
   public login(credentials: { email: string; password: string }): Observable<ILoginResponse> {
-    return this.http.post<ILoginResponse>('auth/login', credentials).pipe(
+    return this.http.post<ILoginResponse>('http://localhost:8080/auth/login', credentials).pipe(
       tap((response: ILoginResponse) => {
-        this.accessToken = response.accessToken;
-        this.user.email = credentials.email;
+        if (!response.token) {
+          console.error("No token received from backend", response);
+          return;
+        }
+        console.log("Traditional login successful:", response.token);
+
+        this.accessToken = response.token;
+        this.user = response.authUser;
         this.expiresIn = response.expiresIn;
-        this.user = response.authUser!;
         this.save();
       })
     );
   }
-
   public hasRole(role: string): boolean {
     return this.user.authorities ? this.user?.authorities.some(authority => authority.authority == role) : false;
   }
@@ -69,15 +67,34 @@ export class AuthService {
     return this.user.authorities ? this.user?.authorities.some(authority => authority.authority == IRoleType.superAdmin) : false;
   }
 
-  public hasAnyRole(roles: string[]): boolean {
-    return roles.some(role => this.hasRole(role));
+  public getUserAuthorities(): IAuthority[] | undefined {
+    return this.getUser()?.authorities ? this.getUser()?.authorities : [];
   }
 
-  public getPermittedRoutes(routes: { path: string; data?: { authorities: string[] } }[]): { path: string; data?: { authorities: string[] } }[] {
-    const permittedRoutes: { path: string; data?: { authorities: string[] } }[] = [];
+  public areActionsAvailable(routeAuthorities: string[]): boolean {
+    let allowedUser = false;
+    let isAdmin = false;
+    let userAuthorities = this.getUserAuthorities();
+
+    for (const authority of routeAuthorities) {
+      if (userAuthorities?.some(item => item.authority == authority)) {
+        allowedUser = true;
+        break;
+      }
+    }
+
+    if (userAuthorities?.some(item => item.authority == IRoleType.admin || item.authority == IRoleType.superAdmin)) {
+      isAdmin = true;
+    }
+
+    return allowedUser && isAdmin;
+  }
+
+  public getPermittedRoutes(routes: any[]): any[] {
+    let permittedRoutes: any[] = [];
     for (const route of routes) {
       if (route.data && route.data.authorities) {
-        if (this.hasAnyRole(route.data.authorities)) {
+        if (this.hasRole(route.data.authorities)) {
           permittedRoutes.unshift(route);
         }
       }
@@ -89,41 +106,15 @@ export class AuthService {
     return this.http.post<ILoginResponse>('auth/signup', user);
   }
 
-  public logout() {
+  public profile(): IUser | undefined {
+    return this.user;
+  }
+
+
+  public logout(): void {
     this.accessToken = '';
     localStorage.removeItem('access_token');
     localStorage.removeItem('expiresIn');
     localStorage.removeItem('auth_user');
-  }
-
-  public getUserAuthorities(): IAuthority[] | undefined {
-    return this.getUser()?.authorities ? this.getUser()?.authorities : [];
-  }
-
-  public areActionsAvailable(routeAuthorities: string[]): boolean {
-    // definición de las variables de validación
-    let allowedUser = false;
-    let isAdmin = false;
-    // se obtienen los permisos del usuario
-    const userAuthorities = this.getUserAuthorities();
-    // se valida que sea una ruta permitida para el usuario
-    for (const authority of routeAuthorities) {
-      if (userAuthorities?.some(item => item.authority == authority)) {
-        allowedUser = userAuthorities?.some(item => item.authority == authority);
-      }
-      if (allowedUser) break;
-    }
-    // se valida que el usuario tenga un rol de administración
-    if (userAuthorities?.some(item => item.authority == IRoleType.admin || item.authority == IRoleType.superAdmin)) {
-      isAdmin = userAuthorities?.some(item => item.authority == IRoleType.admin || item.authority == IRoleType.superAdmin);
-    }
-    return allowedUser && isAdmin;
-  }
-
-  public setGoogleAuthData(response: ILoginResponse): void {
-    this.accessToken = response.accessToken;
-    this.user = response.authUser!;
-    this.expiresIn = response.expiresIn;
-    this.save();
   }
 }

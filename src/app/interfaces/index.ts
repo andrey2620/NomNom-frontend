@@ -1,8 +1,12 @@
 export interface ILoginResponse {
+  token: string;
+  authUser: IUser;
+  expiresIn: number;
+}
+
+export interface IGoogleLoginResponse {
   accessToken: string;
   expiresIn: number;
-  email: string;
-  authUser?: IUser;
 }
 
 export interface IResponse<T> {

@@ -1,48 +1,55 @@
-import { Component, ViewChild, inject } from "@angular/core";
-import { FormsModule, NgModel } from "@angular/forms";
-import { Router, RouterLink } from "@angular/router";
-import { AuthService } from "../../../services/auth.service";
-import { AuthGoogleService } from "../../../services/auth-google.service";
-import { CommonModule } from "@angular/common";
+import { Component, ViewChild, inject } from '@angular/core';
+import { FormsModule, NgModel } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../../../services/auth.service';
+import { AuthGoogleService } from '../../../services/auth-google.service';
+import { CommonModule } from '@angular/common';
+import { OAuthService } from 'angular-oauth2-oidc';
 
 @Component({
-  selector: "app-login",
+  selector: 'app-login',
   standalone: true,
   imports: [CommonModule, FormsModule, RouterLink],
-  templateUrl: "./login.component.html",
-  styleUrls: ["./login.component.scss"],
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
   public loginError!: string;
-  @ViewChild("email") emailModel!: NgModel;
-  @ViewChild("password") passwordModel!: NgModel;
+  @ViewChild('email') emailModel!: NgModel;
+  @ViewChild('password') passwordModel!: NgModel;
 
-  public loginForm: { email: string; password: string } = {
-    email: "",
-    password: "",
-  };
+  public loginForm: { email: string; password: string } = { email: '', password: '' };
 
-  private authGoogleService = inject(AuthGoogleService);
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private authGoogleService: AuthGoogleService,
+    private oauthService: OAuthService
+  ) {}
 
-  constructor(private router: Router, private authService: AuthService) {}
-
+  /** 🔹 Método para Login Normal (Email y Password) */
   public handleLogin(event: Event) {
     event.preventDefault();
-    if (!this.emailModel.valid) {
+    if (!this.emailModel.valid || !this.passwordModel.valid) {
       this.emailModel.control.markAsTouched();
-    }
-    if (!this.passwordModel.valid) {
       this.passwordModel.control.markAsTouched();
+      return;
     }
-    if (this.emailModel.valid && this.passwordModel.valid) {
-      this.authService.login(this.loginForm).subscribe({
-        next: () => this.router.navigateByUrl("/app/dashboard"),
-        error: (err: any) => (this.loginError = err.error.description),
-      });
-    }
+
+    this.authService.login(this.loginForm).subscribe({
+      next: () => {
+        console.log('Login normal exitoso, redirigiendo...');
+        this.router.navigateByUrl('/app/dashboard');
+      },
+      error: (err: any) => {
+        console.error('Error en login normal:', err);
+        this.loginError = err.error?.description || 'Error en login.';
+      },
+    });
   }
 
-  public signInWithGoogle() {
-    this.authGoogleService.login();
+  /** 🔹 Método para Login con Google */
+  public signInWithGoogle(): void {
+    this.oauthService.initLoginFlow(); // 🔹 Esto redirige a la página de login de Google
   }
 }
