@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './pages/auth/login/login.component';
 import { AppLayoutComponent } from './components/app-layout/app-layout.component';
-import { SigUpComponent } from './pages/auth/sign-up/signup.component';
+import { SignUpComponent } from './pages/auth/sign-up/signup.component';
 import { UsersComponent } from './pages/users/users.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AccessDeniedComponent } from './pages/access-denied/access-denied.component';
@@ -13,6 +13,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { GamesComponent } from './pages/games/games.component';
 import { OrdersComponent } from './pages/orders/orders.component';
 import { PreferenceListPageComponent } from './pages/preferenceList/preference-list.component';
+import { CallbackComponent } from './pages/auth/login/CallbackComponent';
 import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgotPassword.component';
 import { ResetPasswordComponent } from './pages/auth/reset-password/reset-password.component';
 
@@ -24,7 +25,7 @@ export const routes: Routes = [
   },
   {
     path: 'signup',
-    component: SigUpComponent,
+    component: SignUpComponent,
     canActivate: [GuestGuard],
   },
   {
@@ -32,18 +33,22 @@ export const routes: Routes = [
     component: ForgotPasswordComponent,
     canActivate: [GuestGuard],
   },
-  
+
   {
     path: 'access-denied',
     component: AccessDeniedComponent,
   },
+    {
+      path: 'callback',
+      component: CallbackComponent,
+    },
   {
-    path: 'forgot-password', 
+    path: 'forgot-password',
     component: ForgotPasswordComponent
   },
-  { 
-    path: 'reset-password', 
-    component: ResetPasswordComponent 
+  {
+    path: 'reset-password',
+    component: ResetPasswordComponent
   },
   {
     path: '',
@@ -64,9 +69,8 @@ export const routes: Routes = [
         path: 'users',
         component: UsersComponent,
         canActivate:[AdminRoleGuard],
-        data: { 
+        data: {
           authorities: [
-            IRoleType.admin, 
             IRoleType.superAdmin
           ],
           name: 'Users',
@@ -76,9 +80,8 @@ export const routes: Routes = [
       {
         path: 'dashboard',
         component: DashboardComponent,
-        data: { 
+        data: {
           authorities: [
-            IRoleType.admin, 
             IRoleType.superAdmin,
             IRoleType.user
           ],
@@ -89,9 +92,8 @@ export const routes: Routes = [
       {
         path: 'profile',
         component: ProfileComponent,
-        data: { 
+        data: {
           authorities: [
-            IRoleType.admin, 
             IRoleType.superAdmin,
             IRoleType.user
           ],
@@ -102,9 +104,8 @@ export const routes: Routes = [
       {
         path: 'games',
         component: GamesComponent,
-        data: { 
+        data: {
           authorities: [
-            IRoleType.admin, 
             IRoleType.superAdmin,
             IRoleType.user,
           ],
@@ -115,9 +116,8 @@ export const routes: Routes = [
       {
         path: 'orders',
         component: OrdersComponent,
-        data: { 
+        data: {
           authorities: [
-            IRoleType.admin, 
             IRoleType.superAdmin,
             IRoleType.user,
           ],
@@ -128,9 +128,8 @@ export const routes: Routes = [
       {
         path: 'preference-list',
         component: PreferenceListPageComponent,
-        data: { 
+        data: {
           authorities: [
-            IRoleType.admin, 
             IRoleType.superAdmin,
             IRoleType.user,
           ],

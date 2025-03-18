@@ -10,7 +10,7 @@ export class GameService extends BaseService<IGame>{
   protected override source: string = 'games';
   private itemListSignal = signal<IGame[]>([]);
   private snackBar = inject(MatSnackBar);
-  
+
   get items$() {
     return this.itemListSignal
   }
@@ -22,7 +22,7 @@ export class GameService extends BaseService<IGame>{
         this.itemListSignal.set(response);
       },
       error: (error : any) => {
-        console.log('error', error);
+        console.error('error', error);
       }
     });
   }
@@ -43,7 +43,7 @@ export class GameService extends BaseService<IGame>{
         console.error('error', error);
       }
     })
-  } 
+  }
 
   public update(item: IGame) {
     this.edit(item.id, item).subscribe({
