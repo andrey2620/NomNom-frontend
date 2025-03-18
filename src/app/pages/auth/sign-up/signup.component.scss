@@ -54,14 +54,10 @@
   .logo img {
     width: 20vh; /* Ajusta según necesites */
   }
-}
-
-@media screen and (max-width: 600px) {
   .btn-signUp {
     width: 80%; /* Reducimos en móviles */
     max-width: 180px;
     margin: 50px; /* Ajusta el espacio interno */
-
   }
 }
 
