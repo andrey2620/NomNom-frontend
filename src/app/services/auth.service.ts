@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { IAuthority, ILoginResponse, IResponse, IRoleType, IUser } from '../interfaces';
 import { Observable, firstValueFrom, of, tap } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -123,5 +123,14 @@ export class AuthService {
       isAdmin = userAuthorities?.some(item => item.authority == IRoleType.admin || item.authority == IRoleType.superAdmin);
     }          
     return allowedUser && isAdmin;
+  }
+
+  public sendResetLink(email: string): Observable<IResponse<any>> {
+    return this.http.post<IResponse<any>>(`auth/forgot-password?email=${encodeURIComponent(email)}`, {});
+  }
+  
+  public resetPassword(token: string, newPassword: string): Observable<IResponse<any>> {
+    const params = new HttpParams().set('token', token);
+    return this.http.post<IResponse<any>>('auth/reset-password', newPassword, { params });
   }
 }

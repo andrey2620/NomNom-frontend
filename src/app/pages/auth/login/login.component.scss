@@ -1,5 +1,5 @@
 .login-container {
-  height: 100vh;
+  height: 140vh;
   // background-image: url("../../../../assets/img/login/login-bg.jpg");
   background-position: left;
   background-size: cover;
@@ -13,23 +13,27 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.5); /* Ajusta la opacidad según necesites */
+    background: rgba(0, 0, 0, 0.5);
     z-index: 1;
   }
   .login-card {
     position: relative;
     z-index: 2;
-    width: 50%;
+    width: 40%;
     padding: 40px;
     border-radius: 10px;
-    box-shadow: 0 0 37px rgba(8, 21, 66, 0.05);
+    box-shadow: 0 0 37px rgba(15, 66, 8, 0.05);
     margin: 0 auto;
     background-color: #fff;
   }
-  @media screen and (min-width: 801px) and (max-width: 1500px) {
+  .invalid-feedback {
+    position: absolute;
+    margin-top: 0px;
+  }
+  @media screen and (min-width: 801px) and (max-width: 2000px) {
     padding: 20px 5%;
     .login-card {
-      width: 60%;
+      width: 45%;
       .login-main {
         padding: 0px;
       }
@@ -38,10 +42,33 @@
   @media screen and (max-width: 800px) {
     padding: 20px 5%;
     .login-card {
-      width: 100%;
+      width: 90%;
       .login-main {
         padding: 0px;
       }
     }
   }
+
+  @media screen and (max-width: 600px) {
+    .btn-signIn {
+      width: 40%;  
+    }
+    .smallLetter{
+      font-size: 14px;
+    }
+  }
+}
+
+.btn-signIn{
+  border-radius: 50px !important;
+  width: 20%;
+}
+
+.btn-signIn:hover{
+  background-color: #8c1122 !important;
+  border-color: #8c1122 !important;
+}
+
+.passEye{
+  margin-right: 2vw;
 }

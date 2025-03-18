@@ -21,6 +21,7 @@ export class SigUpComponent {
   @ViewChild('lastname') lastnameModel!: NgModel;
   @ViewChild('email') emailModel!: NgModel;
   @ViewChild('password') passwordModel!: NgModel;
+  //@ViewChild('confPassword') confPasswordModel!: NgModel;
 
   public user: IUser = {};
 

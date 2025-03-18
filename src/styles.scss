@@ -84,9 +84,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   color: #2c5530;
 }
 
+.green-bg{
+  background-color: #2c5530;
+}
+
 .light-green {
   color: #c3bf6d;
 }
+
 .light-green:hover{
   color: #b5152a;
 }
@@ -94,8 +99,4 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .red-bg{
   background-color: #b5152a; 
   border-color: #b5152a;
-}
-
-.green-bg{
-  background-color: #2c5530;
 }
