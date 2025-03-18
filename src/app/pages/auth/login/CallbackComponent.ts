@@ -92,7 +92,7 @@ export class CallbackComponent implements OnInit {
         });
     }
 
-    /** 🔹 Manejar la respuesta del backend */
+    /** Manejar la respuesta del backend */
     private handleLoginResponse(response: any, userEmail: string): void {
       console.log("Respuesta del backend:", response);
 
@@ -106,7 +106,7 @@ export class CallbackComponent implements OnInit {
       this.router.navigate(['/app/dashboard']);
     }
 
-    /** 🔹 Manejar errores en el login */
+    /** Manejar errores en el login */
     private handleLoginError(): void {
       console.error("Error en Google login, redirigiendo a /login");
       this.router.navigate(['/login']);

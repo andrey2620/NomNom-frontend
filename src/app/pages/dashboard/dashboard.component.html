@@ -4,7 +4,8 @@
   <div *ngIf="user">
     <h2>Bienvenido, {{ user.name }}</h2>
     <p>Email: {{ user.email }}</p>
-    <img *ngIf="user.picture" [src]="user.picture" alt="User Picture" width="100">
+    <img [src]="user.picture" alt="User Picture" width="100">
+    <!-- <img [src]="user.picture || 'assets/img/default-avatar-1.png'" alt="User Picture" width="100"> -->
   </div>
 
   <button (click)="logOut()">LogOut</button>

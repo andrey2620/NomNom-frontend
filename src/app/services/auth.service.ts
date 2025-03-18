@@ -10,9 +10,8 @@ export class AuthService {
   private accessToken!: string;
   private expiresIn!: number;
   private user: IUser = { email: '', authorities: [] };
-  private http: HttpClient = inject(HttpClient);
 
-  constructor() {
+  constructor(private http: HttpClient) {
     this.load();
   }
 
@@ -44,19 +43,26 @@ export class AuthService {
   }
 
   public login(credentials: { email: string; password: string }): Observable<ILoginResponse> {
-    return this.http.post<ILoginResponse>('http://localhost:8080/auth/login', credentials).pipe(
+    return this.http.post<ILoginResponse>('auth/login', credentials).pipe(
       tap((response: ILoginResponse) => {
-        if (!response.token) {
-          console.error("No token received from backend", response);
+        if (!response.authUser) {
+          console.error('Error: No se encontró información del usuario.');
           return;
         }
-        console.log("Traditional login successful:", response.token);
+
+        console.log('Login Response:', response);
 
         this.accessToken = response.token;
         this.user = response.authUser;
         this.expiresIn = response.expiresIn;
-        this.save();
-        this.setAuthData(response.authUser, response.token, true);
+
+        this.user.picture = response.authUser.picture || 'assets/default-avatar.png';
+
+        localStorage.setItem('auth_user', JSON.stringify(this.user));
+        localStorage.setItem('access_token', response.token);
+        localStorage.setItem('expiresIn', JSON.stringify(this.expiresIn));
+
+        console.log('User stored:', this.user);
       })
     );
   }
@@ -64,12 +70,12 @@ export class AuthService {
   public setAuthData(authUser: IUser, token: string, exists: boolean): void {
     this.user = authUser;
     this.accessToken = token;
-    this.expiresIn = 3600; // 🔹 Definir tiempo de expiración manualmente si el backend no lo devuelve
+    this.expiresIn = 3600;
 
-    localStorage.setItem("access_token", token);
-    localStorage.setItem("auth_user", JSON.stringify(authUser));
+    localStorage.setItem('access_token', token);
+    localStorage.setItem('auth_user', JSON.stringify(authUser));
 
-    console.log("Usuario autenticado guardado:", authUser);
+    console.log('Usuario autenticado guardado:', authUser);
   }
 
   public isAuthenticated(): boolean {
@@ -77,7 +83,15 @@ export class AuthService {
   }
 
   public hasRole(role: string): boolean {
-    return this.user.authorities ? this.user?.authorities.some(authority => authority.authority == role) : false;
+    const user = this.getUser();
+    if (!user || !user.authorities) {
+      return false;
+    }
+
+    console.log('Checking role:', role);
+    console.log('User roles:', user.authorities);
+
+    return user.authorities.some(authority => authority.authority === role);
   }
 
   public isSuperAdmin(): boolean {
@@ -126,7 +140,6 @@ export class AuthService {
   public profile(): IUser | undefined {
     return this.user;
   }
-
 
   public logout(): void {
     this.accessToken = '';

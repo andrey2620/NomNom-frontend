@@ -27,7 +27,7 @@ export class LoginComponent {
     private oauthService: OAuthService
   ) {}
 
-  /** 🔹 Método para Login Normal (Email y Password) */
+  /**  Método para Login Normal (Email y Password) */
   public handleLogin(event: Event) {
     event.preventDefault();
     if (!this.emailModel.valid || !this.passwordModel.valid) {
@@ -48,8 +48,8 @@ export class LoginComponent {
     });
   }
 
-  /** 🔹 Método para Login con Google */
+  /** Método para Login con Google */
   public signInWithGoogle(): void {
-    this.oauthService.initLoginFlow(); // 🔹 Esto redirige a la página de login de Google
+    this.oauthService.initLoginFlow(); // Esto redirige a la página de login de Google
   }
 }

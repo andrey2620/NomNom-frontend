@@ -30,10 +30,10 @@ export const routes: Routes = [
     path: 'access-denied',
     component: AccessDeniedComponent,
   },
-  {
-    path: 'callback',
-    component: CallbackComponent,
-  },
+    {
+      path: 'callback',
+      component: CallbackComponent,
+    },
   {
     path: '',
     redirectTo: 'login',

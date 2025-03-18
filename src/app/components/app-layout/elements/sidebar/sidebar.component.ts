@@ -1,34 +1,47 @@
-import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Route, RouterLink, RouterLinkActive } from '@angular/router';
 import { LayoutService } from '../../../../services/layout.service';
 import { AuthService } from '../../../../services/auth.service';
 import { SvgIconComponent } from '../../../svg-icon/svg-icon.component';
 import { routes } from '../../../../app.routes';
+import { Component, inject, OnInit } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
-  standalone: true,
-  imports: [
-    CommonModule,
-    RouterLink,
-    RouterLinkActive,
-    SvgIconComponent
-  ],
   templateUrl: './sidebar.component.html',
+  standalone: true,
+  imports: [CommonModule, RouterModule],
 })
-export class SidebarComponent {
-  public width: any = window.innerWidth;
-  public showLeftArrow: boolean = true;
-  public showRigthArrow: boolean = false;
-  public layoutService = inject(LayoutService);
-  public authService = inject(AuthService);
-  public permittedRoutes: Route[] = [];
-  appRoutes: any;
+export class SidebarComponent implements OnInit {
+  private authService = inject(AuthService);
+  public permittedRoutes: any[] = [];
+  public showLeftArrow = false;
+  public showRigthArrow = false;
+  public layoutService: any;
 
-  constructor(
-  ) {
-    this.appRoutes = routes.filter(route => route.path == 'app')[0];
-    this.permittedRoutes = this.authService.getPermittedRoutes(this.appRoutes.children);
+  ngOnInit(): void {
+    this.permittedRoutes = this.getPermittedRoutes();
+    console.log('Permitted Routes:', this.permittedRoutes);
+  }
+
+  private getPermittedRoutes(): any[] {
+    const user = this.authService.getUser();
+    if (!user || !user['authorities']) {
+      console.warn('No user found or no authorities assigned.');
+      return [];
+    }
+
+    console.log('User Authorities:', user['authorities']);
+
+    return (
+      routes
+        .find(route => route.path === 'app')
+        ?.children?.filter(route => {
+          return route.data?.['authorities']?.some((auth: string) =>
+            user['authorities']?.some((userAuth: { authority: string }) => userAuth.authority === auth)
+          );
+        }) || []
+    );
   }
 }

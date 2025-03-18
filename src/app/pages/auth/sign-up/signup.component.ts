@@ -3,12 +3,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule, NgModel } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
 import { IUser } from '../../../interfaces';
-import { CommonModule } from '@angular/common'; // 🔹 Importar CommonModule para `*ngIf` y `ngClass`
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [FormsModule, CommonModule], // 🔹 Agregar CommonModule aquí
+  imports: [FormsModule, CommonModule],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss'
 })
@@ -21,7 +21,7 @@ export class SignUpComponent implements OnInit {
   @ViewChild('password') passwordModel!: NgModel;
 
   public user: IUser = { email: '', name: '', lastname: '', password: '' };
-  public isGoogleSignUp = false; // 🔹 Saber si viene de Google
+  public isGoogleSignUp = false;
 
   constructor(
     private router: Router,
@@ -33,7 +33,7 @@ export class SignUpComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       if (params['email']) {
         this.user.email = params['email'];
-        this.isGoogleSignUp = true; // 🔹 Indicar que viene de Google
+        this.isGoogleSignUp = true;
       }
     });
   }
