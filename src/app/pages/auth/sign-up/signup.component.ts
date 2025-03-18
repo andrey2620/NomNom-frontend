@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [FormsModule, CommonModule],
   templateUrl: './signup.component.html',
-  styleUrl: './signup.component.scss'
+  styleUrl: './signup.component.scss',
 })
 export class SignUpComponent implements OnInit {
   public signUpError!: string;
@@ -34,6 +34,12 @@ export class SignUpComponent implements OnInit {
       if (params['email']) {
         this.user.email = params['email'];
         this.isGoogleSignUp = true;
+      }
+      if (params['name']) {
+        this.user.name = params['name'];
+      }
+      if (params['lastname']) {
+        this.user.lastname = params['lastname'];
       }
     });
   }
