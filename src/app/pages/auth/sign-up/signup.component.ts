@@ -15,10 +15,13 @@ import { CommonModule } from '@angular/common';
 export class SignUpComponent implements OnInit {
   public signUpError!: string;
   public validSignup!: boolean;
+  public showPassword: boolean = false; // Estado inicial para mostrar/ocultar contraseña
+
   @ViewChild('name') nameModel!: NgModel;
   @ViewChild('lastname') lastnameModel!: NgModel;
   @ViewChild('email') emailModel!: NgModel;
   @ViewChild('password') passwordModel!: NgModel;
+  //@ViewChild('confPassword') confPasswordModel!: NgModel;
 
   public user: IUser = { email: '', name: '', lastname: '', password: '' };
   public isGoogleSignUp = false;
@@ -65,5 +68,10 @@ export class SignUpComponent implements OnInit {
         this.signUpError = err.description || 'Error en el registro.';
       },
     });
+  }
+
+  // Método para alternar visibilidad de la contraseña
+  public togglePassword() {
+    this.showPassword = !this.showPassword;
   }
 }

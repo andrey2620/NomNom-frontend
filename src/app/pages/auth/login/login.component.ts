@@ -20,6 +20,15 @@ export class LoginComponent {
 
   public loginForm: { email: string; password: string } = { email: '', password: '' };
 
+  // Variables para mostrar/ocultar contraseña
+  showPassword = false;
+  showConfirmPassword = false;
+
+  // Método para alternar la visibilidad de la contraseña
+  toggleShowPassword() {
+    this.showPassword = !this.showPassword;
+  }
+
   constructor(
     private router: Router,
     private authService: AuthService,

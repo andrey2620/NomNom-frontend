@@ -14,6 +14,8 @@ import { GamesComponent } from './pages/games/games.component';
 import { OrdersComponent } from './pages/orders/orders.component';
 import { PreferenceListPageComponent } from './pages/preferenceList/preference-list.component';
 import { CallbackComponent } from './pages/auth/login/CallbackComponent';
+import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgotPassword.component';
+import { ResetPasswordComponent } from './pages/auth/reset-password/reset-password.component';
 
 export const routes: Routes = [
   {
@@ -27,6 +29,12 @@ export const routes: Routes = [
     canActivate: [GuestGuard],
   },
   {
+    path:'forgotPassword',
+    component: ForgotPasswordComponent,
+    canActivate: [GuestGuard],
+  },
+
+  {
     path: 'access-denied',
     component: AccessDeniedComponent,
   },
@@ -34,6 +42,14 @@ export const routes: Routes = [
       path: 'callback',
       component: CallbackComponent,
     },
+  {
+    path: 'forgot-password',
+    component: ForgotPasswordComponent
+  },
+  {
+    path: 'reset-password',
+    component: ResetPasswordComponent
+  },
   {
     path: '',
     redirectTo: 'login',

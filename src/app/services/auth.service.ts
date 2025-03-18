@@ -1,7 +1,7 @@
-import { Injectable, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
-import { ILoginResponse, IUser, IAuthority, IRoleType } from '../interfaces';
+import { ILoginResponse, IUser, IAuthority, IRoleType, IResponse } from '../interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -135,5 +135,14 @@ export class AuthService {
     this.accessToken = '';
     sessionStorage.clear();
     localStorage.clear();
+  }
+
+  public sendResetLink(email: string): Observable<IResponse<any>> {
+    return this.http.post<IResponse<any>>(`auth/forgot-password?email=${encodeURIComponent(email)}`, {});
+  }
+
+  public resetPassword(token: string, newPassword: string): Observable<IResponse<any>> {
+    const params = new HttpParams().set('token', token);
+    return this.http.post<IResponse<any>>('auth/reset-password', newPassword, { params });
   }
 }
