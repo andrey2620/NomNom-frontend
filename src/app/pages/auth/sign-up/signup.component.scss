@@ -49,4 +49,66 @@
   }
   }
  }
+
+ @media screen and (max-width: 600px) {
+  .logo img {
+    width: 20vh; /* Ajusta según necesites */
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .btn-signUp {
+    width: 80%; /* Reducimos en móviles */
+    max-width: 180px;
+    margin: 50px; /* Ajusta el espacio interno */
+
+  }
+}
+
+
+.btn-signUp {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%; /* O puedes usar max-width */
+  max-width: 100px; /* Para que no sea demasiado ancho */
+  border-radius: 50px;
+  padding: 10px 20px; /* Ajusta el espacio interno */
+}
+
+
+.btn-signUp:hover{
+  background-color: #8c1122 !important;
+  border-color: #8c1122 !important;
+}
+
+.form-input {
+  position: relative;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #bb0a21; /* Ajusta el color según tu diseño */
+}
+
+.toggle-password:focus {
+  outline: none;
+}
+
+.toggle-password i {
+  transition: color 0.3s ease;
+}
+
+.toggle-password:hover i {
+  color: #8c1122; /* Color más oscuro en hover */
+}
+
  
