@@ -46,7 +46,6 @@ export enum IFeedbackStatus {
 }
 
 export enum IRoleType {
-  admin = 'ROLE_ADMIN',
   user = 'ROLE_USER',
   superAdmin = 'ROLE_SUPER_ADMIN',
 }

@@ -114,7 +114,7 @@ export class AuthService {
       }
     }
 
-    if (userAuthorities?.some(item => item.authority == IRoleType.admin || item.authority == IRoleType.superAdmin)) {
+    if (userAuthorities?.some(item => item.authority == IRoleType.superAdmin)) {
       isAdmin = true;
     }
 
