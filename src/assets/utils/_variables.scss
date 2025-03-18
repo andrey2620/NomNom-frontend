@@ -1,19 +1,21 @@
-// General variables
+//-------------------- Base proyect Colors 
+//General variables
 $theme-font-color: #242934;
 $theme-body-font-color: #2f2f3b;
 $theme-body-sub-title-color: #52526c;
 $body-color: #f8f8f8;
 $main-body-color: #f7f8f9;
 
+
 // Theme colors variables
-$primary-color: #7366ff;
-$secondary-color: #ff3364;
-$success-color: #54ba4a;
-$info-color: #16c7f9;
+$primary-color: #fcb1a6;
+$secondary-color: #2c5530;
+$success-color: #f4c542;
+$info-color: #fcb1a6;
 $warning-color: #ffaa05;
 $danger-color: #fc4438;
 $light-color: #f4f4f4;
-$badge-light-color: #52526c;
+$badge-light-color: #c3bf6d;
 $light-gray: #ecf3fa;
 $light-widget-border: #efeeff;
 $light-semi-gray: #efefef;
@@ -29,11 +31,11 @@ $light: #fdfeff;
 $semi-dark: #59667a;
 $light-text: #999999;
 $light-paragraph: #8f8f8f;
-$light-background: #d7e2e9;
+$light-background: #daefb3;
 $light-font: rgba(27, 49, 85, 0.4);
 $light-semi-font: $semi-dark;
 $light-chartist-grid-color: #f6f9fd;
-$pitch-color: #fe8a7d;
+$pitch-color: #d08c7a;
 $color-scarpa: #4c5667;
 $color-fiord: #455a64;
 $black: #000;
@@ -46,11 +48,12 @@ $dropdown-border-color: #918e99;
 $gradient-primary: linear-gradient(
   26deg,
   var(--theme-default) 0%,
-  #a26cf8 100%
+  #bb0a21 100%
 );
+
 $gradient-bg-primary: linear-gradient(
   103.75deg,
-  #33b1ee -13.9%,
+  #c3bf6d -13.9%,
   var(--theme-default) 79.68%
 );
 
@@ -62,8 +65,8 @@ $linkedin: #0077b5;
 
 // soical table
 $fb-color: #2f84f4;
-$insta-color: #fc971e;
-$pintrest-color: $secondary-color;
+$insta-color: #fcb1a6;
+$pintrest-color: $primary-color;
 $twitter-color: #57b9f6;
 $youtube-color: #f42f2f;
 
@@ -71,8 +74,17 @@ $youtube-color: #f42f2f;
 $light-body-bg-color: #fafdff;
 
 //fonts
-$font-rubik: Rubik;
-$font-roboto: Roboto;
+// Fonts
+$font-primary: 'Poppins', sans-serif;
+$font-secondary: 'Montserrat', sans-serif;
+
+// Aplicar fuente a toda la app
+body {
+  font-family: $font-primary;
+}
+
+$font-rubik: Poppins;
+$font-roboto: Poppins;
 $font-serif: sans-serif;
 $landing-cursive: "Caveat", cursive;
 $font-themify: themify;
@@ -241,7 +253,7 @@ $sidebar-profile-name-letter-specing: 1.5px;
 $sidebar-profile-name-marging: 3px;
 $sidebar-profile-sub-title-font-size: 10px;
 $sidebar-profile-sub-title-margin: 0px;
-$sidebar-profile-img-shadow: 0 0 15px rgba(68, 102, 242, 0.3);
+$sidebar-profile-img-shadow: 0 0 15px rgb(195, 191, 109);
 
 //Sidebar main menu setting
 $sidebar-menu-padding: 15px;
@@ -274,14 +286,14 @@ $sidebar-compact-width: 265px;
 $main-header-position: fixed;
 $main-header-top: 0;
 $main-header-shadow: 0 0 20px rgba($semi-dark, 0.1);
-$main-header-shadow-1: 0px 4px 40px rgba(39, 32, 120, 0.1);
+$main-header-shadow-1: 0px 4px 40px rgb(218, 239, 179);
 
 //page settings
 $page-body-padding: 0 15px 0 15px;
 $page-body-bg-color: $light-color;
 $page-body-margin-bottom: 0px;
 $page-title-padding: 15px 30px;
-$common-box-shadow: 2px 3.464px 8px 0px rgba(22, 145, 248, 0.18);
+$common-box-shadow: 2px 3.464px 8px 0px rgb(45, 45, 45);
 $page-title-font-size: 24px;
 $page-title-margin-bottom: 0;
 $page-title-text-tranform: capitalize;
@@ -306,5 +318,5 @@ $header-size: 136px;
 $box-layout-space: 40px;
 
 // widgets variables
-$widget-shadow: 1px 2px 21px -2px rgba(214, 214, 227, 0.83);
+$widget-shadow: 1px 2px 21px -2px rgb(208, 140, 122);
 $white: #fff;
