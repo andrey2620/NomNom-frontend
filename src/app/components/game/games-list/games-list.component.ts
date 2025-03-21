@@ -28,13 +28,12 @@ export class GamesListComponent implements OnChanges{
 
   ngOnChanges(changes: SimpleChanges): void {
     if(changes['areActionsAvailable']) {
-      console.log('areActionsAvailable', this.areActionsAvailable);
     }
   }
 
   showDetailModal(item: IGame, modal:any) {
     this.selectedItem = {...item};
-    modal.show(); 
+    modal.show();
   }
 
   onFormEventCalled (params: IGame) {

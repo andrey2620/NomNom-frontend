@@ -1,11 +1,18 @@
 export interface ILoginResponse {
+  token: string;
+  authUser: IUser;
+  expiresIn: number;
+}
+
+export interface IGoogleLoginResponse {
   accessToken: string;
-  expiresIn: number
+  authUser: IUser;
+  exists: boolean;
 }
 
 export interface IResponse<T> {
   data: T;
-  message: string,
+  message: string;
   meta: T;
 }
 
@@ -19,7 +26,8 @@ export interface IUser {
   createdAt?: string;
   updatedAt?: string;
   authorities?: IAuthority[];
-  role?: IRole
+  role?: IRole;
+  picture?: string;
 }
 
 export interface IAuthority {
@@ -32,22 +40,21 @@ export interface IFeedBackMessage {
 }
 
 export enum IFeedbackStatus {
-  success = "SUCCESS",
-  error = "ERROR",
-  default = ''
+  success = 'SUCCESS',
+  error = 'ERROR',
+  default = '',
 }
 
 export enum IRoleType {
-  admin = "ROLE_ADMIN",
-  user = "ROLE_USER",
-  superAdmin = 'ROLE_SUPER_ADMIN'
+  user = 'ROLE_USER',
+  superAdmin = 'ROLE_SUPER_ADMIN',
 }
 
 export interface IRole {
   createdAt: string;
   description: string;
   id: number;
-  name : string;
+  name: string;
   updatedAt: string;
 }
 
@@ -73,7 +80,7 @@ export interface ISearch {
   pageNumber?: number;
   pageSize?: number;
   totalElements?: number;
-  totalPages?:number;
+  totalPages?: number;
 }
 
 export interface IMovie {
