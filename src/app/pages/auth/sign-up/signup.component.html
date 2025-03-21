@@ -58,7 +58,7 @@
                 class="form-control"
                 id="email"
                 name="email"
-                placeholder="ejemplo@gmail.com"
+                placeholder="ejemplo@nomnom.com"
                 [(ngModel)]="user.email"
                 [readonly]="isGoogleSignUp"
                 [ngClass]="{
@@ -78,7 +78,7 @@
                   class="form-control"
                   id="password"
                   name="password"
-                  placeholder="*****"
+                  placeholder="Entra al menos 8 caracteres"
                   [(ngModel)]="user.password"
                   [ngClass]="{
                     'is-invalid': password.invalid && password.touched,
