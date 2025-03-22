@@ -1,0 +1,20 @@
+<div class="card recipe-card shadow-sm border-0">
+    <img [src]="recipe.image_url" class="card-img-top recipe-img" alt="Imagen de receta" />
+  
+    <div class="card-body">
+      <h3 class="card-title">{{ recipe.name }}</h3>
+  
+      <h5 class="section-title">Ingredientes</h5>
+      <ul class="list-unstyled">
+        <li *ngFor="let item of recipe.description.split('\n')">{{ item }}</li>
+      </ul>
+  
+      <h5 class="section-title mt-4">Instrucciones</h5>
+      <ol>
+        <li *ngFor="let step of recipe.instructions.split('\n')">
+          {{ step }}
+        </li>
+      </ol>
+    </div>
+  </div>
+  

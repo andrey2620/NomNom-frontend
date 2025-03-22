@@ -1,0 +1,25 @@
+.recipe-form {
+    max-width: 700px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  
+    h2 {
+      font-weight: bold;
+      color: #02306D;
+    }
+  
+    .form-label {
+      font-weight: 500;
+    }
+  
+    .btn-primary {
+      background-color: #02306D;
+      border-color: #02306D;
+      border-radius: 8px;
+      padding: 0.5rem 1.25rem;
+    }
+  }
+  

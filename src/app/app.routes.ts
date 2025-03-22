@@ -16,6 +16,8 @@ import { PreferenceListPageComponent } from './pages/preferenceList/preference-l
 import { CallbackComponent } from './pages/auth/login/CallbackComponent';
 import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgotPassword.component';
 import { ResetPasswordComponent } from './pages/auth/reset-password/reset-password.component';
+import { RecipeFormComponent } from './components/recipe/recipe-form/recipe-form.component';
+import { RecipeListComponent } from './components/recipe/recipe-list/recipe-list.component';
 
 export const routes: Routes = [
   {
@@ -136,7 +138,32 @@ export const routes: Routes = [
           name: 'preference list',
           showInSidebar: true
         }
+      },
+      {
+        path: 'recipes',
+        component: RecipeListComponent,
+        data: {
+          authorities: [
+            IRoleType.superAdmin,
+            IRoleType.user,
+          ],
+          name: 'recipes',
+          showInSidebar: true
+        }
+      },
+      {
+        path: 'recipes/new',
+        component: RecipeFormComponent,
+        data: {
+          authorities: [
+            IRoleType.superAdmin,
+            IRoleType.user,
+          ],
+          name: 'new recipe',
+          showInSidebar: false
+        }
       }
+      
     ],
   },
 ];
