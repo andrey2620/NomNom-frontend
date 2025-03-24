@@ -1,17 +1,98 @@
-.card-img-top {
-    height: 200px;
-    object-fit: cover;
-    border-top-left-radius: 12px;
-    border-top-right-radius: 12px;
+.recipe-panel {
+  background-color: #fcb1a6;
+  border-radius: 16px;
+  padding: 1.5rem;
+  max-width: 400px;
+  max-height: 600px; // altura límite visible
+  overflow-y: auto; // activa el scroll vertical
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+
+  // Estilo para la barra de scroll personalizada
+  &::-webkit-scrollbar {
+    width: 3px;
   }
-  
-  .card-title {
-    font-weight: bold;
-    font-size: 1.25rem;
+
+  &::-webkit-scrollbar-thumb {
+    background-color: white;
+    border-radius: 3px;
   }
-  
-  .card-text {
-    font-size: 0.95rem;
-    color: #555;
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
   }
-  
+
+  // Firefox
+  scrollbar-width: thin;
+  scrollbar-color: white transparent;
+
+  .section-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #BB0A21;
+  }
+
+
+  .section-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: black;
+  }
+
+  .card {
+    border: none;
+    border-radius: 12px;
+    overflow: hidden;
+
+    .card-img-top {
+      height: 120px;
+      object-fit: cover;
+    }
+
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: bold;
+    }
+
+    .card-text {
+      font-size: 0.9rem;
+      color: black;
+    }
+
+    .btn-outline-primary {
+      border-color: #bb0a21;
+      color: #BB0A21;
+
+      &:hover {
+        background-color: #bb0a21;
+        color: white;
+      }
+    }
+
+    .btn-outline-danger {
+      border-color: #bb0a21;
+      color: #bb0a21;
+
+      &:hover {
+        background-color: #bb0a21;
+        color: white;
+      }
+    }
+
+    .cook-btn {
+      background-color: #ffffff;
+      color: #BB0A21;
+      border: 2px solid #BB0A21;
+      border-radius: 35px;
+      padding: 0.5rem 1rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+    
+      &:hover {
+        background-color: #BB0A21;
+        color: white;
+      }
+    }
+    
+  }
+}
