@@ -171,6 +171,76 @@
       transform: rotate(360deg);
     }
   }
+  .loader-box {
+  &.contrast {
+    background-color: #1e3932;
+    
+    .loader-3 {
+      border-color: #fff;
+      border-bottom-color: transparent;
+    }
+  }
+
+  &.sm {
+    .loader-3 {
+      width: 30px;
+      height: 30px;
+      border-width: 0.15em;
+    }
+  }
+
+  &.md {
+    .loader-3 {
+      width: 50px;
+      height: 50px;
+    }
+  }
+
+  &.full {
+    height: 100vh;
+
+    .loader-3 {
+      width: 70px;
+      height: 70px;
+      border-width: 0.3em;
+    }
+  }
+
+  &.contrast {
+    background-color: #1e3932;
+    
+    .loader-3 {
+      border-color: #fff;
+      border-bottom-color: transparent;
+    }
+  }
+
+  &.sm {
+    .loader-3 {
+      width: 30px;
+      height: 30px;
+      border-width: 0.15em;
+    }
+  }
+
+  &.md {
+    .loader-3 {
+      width: 50px;
+      height: 50px;
+    }
+  }
+
+  &.full {
+    height: 100vh;
+
+    .loader-3 {
+      width: 70px;
+      height: 70px;
+      border-width: 0.3em;
+    }
+  }
+}
+
 }
 /**=====================
      04. Loader CSS Ends

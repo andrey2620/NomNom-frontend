@@ -1,20 +1,42 @@
-<div class="card recipe-card shadow-sm border-0">
-    <img [src]="recipe.image_url" class="card-img-top recipe-img" alt="Imagen de receta" />
-  
-    <div class="card-body">
-      <h3 class="card-title">{{ recipe.name }}</h3>
-  
-      <h5 class="section-title">Ingredientes</h5>
+<div [ngClass]="mode === 'card' ? 'card recipe-card shadow-sm border-0' : 'recipe-detail'">
+  <img 
+    [src]="recipe.image_url" 
+    [ngClass]="mode === 'card' ? 'card-img-top recipe-img' : 'img-fluid rounded mb-3'" 
+    alt="Imagen de receta"
+  />
+
+  <div class="card-body" *ngIf="mode === 'card'; else detailBody">
+    <h3 class="card-title">{{ recipe.name }}</h3>
+
+    <h5 class="section-title">Ingredientes</h5>
+    <ul class="list-unstyled">
+      <li *ngFor="let item of recipe.description?.split('\n')">{{ item }}</li>
+      <li *ngIf="!recipe.description">No hay ingredientes registrados.</li>
+    </ul>
+
+    <h5 class="section-title mt-4">Instrucciones</h5>
+    <ol>
+      <li *ngFor="let step of recipe.instructions?.split('\n')">
+        {{ step }}
+      </li>
+    </ol>
+  </div>
+
+  <ng-template #detailBody>
+    <div>
+      <h3 class="text-dark">{{ recipe.name }}</h3>
+
+      <h5 class="text-success mt-3">Ingredientes</h5>
       <ul class="list-unstyled">
-        <li *ngFor="let item of recipe.description.split('\n')">{{ item }}</li>
+        <li *ngFor="let item of recipe.description?.split('\n')">{{ item }}</li>
       </ul>
-  
-      <h5 class="section-title mt-4">Instrucciones</h5>
+
+      <h5 class="text-success mt-4">Instrucciones</h5>
       <ol>
-        <li *ngFor="let step of recipe.instructions.split('\n')">
+        <li *ngFor="let step of recipe.instructions?.split('\n')">
           {{ step }}
         </li>
       </ol>
     </div>
-  </div>
-  
+  </ng-template>
+</div>

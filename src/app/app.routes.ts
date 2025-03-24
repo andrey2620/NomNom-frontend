@@ -151,18 +151,6 @@ export const routes: Routes = [
           showInSidebar: true
         }
       },
-      {
-        path: 'recipes/new',
-        component: RecipeFormComponent,
-        data: {
-          authorities: [
-            IRoleType.superAdmin,
-            IRoleType.user,
-          ],
-          name: 'new recipe',
-          showInSidebar: false
-        }
-      }
       
     ],
   },

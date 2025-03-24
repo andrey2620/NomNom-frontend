@@ -8,4 +8,6 @@ import { IRecipe } from '../../interfaces';
 })
 export class RecipeComponent {
   @Input() recipe!: IRecipe;
+  @Input() mode: 'card' | 'detail' = 'card';
+
 }

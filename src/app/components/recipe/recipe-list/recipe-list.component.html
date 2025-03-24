@@ -1,24 +1,18 @@
 <div class="row g-4">
-    <div class="col-md-6 col-lg-4" *ngFor="let recipe of itemList">
+  <div><h1>Recetas Generadas</h1></div>
+  <ng-container *ngFor="let recipe of itemList; trackBy: trackById">
+    <div class="col-md-6 col-lg-4">
       <div class="card h-100 shadow-sm">
         <img [src]="recipe.image_url" class="card-img-top" alt="Imagen de receta">
         <div class="card-body">
           <h5 class="card-title">{{ recipe.name }}</h5>
           <p class="card-text">{{ recipe.description?.split('\n')?.[0] || 'Sin descripción' }}</p>
           <div *ngIf="areActionsAvailable" class="d-flex justify-content-end gap-2">
-            <button class="btn btn-sm btn-outline-primary" (click)="showDetailModal(recipe, editModal)">Editar</button>
+            <button class="btn btn-sm btn-outline-primary" (click)="onSave()">Guardar</button>
             <button class="btn btn-sm btn-outline-danger" (click)="deleteRecipe(recipe)">Eliminar</button>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  
-  <app-modal #editModal>
-    <app-recipe-form 
-      [title]="'Editar Receta'"
-      [toUpdateRecipe]="selectedItem"
-      (callParentEvent)="onFormEventCalled($event)">
-    </app-recipe-form>
-  </app-modal>
-  
+  </ng-container>
+</div>

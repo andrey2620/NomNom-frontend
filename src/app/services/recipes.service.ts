@@ -17,7 +17,7 @@ export class RecipesService extends BaseService<IRecipe> {
 
   public search: ISearch = {
     page: 1,
-    size: 5
+    size: 3
   };
 
   public totalItems: any = [];
@@ -53,18 +53,6 @@ export class RecipesService extends BaseService<IRecipe> {
     });
   }
 
-  update(recipe: IRecipe) {
-    this.edit(recipe.id_recipe!, recipe).subscribe({
-        next: (response: any) => {
-        this.alertService.displayAlert('success', response.message, 'center', 'top', ['success-snackbar']);
-        this.getAll(); // o `this.getAllByUser()` si aplica
-      },
-      error: (err: any) => {
-        this.alertService.displayAlert('error', 'Ocurrió un error al actualizar la receta', 'center', 'top', ['error-snackbar']);
-        console.error('Error', err);
-      }
-    });
-  }
 
   delete(recipe: IRecipe) {
     this.del(`${recipe.id_recipe}`).subscribe({
