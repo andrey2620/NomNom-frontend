@@ -4,12 +4,18 @@
         <div class="ingredientDiv" 
         [class.selected]="selectedIngredients.includes(item.id ?? null)"
         (click)="selectIngredient(item.id ?? null)">
-            <img class="w-100" src="{{item.image}}" alt="img{{item.name}}">
+            @if (!item.image){
+                <img class="w-100" src="../../../assets/gifs/default.gif" alt="img{{item.name}}">
+            }@else{
+                <img class="w-100" src="{{item.image}}" alt="img{{item.name}}"> 
+            }
+            
+            
             <h2 class="text-center">{{item.name}}</h2>
         </div>
     } @empty {
         <div class="d-flex justify-content-center align-items-center w-100">
-            <p class="mb-0">No hay ingredientes</p>
+            <h2 class="mb-0">Error en el sistema. Por favor</h2>
         </div>
     }
 
