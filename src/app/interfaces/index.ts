@@ -95,3 +95,10 @@ export interface IPreferenceList {
   name?: string;
   movies?: IMovie[];
 }
+
+export interface IIngredients{
+  id?: number;
+  name?: string;
+  description?: string;
+  image?: string;
+}

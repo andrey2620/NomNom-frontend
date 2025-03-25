@@ -10,12 +10,13 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class PaginationComponent {
   @Input() service: any;
-  @Output() callCustomPaginationMethod = new EventEmitter();
+  @Output() pageChange = new EventEmitter<number>();
   @Input() customCall: boolean = false;
+
   onPage(pPage: number) {
 		this.service.search.page = pPage;
     if (this.customCall) {
-      this.callCustomPaginationMethod.emit();
+      this.pageChange.emit(pPage);
     } else {
       this.service.getAll();
     }
