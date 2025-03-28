@@ -96,9 +96,12 @@ export interface IPreferenceList {
   movies?: IMovie[];
 }
 
-export interface IIngredients{
-  id?: number;
+export interface IRecipe {
+  id_recipe?: number;
   name?: string;
   description?: string;
-  image?: string;
+  instructions?: string;
+  preparation_time?: number;
+  nutritional_info?: string;
+  image_url?: string;
 }
