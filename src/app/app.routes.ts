@@ -19,6 +19,7 @@ import { ResetPasswordComponent } from './pages/auth/reset-password/reset-passwo
 
 import { RecipeFormComponent } from './components/recipe/recipe-form/recipe-form.component';
 import { RecipeListComponent } from './components/recipe/recipe-list/recipe-list.component';
+import { GenerateRecipesComponent } from './pages/generateRecipes/generateRecipes.component';
 
 
 export const routes: Routes = [
