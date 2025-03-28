@@ -17,11 +17,6 @@
             <div class="text-center mt-3">
               <button class="btn cook-btn" (click)="onCook(recipe)">¡Hora de cocinar!</button>
             </div>
-
-            <div *ngIf="areActionsAvailable" class="d-flex justify-content-end gap-2 mt-3">
-              <button class="btn btn-sm btn-outline-primary" (click)="onSave()">Guardar</button>
-              <button class="btn btn-sm btn-outline-danger" (click)="deleteRecipe(recipe)">Eliminar</button>
-            </div>
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IRecipe } from '../../../interfaces';
 
@@ -11,4 +11,16 @@ import { IRecipe } from '../../../interfaces';
 })
 export class ViewRecipeComponent {
   @Input() recipe!: IRecipe;
+  @Input() areActionsAvailable: boolean = false;
+  
+  @Output() save = new EventEmitter<IRecipe>();
+  @Output() delete = new EventEmitter<IRecipe>();
+
+  onSave() {
+    this.save.emit(this.recipe);
+  }
+
+  onDelete() {
+    this.delete.emit(this.recipe);
+  }
 }

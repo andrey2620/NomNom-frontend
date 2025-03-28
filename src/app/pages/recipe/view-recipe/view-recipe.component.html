@@ -18,4 +18,10 @@
       <p><strong>Tiempo de preparación:</strong> {{ recipe.preparation_time }} minutos</p>
       <p><strong>Información nutricional:</strong> {{ recipe.nutritional_info }}</p>
     </div>
+
+    <div *ngIf="areActionsAvailable" class="d-flex justify-content-end gap-2 mt-3">
+      <button class="btn btn-sm btn-outline-primary" (click)="onSave()">Guardar</button>
+      <button class="btn btn-sm btn-outline-danger" (click)="onDelete()">Eliminar</button>
+    </div>
+    
   </div>

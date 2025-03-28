@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, EventEmitter, AfterViewInit, inject, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -22,8 +22,16 @@ import { RecipeFormComponent } from '../recipe-form/recipe-form.component';
 })
 
 
-export class RecipeListComponent {
+export class RecipeListComponent implements AfterViewInit{
+
   @Input() areActionsAvailable: boolean = false;
+  @Output() cook = new EventEmitter<IRecipe>();
+  @Output() listInitialized = new EventEmitter<IRecipe[]>();
+  
+  ngAfterViewInit(): void {
+    this.listInitialized.emit(this.itemList);
+    throw new Error('Method not implemented.');
+  }
 
   public itemList: IRecipe[] = [
     {
@@ -81,7 +89,9 @@ export class RecipeListComponent {
   }
 
   onCook(recipe: IRecipe) {
-    this.selectedItem = recipe;
+    this.cook.emit(recipe);
   }
+
+  
   
 }
