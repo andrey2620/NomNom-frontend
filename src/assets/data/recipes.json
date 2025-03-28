@@ -6,6 +6,7 @@
       "instructions": "1. Cocinar el arroz\n2. Saltear el pollo\n3. Mezclar todo",
       "preparation_time": 30,
       "nutritional_info": "250 kcal por porción",
+      "categoria": "comida",
       "image_url": "assets/img/recipe/breads.png"
     },
     {
@@ -15,6 +16,7 @@
       "instructions": "1. Machacar plátanos\n2. Mezclar con avena\n3. Hornear",
       "preparation_time": 20,
       "nutritional_info": "150 kcal por galleta",
+      "categoria": "comida",
       "image_url": "assets/img/recipe/breads.png"
     }
   ]

@@ -14,9 +14,8 @@
             </p>
             <p *ngIf="itemList.length === 0">No hay recetas disponibles.</p>
 
-
             <div class="text-center mt-3">
-              <button class="btn cook-btn">¡Hora de cocinar!</button>
+              <button class="btn cook-btn" (click)="onCook(recipe)">¡Hora de cocinar!</button>
             </div>
 
             <div *ngIf="areActionsAvailable" class="d-flex justify-content-end gap-2 mt-3">
@@ -28,4 +27,8 @@
       </div>
     </ng-container>
   </div>
+  <app-view-recipe 
+    *ngIf="selectedItem" 
+    [recipe]="selectedItem">
+  </app-view-recipe>
 </div>

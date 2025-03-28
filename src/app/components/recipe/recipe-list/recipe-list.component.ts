@@ -4,6 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { IRecipe } from '../../../interfaces';
 import { RecipesService } from '../../../services/recipes.service';
+import { ViewRecipeComponent } from '../../../pages/recipe/view-recipe/view-recipe.component';
 import { ModalComponent } from '../../modal/modal.component';
 import { RecipeFormComponent } from '../recipe-form/recipe-form.component';
 
@@ -13,11 +14,14 @@ import { RecipeFormComponent } from '../recipe-form/recipe-form.component';
   imports: [
     CommonModule,
     ModalComponent,
-    RecipeFormComponent
+    RecipeFormComponent,
+    ViewRecipeComponent
   ],
   templateUrl: './recipe-list.component.html',
-  styleUrl: './recipe-list.component.scss'
+  styleUrls: ['./recipe-list.component.scss']
 })
+
+
 export class RecipeListComponent {
   @Input() areActionsAvailable: boolean = false;
 
@@ -29,6 +33,7 @@ export class RecipeListComponent {
       instructions: '1. Cocinar el arroz\n2. Saltear el pollo\n3. Mezclar todo',
       preparation_time: 30,
       nutritional_info: '250 kcal por porción',
+      categoria: 'jugos',
       image_url: 'assets/img/recipe/juices.png'
     },
     {
@@ -38,6 +43,7 @@ export class RecipeListComponent {
       instructions: '1. Machacar plátanos\n2. Mezclar con avena\n3. Hornear',
       preparation_time: 20,
       nutritional_info: '150 kcal por galleta',
+      categoria: 'panes',
       image_url: 'assets/img/recipe/breads.png'
     },
     {
@@ -47,11 +53,13 @@ export class RecipeListComponent {
       instructions: '1. Cocinar la quinoa\n2. Mezclar ingredientes\n3. Servir frío',
       preparation_time: 25,
       nutritional_info: '300 kcal por porción',
+      categoria: 'comida',
       image_url: 'assets/img/recipe/meal2.png'
     }
   ];
 
-  public selectedItem: IRecipe = {};
+  public selectedItem: IRecipe | null = null;
+
   public modalService = inject(NgbModal);
   private recipeService = inject(RecipesService);
 
@@ -71,4 +79,9 @@ export class RecipeListComponent {
   onSave() {
     console.log('Guardar clickeado');
   }
+
+  onCook(recipe: IRecipe) {
+    this.selectedItem = recipe;
+  }
+  
 }

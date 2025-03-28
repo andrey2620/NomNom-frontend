@@ -1,0 +1,44 @@
+.view-recipe {
+    padding: 1.5rem;
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    color: #02306D;
+  
+    .view-img {
+      max-height: 250px;
+      width: 100%;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+  
+    .recipe-title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+    }
+  
+    .section-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: #1e3932;
+    }
+  
+    ul, ol {
+      padding-left: 1.25rem;
+    }
+  
+    li {
+      margin-bottom: 0.5rem;
+    }
+  
+    .nutritional-info {
+      font-size: 0.95rem;
+      color: #555;
+      margin-top: 1rem;
+    }
+  }
+  

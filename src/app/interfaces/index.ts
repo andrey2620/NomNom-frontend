@@ -104,6 +104,7 @@ export interface IRecipe {
   preparation_time?: number;
   nutritional_info?: string;
   image_url?: string;
+  categoria: string;
 }
 
 export interface IIngredients{

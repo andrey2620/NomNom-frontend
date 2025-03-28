@@ -21,7 +21,8 @@ export class RecipeFormComponent {
     instructions: '',
     preparation_time: 0,
     nutritional_info: '',
-    image_url: ''
+    image_url: '',
+    categoria: 'panes'
   };
 
   @Output() callParentEvent: EventEmitter<IRecipe> = new EventEmitter<IRecipe>();

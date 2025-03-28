@@ -1,0 +1,21 @@
+<div *ngIf="recipe" class="view-recipe">
+    <img [src]="recipe.image_url" alt="Imagen de receta" class="img-fluid rounded mb-3 view-img" />
+  
+    <h3 class="recipe-title">{{ recipe.name }}</h3>
+    <p class="text-muted">Categoría: <strong>{{ recipe.categoria }}</strong></p>
+  
+    <h5 class="section-title mt-4">Ingredientes</h5>
+    <ul class="list-unstyled">
+      <li *ngFor="let item of recipe.description?.split('\n')">{{ item }}</li>
+    </ul>
+  
+    <h5 class="section-title mt-4">Instrucciones</h5>
+    <ol>
+      <li *ngFor="let step of recipe.instructions?.split('\n')">{{ step }}</li>
+    </ol>
+  
+    <div class="nutritional-info mt-3">
+      <p><strong>Tiempo de preparación:</strong> {{ recipe.preparation_time }} minutos</p>
+      <p><strong>Información nutricional:</strong> {{ recipe.nutritional_info }}</p>
+    </div>
+  </div>

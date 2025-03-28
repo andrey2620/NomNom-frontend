@@ -102,7 +102,7 @@ export const routes: Routes = [
             IRoleType.superAdmin,
             IRoleType.user
           ],
-          name: 'Recipes',
+          name: 'Generador',
           showInSidebar: true
         }
       },
