@@ -105,3 +105,12 @@ export interface IRecipe {
   nutritional_info?: string;
   image_url?: string;
 }
+
+export interface IIngredients{
+  id?: number;
+  name?: string;
+  description?: string;
+  image?: string;
+}
+
+
