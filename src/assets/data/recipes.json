@@ -1,0 +1,21 @@
+[
+    {
+      "id_recipe": 1,
+      "name": "Arroz con Pollo",
+      "description": "1 taza de arroz\n1 pechuga de pollo\nVerduras al gusto",
+      "instructions": "1. Cocinar el arroz\n2. Saltear el pollo\n3. Mezclar todo",
+      "preparation_time": 30,
+      "nutritional_info": "250 kcal por porción",
+      "image_url": "assets/img/recipe/breads.png"
+    },
+    {
+      "id_recipe": 2,
+      "name": "Galletas de avena",
+      "description": "2 plátanos maduros\n1 taza de avena\nChispas de chocolate",
+      "instructions": "1. Machacar plátanos\n2. Mezclar con avena\n3. Hornear",
+      "preparation_time": 20,
+      "nutritional_info": "150 kcal por galleta",
+      "image_url": "assets/img/recipe/breads.png"
+    }
+  ]
+  

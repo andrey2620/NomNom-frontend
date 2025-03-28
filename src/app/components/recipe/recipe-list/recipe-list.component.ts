@@ -1,11 +1,11 @@
-import { Component, Input, OnChanges, SimpleChanges, inject } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { IRecipe } from '../../../interfaces';
-import { RecipeFormComponent } from '../recipe-form/recipe-form.component';
-import { ModalComponent } from '../../modal/modal.component';
 import { RecipesService } from '../../../services/recipes.service';
+import { ModalComponent } from '../../modal/modal.component';
+import { RecipeFormComponent } from '../recipe-form/recipe-form.component';
 
 @Component({
   selector: 'app-recipe-list',
@@ -18,9 +18,10 @@ import { RecipesService } from '../../../services/recipes.service';
   templateUrl: './recipe-list.component.html',
   styleUrl: './recipe-list.component.scss'
 })
-export class RecipeListComponent implements OnChanges {
-  //@Input() itemList: IRecipe[] = [];
-  itemList: IRecipe[] = [
+export class RecipeListComponent {
+  @Input() areActionsAvailable: boolean = false;
+
+  public itemList: IRecipe[] = [
     {
       id_recipe: 1,
       name: 'Arroz con Pollo',
@@ -37,30 +38,22 @@ export class RecipeListComponent implements OnChanges {
       instructions: '1. Machacar plátanos\n2. Mezclar con avena\n3. Hornear',
       preparation_time: 20,
       nutritional_info: '150 kcal por galleta',
-      image_url: 'assets/img/recipe/meal2.png'
+      image_url: 'assets/img/recipe/breads.png'
     },
     {
       id_recipe: 3,
-      name: 'Galletas de avena',
-      description: '2 plátanos maduros\n1 taza de avena\nChispas de chocolate',
-      instructions: '1. Machacar plátanos\n2. Mezclar con avena\n3. Hornear',
-      preparation_time: 20,
-      nutritional_info: '150 kcal por galleta',
-      image_url: 'assets/img/recipe/meal1.png'
+      name: 'Bowl de quinoa',
+      description: '1 taza de quinoa\n1 taza de espinaca\n1/2 aguacate\nAderezo al gusto',
+      instructions: '1. Cocinar la quinoa\n2. Mezclar ingredientes\n3. Servir frío',
+      preparation_time: 25,
+      nutritional_info: '300 kcal por porción',
+      image_url: 'assets/img/recipe/meal2.png'
     }
   ];
-  
-  @Input() areActionsAvailable: boolean = false;
 
   public selectedItem: IRecipe = {};
-  private recipeService = inject(RecipesService);
   public modalService = inject(NgbModal);
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['areActionsAvailable']) {
-      // lógica si se necesita cuando cambian las acciones disponibles
-    }
-  }
+  private recipeService = inject(RecipesService);
 
   showDetailModal(item: IRecipe, modal: any) {
     this.selectedItem = { ...item };
@@ -78,8 +71,4 @@ export class RecipeListComponent implements OnChanges {
   onSave() {
     console.log('Guardar clickeado');
   }
-  
-
-  
-  
 }

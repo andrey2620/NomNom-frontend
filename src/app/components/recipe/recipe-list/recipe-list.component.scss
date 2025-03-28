@@ -3,11 +3,10 @@
   border-radius: 16px;
   padding: 1.5rem;
   max-width: 400px;
-  max-height: 600px; // altura límite visible
-  overflow-y: auto; // activa el scroll vertical
+  max-height: 600px; 
+  overflow-y: auto; 
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
 
-  // Estilo para la barra de scroll personalizada
   &::-webkit-scrollbar {
     width: 3px;
   }
