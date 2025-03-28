@@ -105,5 +105,3 @@ export interface IRecipe {
   nutritional_info?: string;
   image_url?: string;
 }
-
-
