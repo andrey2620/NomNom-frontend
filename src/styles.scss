@@ -53,14 +53,21 @@ body[class="dark-only"] {
 html, body { 
   height: 100%; 
 }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Poppins, sans-serif; }
+
+.mat-typography {
+  font-family: 'Poppins', sans-serif !important;
+  font-size: 16px !important;
+  line-height: 1.6 !important;
+  letter-spacing: normal !important;
+}
 
 .error-snackbar .mdc-snackbar__surface{
-  background-color: rgb(197, 49, 49) !important;
+  background-color: #bb0a21 !important;
 }
 
 .success-snackbar .mdc-snackbar__surface{
-  background-color: rgb(54, 197, 49) !important;
+  background-color: #c3bf6d !important;
 }
 
 

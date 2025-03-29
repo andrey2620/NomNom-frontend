@@ -1,15 +1,17 @@
-.sous-chef-container {
+.sous-chef-panel {
     background-color: #c6c275; 
-    padding: 2rem;
-    border-radius: 12px;
     height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: start;
   }
+
+  .rounded{
+    border-radius: .25rem !important;
+  }
   
-  .sous-chef-initials {
+  .icon-box {
     width: 60px;
     height: 60px;
     background-color: #2b4827; 
@@ -22,33 +24,23 @@
     justify-content: center;
     margin-bottom: 1.5rem;
   }
-  
-  .control-label {
-    font-weight: 500;
-    margin-top: 1.25rem;
-    margin-bottom: 0.5rem;
-    align-self: start;
-    color: #2b4827;
-  }
+
   
   .slider {
     width: 100%;
     margin-bottom: 1rem;
   }
   
-  .slider::-webkit-slider-thumb {
-    background-color: #2b4827;
-  }
   
   .controls {
     display: flex;
     justify-content: center;
     gap: 1rem;
     margin: 1rem 0;
-  }
+  }  
   
   .controls button {
-    background-color: #e9ecda;
+    background-color: #daefb3;
     border: none;
     padding: 0.6rem;
     border-radius: 50%;
