@@ -26,7 +26,12 @@
       margin-bottom: 0.5rem;
       color: #1e3932;
     }
-  
+
+    :host {
+      display: block;
+      width: 100%;
+    }
+    
     ul, ol {
       padding-left: 1.25rem;
     }

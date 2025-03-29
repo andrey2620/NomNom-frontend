@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { IRecipe } from '../../interfaces';
 import { RecipeListComponent } from '../../components/recipe/recipe-list/recipe-list.component';
 import { ViewRecipeComponent } from './view-recipe/view-recipe.component';
+import { SousChefComponent } from './sous-chef/sous-chef.component';
+
 
 @Component({
   selector: 'app-recipe',
@@ -10,7 +12,8 @@ import { ViewRecipeComponent } from './view-recipe/view-recipe.component';
   imports: [
     CommonModule,
     RecipeListComponent,
-    ViewRecipeComponent
+    ViewRecipeComponent,
+    SousChefComponent
   ],
   templateUrl: './recipe.component.html',
   styleUrls: ['./recipe.component.scss']

@@ -8,11 +8,20 @@
       </app-recipe-list>    
     </div>
 
-    <div class="col-md-8" *ngIf="selectedRecipe">
-      <app-view-recipe [recipe]="selectedRecipe"
-      (save)="onRecipeSaved($event)"
-      (delete)="onRecipeDeleted($event)">
-      </app-view-recipe>
+    <div class="col-md-8">
+      <div class="row">
+        <div class="col-md-8" *ngIf="selectedRecipe">
+          <app-view-recipe 
+            [recipe]="selectedRecipe"
+            (save)="onRecipeSaved($event)"
+            (delete)="onRecipeDeleted($event)">
+          </app-view-recipe>
+        </div>
+
+        <div class="col-md-4" *ngIf="selectedRecipe">
+          <app-sous-chef [recipe]="selectedRecipe"></app-sous-chef>
+        </div>
+      </div>
     </div>
   </div>
 </div>
