@@ -36,9 +36,10 @@
     margin-bottom: 1rem;
     -webkit-appearance: none; 
     height: 6px;
-    background: #e0e0e0;
     border-radius: 5px;
     outline: none;
+    transition: background 0.3s ease;
+
   
     &::-webkit-slider-thumb {
       -webkit-appearance: none;
@@ -46,11 +47,13 @@
       width: 14px;
       height: 14px;
       border-radius: 50%;
-      background: #e0e0e0;
+      background: #daefb3;
       cursor: pointer;
       border: none;
       box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
       margin-top: -4px; 
+      transition: background 0.3s ease, transform 0.2s ease;
+
     }
   
     &::-moz-range-thumb {
@@ -60,6 +63,8 @@
       background: #2c5530;
       border: none;
       cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+
     }
   
     &::-webkit-slider-runnable-track {
@@ -73,6 +78,55 @@
       background: #2c5530;
       border-radius: 5px;
     }
+
+    &::-webkit-slider-thumb:hover {
+      background: #fcb1a6; 
+      transform: scale(1.1);
+
+    }
+  
+    &::-moz-range-thumb:hover {
+      background: #1f3e24;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  
+    &:focus::-webkit-slider-runnable-track {
+      background: #daefb3; 
+    }
+  
+    &:focus::-moz-range-track {
+      background: #daefb3;
+    }
+  }
+
+  .control-btn {
+    background-color: #daefb3;
+    color: #2c5530;
+    padding: 0.6rem;
+    border-radius: 50%;
+    font-size: 1.25rem;
+    transition: all 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    i {
+      font-size: 1.2rem;
+    }
+  
+    &:hover {
+      background-color: #2c5530;
+      color: #daefb3;
+      transform: scale(1.1);
+    }
+  
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px #daefb3;
+    }
   }
   
   
@@ -84,7 +138,6 @@
   }  
   
   .controls button {
-    background-color: #daefb3;
     border: none;
     padding: 0.6rem;
     border-radius: 50%;
@@ -97,12 +150,12 @@
     transform: scale(1.1);
   }
   
-  .toggle-button {
+  .toggle-btn {
     background-color: #2b4827;
     color: white;
     padding: 0.5rem 1rem;
     border: none;
-    border-radius: 8px;
+    border-radius: 35px;
     margin-top: 1rem;
     cursor: pointer;
     transition: background-color 0.2s;
