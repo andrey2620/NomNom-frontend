@@ -17,6 +17,7 @@ import { CallbackComponent } from './pages/auth/login/CallbackComponent';
 import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgotPassword.component';
 import { ResetPasswordComponent } from './pages/auth/reset-password/reset-password.component';
 import { GenerateRecipesComponent } from './pages/generateRecipes/generateRecipes.component';
+import { InteractiveMapComponent } from './pages/interactiveMap/interactiveMap.component';
 
 export const routes: Routes = [
   {
@@ -98,7 +99,19 @@ export const routes: Routes = [
             IRoleType.superAdmin,
             IRoleType.user
           ],
-          name: 'Recipes',
+          name: 'Recetas',
+          showInSidebar: true
+        }
+      },
+      {
+        path: 'interactiveMap',
+        component: InteractiveMapComponent,
+        data: {
+          authorities: [
+            IRoleType.superAdmin,
+            IRoleType.user
+          ],
+          name: 'Mapa interactivo',
           showInSidebar: true
         }
       },
