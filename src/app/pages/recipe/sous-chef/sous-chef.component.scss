@@ -14,7 +14,7 @@
   .icon-box {
     width: 60px;
     height: 60px;
-    background-color: #2b4827; 
+    background-color: #bb0a21; 
     color: white;
     font-size: 1.8rem;
     font-weight: bold;
@@ -161,8 +161,27 @@
     transition: background-color 0.2s;
   }
   
-  .toggle-button:hover {
-    background-color: #1d321b;
+  .toggle-btn:hover {
+    background-color: #daefb3;
+    color: #2b4827;
+
+  }
+
+  .toggle-btn2 {
+    background-color: #bb0a21;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 35px;
+    margin-top: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .toggle-btn2:hover {
+    background-color: #daefb3;
+    color: #2b4827;
+
   }
   
   .section-subtitle {

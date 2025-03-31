@@ -21,13 +21,19 @@
     </div>
   
     <div class="text-center">
-      <button class="btn toggle-btn" (click)="toggleSousChef()">Apagar</button>
+      <button 
+        class="btn toggle-btn" 
+        [ngClass]="{ 'btn-dark': isSousChefOn, 'btn-success': !isSousChefOn }"
+        (click)="toggleSousChef()">
+        {{ isSousChefOn ? 'Apagar' : 'Prender' }}
+      </button>
     </div>
+    
   
     <hr class="my-4" />
-    <h5 class="text-center mt-3">Sugerencias de presentación</h5>
+    <label for="speed" class="form-label">Sugerencias de presentación</label>
     <div class="text-center">
-      <button class="btn btn-danger">Prender/Apagar</button>
+      <button class="btn toggle-btn2">Apagar</button>
     </div>
   </div>
   

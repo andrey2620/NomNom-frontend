@@ -13,8 +13,8 @@ import { IRecipe } from '../../../interfaces';
 export class SousChefComponent {
   @Input() recipe!: IRecipe;
 
-  public volume: number = 1;
-  public rate: number = 0.5;
+  public volume: number = 0.5;
+  public rate: number = 1;
   public isSpeaking: boolean = false;
 
   speak() {
@@ -40,14 +40,22 @@ export class SousChefComponent {
   }
 
   private buildText(): string {
-    const intro = `Vamos a preparar .`;
-    const ingredientes = `Los ingredientes son:.`;
-    const pasos = `Y los pasos son: s`;
+    const intro = `Hola... Soy el sous chef de NomNom. Estoy en periodo de prueba y`;
+    const ingredientes = `Aun no puedo ayudarte a cocinar, lo siento.`;
+    const pasos = `Vuelve pronto`;
     return `${intro} ${ingredientes} ${pasos}`;
   }
 
+  public isSousChefOn: boolean = false;
+
   toggleSousChef() {
-    console.log("Toggling Sous Chef...");
+    this.isSousChefOn = !this.isSousChefOn;
+  
+    if (this.isSousChefOn) {
+      this.speak(); //aun me falta poner el text to speack
+    } else {
+      this.stop(); 
+    }
   }
   
 }
