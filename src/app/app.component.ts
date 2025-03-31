@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
 
 interface Operator {
@@ -17,7 +18,8 @@ interface Calculator {
   standalone: true,
   imports: [
     RouterOutlet,
-    CommonModule
+    CommonModule,
+    FormsModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
@@ -39,12 +41,12 @@ export class AppComponent {
     name: 'My caculator',
     type: 'simple'
   };
-  date: Date = new Date(); 
+  date: Date = new Date();
 
   operation(name: string) {
     if (name == 'addition') {
       this.cant++;
-    } else  if (name == 'subtraction') {
+    } else if (name == 'subtraction') {
       this.cant--;
     }
   }

@@ -1,5 +1,32 @@
+<h1>Dashboard - User is logged in</h1>
 
-<div class="row info-container">
+<div *ngIf="user">
+  <h2>Bienvenido, {{ user.name }}</h2>
+  <p>Email: {{ user.email }}</p>
+  <img [src]="user.picture" alt="User Picture" width="100">
+</div>
+
+
+<h3>Alergias</h3>
+<div *ngFor="let allergy of allergyOptions">
+  <input type="checkbox" [value]="allergy.id"
+    (change)="selectedAllergies.has(allergy.id) ? selectedAllergies.delete(allergy.id) : selectedAllergies.add(allergy.id)">
+  <label>{{ allergy.name }}</label>
+</div>
+
+<h3>Preferencias Dietéticas</h3>
+<div *ngFor="let preference of preferenceOptions">
+  <input type="checkbox" [value]="preference.id"
+    (change)="selectedPreferences.has(preference.id) ? selectedPreferences.delete(preference.id) : selectedPreferences.add(preference.id)">
+  <label>{{ preference.name }}</label>
+</div>
+
+
+<button (click)="updateSelections()">Guardar Selecciones</button>
+
+
+<button (click)="logOut()">LogOut</button>
+<!-- <div class="row info-container">
   <div class="col-6">
     <div class="shadow-sm bg-body rounded px-4 py-4 h-100">
       <div>
@@ -73,4 +100,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
