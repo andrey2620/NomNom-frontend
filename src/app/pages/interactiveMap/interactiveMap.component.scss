@@ -1,0 +1,12 @@
+.mapContaier{
+    display: flex;
+    gap: 10px;
+}
+
+app-map{
+    flex: 1;
+}
+
+app-recipe-list{
+    flex: 0.5;
+}

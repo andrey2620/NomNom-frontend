@@ -1,0 +1,31 @@
+<div class="recipe-panel p-3 rounded">
+  <h2 class="section-title mb-4">Mis Recetas</h2>
+
+  <div class="row g-4">
+    <ng-container *ngFor="let recipe of itemList; trackBy: trackById">
+      <div class="col-md-12 col-lg-12">
+        <div class="card h-100 shadow-sm">
+          <img [src]="recipe.image_url" class="card-img-top" alt="Imagen de receta" />
+          
+          <div class="card-body">
+            <h5 class="card-title">{{ recipe.name }}</h5>
+            <p class="card-text">
+              {{ recipe.description?.split('\n')?.[0] || 'Sin descripción' }}
+            </p>
+            <p *ngIf="itemList.length === 0">No hay recetas disponibles.</p>
+
+
+            <div class="text-center mt-3">
+              <button class="btn cook-btn">¡Hora de cocinar!</button>
+            </div>
+
+            <div *ngIf="areActionsAvailable" class="d-flex justify-content-end gap-2 mt-3">
+              <button class="btn btn-sm btn-outline-primary" (click)="onSave()">Guardar</button>
+              <button class="btn btn-sm btn-outline-danger" (click)="deleteRecipe(recipe)">Eliminar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>
