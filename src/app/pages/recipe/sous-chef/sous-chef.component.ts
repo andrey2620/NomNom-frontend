@@ -43,6 +43,7 @@ export class SousChefComponent {
     const intro = `Hola... Soy el sous chef de NomNom. Estoy en periodo de prueba y`;
     const ingredientes = `Aun no puedo ayudarte a cocinar, lo siento.`;
     const pasos = `Vuelve pronto`;
+    const sugerencias = `Aun no tengo sugerencias por compartir.`;
     return `${intro} ${ingredientes} ${pasos}`;
   }
 
