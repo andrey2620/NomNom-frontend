@@ -19,7 +19,7 @@ export class ProfileService extends BaseService<IUser> {
   getUserInfoSignal() {
     this.findAll().subscribe({
       next: (response: any) => {
-        this.userSignal.set(response);  // Actualiza el valor de la señal
+        this.userSignal.set(response);
       },
       error: (error: any) => {
         this.snackBar.open(
@@ -30,12 +30,9 @@ export class ProfileService extends BaseService<IUser> {
             verticalPosition: 'top',
             panelClass: ['error-snackbar']
           }
-        );
+        )
       }
-    });
-  }
-  getUser() {
-    return this.userSignal();  // Accede al valor actual de la señal
+    })
   }
 
   updateUserProfile(user: IUser) {

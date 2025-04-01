@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ProfileService } from '../../services/profile.service';
 import { AuthService } from '../../services/auth.service';
 import { HttpClient } from '@angular/common/http';
@@ -6,17 +6,23 @@ import { firstValueFrom } from 'rxjs';
 import { AllergiesService } from '../../services/allergies.service';
 import { DietPreferenceService } from '../../services/dietPreference.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { IAllergies, IDietPreferences } from '../../interfaces';
+import { IAllergies, IDietPreferences, IUser } from '../../interfaces';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
+  standalone: true,
   selector: 'app-profile',
   templateUrl: './profile.component.html',
+  imports: [
+    CommonModule
+  ],
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  user: any;
+  public profileService = inject(ProfileService);
+  public user!: IUser;
   allergyOptions: any[] = [];
   preferenceOptions: any[] = [];
   selectedAllergies: Set<number> = new Set();
@@ -28,11 +34,10 @@ export class ProfileComponent implements OnInit {
     private authService: AuthService,
     private dietPreferenceService: DietPreferenceService,
     private allergiesService: AllergiesService,
-    private profileService: ProfileService,
     private router: Router,
 
   ) {
-    this.user = this.authService.getUser();
+    this.profileService.getUserInfoSignal();
   }
 
 
@@ -52,7 +57,6 @@ export class ProfileComponent implements OnInit {
   }
 
   updateSelections() {
-
     const selectedAllergiesArray = Array.from(this.selectedAllergies);
     const selectedPreferencesArray = Array.from(this.selectedPreferences);
 
