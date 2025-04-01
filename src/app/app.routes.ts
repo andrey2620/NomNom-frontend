@@ -20,6 +20,7 @@ import { ResetPasswordComponent } from './pages/auth/reset-password/reset-passwo
 import { RecipeFormComponent } from './components/recipe/recipe-form/recipe-form.component';
 import { RecipeListComponent } from './components/recipe/recipe-list/recipe-list.component';
 import { GenerateRecipesComponent } from './pages/generateRecipes/generateRecipes.component';
+import { RecipeComponent } from './pages/recipe/recipe.component';
 
 
 export const routes: Routes = [
@@ -102,7 +103,7 @@ export const routes: Routes = [
             IRoleType.superAdmin,
             IRoleType.user
           ],
-          name: 'Recipes',
+          name: 'Generador',
           showInSidebar: true
         }
       },
@@ -156,7 +157,7 @@ export const routes: Routes = [
       },
       {
         path: 'recipes',
-        component: RecipeListComponent,
+        component: RecipeComponent,
         data: {
           authorities: [
             IRoleType.superAdmin,

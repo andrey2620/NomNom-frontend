@@ -3,7 +3,7 @@
   border-radius: 16px;
   padding: 1.5rem;
   max-width: 400px;
-  max-height: 600px; 
+  max-height: 700px; 
   overflow-y: auto; 
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
 
@@ -20,7 +20,6 @@
     background: transparent;
   }
 
-  // Firefox
   scrollbar-width: thin;
   scrollbar-color: white transparent;
 
@@ -34,7 +33,7 @@
   .section-title {
     font-size: 1.5rem;
     font-weight: 700;
-    color: black;
+    color: #2c5530;
   }
 
   .card {
@@ -54,7 +53,7 @@
 
     .card-text {
       font-size: 0.9rem;
-      color: black;
+      color: #2c5530;
     }
 
     .btn-outline-primary {

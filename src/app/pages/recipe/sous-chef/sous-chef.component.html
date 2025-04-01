@@ -1,0 +1,39 @@
+<div class="sous-chef-panel p-3 rounded">
+    <div class="sous-chef-icon text-center mb-3">
+      <div class="icon-box">SC</div>
+    </div>
+  
+    <div class="control-section mb-4">
+      <label for="volume" class="">Volumen</label>
+      <input class="slider"  type="range" id="volume" min="0" max="1" step="0.1" [(ngModel)]="volume" />
+    </div>
+  
+    <div class="control-section mb-4">
+      <label for="speed" class="form-label">Velocidad</label>
+      <p class="text-center">{{ rate }}</p>
+      <input  class="slider" type="range" id="speed" min="0.1" max="2" step="0.1" [(ngModel)]="rate" />
+    </div>
+  
+    <div class="d-flex justify-content-center gap-2 mb-3">
+      <button class="btn control-btn rounded-circle"><i class="bi bi-skip-backward-fill"></i></button>
+      <button class="btn control-btn rounded-circle"><i class="bi bi-play-fill"></i></button>
+      <button class="btn control-btn rounded-circle"><i class="bi bi-skip-forward-fill"></i></button>
+    </div>
+  
+    <div class="text-center">
+      <button 
+        class="btn toggle-btn" 
+        [ngClass]="{ 'btn-dark': isSousChefOn, 'btn-success': !isSousChefOn }"
+        (click)="toggleSousChef()">
+        {{ isSousChefOn ? 'Apagar' : 'Prender' }}
+      </button>
+    </div>
+    
+  
+    <hr class="my-4" />
+    <label for="speed" class="form-label">Sugerencias de presentación</label>
+    <div class="text-center">
+      <button class="btn toggle-btn2">Apagar</button>
+    </div>
+  </div>
+  
