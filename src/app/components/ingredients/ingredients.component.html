@@ -1,0 +1,24 @@
+<div class="ingredientContainer" #ingredientContainer>
+
+    @for (item of ingredients; track item.id) {
+        <div class="ingredientDiv" 
+        [class.selected]="selectedIngredients.includes(item.id ?? null)"
+        (click)="selectIngredient(item.id ?? null)">
+            @if (!item.image){
+                <img class="w-100" src="../../../assets/gifs/default.gif" alt="img{{item.name}}">
+            }@else{
+                <img class="w-100" src="{{item.image}}" alt="img{{item.name}}"> 
+            }
+            
+            
+            <h2 class="text-center">{{item.name}}</h2>
+        </div>
+    } @empty {
+        <div class="d-flex justify-content-center align-items-center w-100">
+            <h2 class="mb-0">Error en el sistema. Por favor</h2>
+        </div>
+    }
+
+    
+
+</div>

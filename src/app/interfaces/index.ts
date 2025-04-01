@@ -98,6 +98,7 @@ export interface IPreferenceList {
   movies?: IMovie[];
 }
 
+
 export interface IAllergies {
   id?: number;
   name?: string;
@@ -106,4 +107,22 @@ export interface IAllergies {
 export interface IDietPreferences {
   id?: number;
   name?: string;
+}
+
+export interface IRecipe {
+  id_recipe?: number;
+  name?: string;
+  description?: string;
+  instructions?: string;
+  preparation_time?: number;
+  nutritional_info?: string;
+  image_url?: string;
+  categoria: string;
+}
+
+export interface IIngredients{
+  id?: number;
+  name?: string;
+  description?: string;
+  image?: string;
 }

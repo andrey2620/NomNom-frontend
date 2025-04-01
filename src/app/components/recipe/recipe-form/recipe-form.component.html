@@ -1,0 +1,40 @@
+<div class="container recipe-form mt-4">
+  <h2 class="text-center mb-4">{{ title }}</h2>
+
+  <form (ngSubmit)="onSubmit()" #formRecipe="ngForm">
+
+    <div class="mb-3">
+      <label for="name" class="form-label">Nombre de la receta</label>
+      <input type="text" class="form-control" id="name" name="name" required [(ngModel)]="toUpdateRecipe.name">
+    </div>
+
+    <div class="mb-3">
+      <label for="description" class="form-label">Ingredientes</label>
+      <textarea class="form-control" id="description" name="description" rows="4" required [(ngModel)]="toUpdateRecipe.description"></textarea>
+      <small class="form-text text-muted">Un ingrediente por línea</small>
+    </div>
+
+    <div class="mb-3">
+      <label for="instructions" class="form-label">Instrucciones</label>
+      <textarea class="form-control" id="instructions" name="instructions" rows="6" required [(ngModel)]="toUpdateRecipe.instructions"></textarea>
+      <small class="form-text text-muted">Una instrucción por línea</small>
+    </div>
+
+    <div class="mb-3">
+      <label for="preparation_time" class="form-label">Tiempo de preparación (minutos)</label>
+      <input type="number" class="form-control" id="preparation_time" name="preparation_time" required [(ngModel)]="toUpdateRecipe.preparation_time">
+    </div>
+
+    <div class="mb-3">
+      <label for="nutritional_info" class="form-label">Información nutricional</label>
+      <textarea class="form-control" id="nutritional_info" name="nutritional_info" rows="3" [(ngModel)]="toUpdateRecipe.nutritional_info"></textarea>
+    </div>
+
+    <div class="mb-3">
+      <label for="image_url" class="form-label">URL de imagen</label>
+      <input type="text" class="form-control" id="image_url" name="image_url" [(ngModel)]="toUpdateRecipe.image_url">
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="formRecipe.invalid">Guardar Receta</button>
+  </form>
+</div>

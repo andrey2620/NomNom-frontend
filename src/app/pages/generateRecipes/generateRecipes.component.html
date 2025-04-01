@@ -1,0 +1,25 @@
+@defer{
+<div class="row p-4 w-75">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center green">
+            <h2>{{title}}</h2>
+        </div>
+    </div>
+
+    <div class="col-12 pb-1">
+        <input type="text" [(ngModel)]="searchQuery" placeholder="Buscar..." (input)="filterIngredients()"
+            class="form-control w-25 mb-3" />
+        <h1>Escoge tus ingredientes</h1>
+    </div>
+    
+
+    <div class="col-12">
+        <app-ingredients [ingredients]="ingredientService.ingredient$()" />
+    </div>
+
+    <app-pagination [service]="ingredientService" (pageChange)="changePage($event)"></app-pagination>
+
+</div>
+} @loading (minimum 1.5s){
+<app-loader></app-loader>
+}

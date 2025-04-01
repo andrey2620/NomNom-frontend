@@ -83,6 +83,7 @@ body {
   font-family: $font-primary;
 }
 
+
 $font-rubik: Poppins;
 $font-roboto: Poppins;
 $font-serif: sans-serif;
@@ -253,7 +254,7 @@ $sidebar-profile-name-letter-specing: 1.5px;
 $sidebar-profile-name-marging: 3px;
 $sidebar-profile-sub-title-font-size: 10px;
 $sidebar-profile-sub-title-margin: 0px;
-$sidebar-profile-img-shadow: 0 0 15px rgb(195, 191, 109);
+$sidebar-profile-img-shadow: 0 0 15px #b1b1ac;
 
 //Sidebar main menu setting
 $sidebar-menu-padding: 15px;
@@ -286,7 +287,7 @@ $sidebar-compact-width: 265px;
 $main-header-position: fixed;
 $main-header-top: 0;
 $main-header-shadow: 0 0 20px rgba($semi-dark, 0.1);
-$main-header-shadow-1: 0px 4px 40px rgb(218, 239, 179);
+$main-header-shadow-1: 0px 4px 40px #bdbeba;
 
 //page settings
 $page-body-padding: 0 15px 0 15px;

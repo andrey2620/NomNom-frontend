@@ -17,6 +17,12 @@ import { CallbackComponent } from './pages/auth/login/CallbackComponent';
 import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgotPassword.component';
 import { ResetPasswordComponent } from './pages/auth/reset-password/reset-password.component';
 
+import { RecipeFormComponent } from './components/recipe/recipe-form/recipe-form.component';
+import { RecipeListComponent } from './components/recipe/recipe-list/recipe-list.component';
+import { GenerateRecipesComponent } from './pages/generateRecipes/generateRecipes.component';
+import { RecipeComponent } from './pages/recipe/recipe.component';
+
+
 export const routes: Routes = [
   {
     path: 'login',
@@ -90,6 +96,18 @@ export const routes: Routes = [
         }
       },
       {
+        path: 'generateRecipes',
+        component: GenerateRecipesComponent,
+        data: {
+          authorities: [
+            IRoleType.superAdmin,
+            IRoleType.user
+          ],
+          name: 'Generador',
+          showInSidebar: true
+        }
+      },
+      {
         path: 'profile',
         component: ProfileComponent,
         data: {
@@ -136,7 +154,20 @@ export const routes: Routes = [
           name: 'preference list',
           showInSidebar: true
         }
-      }
+      },
+      {
+        path: 'recipes',
+        component: RecipeComponent,
+        data: {
+          authorities: [
+            IRoleType.superAdmin,
+            IRoleType.user,
+          ],
+          name: 'recipes',
+          showInSidebar: true
+        }
+      },
+      
     ],
   },
 ];
