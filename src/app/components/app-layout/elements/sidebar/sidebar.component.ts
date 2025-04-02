@@ -15,16 +15,15 @@ import { RouterModule } from '@angular/router';
 })
 export class SidebarComponent implements OnInit {
   private authService = inject(AuthService);
-  public permittedRoutes: any[] = [];
+  public permittedRoutes: Route[] = [];
   public showLeftArrow = false;
   public showRigthArrow = false;
-  public layoutService: any;
-
+  constructor(public layoutService: LayoutService) {}
   ngOnInit(): void {
     this.permittedRoutes = this.getPermittedRoutes();
   }
 
-  private getPermittedRoutes(): any[] {
+  private getPermittedRoutes(): Route[] {
     const user = this.authService.getUser();
     if (!user || !user['authorities']) {
       console.warn('No user found or no authorities assigned.');

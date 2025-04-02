@@ -120,6 +120,18 @@ export const routes: Routes = [
         }
       },
       {
+        path: 'recipes',
+        component: RecipeComponent,
+        data: {
+          authorities: [
+            IRoleType.superAdmin,
+            IRoleType.user,
+          ],
+          name: 'recipes',
+          showInSidebar: true
+        }
+      },
+      /*       {
         path: 'games',
         component: GamesComponent,
         data: {
@@ -154,20 +166,7 @@ export const routes: Routes = [
           name: 'preference list',
           showInSidebar: true
         }
-      },
-      {
-        path: 'recipes',
-        component: RecipeComponent,
-        data: {
-          authorities: [
-            IRoleType.superAdmin,
-            IRoleType.user,
-          ],
-          name: 'recipes',
-          showInSidebar: true
-        }
-      },
-      
+      }, */
     ],
   },
 ];
