@@ -3,12 +3,13 @@ import { BaseService } from './base-service';
 import { IRecipe, ISearch } from '../interfaces';
 import { AuthService } from './auth.service';
 import { AlertService } from './alert.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RecipesService extends BaseService<IRecipe> {
-  protected override source: string = 'recipes'; // Ajusta esto si tu endpoint usa otro nombre
+  protected override source: string = 'recipes';
 
   private recipeListSignal = signal<IRecipe[]>([]);
   get recipes$() {
@@ -17,7 +18,7 @@ export class RecipesService extends BaseService<IRecipe> {
 
   public search: ISearch = {
     page: 1,
-    size: 3
+    size: 3,
   };
 
   public totalItems: any = [];
@@ -28,15 +29,12 @@ export class RecipesService extends BaseService<IRecipe> {
     this.findAllWithParams({ page: this.search.page, size: this.search.size }).subscribe({
       next: (response: any) => {
         this.search = { ...this.search, ...response.meta };
-        this.totalItems = Array.from(
-          { length: this.search.totalPages ?? 0 },
-          (_, i) => i + 1
-        );
+        this.totalItems = Array.from({ length: this.search.totalPages ?? 0 }, (_, i) => i + 1);
         this.recipeListSignal.set(response.data);
       },
       error: (err: any) => {
         console.error('Error al obtener recetas', err);
-      }
+      },
     });
   }
 
@@ -49,10 +47,9 @@ export class RecipesService extends BaseService<IRecipe> {
       error: (err: any) => {
         this.alertService.displayAlert('error', 'Ocurrió un error al agregar la receta', 'center', 'top', ['error-snackbar']);
         console.error('Error', err);
-      }
+      },
     });
   }
-
 
   delete(recipe: IRecipe) {
     this.del(`${recipe.id_recipe}`).subscribe({
@@ -63,7 +60,13 @@ export class RecipesService extends BaseService<IRecipe> {
       error: (err: any) => {
         this.alertService.displayAlert('error', 'Ocurrió un error al eliminar la receta', 'center', 'top', ['error-snackbar']);
         console.error('Error', err);
-      }
+      },
     });
   }
+
+  getRecipesByUser(userId: number): Observable<any> {
+    return this.findAllWithParamsAndCustomSource(`generator/user/${userId}`);
+  }
+
+
 }
