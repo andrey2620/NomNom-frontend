@@ -1,0 +1,26 @@
+.custom-top-menu {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-left: 2rem;
+  
+    .nav-link {
+      font-weight: 500;
+      font-size: 1rem;
+      color: #333;
+      text-decoration: none;
+      padding: 0.25rem 0;
+      position: relative;
+  
+      &.active {
+        color: #b40020;
+        font-weight: 600;
+      }
+  
+      &:hover {
+        color: #b40020;
+        text-decoration: none;
+      }
+    }
+  }
+  
