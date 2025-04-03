@@ -24,15 +24,19 @@
 
 <div class="prefrencias-main-container">
   <h3>Alergias</h3>
-  <div class="alergias" *ngFor="let allergy of allergiesService.allAllergies">
-    <input type="checkbox" [value]="allergy.id" (change)="onSelectedAllergy(allergy)">
-    <label>{{ allergy.name }}</label>
+  <div class="prefrencias-second-container">
+    <div *ngFor="let allergy of allergiesService.allAllergies">
+      <input type="checkbox" [value]="allergy.id" (change)="onSelectedAllergy(allergy)">
+      <label>{{ allergy.name }}</label>
+    </div>
   </div>
 
   <h3>Preferencias Dietéticas</h3>
-  <div *ngFor="let preference of dietPreferenceService.allDietPreferences">
-    <input type="checkbox" [value]="preference.id" (change)="onSelectedPreference(preference)">
-    <label>{{ preference.name }}</label>
+  <div class="prefrencias-second-container">
+    <div *ngFor="let preference of dietPreferenceService.allDietPreferences">
+      <input type="checkbox" [value]="preference.id" (change)="onSelectedPreference(preference)">
+      <label>{{ preference.name }}</label>
+    </div>
   </div>
 </div>
 

@@ -50,10 +50,13 @@
 .prefrencias-main-container {
   position: relative;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  background-color: #fcb1a6;
 
-  .alergias {
+  .prefrencias-second-container {
     margin: 0.5%;
     border: 1%;
+    width: 30%;
+    background-color: #fbfef9;
   }
 }
