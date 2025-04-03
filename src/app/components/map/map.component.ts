@@ -127,6 +127,7 @@ export class MapComponent implements AfterViewInit {
                     .map(([key, recipe]: [string, any]) => ({
                         name: recipe.name,
                         description: recipe.description,
+                        image_url: recipe.image_url,
                     }));
                 
                 this.recipesSelected.emit(recipesList);

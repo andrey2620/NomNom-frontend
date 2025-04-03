@@ -8,11 +8,13 @@
             "recipes":{
                 "Gallopinto":{
                     "name":"Gallopinto",
-                    "description":"Arroz con frijoles."
+                    "description":"Arroz con frijoles.",
+                    "image_url" :"assets/img/recipe/meal1.png"
                 },
                 "Tamales":{
                     "name":"Tamales",
-                    "description":"Masa de maíz rellena de carne y vegetales."
+                    "description":"Masa de maíz rellena de carne y vegetales.",
+                    "image_url" :"assets/img/recipe/meal2.png"
                 }
             }
         }
