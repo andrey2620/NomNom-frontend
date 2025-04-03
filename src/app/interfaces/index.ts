@@ -98,7 +98,6 @@ export interface IPreferenceList {
   movies?: IMovie[];
 }
 
-
 export interface IAllergies {
   id?: number;
   name?: string;
@@ -113,18 +112,38 @@ export interface IDietPreferences {
 
 export interface IRecipe {
   id_recipe?: number;
-  name?: string;
-  description?: string;
-  instructions?: string;
-  preparation_time?: number;
-  nutritional_info?: string;
+  name: string;
+  description: string;
+  instructions: string;
+  preparationTime: number;
+  nutritionalInfo: string;
   image_url?: string;
-  categoria: string;
+  recipeCategory: string;
+  ingredients: {
+    name: string;
+    quantity: string;
+    measurement: string;
+  }[];
+  suggestion?: ISuggestions;
 }
 
-export interface IIngredients{
+export interface IIngredients {
   id?: number;
   name?: string;
   description?: string;
   image?: string;
+}
+
+export const CATEGORY_IMAGE_MAP: Record<string, string> = {
+  comida: 'meal1.png',
+  ensalada: 'salads.png',
+  jugos: 'juices.png',
+  postre: 'sweets.png',
+  panes: 'breads.png',
+};
+
+export interface ISuggestions {
+  ingredientSubstitutions: string[];
+  presentationTips: string[];
+  kidsParticipation: string[];
 }

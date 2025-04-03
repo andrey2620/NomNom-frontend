@@ -1,10 +1,104 @@
+// .recipe-panel {
+//   background-color: #fcb1a6;
+//   border-radius: 16px;
+//   padding: 1.5rem;
+//   max-width: 400px;
+//   max-height: 700px;
+//   overflow-y: auto;
+//   box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+
+//   &::-webkit-scrollbar {
+//     width: 3px;
+//   }
+
+//   &::-webkit-scrollbar-thumb {
+//     background-color: white;
+//     border-radius: 3px;
+//   }
+
+//   &::-webkit-scrollbar-track {
+//     background: transparent;
+//   }
+
+//   scrollbar-width: thin;
+//   scrollbar-color: white transparent;
+
+//   .section-title {
+//     font-size: 1.5rem;
+//     font-weight: 700;
+//     color: #bb0a21;
+//   }
+
+//   .section-title {
+//     font-size: 1.5rem;
+//     font-weight: 700;
+//     color: #2c5530;
+//   }
+
+//   .card {
+//     border: none;
+//     border-radius: 12px;
+//     overflow: hidden;
+
+//     .card-img-top {
+//       height: 120px;
+//       object-fit: cover;
+//     }
+
+//     .card-title {
+//       font-size: 1.1rem;
+//       font-weight: bold;
+//     }
+
+//     .card-text {
+//       font-size: 0.9rem;
+//       color: #2c5530;
+//     }
+
+//     .btn-outline-primary {
+//       border-color: #bb0a21;
+//       color: #bb0a21;
+
+//       &:hover {
+//         background-color: #bb0a21;
+//         color: white;
+//       }
+//     }
+
+//     .btn-outline-danger {
+//       border-color: #bb0a21;
+//       color: #bb0a21;
+
+//       &:hover {
+//         background-color: #bb0a21;
+//         color: white;
+//       }
+//     }
+
+//     .cook-btn {
+//       background-color: #ffffff;
+//       color: #bb0a21;
+//       border: 2px solid #bb0a21;
+//       border-radius: 35px;
+//       padding: 0.5rem 1rem;
+//       font-weight: 600;
+//       font-size: 0.95rem;
+//       transition: all 0.3s ease;
+
+//       &:hover {
+//         background-color: #bb0a21;
+//         color: white;
+//       }
+//     }
+//   }
+// }
 .recipe-panel {
   background-color: #fcb1a6;
   border-radius: 16px;
   padding: 1.5rem;
   max-width: 400px;
-  max-height: 700px; 
-  overflow-y: auto; 
+  max-height: 700px;
+  overflow-y: auto;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
 
   &::-webkit-scrollbar {
@@ -22,13 +116,6 @@
 
   scrollbar-width: thin;
   scrollbar-color: white transparent;
-
-  .section-title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #BB0A21;
-  }
-
 
   .section-title {
     font-size: 1.5rem;
@@ -56,26 +143,6 @@
       color: #2c5530;
     }
 
-    .btn-outline-primary {
-      border-color: #bb0a21;
-      color: #BB0A21;
-
-      &:hover {
-        background-color: #bb0a21;
-        color: white;
-      }
-    }
-
-    .btn-outline-danger {
-      border-color: #bb0a21;
-      color: #bb0a21;
-
-      &:hover {
-        background-color: #bb0a21;
-        color: white;
-      }
-    }
-
     .cook-btn {
       background-color: #ffffff;
       color: #BB0A21;
@@ -85,12 +152,11 @@
       font-weight: 600;
       font-size: 0.95rem;
       transition: all 0.3s ease;
-    
+
       &:hover {
         background-color: #BB0A21;
         color: white;
       }
     }
-    
   }
 }

@@ -5,14 +5,13 @@
     <ng-container *ngFor="let recipe of itemList; trackBy: trackById">
       <div class="col-md-12 col-lg-12">
         <div class="card h-100 shadow-sm">
-          <img [src]="recipe.image_url" class="card-img-top" alt="Imagen de receta" />
-          
+          <img [src]="getCategoryImage(recipe.recipeCategory)" class="card-img-top" alt="Imagen de receta" (error)="onImageError($event)" />
+
           <div class="card-body">
             <h5 class="card-title">{{ recipe.name }}</h5>
             <p class="card-text">
               {{ recipe.description?.split('\n')?.[0] || 'Sin descripción' }}
             </p>
-            <p *ngIf="itemList.length === 0">No hay recetas disponibles.</p>
 
             <div class="text-center mt-3">
               <button class="btn cook-btn" (click)="onCook(recipe)">¡Hora de cocinar!</button>
@@ -22,8 +21,8 @@
       </div>
     </ng-container>
   </div>
-  <app-view-recipe 
-    *ngIf="selectedItem" 
-    [recipe]="selectedItem">
-  </app-view-recipe>
+
+  <p *ngIf="itemList.length === 0" class="text-center mt-3">No hay recetas disponibles.</p>
+
+  <app-view-recipe *ngIf="selectedItem" [recipe]="selectedItem"> </app-view-recipe>
 </div>

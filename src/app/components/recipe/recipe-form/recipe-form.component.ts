@@ -6,12 +6,9 @@ import { IRecipe } from '../../../interfaces';
 @Component({
   selector: 'app-recipe-form',
   standalone: true,
-  imports: [
-    CommonModule,
-    FormsModule
-  ],
+  imports: [CommonModule, FormsModule],
   templateUrl: './recipe-form.component.html',
-  styleUrl: './recipe-form.component.scss'
+  styleUrl: './recipe-form.component.scss',
 })
 export class RecipeFormComponent {
   @Input() title: string = 'Agregar Receta';
@@ -19,10 +16,11 @@ export class RecipeFormComponent {
     name: '',
     description: '',
     instructions: '',
-    preparation_time: 0,
-    nutritional_info: '',
+    preparationTime: 0,
+    nutritionalInfo: '',
     image_url: '',
-    categoria: 'panes'
+    recipeCategory: '',
+    ingredients: [],
   };
 
   @Output() callParentEvent: EventEmitter<IRecipe> = new EventEmitter<IRecipe>();
