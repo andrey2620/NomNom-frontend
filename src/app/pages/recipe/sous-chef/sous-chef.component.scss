@@ -99,6 +99,11 @@
   &:focus::-moz-range-track {
     background: #daefb3;
   }
+
+  .toggle-btn:hover {
+    background-color: #daefb3;
+    color: #2b4827;
+  }
 }
 
 .control-btn {
