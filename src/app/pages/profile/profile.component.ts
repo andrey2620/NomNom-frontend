@@ -20,11 +20,13 @@ import { CommonModule } from '@angular/common';
   ],
   styleUrls: ['./profile.component.scss']
 })
+
 export class ProfileComponent implements OnInit {
   public profileService = inject(ProfileService);
+
   public user!: IUser;
-  allergyOptions: any[] = [];
-  preferenceOptions: any[] = [];
+  // allergyOptions: any[] = [];
+  // preferenceOptions: any[] = [];
   selectedAllergies: Set<number> = new Set();
   selectedPreferences: Set<number> = new Set();
 
@@ -32,40 +34,54 @@ export class ProfileComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private authService: AuthService,
-    private dietPreferenceService: DietPreferenceService,
-    private allergiesService: AllergiesService,
+    public dietPreferenceService: DietPreferenceService,
+    public allergiesService: AllergiesService,
     private router: Router,
 
   ) {
     this.profileService.getUserInfoSignal();
-  }
-
-
-  ngOnInit(): void {
-    this.user = this.authService.getUser();
     this.dietPreferenceService.getAll();
     this.allergiesService.getAll();
-
-    this.preferenceOptions = this.dietPreferenceService.dietPreferences$();
-    this.allergyOptions = this.allergiesService.allergies$();
   }
 
+  ngOnInit(): void {
+    // this.user = this.authService.getUser();
+    // this.preferenceOptions = this.dietPreferenceService.dietPreferences$();
+    // this.allergyOptions = this.allergiesService.allergies$();
+    // console.log(this.allergyOptions);
+  }
 
   logOut() {
     this.authService.logout();
     this.router.navigate(['/login']);
   }
 
-  updateSelections() {
-    const selectedAllergiesArray = Array.from(this.selectedAllergies);
-    const selectedPreferencesArray = Array.from(this.selectedPreferences);
+  onSelectedAllergy(allergy: any) {
+    this.selectedAllergies.has(allergy) ? this.selectedAllergies.delete(allergy) : this.selectedAllergies.add(allergy)
+    console.log(this.selectedAllergies);
+  }
 
-    const updatedUser = {
-      ...this.user,
-      allergies: selectedAllergiesArray.join(','),
-      diet_preference: selectedPreferencesArray.join(',')
-    };
-    this.profileService.updateUserProfile(updatedUser);
+  onSelectedPreference(preference: any) {
+    this.selectedPreferences.has(preference) ? this.selectedPreferences.delete(preference.id) : this.selectedPreferences.add(preference);
+    console.log(this.selectedPreferences);
+  }
+
+  updateSelections() {
+    // debugger;
+    // console.log(this.allergiesService.allAllergies);
+    // const selectedAllergiesArray = Array.from(this.selectedAllergies);
+    // this.allergyOptions = this.allergiesService.allAllergies
+    // this.preferenceOptions = this.dietPreferenceService.allDietPreferences;
+    // console.log(this.preferenceOptions);
+    // console.log(this.dietPreferenceService);
+    // const selectedPreferencesArray = Array.from(this.selectedPreferences);
+
+    // const updatedUser = {
+    //   ...this.user,
+    //   allergies: selectedAllergiesArray.join(','),
+    //   diet_preference: selectedPreferencesArray.join(',')
+    // };
+    // this.profileService.updateUserProfile(updatedUser);
   }
 
 

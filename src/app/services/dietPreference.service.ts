@@ -8,7 +8,7 @@ import { BaseService } from "./base-service";
 })
 export class DietPreferenceService extends BaseService<IDietPreferences> {
     private dietPreferencesSignal = signal<IDietPreferences[]>([]);
-    private allDietPreferences: IDietPreferences[] = [];
+    public allDietPreferences: IDietPreferences[] = [];
     private alertService: AlertService = inject(AlertService);
     protected override source: string = 'diet_preferences';
 
@@ -20,6 +20,7 @@ export class DietPreferenceService extends BaseService<IDietPreferences> {
     public totalItems: number[] = [];
 
     get dietPreferences$() {
+
         return this.dietPreferencesSignal;
     }
 

@@ -8,7 +8,7 @@ import { BaseService } from "./base-service";
 })
 export class AllergiesService extends BaseService<IAllergies> {
     private allergiesSignal = signal<IAllergies[]>([]);
-    private allAllergies: IAllergies[] = [];
+    public allAllergies: IAllergies[] = [];
     private alertService: AlertService = inject(AlertService);
     protected override source: string = 'allergies';
 
@@ -20,6 +20,7 @@ export class AllergiesService extends BaseService<IAllergies> {
     public totalItems: number[] = [];
 
     get allergies$() {
+
         return this.allergiesSignal;
     }
 
@@ -31,6 +32,8 @@ export class AllergiesService extends BaseService<IAllergies> {
                     { length: this.search.totalPages ? this.search.totalPages : 0 },
                     (_, i) => i + 1
                 );
+
+                // debugger;
                 this.allAllergies = response.data;
                 this.allergiesSignal.set(response.data);
             },

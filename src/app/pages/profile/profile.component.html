@@ -22,21 +22,19 @@
   </div>
 </div>
 
+<div class="prefrencias-main-container">
+  <h3>Alergias</h3>
+  <div class="alergias" *ngFor="let allergy of allergiesService.allAllergies">
+    <input type="checkbox" [value]="allergy.id" (change)="onSelectedAllergy(allergy)">
+    <label>{{ allergy.name }}</label>
+  </div>
 
-<h3>Alergias</h3>
-<div *ngFor="let allergy of allergyOptions">
-  <input type="checkbox" [value]="allergy.id"
-    (change)="selectedAllergies.has(allergy.id) ? selectedAllergies.delete(allergy.id) : selectedAllergies.add(allergy.id)">
-  <label>{{ allergy.name }}</label>
+  <h3>Preferencias Dietéticas</h3>
+  <div *ngFor="let preference of dietPreferenceService.allDietPreferences">
+    <input type="checkbox" [value]="preference.id" (change)="onSelectedPreference(preference)">
+    <label>{{ preference.name }}</label>
+  </div>
 </div>
-
-<h3>Preferencias Dietéticas</h3>
-<div *ngFor="let preference of preferenceOptions">
-  <input type="checkbox" [value]="preference.id"
-    (change)="selectedPreferences.has(preference.id) ? selectedPreferences.delete(preference.id) : selectedPreferences.add(preference.id)">
-  <label>{{ preference.name }}</label>
-</div>
-
 
 <button (click)="updateSelections()">Guardar Selecciones</button>
 

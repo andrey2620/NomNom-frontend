@@ -101,9 +101,11 @@ export interface IPreferenceList {
 export interface IAllergies {
   id?: number;
   name?: string;
+  isSelected?: boolean;
 }
 
 export interface IDietPreferences {
   id?: number;
   name?: string;
+  isSelected?: boolean;
 }
