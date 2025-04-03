@@ -1,0 +1,515 @@
+/* ==================== ESTILOS GENERALES ==================== */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    min-height: 100vh;
+}
+
+/* ==================== MEDIA QUERIES (RESPONSIVE DESIGN) ==================== */
+
+/* Para dispositivos pequeños (tablets y móviles) */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+        /* Reduce el tamaño de fuente */
+    }
+
+    header {
+        flex-direction: column;
+        /* Alinea el header en columna */
+        align-items: center;
+    }
+
+    button {
+        width: 100%;
+        /* Hace que los botones ocupen todo el ancho */
+        font-size: 14px;
+    }
+}
+
+button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Para dispositivos muy pequeños (móviles en modo vertical) */
+@media (max-width: 480px) {
+    body {
+        font-size: 12px;
+        /* Reduce aún más el tamaño de fuente */
+    }
+
+    .container {
+        padding: 10px;
+    }
+
+    button {
+        padding: 8px;
+    }
+}
+
+#scrollToTopBtn {
+    display: none;
+    /* Oculto por defecto */
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 1000;
+    font-size: 24px;
+    background-color: #535252;
+    color: white;
+    border: white;
+    border-radius: 50%;
+    padding: 10px 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#scrollToTopBtn:hover {
+    transform: translateY(-5px);
+    background-color: #2b2929;
+    color: white;
+
+}
+
+
+@media (max-width: 768px) {
+    #scrollToTopBtn {
+        bottom: 20px;
+        right: 90px;
+        font-size: 20px;
+        padding: 10px;
+        background-color: #4f4c4c;
+        width: 15%;
+    }
+}
+
+
+
+
+/* ==================== HEADER ==================== */
+header {
+    background-color: black;
+    padding: 15px 30px;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo {
+    height: 45px;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    position: relative;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+nav ul li a:hover {
+    transform: translateY(-5px);
+}
+
+/* ========= DESKTOP NAVBAR ========= */
+.nav-links {
+    display: flex;
+    flex-direction: row;
+    gap: 55px;
+}
+
+/* Oculta el botón hamburguesa en desktop */
+.menu-toggle {
+    display: none;
+}
+
+/* ========= RESPONSIVE: Tablets y móviles ========= */
+@media (max-width: 768px) {
+
+    /* Oculta navbar por defecto */
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        gap: 20px;
+        background-color: black;
+        padding: 20px;
+    }
+
+    /* Activa navbar cuando tiene la clase .active */
+    .nav-links.active {
+        display: flex;
+    }
+
+    /* Muestra el botón hamburguesa */
+    .menu-toggle {
+        display: block;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 30px;
+        cursor: pointer;
+    }
+
+    /* Ajusta header en columna */
+    header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    button {
+        width: 100%;
+        font-size: 14px;
+    }
+}
+
+
+
+
+/* ==================== SECCIÓN PRINCIPAL / HERO ==================== */
+.div-encabezado {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 5%;
+    border-radius: 1%;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 5%;
+}
+
+h1 {
+    margin: auto;
+    font-size: 75px;
+}
+
+.div-encabezado img {
+    width: 40%;
+    height: 50%;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    background-color: black;
+    color: #ffffff;
+    justify-content: space-between;
+    gap: 4%;
+    padding: 10%;
+}
+
+.container img {
+    max-width: 50%;
+    height: auto;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.content h2 {
+    font-size: 44px;
+    margin: 0;
+}
+
+.content p {
+    font-size: 24px;
+}
+
+.content button {
+    width: fit-content;
+    padding: 8px 16px;
+    font-size: 18px;
+    cursor: pointer;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 15px;
+    color: #000000;
+    transition: transform 0.3s ease;
+}
+
+.content button:hover {
+    transform: translateY(-8px);
+}
+
+/* ==================== HERO SECTION ==================== */
+.hero {
+    text-align: center;
+    background-color: #ffffff;
+    padding: 5%;
+}
+
+/* Contenedor del Hero */
+.hero-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* Imagen del Hero */
+.hero-image {
+    max-width: 45%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 5%;
+}
+
+/* Contenido del Hero */
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    text-align: left;
+    max-width: 50%;
+}
+
+/* Títulos y párrafos */
+.hero-content h2 {
+    font-size: 44px;
+    margin: 0;
+}
+
+.hero-content p {
+    font-size: 18px;
+}
+
+/* Botón */
+.hero-content button {
+    width: fit-content;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    transition: transform 0.3s ease, background 0.3s;
+}
+
+.hero-content button:hover {
+    transform: translateY(-5px);
+    background-color: gray;
+}
+
+/* ==================== RESPONSIVE DESIGN ==================== */
+
+/* 📱 Tablets y móviles */
+@media (max-width: 768px) {
+    .hero-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-image {
+        max-width: 80%;
+    }
+
+    .hero-content {
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .hero-content h2 {
+        font-size: 32px;
+    }
+
+    .hero-content p {
+        font-size: 16px;
+    }
+
+    .hero-content button {
+        font-size: 16px;
+        padding: 8px 16px;
+    }
+}
+
+/* 📱 Móviles pequeños */
+@media (max-width: 480px) {
+    .hero-content h2 {
+        font-size: 24px;
+    }
+
+    .hero-content p {
+        font-size: 14px;
+    }
+
+    .hero-content button {
+        font-size: 14px;
+        padding: 6px 12px;
+    }
+}
+
+
+
+/* ==================== SECCIÓN "NOSOTROS" ==================== */
+.team {
+    display: flex;
+    width: 100%;
+    background-color: #000000;
+    overflow: hidden;
+    position: relative;
+}
+
+.team-slider {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.team-member {
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+    min-width: 100%;
+}
+
+.team-member img {
+    height: 80%;
+    width: 30%;
+    margin: 3%;
+}
+
+.team-member h3 {
+    font-size: 40px;
+}
+
+.team-member p {
+    width: 50%;
+    font-size: 24px;
+}
+
+.next {
+    background-color: transparent;
+    color: white;
+    border: none;
+    margin: 2%;
+    font-size: 24px;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+}
+
+@media (max-width: 768px) {
+    .team {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .team-slider {
+        flex-direction: column;
+        /* Uno debajo del otro */
+        transform: none !important;
+        /* Elimina el movimiento tipo slider */
+    }
+
+    .team-member {
+        flex-direction: column;
+        text-align: center;
+        min-width: 100%;
+        padding: 20px 10px;
+    }
+
+    .team-member img {
+        width: 80%;
+        height: auto;
+        margin: 0 auto 15px auto;
+    }
+
+    .team-member h3 {
+        font-size: 28px;
+    }
+
+    .team-member p {
+        width: 90%;
+        font-size: 18px;
+        margin: 0 auto 10px auto;
+    }
+
+    .next {
+        display: none;
+        /* Oculta botón de slider en móvil */
+    }
+}
+
+
+/* ==================== SECCIÓN "PROYECTOS" ==================== */
+#proyectos .div-encabezado {
+    background-color: #ffffff;
+    padding: 5%;
+    border-radius: 1%;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        padding: 10% 5%;
+        text-align: center;
+    }
+
+    .container img {
+        max-width: 90%;
+        margin-bottom: 20px;
+    }
+
+    .content h2 {
+        font-size: 32px;
+    }
+
+    .content p {
+        font-size: 16px;
+    }
+
+    .content button {
+        font-size: 16px;
+        padding: 10px 20px;
+        margin: 0 auto;
+    }
+}
+
+
+/* ==================== SECCIÓN "TRABAJA CON NOSOTROS" ==================== */
+#contacto .container {
+    display: flex;
+    align-items: center;
+    background-color: black;
+    color: #ffffff;
+    justify-content: space-between;
+    gap: 4%;
+    padding: 10%;
+}
+
+/* ==================== FOOTER ==================== */
+footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #ffffff;
+    background-color: #6d6d6d;
+    padding: 15px 30px;
+}

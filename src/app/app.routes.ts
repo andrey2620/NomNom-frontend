@@ -22,12 +22,18 @@ import { RecipeListComponent } from './components/recipe/recipe-list/recipe-list
 import { GenerateRecipesComponent } from './pages/generateRecipes/generateRecipes.component';
 import { RecipeComponent } from './pages/recipe/recipe.component';
 import { nomNomLandingComponent } from './pages/NomNomLandingPage/nomNomLanding';
+import { codeCollectiveLandingComponent } from './pages/CodeCollectiveLandingPage/codeCollectiveLanding';
 
 
 export const routes: Routes = [
   {
     path: 'nomNomLanding',
     component: nomNomLandingComponent,
+    canActivate: [GuestGuard],
+  },
+  {
+    path: 'codeCollectiveLanding',
+    component: codeCollectiveLandingComponent,
     canActivate: [GuestGuard],
   },
   {
