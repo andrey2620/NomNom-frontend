@@ -55,7 +55,13 @@ html, body {
   font-family: 'Poppins', sans-serif;
   color: #2c5530; 
 }
+
 body { margin: 0; font-family: Poppins, sans-serif; }
+
+footer{
+  margin: 0;
+  color: #b5152a;
+}
 
 .mat-typography {
   font-family: 'Poppins', sans-serif !important;
@@ -71,7 +77,6 @@ body { margin: 0; font-family: Poppins, sans-serif; }
 .success-snackbar .mdc-snackbar__surface{
   background-color: #c3bf6d !important;
 }
-
 
 .page-wrapper div.sidebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li .sidebar-link {
   text-decoration: none;
