@@ -28,6 +28,8 @@ export interface IUser {
   authorities?: IAuthority[];
   role?: IRole;
   picture?: string;
+  allergies?: string;
+  diet_preference?: string;
 }
 
 export interface IAuthority {
@@ -96,6 +98,19 @@ export interface IPreferenceList {
   movies?: IMovie[];
 }
 
+
+export interface IAllergies {
+  id?: number;
+  name?: string;
+  isSelected?: boolean;
+}
+
+export interface IDietPreferences {
+  id?: number;
+  name?: string;
+  isSelected?: boolean;
+}
+
 export interface IRecipe {
   id_recipe?: number;
   name?: string;
@@ -113,5 +128,3 @@ export interface IIngredients{
   description?: string;
   image?: string;
 }
-
-
