@@ -41,7 +41,7 @@ button:hover {
         /* Reduce aún más el tamaño de fuente */
     }
 
-    .container {
+    .container2 {
         padding: 10px;
     }
 
@@ -197,6 +197,11 @@ nav ul li a:hover {
     margin-bottom: 5%;
 }
 
+.div-encabezado h1 {
+    font-weight: bold;
+    color: var(--body-font-color);
+}
+
 h1 {
     margin: auto;
     font-size: 75px;
@@ -207,7 +212,7 @@ h1 {
     height: 50%;
 }
 
-.container {
+.container2 {
     display: flex;
     align-items: center;
     background-color: black;
@@ -215,9 +220,10 @@ h1 {
     justify-content: space-between;
     gap: 4%;
     padding: 10%;
+    width: 100%;
 }
 
-.container img {
+.container2 img {
     max-width: 50%;
     height: auto;
 }
@@ -285,12 +291,15 @@ h1 {
     gap: 15px;
     text-align: left;
     max-width: 50%;
+    color: black;    
 }
 
 /* Títulos y párrafos */
 .hero-content h2 {
     font-size: 44px;
     margin: 0;
+    font-weight: bold;
+    line-height: 1.2;
 }
 
 .hero-content p {
@@ -466,13 +475,13 @@ h1 {
 }
 
 @media (max-width: 768px) {
-    .container {
+    .container2 {
         flex-direction: column;
         padding: 10% 5%;
         text-align: center;
     }
 
-    .container img {
+    .container2 img {
         max-width: 90%;
         margin-bottom: 20px;
     }
@@ -494,7 +503,7 @@ h1 {
 
 
 /* ==================== SECCIÓN "TRABAJA CON NOSOTROS" ==================== */
-#contacto .container {
+#contacto .container2 {
     display: flex;
     align-items: center;
     background-color: black;

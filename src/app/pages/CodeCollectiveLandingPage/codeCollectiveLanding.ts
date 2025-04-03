@@ -25,7 +25,17 @@ export class codeCollectiveLandingComponent implements OnInit, AfterViewInit {
         this.initSlider();
         this.initMenu();
         this.initScrollToTop();
-        
+        this.initExploreButton();
+    }
+
+    private initExploreButton() {
+        const exploreButton = document.getElementById("explorar-proyecto");
+
+        if (exploreButton) {
+            exploreButton.addEventListener("click", () => {
+                window.location.href = "/nomNomLanding";
+            });
+        }
     }
 
     private updatePageMetadata() {
