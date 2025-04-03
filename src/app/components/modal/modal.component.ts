@@ -1,5 +1,5 @@
-import { Component, inject, Input, ViewChild, OnInit, Output, EventEmitter, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { Component, inject, Input, ViewChild, Output, EventEmitter } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoaderComponent } from '../loader/loader.component';
 import { CommonModule } from '@angular/common';
 
@@ -12,9 +12,8 @@ import { CommonModule } from '@angular/common';
   ],
   templateUrl: './modal.component.html',
   styleUrl: './modal.component.scss',
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class ModalComponent{
+export class ModalComponent {
   @Input() title?: string;
   @Input() confirmAction: string = '';
   @Input() cancelAction: string = '';
@@ -31,15 +30,20 @@ export class ModalComponent{
   @Output() callCancelMethod = new EventEmitter();
   @Output() callConfirmationMethod = new EventEmitter();
 
-  public modalService: NgbModal = inject(NgbModal)
+  public modalService: NgbModal = inject(NgbModal);
+
+  @ViewChild('modalContent', { static: true }) modalContent!: any;
+
+  public show() {
+    this.modalService.open(this.modalContent, { centered: true });
+  }
 
   public hide() {
-   this.modalService.dismissAll();
+    this.modalService.dismissAll();
   }
 
   public hideModal() {
     this.hide();
     this.callCancelMethod.emit();
   }
-
 }
