@@ -1,21 +1,30 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IRecipe } from '../../../interfaces';
+import { IRecipe, ISuggestions } from '../../../interfaces';
+import { RecipesService } from '../../../services/recipes.service';
+import { delay, retry, retryWhen, tap, timer } from 'rxjs';
 
 @Component({
   selector: 'app-sous-chef',
   standalone: true,
-  imports: [CommonModule, FormsModule], 
+  imports: [CommonModule, FormsModule],
   templateUrl: './sous-chef.component.html',
-  styleUrls: ['./sous-chef.component.scss']
+  styleUrls: ['./sous-chef.component.scss'],
 })
 export class SousChefComponent {
   @Input() recipe!: IRecipe;
 
-  public volume: number = 0.5;
-  public rate: number = 1;
-  public isSpeaking: boolean = false;
+  constructor(private recipesService: RecipesService) {}
+  public volume = 0.5;
+  public rate = 1;
+  public isSpeaking = false;
+  public presentationSuggestion = '';
+  suggestions: ISuggestions = {
+    ingredientSubstitutions: [],
+    presentationTips: [],
+    kidsParticipation: [],
+  };
 
   speak() {
     if (!this.recipe) return;
@@ -47,16 +56,44 @@ export class SousChefComponent {
     return `${intro} ${ingredientes} ${pasos}`;
   }
 
-  public isSousChefOn: boolean = false;
+  public isSousChefOn = false;
 
   toggleSousChef() {
     this.isSousChefOn = !this.isSousChefOn;
-  
+
     if (this.isSousChefOn) {
       this.speak(); //aun me falta poner el text to speack
     } else {
-      this.stop(); 
+      this.stop();
     }
   }
-  
+
+  suggestPresentation(): void {
+    if (!this.recipe) return;
+
+    this.recipesService
+      .generateSuggestions(this.recipe)
+      .pipe(
+        retry({
+          count: 10, // Máximo 10 intentos
+          delay: (error, retryCount) => {
+            console.warn(`Reintentando #${retryCount}...`);
+            return timer(2000);
+          },
+        })
+      )
+      .subscribe({
+        next: res => {
+          console.log('Sugerencias recibidas:', res.data);
+          this.suggestions = res.data || {
+            ingredientSubstitutions: [],
+            presentationTips: [],
+            kidsParticipation: [],
+          };
+        },
+        error: err => {
+          console.error('Error final al generar sugerencias:', err);
+        },
+      });
+  }
 }

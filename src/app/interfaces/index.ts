@@ -110,6 +110,7 @@ export interface IRecipe {
     quantity: string;
     measurement: string;
   }[];
+  suggestion?: ISuggestions;
 }
 
 export interface IIngredients {
@@ -126,3 +127,9 @@ export const CATEGORY_IMAGE_MAP: Record<string, string> = {
   postre: 'sweets.png',
   panes: 'breads.png',
 };
+
+export interface ISuggestions {
+  ingredientSubstitutions: string[];
+  presentationTips: string[];
+  kidsParticipation: string[];
+}
