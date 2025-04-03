@@ -21,9 +21,15 @@ import { RecipeFormComponent } from './components/recipe/recipe-form/recipe-form
 import { RecipeListComponent } from './components/recipe/recipe-list/recipe-list.component';
 import { GenerateRecipesComponent } from './pages/generateRecipes/generateRecipes.component';
 import { RecipeComponent } from './pages/recipe/recipe.component';
+import { nomNomLandingComponent } from './pages/NomNomLandingPage/nomNomLanding';
 
 
 export const routes: Routes = [
+  {
+    path: 'nomNomLanding',
+    component: nomNomLandingComponent,
+    canActivate: [GuestGuard],
+  },
   {
     path: 'login',
     component: LoginComponent,
@@ -58,7 +64,7 @@ export const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'nomNomLanding',
     pathMatch: 'full',
   },
   {

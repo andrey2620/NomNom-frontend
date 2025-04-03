@@ -27,6 +27,42 @@
   --fc-button-border-color: var(--theme-default);
   --fc-button-hover-bg-color: var(--theme-default);
   --fc-button-hover-border-color: var(--theme-default);
+
+  /* Paleta de colores principal */
+  --primary-color: #bb0a21;   /* Rojo oscuro */
+  --secondary-color: #2c5530; /* Verde oscuro */
+  --accent-light: #daefb3;    /* Verde claro */
+  --accent-pink: #fcb1a6;     /* Rosa pastel */
+  --muted-gold: #c3bf6d;      /* Dorado apagado */
+
+  /* Colores complementarios */
+  --dark-burgundy: #8a0718;   /* Rojo vino profundo */
+  --soft-olive: #6b8e23;      /* Verde oliva */
+  --warm-beige: #f5e0c3;      /* Beige cálido */
+  --soft-gray: #eaeaea;       /* Gris claro */
+  --deep-brown: #5a3e2b;      /* Marrón oscuro */
+
+  /* Colores de texto */
+  --text-primary: var(--secondary-color);  /* Verde oscuro */
+  --text-secondary: var(--primary-color);  /* Rojo oscuro */
+  --text-muted: #6b6b6b;                   /* Gris oscuro */
+
+  /* Colores de fondo */
+  --background-light: #fbfef9;    /* Fondo claro */
+  --background-dark: var(--secondary-color); /* Fondo oscuro */
+  --background-accent: var(--accent-pink);   /* Fondo de secciones destacadas */
+
+  /* Colores de bordes */
+  --border-color: var(--muted-gold); /* Color de bordes */
+
+  /* Colores de botones */
+  --button-primary-bg: var(--primary-color);
+  --button-primary-text: white;
+  --button-secondary-bg: var(--secondary-color);
+  --button-secondary-text: var(--accent-light);
+
+  /* Negrita */
+  --font-weight: 400;
 }
 
 body[class="dark-only"] {
@@ -108,4 +144,8 @@ body { margin: 0; font-family: Poppins, sans-serif; }
 .red-bg{
   background-color: #b5152a; 
   border-color: #b5152a;
+}
+
+.red{
+  color: #b5152a;
 }
