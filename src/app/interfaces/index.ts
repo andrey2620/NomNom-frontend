@@ -28,8 +28,8 @@ export interface IUser {
   authorities?: IAuthority[];
   role?: IRole;
   picture?: string;
-  allergies?: string;
-  diet_preference?: string;
+  allergies?: IAllergies[];
+  preferences?: IDietPreferences[];
 }
 
 export interface IAuthority {
@@ -53,11 +53,11 @@ export enum IRoleType {
 }
 
 export interface IRole {
-  createdAt: string;
-  description: string;
-  id: number;
-  name: string;
-  updatedAt: string;
+  createdAt?: string;
+  description?: string;
+  id?: number;
+  name?: string;
+  updatedAt?: string;
 }
 
 export interface IGame {
@@ -100,9 +100,9 @@ export interface IPreferenceList {
 
 
 export interface IAllergies {
-  id?: number;
-  name?: string;
-  isSelected?: boolean;
+  id: number;
+  name: string;
+  isSelected: boolean;
 }
 
 export interface IDietPreferences {
@@ -122,7 +122,7 @@ export interface IRecipe {
   categoria: string;
 }
 
-export interface IIngredients{
+export interface IIngredients {
   id?: number;
   name?: string;
   description?: string;

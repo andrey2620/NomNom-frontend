@@ -23,14 +23,16 @@ export class SignUpComponent implements OnInit {
   @ViewChild('password') passwordModel!: NgModel;
   //@ViewChild('confPassword') confPasswordModel!: NgModel;
 
-  public user: IUser = { email: '', name: '', lastname: '', password: '' };
+  public user: IUser = {
+    email: '', name: '', lastname: '', password: '',
+  };
   public isGoogleSignUp = false;
 
   constructor(
     private router: Router,
     private authService: AuthService,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
