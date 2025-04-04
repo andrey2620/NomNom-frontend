@@ -8,19 +8,33 @@
 
     <div row>
       <div class="col col-12 col-md-6 col-lg-4">
-
-        <input type="text" [(ngModel)]="searchQuery" placeholder="Buscar..." (input)="filterIngredients()" class="form-control w-100   mb-3" />
+        <input
+          type="text"
+          [(ngModel)]="searchQuery"
+          placeholder="Buscar..."
+          (input)="filterIngredients()"
+          class="form-control w-100 mb-3"
+        />
       </div>
       <div class="d-flex justify-content-between align-items-center flex-wrap">
         <h1 class="h3 text-center text-md-start">Escoge tus ingredientes</h1>
-        <app-pagination [service]="ingredientService" (pageChange)="changePage($event)"></app-pagination>
+        <app-pagination
+          [service]="ingredientService"
+          (pageChange)="changePage($event)">
+        </app-pagination>
       </div>
     </div>
 
     <div class="">
-      <app-ingredients [ingredients]="ingredientService.ingredient$()" />
+      <app-ingredients
+        [ingredients]="ingredientService.ingredient$()"
+        (selectedChange)="selectedIngredients = $event">
+      </app-ingredients>
     </div>
-    <button class="btn btn-danger my-4">Guardar</button>
+
+    <button class="btn btn-danger my-4" (click)="saveSelectedIngredients()">
+      Guardar
+    </button>
   </div>
 } @loading (minimum 1.5s) {
   <app-loader></app-loader>

@@ -145,4 +145,17 @@ export class AuthService {
     const params = new HttpParams().set('token', token);
     return this.http.post<IResponse<any>>('auth/reset-password', newPassword, { params });
   }
+
+  getCurrentUserId(): number | null {
+    const userJson = localStorage.getItem('auth_user');
+    if (!userJson) return null;
+
+    try {
+      const user = JSON.parse(userJson);
+      return user?.id ?? null;
+    } catch (e) {
+      console.error('Error parsing auth_user from localStorage:', e);
+      return null;
+    }
+  }
 }
