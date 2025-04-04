@@ -50,18 +50,15 @@ body[class="dark-only"] {
 @import "./assets/layout/layout.scss";
 //end template styles
 
-html, body { 
-  height: 100%; 
+html, body {
+  height: 100%;
   font-family: 'Poppins', sans-serif;
-  color: #2c5530; 
+  color: #2c5530;
 }
 
 body { margin: 0; font-family: Poppins, sans-serif; }
 
-footer{
-  margin: 0;
-  color: #b5152a;
-}
+
 
 .mat-typography {
   font-family: 'Poppins', sans-serif !important;
@@ -110,7 +107,7 @@ footer{
 }
 
 .red-bg{
-  background-color: #b5152a; 
+  background-color: #b5152a;
   border-color: #b5152a;
 }
 

@@ -1,32 +1,29 @@
-<div class="page-header" [ngClass]="{ close_icon: !layoutService.sidebarOpen }">
-  <div class="header-wrapper row m-0 align-items-center">
-    
-    <div class="header-logo-wrapper col-auto p-0 d-flex align-items-center">
-      <a routerLink="/">
-        <img class="img-fluid" src="../../../../../assets/icons/LogoNomNom.png" alt="Logo" style="height: 48px;" />
-      </a>
+<header class="header-topbar px-5 shadow border-bottom border-2 border-danger" [ngClass]="{ close_icon: !layoutService.sidebarOpen }">
+  <div class="d-flex justify-content-between align-items-center h-100">
+    <div class="d-flex justify-content-start align-items-center h-100 gap-3">
+      <div class="header-logo-wrapper">
+        <a routerLink="/">
+          <img class="img-fluid" src="../../../../../assets/icons/LogoNomNom.png" alt="Logo" style="height: 60px" />
+        </a>
+      </div>
+
+      <nav class="d-flex justify-content-start align-items-center">
+        <ul class="nav custom-top-menu">
+          <li class="nav-item" *ngFor="let item of menuItems">
+            <a class="nav-link" [routerLink]="item.path" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+              {{ item.name }}
+            </a>
+          </li>
+        </ul>
+      </nav>
     </div>
 
-    <div class="col">
-      <ul class="nav custom-top-menu">
-        <li class="nav-item" *ngFor="let item of menuItems">
-          <a class="nav-link" 
-             [routerLink]="item.path" 
-             routerLinkActive="active" 
-             [routerLinkActiveOptions]="{ exact: true }">
-            {{ item.name }}
-          </a>
-        </li>
-      </ul>
-    </div>
-
-    <div class="nav-right col ms-auto d-flex justify-content-end">
-      <ul class="nav-menus mb-0">
+    <div class="">
+      <ul class="nav-menus mb-0 list-unstyled">
         <li class="profile-nav onhover-dropdown pe-0 py-0">
           <app-my-account></app-my-account>
         </li>
       </ul>
     </div>
-
   </div>
-</div>
+</header>
