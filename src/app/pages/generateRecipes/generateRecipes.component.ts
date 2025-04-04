@@ -8,6 +8,7 @@ import { IngredientService } from '../../services/ingredient.service';
 import { PaginationComponent } from '../../components/pagination/pagination.component';
 import { IIngredients } from '../../interfaces';
 import { AuthService } from '../../services/auth.service';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   standalone: true,
@@ -36,7 +37,7 @@ export class GenerateRecipesComponent {
   public itemsPerPage: number = 18; // Elementos por página
   selectedIngredients: number[] = [];
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private toastService: ToastService) {
     this.ingredientService.getAll();
   }
 
@@ -63,17 +64,28 @@ export class GenerateRecipesComponent {
     return this.ingredientService.getTotalPages(this.itemsPerPage);
   }
 
-  saveSelectedIngredients() {
+  saveSelectedIngredients(): void {
     const userId = this.authService.getCurrentUserId();
     if (!userId) {
-      console.warn('Usuario no encontrado en localStorage.');
+      this.toastService.showError('No se pudo identificar al usuario.');
+      return;
+    }
+
+    if (!this.selectedIngredients.length) {
+      this.toastService.showError('Debe seleccionar al menos un ingrediente.');
       return;
     }
 
     this.selectedIngredients.forEach(ingredientId => {
       this.ingredientService.linkIngredientToUser(ingredientId, userId).subscribe({
-        next: () => console.log(`Ingrediente ${ingredientId} vinculado exitosamente`),
-        error: err => console.error(`Error vinculando ingrediente ${ingredientId}:`, err)
+        next: response => {
+          const message = response?.message || 'Ingrediente vinculado correctamente.';
+          this.toastService.showSuccess(message + ' Verifique su correo electrónico para continuar.');
+        },
+        error: error => {
+          const errorMessage = error?.error?.message || 'Error al vincular ingrediente.';
+          this.toastService.showError(errorMessage);
+        },
       });
     });
   }
