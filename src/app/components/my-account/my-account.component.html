@@ -1,11 +1,14 @@
 <div class="my-account-container ">
   <div class="dropdow dropdown-custom">
-    <button class="btn btn-secondary dropdown-toggle dropdown-custom " type="button" data-bs-toggle="dropdown" aria-expanded="false">
-        <i class="fa-regular fa-user me-2"></i>  <span>{{ userName }}</span>
-      </button>
+    <button class="btn btn-secondary dropdown-toggle dropdown-custom " type="button" data-bs-toggle="dropdown"
+      aria-expanded="false">
+      <i class="fa-regular fa-user me-2"></i> <span>{{ userName }}</span>
+    </button>
     <ul class="dropdown-menu">
-      <li routerLink="profile" class="d-flex gap-2 align-items-center dropdown-item"><i class="fa-solid fa-user-tie"> </i><span>Profile</span></li>
-    <li (click)="logout()" class="d-flex gap-2 align-items-center dropdown-item"><i class="fa-solid fa-arrow-right-from-bracket"></i><span>Log out</span></li>
+      <li routerLink="profile" class="d-flex gap-2 align-items-center dropdown-item"><i class="fa-solid fa-user-tie">
+        </i><span>Perfil</span></li>
+      <li (click)="logout()" class="d-flex gap-2 align-items-center dropdown-item"><i
+          class="fa-solid fa-arrow-right-from-bracket"></i><span>Cerrar Sesión</span></li>
     </ul>
   </div>
 </div>
