@@ -16,12 +16,9 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  imports: [
-    CommonModule
-  ],
-  styleUrls: ['./profile.component.scss']
+  imports: [CommonModule],
+  styleUrls: ['./profile.component.scss'],
 })
-
 export class ProfileComponent implements OnInit {
   public profileService = inject(ProfileService);
   public user!: IUser;
@@ -29,14 +26,12 @@ export class ProfileComponent implements OnInit {
   selectedAllergies: Set<IAllergies> = new Set();
   selectedPreferences: Set<IDietPreferences> = new Set();
 
-
   constructor(
     private http: HttpClient,
     private authService: AuthService,
     public dietPreferenceService: DietPreferenceService,
     public allergiesService: AllergiesService,
-    private router: Router,
-
+    private router: Router
   ) {
     this.profileService.getUserInfoSignal();
     this.dietPreferenceService.getAll();
@@ -51,14 +46,13 @@ export class ProfileComponent implements OnInit {
       const user = this.profileService.user$();
       if (user?.id) {
         this.user = user;
-        console.log('User cargado correctamente:', this.user);
+        // console.log('User cargado correctamente:', this.user);
 
         this.selectedAllergies = new Set(this.user.allergies || []);
         this.selectedPreferences = new Set(this.user.preferences || []);
       }
     });
   }
-
 
   logOut() {
     this.authService.logout();
@@ -76,7 +70,7 @@ export class ProfileComponent implements OnInit {
       allergy.isSelected = false;
     }
 
-    console.log('Alergias seleccionadas:', Array.from(this.selectedAllergies));
+    // console.log('Alergias seleccionadas:', Array.from(this.selectedAllergies));
   }
 
   onSelectedPreference(event: Event, preference: IDietPreferences) {
@@ -90,10 +84,8 @@ export class ProfileComponent implements OnInit {
       preference.isSelected = false;
     }
 
-    console.log('Preferencias seleccionadas:', Array.from(this.selectedPreferences));
+    // console.log('Preferencias seleccionadas:', Array.from(this.selectedPreferences));
   }
-
-
 
   updateSelections() {
     const user = this.profileService.user$();
@@ -103,7 +95,7 @@ export class ProfileComponent implements OnInit {
       this.snackBar.open('Error: El usuario no está cargado correctamente.', 'Cerrar', {
         horizontalPosition: 'right',
         verticalPosition: 'top',
-        panelClass: ['error-snackbar']
+        panelClass: ['error-snackbar'],
       });
       return;
     }
@@ -115,10 +107,10 @@ export class ProfileComponent implements OnInit {
       ...user,
       allergies: selectedAllergiesArray,
       preferences: selectedPreferencesArray,
-      role: user.role
+      role: user.role,
     };
 
-    console.log('Actualizando usuario con:', updatedUser);
+    // console.log('Actualizando usuario con:', updatedUser);
 
     this.profileService.updateUserProfile(updatedUser);
   }
