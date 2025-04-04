@@ -30,7 +30,7 @@ export class AuthService {
     if (user) this.user = JSON.parse(user);
   }
 
-  public getUser(): IUser | undefined {
+  public getUser(): IUser {
     return this.user;
   }
 

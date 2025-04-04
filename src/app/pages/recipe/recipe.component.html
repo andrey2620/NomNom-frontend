@@ -1,27 +1,22 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-4">
-      <app-recipe-list
-        [areActionsAvailable]="true"
-        (cook)="onRecipeSelected($event)"
-        (listInitialized)="onRecipeListInitialized($event)">
-      </app-recipe-list>    
+<div class="container-fluid p-2 border border-danger" style="height: calc(100dvh - 130px); overflow: hidden">
+  <div class="row align-items-stretch h-100">
+    <!-- Lista de recetas: siempre visible -->
+    <div class="col-lg-3 col-md-4 h-100">
+      <app-recipe-list [areActionsAvailable]="true" (cook)="onRecipeSelected($event)" (listInitialized)="onRecipeListInitialized($event)">
+      </app-recipe-list>
     </div>
 
-    <div class="col-md-8">
-      <div class="row">
-        <div class="col-md-8" *ngIf="selectedRecipe">
-          <app-view-recipe 
-            [recipe]="selectedRecipe"
-            (save)="onRecipeSaved($event)"
-            (delete)="onRecipeDeleted($event)">
-          </app-view-recipe>
-        </div>
-
-        <div class="col-md-4" *ngIf="selectedRecipe">
-          <app-sous-chef [recipe]="selectedRecipe"></app-sous-chef>
-        </div>
+    <!-- Receta y Sous-chef: solo cuando hay receta seleccionada -->
+    <ng-container *ngIf="selectedRecipe">
+      <!-- vista receta -->
+      <div class="col-lg-6 col-md-5 h-100">
+        <app-view-recipe [recipe]="selectedRecipe" (save)="onRecipeSaved($event)" (delete)="onRecipeDeleted($event)"> </app-view-recipe>
       </div>
-    </div>
+
+      <!-- sous chef -->
+      <div class="col-lg-3 d-flex flex-column h-100">
+        <app-sous-chef class="" [recipe]="selectedRecipe"></app-sous-chef>
+      </div>
+    </ng-container>
   </div>
 </div>

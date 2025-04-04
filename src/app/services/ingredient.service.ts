@@ -8,7 +8,7 @@ import { BaseService } from "./base-service";
 })
 
 export class IngredientService extends BaseService<IIngredients> {
-    
+
     private ingredientsSignal = signal<IIngredients[]>([]);
     private allIngredients: IIngredients[] = [];
     private filteredIngredients: IIngredients[] = [];
@@ -25,7 +25,7 @@ export class IngredientService extends BaseService<IIngredients> {
     get ingredient$() {
         return this.ingredientsSignal;
     }
-    
+
     getAll() {
         this.findAllWithParams(this.search).subscribe({
           next: (response: IResponse<IIngredients[]>) => {
@@ -45,7 +45,7 @@ export class IngredientService extends BaseService<IIngredients> {
 
       getIngredientByName(name: string, page: number = 1) {
         this.search.page = page; // Reinicia la búsqueda desde la página 1
-      
+
         this.findAllWithParamsAndCustomSource(`name/${name}`, { page: this.search.page, size: this.search.size }).subscribe({
           next: (response: any) => {
             this.search = { ...this.search, ...response.meta };
@@ -57,8 +57,8 @@ export class IngredientService extends BaseService<IIngredients> {
           }
         });
       }
-        
-    
+
+
     // Aplica la paginación sobre la lista filtrada
     paginateIngredients(page: number, size: number) {
         const startIndex = (page - 1) * size;
@@ -72,5 +72,5 @@ export class IngredientService extends BaseService<IIngredients> {
         const filteredIngredients = this.ingredientsSignal();
         return Math.ceil(filteredIngredients.length / size);
     }
-    
+
 }

@@ -3,8 +3,8 @@
   border-radius: 16px;
   padding: 1.5rem;
   max-width: 400px;
-  max-height: 700px; 
-  overflow-y: auto; 
+  max-height: 100%;
+  overflow-y: auto;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
 
   &::-webkit-scrollbar {
@@ -22,13 +22,6 @@
 
   scrollbar-width: thin;
   scrollbar-color: white transparent;
-
-  .section-title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #BB0A21;
-  }
-
 
   .section-title {
     font-size: 1.5rem;
@@ -56,26 +49,6 @@
       color: #2c5530;
     }
 
-    .btn-outline-primary {
-      border-color: #bb0a21;
-      color: #BB0A21;
-
-      &:hover {
-        background-color: #bb0a21;
-        color: white;
-      }
-    }
-
-    .btn-outline-danger {
-      border-color: #bb0a21;
-      color: #bb0a21;
-
-      &:hover {
-        background-color: #bb0a21;
-        color: white;
-      }
-    }
-
     .cook-btn {
       background-color: #ffffff;
       color: #BB0A21;
@@ -85,12 +58,45 @@
       font-weight: 600;
       font-size: 0.95rem;
       transition: all 0.3s ease;
-    
+
       &:hover {
         background-color: #BB0A21;
         color: white;
       }
     }
-    
+  }
+}
+.placeholder-card {
+  .skeleton-img {
+    height: 180px;
+    background-color: #e0e0e0;
+    animation: pulse 1.5s infinite;
+  }
+
+  .skeleton-text {
+    height: 20px;
+    background-color: #e0e0e0;
+    margin: 10px 0;
+    border-radius: 4px;
+    animation: pulse 1.5s infinite;
+  }
+
+  .skeleton-btn {
+    height: 35px;
+    background-color: #d0d0d0;
+    border-radius: 8px;
+    animation: pulse 1.5s infinite;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 1;
   }
 }

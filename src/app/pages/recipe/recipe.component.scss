@@ -71,18 +71,12 @@
   }
 }
 
-.row > .col-md-4, 
-.row > .col-md-8 {
-  padding: 0.5rem;
-}
-
 app-sous-chef {
   min-width: 250px;
+  height: 100%;
 }
 
 app-view-recipe {
   max-width: 100%;
+  height: 100%;
 }
-
-
-

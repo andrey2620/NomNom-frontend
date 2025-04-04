@@ -5,18 +5,12 @@ import { RecipeListComponent } from '../../components/recipe/recipe-list/recipe-
 import { ViewRecipeComponent } from './view-recipe/view-recipe.component';
 import { SousChefComponent } from './sous-chef/sous-chef.component';
 
-
 @Component({
   selector: 'app-recipe',
   standalone: true,
-  imports: [
-    CommonModule,
-    RecipeListComponent,
-    ViewRecipeComponent,
-    SousChefComponent
-  ],
+  imports: [CommonModule, RecipeListComponent, ViewRecipeComponent, SousChefComponent],
   templateUrl: './recipe.component.html',
-  styleUrls: ['./recipe.component.scss']
+  styleUrls: ['./recipe.component.scss'],
 })
 export class RecipeComponent {
   selectedRecipe: IRecipe | null = null;
@@ -34,7 +28,7 @@ export class RecipeComponent {
   onRecipeSaved(recipe: IRecipe) {
     console.log('Receta guardada:', recipe);
   }
-  
+
   onRecipeDeleted(recipe: IRecipe) {
     console.log('Receta eliminada:', recipe);
   }
