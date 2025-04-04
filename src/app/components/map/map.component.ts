@@ -130,10 +130,10 @@ export class MapComponent implements AfterViewInit {
                         image_url: recipe.image_url,
                     }));
                 
-                this.recipesSelected.emit(recipesList);
+                /*this.recipesSelected.emit(recipesList);
                 content = `<b>${props.name}</b><br /><ul>${recipesList
                     .map(recipe => `<li><b>${recipe.name}</b></li>`)
-                    .join('')}</ul>`;
+                    .join('')}</ul>`;*/
             }
 
             /*if (props && props.recipes) {                
