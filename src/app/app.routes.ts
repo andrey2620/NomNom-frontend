@@ -24,6 +24,7 @@ import { RecipeComponent } from './pages/recipe/recipe.component';
 import { nomNomLandingComponent } from './pages/NomNomLandingPage/nomNomLanding';
 import { codeCollectiveLandingComponent } from './pages/CodeCollectiveLandingPage/codeCollectiveLanding';
 
+import { InteractiveMapComponent } from './pages/interactiveMap/interactiveMap.component';
 
 export const routes: Routes = [
   {
@@ -116,6 +117,18 @@ export const routes: Routes = [
             IRoleType.user
           ],
           name: 'Generador',
+          showInSidebar: true
+        }
+      },
+      {
+        path: 'interactiveMap',
+        component: InteractiveMapComponent,
+        data: {
+          authorities: [
+            IRoleType.superAdmin,
+            IRoleType.user
+          ],
+          name: 'Mapa interactivo',
           showInSidebar: true
         }
       },
