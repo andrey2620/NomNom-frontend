@@ -14,7 +14,7 @@ export class AllergiesService extends BaseService<IAllergies> {
 
     public search: ISearch = {
         page: 1,
-        size: 18
+        size: 100
     };
 
     public totalItems: number[] = [];
