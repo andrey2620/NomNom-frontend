@@ -28,17 +28,32 @@ export class TopbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.authService.getUser();
+  
+    const userRole = this.user?.role?.name?.toUpperCase();
+    const normalizedUserRole = `ROLE_${userRole}`;
 
+  
     const appRoute = this.router.config.find(route => route.path === 'app');
     const children = appRoute?.children || [];
-
+  
     this.menuItems = children
-      .filter(r => r.data?.['showInSidebar'])
+      .filter(r => {
+        const show = r.data?.['showInSidebar'];
+        const allowedRoles: string[] = r.data?.['authorities'] || [];
+        
+        console.log('Allowed Roles:', allowedRoles);
+        console.log('User Role:', userRole);
+
+        const hasAccess = allowedRoles.length === 0 || allowedRoles.includes(normalizedUserRole);
+
+        return show && hasAccess;
+      })
       .map(r => ({
         path: `/app/${r.path}`,
         name: r.data?.['name'] || r.path
       }));
   }
+  
 
   public logout(): void {
     this.authService.logout();
