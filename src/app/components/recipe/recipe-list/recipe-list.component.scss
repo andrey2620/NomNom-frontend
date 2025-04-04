@@ -53,8 +53,8 @@
 
     .cook-btn {
       background-color: #ffffff;
-      color: #BB0A21;
-      border: 2px solid #BB0A21;
+      color: #bb0a21;
+      border: 2px solid #bb0a21;
       border-radius: 35px;
       padding: 0.5rem 1rem;
       font-weight: 600;
@@ -62,12 +62,12 @@
       transition: all 0.3s ease;
 
       &:hover {
-        background-color: #BB0A21;
+        background-color: #bb0a21;
         color: white;
       }
     }
   }
-  .skeleton-container{
+  .skeleton-container {
     width: 100%;
     height: 100%;
   }

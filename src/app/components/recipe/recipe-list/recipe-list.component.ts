@@ -21,7 +21,6 @@ export class RecipeListComponent implements OnInit {
   @Output() listInitialized = new EventEmitter<any[]>();
   itemList: any[] = [];
   selectedItem: any = null;
-
   isLoading = true;
   skeletonList: any[] = [];
 
@@ -35,56 +34,6 @@ export class RecipeListComponent implements OnInit {
     this.loadValidRecipes(userId, 3);
   }
 
-  // loadValidRecipes(userId: number, count: number): void {
-  //   let attempts = 0;
-  //   const maxAttempts = 20;
-
-  //   // Initialize with placeholders that will be replaced
-  //   this.skeletonList = Array(count).fill(null);
-  //   this.itemList = Array(count).fill(null);
-
-  //   const fetchRecipe = (index: number) => {
-  //     this.recipesService
-  //       .getRecipesByUser(userId)
-  //       .pipe(
-  //         catchError(err => {
-  //           console.error('Error al generar receta, reintentando...', err);
-  //           return of(null);
-  //         }),
-  //         delay(500)
-  //       )
-  //       .subscribe(recipe => {
-  //         attempts++;
-
-  //         if (recipe && this.isValidRecipe(recipe)) {
-  //           // Replace the null at the specific index with the recipe
-  //           this.itemList[index] = recipe;
-  //           // Remove the corresponding skeleton
-  //           this.skeletonList[index] = undefined;
-  //         }
-
-  //         // Find the next empty slot
-  //         const nextEmptyIndex = this.itemList.findIndex(item => item === null);
-
-  //         if (nextEmptyIndex !== -1 && attempts < maxAttempts) {
-  //           // Continue fetching for the next empty slot
-  //           fetchRecipe(nextEmptyIndex);
-  //         } else {
-  //           // Clean up null values when done
-  //           this.itemList = this.itemList.filter(item => item !== null);
-  //           this.listInitialized.emit(this.itemList);
-
-  //           if (this.skeletonList.every(item => item === undefined)) {
-  //             this.isLoading = false;
-  //           }
-  //         }
-  //       });
-  //   };
-
-  //   // Start fetching for each position
-  //   fetchRecipe(0);
-  // }
-
   loadValidRecipes(userId: number, count: number): void {
     let attempts = 0;
     const maxAttempts = 20;
@@ -96,13 +45,13 @@ export class RecipeListComponent implements OnInit {
       this.recipesService
         .getRecipesByUser(userId)
         .pipe(
-          catchError((err) => {
+          catchError(err => {
             console.error('Error al generar receta, reintentando...', err);
             return of(null);
           }),
           delay(0)
         )
-        .subscribe((recipe) => {
+        .subscribe(recipe => {
           attempts++;
           if (recipe && this.isValidRecipe(recipe)) {
             this.itemList.push(recipe);
@@ -121,7 +70,6 @@ export class RecipeListComponent implements OnInit {
           }
         });
     };
-
     fetchRecipe();
   }
 

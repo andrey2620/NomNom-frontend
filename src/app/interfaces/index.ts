@@ -98,14 +98,11 @@ export interface IPreferenceList {
   movies?: IMovie[];
 }
 
-
 export interface IAllergies {
   id: number;
   name: string;
   isSelected: boolean;
 }
-
-
 
 export interface IDietPreferences {
   id?: number;
