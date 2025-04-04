@@ -19,30 +19,33 @@
     </div>
   </div>
 
-  <div class="prefrencias-main-container w-75 mx-auto">
-    <div class="prefrencias-second-container">
-      <h3 class="prefrencias-h3">Alergias</h3>
-      <div class="prefrencias-third-container">
-        <div *ngFor="let allergy of allergiesService.allAllergies">
-          <input type="checkbox" [checked]="allergy.isSelected" [value]="allergy.id" (change)="onSelectedAllergy($event, allergy)" />
-          <label>{{ allergy.name }}</label>
+  <div class="prefrencias-main-container d-flex w-75 mx-auto flex-column">
+    <div class="d-flex gap-5 ">
+      <div class="prefrencias-second-container">
+        <h3 class="prefrencias-h3">Alergias</h3>
+        <div class="prefrencias-third-container">
+          <div *ngFor="let allergy of allergiesService.allAllergies">
+            <input type="checkbox" [checked]="allergy.isSelected" [value]="allergy.id" (change)="onSelectedAllergy($event, allergy)" />
+            <label>{{ allergy.name }}</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="prefrencias-second-container">
+        <h3 class="prefrencias-h3">Preferencias Dietéticas</h3>
+        <div class="prefrencias-third-container">
+          <div *ngFor="let preference of dietPreferenceService.allDietPreferences">
+            <input type="checkbox" [checked]="preference.isSelected" [value]="preference.id" (change)="onSelectedPreference($event, preference)" />
+            <label>{{ preference.name }}</label>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="prefrencias-second-container">
-      <h3 class="prefrencias-h3">Preferencias Dietéticas</h3>
-      <div class="prefrencias-third-container">
-        <div *ngFor="let preference of dietPreferenceService.allDietPreferences">
-          <input type="checkbox" [checked]="preference.isSelected" [value]="preference.id" (change)="onSelectedPreference($event, preference)" />
-          <label>{{ preference.name }}</label>
-        </div>
-      </div>
+    <div class="botones-container my-4">
+      <button class="btn btn-preferences" (click)="updateSelections()">Guardar</button>
+      <button class="btn btn-preferences" (click)="logOut()">LogOut</button>
     </div>
   </div>
 
-  <div class="botones-container mt-5">
-    <button class="btn btn-preferences" (click)="updateSelections()">Guardar</button>
-    <button class="btn btn-preferences" (click)="logOut()">LogOut</button>
-  </div>
 </section>

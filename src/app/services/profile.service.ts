@@ -70,7 +70,8 @@ export class ProfileService extends BaseService<IUser> {
           {
             horizontalPosition: 'right',
             verticalPosition: 'top',
-            panelClass: ['success-snackbar']
+            panelClass: ['success-snackbar'],
+            duration: 4000
           }
         );
         this.getUserInfoSignal();

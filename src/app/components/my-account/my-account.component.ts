@@ -7,6 +7,7 @@ import { AuthService } from '../../services/auth.service';
   standalone: true,
   imports: [RouterLink],
   templateUrl: './my-account.component.html',
+  styleUrls: ['./my-account.component.scss'],
 })
 export class MyAccountComponent implements OnInit {
   public userName: string = '';

@@ -12,13 +12,13 @@ import { MyAccountComponent } from '../../../my-account/my-account.component';
   standalone: true,
   imports: [CommonModule,RouterModule, RouterLink, MyAccountComponent],
   templateUrl: './topbar.component.html',
-  styleUrls: ['./topbar.component.scss'], 
+  styleUrls: ['./topbar.component.scss'],
 })
 export class TopbarComponent implements OnInit {
   public user?: IUser;
   public menuItems: { path: string, name: string }[] = [];
 
-  
+
 
   constructor(
     public router: Router,

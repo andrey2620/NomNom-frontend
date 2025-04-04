@@ -48,9 +48,6 @@
 }
 
 .prefrencias-main-container {
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
 
   .prefrencias-second-container {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.09);
@@ -94,7 +91,6 @@
       display: flex;
       justify-content: center;
       gap: 15px;
-      margin-top: 10px;
 
       .btn btn-preferences {
         padding: 10px 20px;

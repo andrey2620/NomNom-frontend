@@ -17,6 +17,16 @@
         grid-template-columns: repeat(5, 1fr); // 4 columnas fijas
     }
 }
+@media (max-width: 600px) {
+    .ingredientContainer {
+        grid-template-columns: repeat(3, 1fr); // 2 columnas fijas
+    }
+}
+@media (max-width: 400px) {
+    .ingredientContainer {
+        grid-template-columns: repeat(2, 1fr); // 2 columnas fijas
+    }
+}
 
 .ingredient {
     object-fit: contain;
