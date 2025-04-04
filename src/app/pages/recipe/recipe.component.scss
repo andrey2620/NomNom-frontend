@@ -17,7 +17,7 @@
     .card-title {
       font-size: 1.4rem;
       font-weight: bold;
-      color: #02306D;
+      color: #02306d;
       margin-bottom: 1rem;
     }
 
@@ -27,7 +27,8 @@
       margin-bottom: 0.5rem;
     }
 
-    ul, ol {
+    ul,
+    ol {
       margin-left: 1rem;
     }
 
@@ -51,7 +52,7 @@
   h3 {
     font-size: 1.6rem;
     font-weight: bold;
-    color: #02306D;
+    color: #02306d;
     margin-top: 1rem;
   }
 
@@ -62,7 +63,8 @@
     margin-bottom: 0.5rem;
   }
 
-  ul, ol {
+  ul,
+  ol {
     padding-left: 1.25rem;
   }
 
@@ -71,12 +73,17 @@
   }
 }
 
-app-sous-chef {
-  min-width: 250px;
-  height: 100%;
+.app-recipe-list-container {
+  width: 100%;
+  max-width: 350px;
 }
 
-app-view-recipe {
-  max-width: 100%;
-  height: 100%;
+.app-view-recipe-container {
+  width: 100%;
+  max-width: 1200px;
+}
+
+.app-sous-chef-container {
+  width: 100%;
+  max-width: 400px;
 }

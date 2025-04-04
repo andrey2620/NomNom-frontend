@@ -1,5 +1,5 @@
-<div *ngIf="recipe" class="card shadow-sm view-recipe h-100">
-  <img [src]="getCategoryImage(recipe.recipeCategory)" class="card-img-top" alt="Imagen de receta" (error)="onImageError($event)" />
+<div *ngIf="recipe" class="card shadow-sm view-recipe h-100 p-0">
+  <img [src]="getCategoryImage(recipe.recipeCategory)" class="card-img-top" alt="Imagen de receta" (error)="onImageError($event)" style="border-top-left-radius: 10px; border-top-right-radius: 10px;" />
   <div class="card-body p-view-recipe">
     <h5 class="section-title">{{ recipe.name }}</h5>
     <p class="card-text text-muted mb-2">{{ recipe.description }}</p>

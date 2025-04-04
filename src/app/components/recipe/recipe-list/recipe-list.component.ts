@@ -100,7 +100,7 @@ export class RecipeListComponent implements OnInit {
             console.error('Error al generar receta, reintentando...', err);
             return of(null);
           }),
-          delay(500)
+          delay(0)
         )
         .subscribe((recipe) => {
           attempts++;
