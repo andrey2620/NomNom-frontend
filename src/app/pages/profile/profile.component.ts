@@ -47,15 +47,12 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.profileService.getUserInfoSignal();
-
     effect(() => {
       const user = this.profileService.user$();
       if (user?.id) {
         this.user = user;
         console.log('User cargado correctamente:', this.user);
 
-        // 🔥 Inicializa los sets con lo que ya viene del backend
         this.selectedAllergies = new Set(this.user.allergies || []);
         this.selectedPreferences = new Set(this.user.preferences || []);
       }
@@ -68,38 +65,61 @@ export class ProfileComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  onSelectedAllergy(allergy: IAllergies) {
-    if (this.selectedAllergies.has(allergy)) {
-      this.selectedAllergies.delete(allergy);
-    } else {
+  onSelectedAllergy(event: Event, allergy: IAllergies) {
+    const checked = (event.target as HTMLInputElement).checked;
+
+    if (checked) {
       this.selectedAllergies.add(allergy);
+      allergy.isSelected = true;
+    } else {
+      this.selectedAllergies.delete(allergy);
+      allergy.isSelected = false;
     }
+
     console.log('Alergias seleccionadas:', Array.from(this.selectedAllergies));
   }
 
-  onSelectedPreference(preference: IDietPreferences) {
-    if (this.selectedPreferences.has(preference)) {
-      this.selectedPreferences.delete(preference);
-    } else {
+  onSelectedPreference(event: Event, preference: IDietPreferences) {
+    const checked = (event.target as HTMLInputElement).checked;
+
+    if (checked) {
       this.selectedPreferences.add(preference);
+      preference.isSelected = true;
+    } else {
+      this.selectedPreferences.delete(preference);
+      preference.isSelected = false;
     }
+
     console.log('Preferencias seleccionadas:', Array.from(this.selectedPreferences));
   }
 
 
+
   updateSelections() {
+    const user = this.profileService.user$();
+
+    if (!user || !user.id) {
+      console.error('Error: Usuario no cargado correctamente.');
+      this.snackBar.open('Error: El usuario no está cargado correctamente.', 'Cerrar', {
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+        panelClass: ['error-snackbar']
+      });
+      return;
+    }
+
     const selectedAllergiesArray = Array.from(this.selectedAllergies);
     const selectedPreferencesArray = Array.from(this.selectedPreferences);
 
     const updatedUser: IUser = {
-      ...this.user,
+      ...user,
       allergies: selectedAllergiesArray,
       preferences: selectedPreferencesArray,
-      role: this.user.role
+      role: user.role
     };
 
     console.log('Actualizando usuario con:', updatedUser);
+
     this.profileService.updateUserProfile(updatedUser);
   }
-
 }
