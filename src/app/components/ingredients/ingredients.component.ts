@@ -28,6 +28,7 @@ export class IngredientsComponent {
             // Si hay menos de 5 seleccionados, agregarlo
             this.selectedIngredients.push(id);
         }
+        
     }
     
 }
