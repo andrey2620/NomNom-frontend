@@ -1,17 +1,23 @@
-<div class="sous-chef-panel rounded h-100 w-100 overflow-y-auto">
+<div class="sous-chef-panel h-100 w-100 overflow-y-auto">
   <div class="sous-chef-icon text-center mb-2 mt-4">
     <div class="icon-box">SC</div>
   </div>
 
-  <div class="control-section mb-4">
+  <div class="mb-2 w-100 mx-auto px-4">
     <label for="volume" class="">Volumen</label>
-    <input class="slider" type="range" id="volume" min="0" max="1" step="0.1" [(ngModel)]="volume" />
+    <div class="d-flex gap-2 justify-content-center align-items-center">
+      <input class="slider" type="range" id="volume" min="0" max="1" step="0.01" [(ngModel)]="volume" />
+
+      <p class="text-center  porcen">{{volume*100}}</p> <!-- cambiar por el porcentaje del volumen -->
+    </div>
   </div>
 
-  <div class="control-section mb-4">
+  <div class="mb-4 w-100 mx-auto px-4">
     <label for="speed" class="form-label">Velocidad</label>
-    <p class="text-center">{{ rate }}</p>
-    <input class="slider" type="range" id="speed" min="0.1" max="2" step="0.1" [(ngModel)]="rate" />
+    <div class="d-flex gap-2 justify-content-center align-items-center">
+      <input class="slider" type="range" id="speed" min="0" max="2" step="0.1" [(ngModel)]="rate" />
+      <p class="text-center porcen">{{ rate }}</p>
+    </div>
   </div>
 
   <div class="d-flex justify-content-center gap-2 mb-3">
