@@ -19,26 +19,29 @@
 </div>
 
 <div class="prefrencias-main-container">
-  <h3>Alergias</h3>
   <div class="prefrencias-second-container">
-    <div *ngFor="let allergy of allergiesService.allAllergies">
-      <input type="checkbox" [checked]="allergy.isSelected" [value]="allergy.id"
-        (change)="onSelectedAllergy($event, allergy)" /> <label>{{ allergy.name }}</label>
+    <h3 class="prefrencias-h3">Alergias</h3>
+    <div class="prefrencias-third-container">
+      <div *ngFor="let allergy of allergiesService.allAllergies">
+        <input type="checkbox" [checked]="allergy.isSelected" [value]="allergy.id"
+          (change)="onSelectedAllergy($event, allergy)" /> <label>{{ allergy.name }}</label>
+      </div>
     </div>
   </div>
 
-  <h3>Preferencias Dietéticas</h3>
   <div class="prefrencias-second-container">
-    <div *ngFor="let preference of dietPreferenceService.allDietPreferences">
-      <input type="checkbox" [checked]="preference.isSelected" [value]="preference.id"
-        (change)="onSelectedPreference($event, preference)" />
-
-      <label>{{ preference.name }}</label>
+    <h3 class="prefrencias-h3">Preferencias Dietéticas</h3>
+    <div class="prefrencias-third-container">
+      <div *ngFor="let preference of dietPreferenceService.allDietPreferences">
+        <input type="checkbox" [checked]="preference.isSelected" [value]="preference.id"
+          (change)="onSelectedPreference($event, preference)" />
+        <label>{{ preference.name }}</label>
+      </div>
     </div>
   </div>
 </div>
 
-<button (click)="updateSelections()">Guardar Selecciones</button>
-
-
-<button (click)="logOut()">LogOut</button>
+<div class="botones-container">
+  <button class="btn btn-preferences" (click)="updateSelections()">Guardar</button>
+  <button class="btn btn-preferences" (click)="logOut()">LogOut</button>
+</div>
