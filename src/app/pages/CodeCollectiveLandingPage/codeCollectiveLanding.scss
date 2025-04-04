@@ -291,7 +291,7 @@ h1 {
     gap: 15px;
     text-align: left;
     max-width: 50%;
-    color: black;    
+    color: black;
 }
 
 /* Títulos y párrafos */
@@ -326,7 +326,7 @@ h1 {
 
 /* ==================== RESPONSIVE DESIGN ==================== */
 
-/* 📱 Tablets y móviles */
+/*  Tablets y móviles */
 @media (max-width: 768px) {
     .hero-container {
         flex-direction: column;
@@ -356,7 +356,7 @@ h1 {
     }
 }
 
-/* 📱 Móviles pequeños */
+/*  Móviles pequeños */
 @media (max-width: 480px) {
     .hero-content h2 {
         font-size: 24px;
