@@ -1,0 +1,22 @@
+<div class="container-fluid p-2 h-100">
+  <div class="d-flex h-100 gap-4 w-100 flex-md-wrap flex-lg-nowrap">
+    <!-- Lista de recetas: siempre visible -->
+    <div class="app-recipe-list-container h-100 w-100">
+      <app-recipe-list [areActionsAvailable]="true" (cook)="onRecipeSelected($event)" (listInitialized)="onRecipeListInitialized($event)">
+      </app-recipe-list>
+    </div>
+
+    <!-- Receta y Sous-chef: solo cuando hay receta seleccionada -->
+    <ng-container *ngIf="selectedRecipe">
+      <!-- vista receta -->
+      <div class="app-view-recipe-container w-100 h-100">
+        <app-view-recipe [recipe]="selectedRecipe" (save)="onRecipeSaved($event)" (delete)="onRecipeDeleted($event)"> </app-view-recipe>
+      </div>
+
+      <!-- sous chef -->
+      <div class="app-sous-chef-container d-flex w-100 flex-column h-100">
+        <app-sous-chef class="h-100" [recipe]="selectedRecipe"></app-sous-chef>
+      </div>
+    </ng-container>
+  </div>
+</div>

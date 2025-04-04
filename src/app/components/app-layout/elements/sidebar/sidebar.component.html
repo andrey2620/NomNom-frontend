@@ -1,39 +1,37 @@
 <div class="logo-wrapper">
   <a routerLink="/">
-    <img
-      class="img-fluid"
-      src="../../../../../assets/icons/logo@2x.png"
-      width="50"
-      alt="Logo"
-    />
+    <img class="img-fluid" src="../../../../../assets/icons/LogoNomNom.png" width="50" alt="Logo" />
   </a>
 
-  <div class="back-btn" (click)="layoutService.toggleSidebar()">
+  <div
+    class="back-btn"
+    (click)="layoutService.toggleSidebar()"
+    (keydown.enter)="layoutService.toggleSidebar()"
+    tabindex="0"
+    role="button"
+    aria-label="Toggle Sidebar">
     <i class="fa-solid fa-arrow-left"></i>
   </div>
 
-  <div class="toggle-sidebar" (click)="layoutService.toggleSidebar()">
+  <div
+    class="toggle-sidebar"
+    (click)="layoutService.toggleSidebar()"
+    (keydown.enter)="layoutService.toggleSidebar()"
+    tabindex="0"
+    role="button"
+    aria-label="Toggle Sidebar Pin">
     <i class="fa-solid fa fa-thumb-tack"></i>
   </div>
 </div>
 
 <div class="logo-icon-wrapper">
   <a href="javascript:void(0)">
-    <img
-      class="img-fluid"
-      src="../../../../../assets/icons/logo@2x.png"
-      width="35"
-      alt=""
-    />
+    <img class="img-fluid" src="../../../../../assets/icons/logo@2x.png" width="35" alt="" />
   </a>
 </div>
 
 <nav class="sidebar-main">
-  <div
-    id="left-arrow"
-    class="left-arrow"
-    [ngClass]="{ 'd-none': !showLeftArrow }"
-  >
+  <div id="left-arrow" class="left-arrow" [ngClass]="{ 'd-none': !showLeftArrow }">
     <!-- <app-feather-icon icon="arrow-left"></app-feather-icon> -->
   </div>
 
@@ -46,19 +44,18 @@
               <div class="simplebar-content">
                 <li class="back-btn">
                   <a href="javascript:void(0)">
-                    <img
-                      class="img-fluid"
-                      src="../../../../../assets/img/login/login-bg.jpg"
-                      alt="Logo"
-                    />
+                    <img class="img-fluid" src="../../../../../assets/img/login/login-bg.jpg" alt="Logo" />
                   </a>
 
                   <div
                     class="mobile-back text-end"
                     (click)="layoutService.toggleSidebar()"
-                  >
+                    (keydown.enter)="layoutService.toggleSidebar()"
+                    tabindex="0"
+                    role="button"
+                    aria-label="Toggle Sidebar">
                     <span>Atrás</span>
-                    <i class="fa fa-angle-right ps-2" ></i>
+                    <i class="fa fa-angle-right ps-2"></i>
                   </div>
                 </li>
 
@@ -70,18 +67,13 @@
 
                 @for (route of permittedRoutes; track $index) {
                   @if (route.data && route.data['showInSidebar']) {
-                  <li class="sidebar-list">
-                    <a
-                      routerLink="{{route.path}}"
-                      routerLinkActive="active"
-                      class="sidebar-link sidebar-title"
-                    >
-                        <span>{{route.data['name']}}</span>
+                    <li class="sidebar-list">
+                      <a routerLink="{{ route.path }}" routerLinkActive="active" class="sidebar-link sidebar-title">
+                        <span>{{ route.data['name'] }}</span>
                       </a>
                     </li>
                   }
                 }
-
               </div>
             </div>
           </div>
@@ -90,11 +82,7 @@
     </ul>
   </div>
 
-  <div
-    class="right-arrow"
-    id="right-arrow"
-    [ngClass]="{ 'd-none': !showRigthArrow }"
-  >
+  <div class="right-arrow" id="right-arrow" [ngClass]="{ 'd-none': !showRigthArrow }">
     <!-- <app-feather-icon icon="arrow-right"></app-feather-icon> -->
   </div>
 </nav>

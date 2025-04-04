@@ -28,6 +28,8 @@ export interface IUser {
   authorities?: IAuthority[];
   role?: IRole;
   picture?: string;
+  allergies?: IAllergies[];
+  preferences?: IDietPreferences[];
 }
 
 export interface IAuthority {
@@ -51,11 +53,11 @@ export enum IRoleType {
 }
 
 export interface IRole {
-  createdAt: string;
-  description: string;
-  id: number;
-  name: string;
-  updatedAt: string;
+  createdAt?: string;
+  description?: string;
+  id?: number;
+  name?: string;
+  updatedAt?: string;
 }
 
 export interface IGame {
@@ -94,4 +96,54 @@ export interface IPreferenceList {
   id?: number;
   name?: string;
   movies?: IMovie[];
+}
+
+export interface IAllergies {
+  id: number;
+  name: string;
+  isSelected: boolean;
+}
+
+export interface IDietPreferences {
+  id?: number;
+  name?: string;
+  isSelected?: boolean;
+}
+
+export interface IRecipe {
+  id_recipe?: number;
+  name: string;
+  description: string;
+  instructions: string;
+  preparationTime: number;
+  nutritionalInfo: string;
+  image_url?: string;
+  recipeCategory: string;
+  ingredients: {
+    name: string;
+    quantity: string;
+    measurement: string;
+  }[];
+  suggestion?: ISuggestions;
+}
+
+export interface IIngredients {
+  id?: number;
+  name?: string;
+  description?: string;
+  image?: string;
+}
+
+export const CATEGORY_IMAGE_MAP: Record<string, string> = {
+  comida: 'meal1.png',
+  ensalada: 'salads.png',
+  jugos: 'juices.png',
+  postre: 'sweets.png',
+  panes: 'breads.png',
+};
+
+export interface ISuggestions {
+  ingredientSubstitutions: string[];
+  presentationTips: string[];
+  kidsParticipation: string[];
 }

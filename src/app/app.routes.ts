@@ -17,7 +17,26 @@ import { CallbackComponent } from './pages/auth/login/CallbackComponent';
 import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgotPassword.component';
 import { ResetPasswordComponent } from './pages/auth/reset-password/reset-password.component';
 
+import { RecipeFormComponent } from './components/recipe/recipe-form/recipe-form.component';
+import { RecipeListComponent } from './components/recipe/recipe-list/recipe-list.component';
+import { GenerateRecipesComponent } from './pages/generateRecipes/generateRecipes.component';
+import { RecipeComponent } from './pages/recipe/recipe.component';
+import { nomNomLandingComponent } from './pages/NomNomLandingPage/nomNomLanding';
+import { codeCollectiveLandingComponent } from './pages/CodeCollectiveLandingPage/codeCollectiveLanding';
+
+import { InteractiveMapComponent } from './pages/interactiveMap/interactiveMap.component';
+
 export const routes: Routes = [
+  {
+    path: 'nomNomLanding',
+    component: nomNomLandingComponent,
+    canActivate: [GuestGuard],
+  },
+  {
+    path: 'codeCollectiveLanding',
+    component: codeCollectiveLandingComponent,
+    canActivate: [GuestGuard],
+  },
   {
     path: 'login',
     component: LoginComponent,
@@ -29,7 +48,7 @@ export const routes: Routes = [
     canActivate: [GuestGuard],
   },
   {
-    path:'forgotPassword',
+    path: 'forgotPassword',
     component: ForgotPasswordComponent,
     canActivate: [GuestGuard],
   },
@@ -38,21 +57,21 @@ export const routes: Routes = [
     path: 'access-denied',
     component: AccessDeniedComponent,
   },
-    {
-      path: 'callback',
-      component: CallbackComponent,
-    },
+  {
+    path: 'callback',
+    component: CallbackComponent,
+  },
   {
     path: 'forgot-password',
-    component: ForgotPasswordComponent
+    component: ForgotPasswordComponent,
   },
   {
     path: 'reset-password',
-    component: ResetPasswordComponent
+    component: ResetPasswordComponent,
   },
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'nomNomLanding',
     pathMatch: 'full',
   },
   {
@@ -68,40 +87,50 @@ export const routes: Routes = [
       {
         path: 'users',
         component: UsersComponent,
-        canActivate:[AdminRoleGuard],
+        canActivate: [AdminRoleGuard],
         data: {
-          authorities: [
-            IRoleType.superAdmin
-          ],
-          name: 'Users',
-          showInSidebar: true
-        }
+          authorities: [IRoleType.superAdmin],
+          name: 'Usuarios',
+          showInSidebar: true,
+        },
       },
       {
-        path: 'dashboard',
-        component: DashboardComponent,
+        path: 'generateRecipes',
+        component: GenerateRecipesComponent,
         data: {
-          authorities: [
-            IRoleType.superAdmin,
-            IRoleType.user
-          ],
-          name: 'Dashboard',
-          showInSidebar: true
-        }
+          authorities: [IRoleType.superAdmin, IRoleType.user],
+          name: 'Generador',
+          showInSidebar: true,
+        },
+      },
+      {
+        path: 'interactiveMap',
+        component: InteractiveMapComponent,
+        data: {
+          authorities: [IRoleType.superAdmin, IRoleType.user],
+          name: 'Mapa interactivo',
+          showInSidebar: true,
+        },
       },
       {
         path: 'profile',
         component: ProfileComponent,
         data: {
-          authorities: [
-            IRoleType.superAdmin,
-            IRoleType.user
-          ],
+          authorities: [IRoleType.superAdmin, IRoleType.user],
           name: 'profile',
-          showInSidebar: false
-        }
+          showInSidebar: false,
+        },
       },
       {
+        path: 'recipes',
+        component: RecipeComponent,
+        data: {
+          authorities: [IRoleType.superAdmin, IRoleType.user],
+          name: 'Recetas',
+          showInSidebar: true,
+        },
+      },
+      /*       {
         path: 'games',
         component: GamesComponent,
         data: {
@@ -136,7 +165,7 @@ export const routes: Routes = [
           name: 'preference list',
           showInSidebar: true
         }
-      }
+      }, */
     ],
   },
 ];

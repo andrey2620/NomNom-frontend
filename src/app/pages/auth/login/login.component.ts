@@ -47,7 +47,7 @@ export class LoginComponent {
 
     this.authService.login(this.loginForm).subscribe({
       next: () => {
-        this.router.navigateByUrl('/app/dashboard');
+        this.router.navigateByUrl('/app/generateRecipes');
       },
       error: (err: any) => {
         console.error('Error en login normal:', err);

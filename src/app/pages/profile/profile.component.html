@@ -1,76 +1,53 @@
-
-<div class="row info-container">
-  <div class="col-6">
+<section class="w-100">
+  <div class="my-4 w-75 mx-auto">
     <div class="shadow-sm bg-body rounded px-4 py-4 h-100">
       <div>
         <i class="fa-solid fa-user-tie"></i>
       </div>
       <div class="border-bottom my-3">
-        <label>Name:</label>
-        <p>{{profileService.user$().name}}</p>
+        <label>Nombre:</label>
+        <p>{{ profileService.user$().name }}</p>
       </div>
       <div class="border-bottom my-3">
-        <label>Lastname:</label>
-        <p>{{profileService.user$().lastname}}</p>
+        <label>Apellido:</label>
+        <p>{{ profileService.user$().lastname }}</p>
       </div>
       <div class="border-bottom my-3">
-        <label>email:</label>
-        <p>{{profileService.user$().email}}</p>
-      </div>
-      <div class=" my-3">
-        <label>Last update:</label>
-        <p>{{profileService.user$().updatedAt | date:'dd/MM/YYYY'}}</p>
+        <label>Email:</label>
+        <p>{{ profileService.user$().email }}</p>
       </div>
     </div>
   </div>
-  <div class="col-6">
-    <div class="row">
-      <div class="col-12 shadow-sm bg-body rounded px-4 py-4 mb-3">
-        <label>Rol:</label>
-        <div class="border-bottom my-3">
-          <label>Name:</label>
-          <p>{{profileService.user$().role?.name}}</p>
-        </div>
-        <div class="border-bottom my-3">
-          <label>Description:</label>
-          <p>{{profileService.user$().role?.description}}</p>
-        </div>
-        <div class=" my-3">
-          <label>Last update:</label>
-          <p>{{profileService.user$().role?.updatedAt | date:'dd/MM/YYYY'}}</p>
+
+  <div class="prefrencias-main-container d-flex w-75 mx-auto flex-column">
+    <div class="d-flex gap-5 ">
+      <div class="prefrencias-second-container">
+        <h3 class="prefrencias-h3">Alergias</h3>
+        <div class="prefrencias-third-container">
+          <div *ngFor="let allergy of allergiesService.allAllergies">
+            <input type="checkbox" [checked]="allergy.isSelected" [value]="allergy.id"
+              (change)="onSelectedAllergy($event, allergy)" />
+            <label>{{ allergy.name }}</label>
+          </div>
         </div>
       </div>
-      <div class="col-12 shadow-sm bg-body rounded px-4 py-4">
-        <label>Last actions:</label>
-        <div>
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Date</th>
-                <th scope="col">Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>10/06/2024</td>
-                <td>Deleted user</td>
-              </tr>
-              <tr>
-                <th scope="row">1</th>
-                <td>10/06/2024</td>
-                <td>Deleted user</td>
-              </tr>
-              <tr>
-                <th scope="row">1</th>
-                <td>10/06/2024</td>
-                <td>Deleted user</td>
-              </tr>
-            </tbody>
-          </table>
+
+      <div class="prefrencias-second-container">
+        <h3 class="prefrencias-h3">Preferencias Dietéticas</h3>
+        <div class="prefrencias-third-container">
+          <div *ngFor="let preference of dietPreferenceService.allDietPreferences">
+            <input type="checkbox" [checked]="preference.isSelected" [value]="preference.id"
+              (change)="onSelectedPreference($event, preference)" />
+            <label>{{ preference.name }}</label>
+          </div>
         </div>
       </div>
     </div>
+
+    <div class="botones-container my-4">
+      <button class="btn btn-preferences" (click)="updateSelections()">Guardar</button>
+      <button class="btn btn-preferences" (click)="logOut()">Cerrar Sesión</button>
+    </div>
   </div>
-</div>
+
+</section>

@@ -1,10 +1,26 @@
-<div class="media profile-media d-flex align-items-center">
-  <i class="fa-regular fa-user"></i>
-  <div class="media-body"><span>{{userName}} <i class="fa-solid fa-chevron-down"></i></span>
-    <!-- <p class="mb-0 font-roboto">Admin </p> -->
+<div class="my-account-container ">
+  <div class="dropdow dropdown-custom">
+    <button class="btn btn-secondary dropdown-toggle dropdown-custom " type="button" data-bs-toggle="dropdown"
+      aria-expanded="false">
+      <i class="fa-regular fa-user me-2"></i> <span>{{ userName }}</span>
+    </button>
+    <ul class="dropdown-menu">
+      <li routerLink="profile" class="d-flex gap-2 align-items-center dropdown-item"><i class="fa-solid fa-user-tie">
+        </i><span>Perfil</span></li>
+      <li (click)="logout()" class="d-flex gap-2 align-items-center dropdown-item"><i
+          class="fa-solid fa-arrow-right-from-bracket"></i><span>Cerrar Sesión</span></li>
+    </ul>
   </div>
 </div>
-<ul class="profile-dropdown onhover-show-div">
-  <li routerLink="profile"><i class="fa-solid fa-user-tie"></i><span>Profile</span></li>
-  <li (click)="logout()"><i class="fa-solid fa-arrow-right-from-bracket"></i><span>Log out</span></li>
-</ul>
+<!--   <div class="media profile-media d-flex align-items-center flex-nowrap gap-2">
+    <i class="fa-regular fa-user"></i>
+    <div class="media-body">
+      <span>{{ userName }} <i class="fa-solid fa-chevron-down"></i></span>
+
+    </div>
+  </div>
+
+  <ul class="position-absolute bg-light shadow border rounded-2 py-4 px-4 list-unstyled d-flex flex-column gap-3" style="top: 45px; width: 150px; ">
+    <li routerLink="profile" class="d-flex gap-2 align-items-center"><i class="fa-solid fa-user-tie"> </i><span>Profile</span></li>
+    <li (click)="logout()" class="d-flex gap-2 align-items-center"><i class="fa-solid fa-arrow-right-from-bracket"></i><span>Log out</span></li>
+  </ul> -->

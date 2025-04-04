@@ -1,50 +1,13 @@
-<div class="ltr">
-  <div class="page-wrapper compact-wrapper">
-    <app-topbar></app-topbar>
+<div class="min-vh-100 overflow-hidden">
+  <app-topbar></app-topbar>
+    <main class="overflow-auto px-2" style="height: calc(100vh - 130px); margin-top: 80px;">
+      <router-outlet></router-outlet>
 
-    <div class="page-body-wrapper">
-      <div
-        class="sidebar-wrapper"
-        sidebar-layout="default-sidebar"
-        icon="stroke-svg"
-        [ngClass]="{ close_icon: !layoutService.sidebarOpen }"
-      >
-        <app-sidebar></app-sidebar>
+    </main>
+
+    <footer class="text-center text-light" style="height: 50px; background-color: #2c5530">
+      <div class="text-center w-100 h-100 d-flex justify-content-center align-items-center">
+        <p class="p-0 m-0 mt-1" style="font-size: 14px">&copy; 2025 NomNom Explorers. - Todos los derechos reservados.</p>
       </div>
-
-      <div class="page-body">
-        <!-- <div class="container-fluid">
-          <div class="page-title">
-            <div class="row">
-              <div class="col-6">
-                <h3>{{ title }}</h3>
-              </div>
-            </div>
-          </div>
-        </div> -->
-        <!-- <h3>{{ title }}</h3> -->
-
-        <main class="container-fluid">
-          <router-outlet></router-outlet>
-        </main>
-      </div>
-
-      <footer class="footer">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-md-12 footer-copyright text-center">
-              <p class="mb-0">
-                Copyright 2024 &copy; gbs. All rights reserved.
-              </p>
-            </div>
-          </div>
-        </div>
-      </footer>
-    </div>
-  </div>
+    </footer>
 </div>
-
-<!-- <div
-  class="bg-overlay"
-  [ngClass]="{ active: layoutService.sidebarOpen }"
-></div> -->
