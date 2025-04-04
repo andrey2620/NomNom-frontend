@@ -7,7 +7,6 @@ import { AllergiesService } from './allergies.service';
 import { DietPreferenceService } from './dietPreference.service';
 
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -90,33 +89,4 @@ export class ProfileService extends BaseService<IUser> {
     });
   }
 
-  updateUserProfile(user: IUser) {
-    return this.http.put(`${this.source}`, user).subscribe({
-      next: (response) => {
-        // Actualización exitosa
-        this.snackBar.open(
-          'Perfil actualizado correctamente',
-          'Cerrar',
-          {
-            horizontalPosition: 'right',
-            verticalPosition: 'top',
-            panelClass: ['success-snackbar']
-          }
-        );
-        this.userSignal.set(response);
-      },
-      error: (error) => {
-        // En caso de error
-        this.snackBar.open(
-          `Error al actualizar perfil: ${error.message}`,
-          'Cerrar',
-          {
-            horizontalPosition: 'right',
-            verticalPosition: 'top',
-            panelClass: ['error-snackbar']
-          }
-        );
-      }
-    });
-  }
 }
