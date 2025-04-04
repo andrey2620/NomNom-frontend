@@ -1,9 +1,9 @@
-<div class="recipe-panel p-3 rounded">
+<div class="recipe-panel p-3">
   <h2 class="section-title mb-4">Mis Recetas</h2>
 
-  <div class="row g-4">
-    <ng-container *ngFor="let recipe of itemList; trackBy: trackById">
-      <div class="col-md-12 col-lg-12">
+  <div class="d-flex flex-column gap-4">
+    <ng-container>
+      <div class="d-flex" *ngFor="let recipe of itemList; trackBy: trackById">
         <div class="card h-100 shadow-sm">
           <img [src]="getCategoryImage(recipe.recipeCategory)" class="card-img-top" alt="Imagen de receta" (error)="onImageError($event)" />
 
@@ -20,9 +20,22 @@
         </div>
       </div>
     </ng-container>
+
+    <ng-container>
+      <div class="w-100 skeleton-container" *ngFor="let skeleton of skeletonList; let i = index">
+        <div class="card h-100 shadow-sm placeholder-card w-100">
+          <div class="card-img-top skeleton-img"></div>
+          <div class="card-body">
+            <h5 class="card-title skeleton-text w-50">&nbsp;</h5>
+            <p class="card-text skeleton-text w-75"></p>
+            <div class="text-center mt-3">
+              <div class="btn cook-btn skeleton-btn w-50"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
   </div>
 
-  <p *ngIf="itemList.length === 0" class="text-center mt-3">No hay recetas disponibles.</p>
-
-  <app-view-recipe *ngIf="selectedItem" [recipe]="selectedItem"> </app-view-recipe>
+  <app-view-recipe *ngIf="selectedItem" [recipe]="selectedItem"></app-view-recipe>
 </div>

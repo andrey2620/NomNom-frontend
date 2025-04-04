@@ -29,28 +29,28 @@
   --fc-button-hover-border-color: var(--theme-default);
 
   /* Paleta de colores principal */
-  --primary-color: #bb0a21;   /* Rojo oscuro */
+  --primary-color: #bb0a21; /* Rojo oscuro */
   --secondary-color: #2c5530; /* Verde oscuro */
-  --accent-light: #daefb3;    /* Verde claro */
-  --accent-pink: #fcb1a6;     /* Rosa pastel */
-  --muted-gold: #c3bf6d;      /* Dorado apagado */
+  --accent-light: #daefb3; /* Verde claro */
+  --accent-pink: #fcb1a6; /* Rosa pastel */
+  --muted-gold: #c3bf6d; /* Dorado apagado */
 
   /* Colores complementarios */
-  --dark-burgundy: #8a0718;   /* Rojo vino profundo */
-  --soft-olive: #6b8e23;      /* Verde oliva */
-  --warm-beige: #f5e0c3;      /* Beige cálido */
-  --soft-gray: #eaeaea;       /* Gris claro */
-  --deep-brown: #5a3e2b;      /* Marrón oscuro */
+  --dark-burgundy: #8a0718; /* Rojo vino profundo */
+  --soft-olive: #6b8e23; /* Verde oliva */
+  --warm-beige: #f5e0c3; /* Beige cálido */
+  --soft-gray: #eaeaea; /* Gris claro */
+  --deep-brown: #5a3e2b; /* Marrón oscuro */
 
   /* Colores de texto */
-  --text-primary: var(--secondary-color);  /* Verde oscuro */
-  --text-secondary: var(--primary-color);  /* Rojo oscuro */
-  --text-muted: #6b6b6b;                   /* Gris oscuro */
+  --text-primary: var(--secondary-color); /* Verde oscuro */
+  --text-secondary: var(--primary-color); /* Rojo oscuro */
+  --text-muted: #6b6b6b; /* Gris oscuro */
 
   /* Colores de fondo */
-  --background-light: #fbfef9;    /* Fondo claro */
+  --background-light: #fbfef9; /* Fondo claro */
   --background-dark: var(--secondary-color); /* Fondo oscuro */
-  --background-accent: var(--accent-pink);   /* Fondo de secciones destacadas */
+  --background-accent: var(--accent-pink); /* Fondo de secciones destacadas */
 
   /* Colores de bordes */
   --border-color: var(--muted-gold); /* Color de bordes */
@@ -65,7 +65,7 @@
   --font-weight: 400;
 }
 
-body[class="dark-only"] {
+body[class='dark-only'] {
   --light-background: rgba(31, 32, 40, 0.65);
   --recent-chart-bg: #262932;
   --light-bg: #1d1e26;
@@ -81,17 +81,22 @@ body[class="dark-only"] {
   --view-border-marker: #2c2c45d4;
 }
 // scss variables
-@import "./assets/utils/variables";
+@import './assets/utils/variables';
 //start template styles
-@import "./assets/layout/layout.scss";
+@import './assets/layout/layout.scss';
 //end template styles
 
-html, body { 
-  height: 100%; 
+html,
+body {
+  height: 100%;
   font-family: 'Poppins', sans-serif;
-  color: #2c5530; 
+  color: #2c5530;
 }
-body { margin: 0; font-family: Poppins, sans-serif; }
+
+body {
+  margin: 0;
+  font-family: Poppins, sans-serif;
+}
 
 .mat-typography {
   font-family: 'Poppins', sans-serif !important;
@@ -100,36 +105,34 @@ body { margin: 0; font-family: Poppins, sans-serif; }
   letter-spacing: normal !important;
 }
 
-.error-snackbar .mdc-snackbar__surface{
+.error-snackbar .mdc-snackbar__surface {
   background-color: #bb0a21 !important;
 }
 
-.success-snackbar .mdc-snackbar__surface{
+.success-snackbar .mdc-snackbar__surface {
   background-color: #c3bf6d !important;
 }
 
-
-.page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links .simplebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li .sidebar-link {
+.page-wrapper div.sidebar-wrapper .simplebar-mask .simplebar-content-wrapper .simplebar-content > li .sidebar-link {
   text-decoration: none;
 }
 
-
-.page-wrapper.compact-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links {
+.page-wrapper .page-body-wrapper div.sidebar-wrapper .sidebar-main .sidebar-links {
   height: calc(93vh - 115px) !important;
-  left: -300px;
+  left: 0;
   z-index: 99;
   transition: color 1s ease;
-  /* overflow: auto; */
-  /* color: rgba(0, 0, 0, 0); */
+  overflow: auto;
+  color: rgba(0, 0, 0, 0);
   margin-top: 20px;
   margin-bottom: 30px;
 }
 
-.green{
+.green {
   color: #2c5530;
 }
 
-.green-bg{
+.green-bg {
   background-color: #2c5530;
 }
 
@@ -137,15 +140,15 @@ body { margin: 0; font-family: Poppins, sans-serif; }
   color: #c3bf6d;
 }
 
-.light-green:hover{
+.light-green:hover {
   color: #b5152a;
 }
 
-.red-bg{
-  background-color: #b5152a; 
+.red-bg {
+  background-color: #b5152a;
   border-color: #b5152a;
 }
 
-.red{
+.red {
   color: #b5152a;
 }

@@ -1,9 +1,21 @@
 .ingredientContainer {
     display: grid;
-    grid-template-columns: repeat(6, 1fr); // 5 columnas fijas
+    grid-template-columns: repeat(9, 1fr); // 5 columnas fijas
     gap: 10px;
     padding: 2x;
     // border: 2px solid red;
+}
+
+/* responsive ingredientContainer */
+@media (max-width: 1200px) {
+    .ingredientContainer {
+        grid-template-columns: repeat(8, 1fr); // 6 columnas fijas
+    }
+}
+@media (max-width: 900px) {
+    .ingredientContainer {
+        grid-template-columns: repeat(5, 1fr); // 4 columnas fijas
+    }
 }
 
 .ingredient {

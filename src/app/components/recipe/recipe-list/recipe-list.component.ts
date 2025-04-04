@@ -15,13 +15,14 @@ import { RecipeFormComponent } from '../recipe-form/recipe-form.component';
   templateUrl: './recipe-list.component.html',
   styleUrls: ['./recipe-list.component.scss'],
 })
-
 export class RecipeListComponent implements OnInit {
   @Input() areActionsAvailable = false;
   @Output() cook = new EventEmitter<any>();
   @Output() listInitialized = new EventEmitter<any[]>();
   itemList: any[] = [];
   selectedItem: any = null;
+  isLoading = true;
+  skeletonList: any[] = [];
 
   constructor(private recipesService: RecipesService) {}
 
@@ -37,38 +38,43 @@ export class RecipeListComponent implements OnInit {
     let attempts = 0;
     const maxAttempts = 20;
 
+    // Initialize with skeleton placeholders
+    this.skeletonList = Array(count).fill(null);
+
     const fetchRecipe = () => {
-      this.recipesService.getRecipesByUser(userId).pipe(
-        catchError(err => {
-          console.error('Error al generar receta, reintentando...', err);
-          return of(null);
-        }),
-        delay(500)
-      ).subscribe(recipe => {
-        attempts++;
-        if (recipe && this.isValidRecipe(recipe)) {
-          this.itemList.push(recipe);
-        }
+      this.recipesService
+        .getRecipesByUser(userId)
+        .pipe(
+          catchError(err => {
+            console.error('Error al generar receta, reintentando...', err);
+            return of(null);
+          }),
+          delay(0)
+        )
+        .subscribe(recipe => {
+          attempts++;
+          if (recipe && this.isValidRecipe(recipe)) {
+            this.itemList.push(recipe);
+            // Reduce skeleton count as recipes load
+            this.skeletonList.pop();
+          }
 
-        if (this.itemList.length < count && attempts < maxAttempts) {
-          fetchRecipe();
-        }
+          if (this.itemList.length < count && attempts < maxAttempts) {
+            fetchRecipe();
+          }
 
-        // 👇 Emitimos la lista al padre cuando ya se terminó
-        if (this.itemList.length === count || attempts >= maxAttempts) {
-          this.listInitialized.emit(this.itemList);
-        }
-      });
+          if (this.itemList.length === count || attempts >= maxAttempts) {
+            this.listInitialized.emit(this.itemList);
+            this.isLoading = false;
+            this.skeletonList = [];
+          }
+        });
     };
-
     fetchRecipe();
   }
 
   isValidRecipe(recipe: any): boolean {
-    return recipe &&
-           recipe.name &&
-           Array.isArray(recipe.ingredients) &&
-           recipe.ingredients.length > 0;
+    return recipe && recipe.name && Array.isArray(recipe.ingredients) && recipe.ingredients.length > 0;
   }
 
   trackById(index: number, _item: any): number {
@@ -89,5 +95,4 @@ export class RecipeListComponent implements OnInit {
       imgElement.src = 'assets/img/recipe/meal1.png';
     }
   }
-
 }

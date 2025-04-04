@@ -1,6 +1,6 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { BaseService } from './base-service';
-import { IRecipe, ISearch, ISuggestions,IResponse } from '../interfaces';
+import { IRecipe, ISearch, ISuggestions, IResponse } from '../interfaces';
 import { AuthService } from './auth.service';
 import { AlertService } from './alert.service';
 import { Observable } from 'rxjs';
@@ -62,6 +62,10 @@ export class RecipesService extends BaseService<IRecipe> {
         console.error('Error', err);
       },
     });
+  }
+
+  getRecipesByIngredientsList(userId: number): Observable<any> {
+    return this.findAllWithParamsAndCustomSource(`generator/user/${userId}`);
   }
 
   getRecipesByUser(userId: number): Observable<any> {

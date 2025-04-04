@@ -1,42 +1,48 @@
-<div class="col-6">
-  <div class="shadow-sm bg-body rounded px-4 py-4 h-100">
-    <div>
-      <i class="fa-solid fa-user-tie"></i>
-    </div>
-    <div class="border-bottom my-3">
-      <label>Name:</label>
-      <p>{{profileService.user$().name}}</p>
-    </div>
-    <div class="border-bottom my-3">
-      <label>Lastname:</label>
-      <p>{{profileService.user$().lastname}}</p>
-    </div>
-    <div class="border-bottom my-3">
-      <label>email:</label>
-      <p>{{profileService.user$().email}}</p>
-    </div>
-    <div class=" my-3">
-      <label>Last update:</label>
-      <p>{{profileService.user$().updatedAt | date:'dd/MM/YYYY'}}</p>
+<section class="w-100">
+  <div class="my-4 w-75 mx-auto">
+    <div class="shadow-sm bg-body rounded px-4 py-4 h-100">
+      <div>
+        <i class="fa-solid fa-user-tie"></i>
+      </div>
+      <div class="border-bottom my-3">
+        <label>Name:</label>
+        <p>{{ profileService.user$().name }}</p>
+      </div>
+      <div class="border-bottom my-3">
+        <label>Lastname:</label>
+        <p>{{ profileService.user$().lastname }}</p>
+      </div>
+      <div class="border-bottom my-3">
+        <label>email:</label>
+        <p>{{ profileService.user$().email }}</p>
+      </div>
     </div>
   </div>
-</div>
 
-<div class="prefrencias-main-container">
-  <h3>Alergias</h3>
-  <div class="alergias" *ngFor="let allergy of allergiesService.allAllergies">
-    <input type="checkbox" [value]="allergy.id" (change)="onSelectedAllergy(allergy)">
-    <label>{{ allergy.name }}</label>
+  <div class="prefrencias-main-container w-75 mx-auto">
+    <div class="prefrencias-second-container">
+      <h3 class="prefrencias-h3">Alergias</h3>
+      <div class="prefrencias-third-container">
+        <div *ngFor="let allergy of allergiesService.allAllergies">
+          <input type="checkbox" [checked]="allergy.isSelected" [value]="allergy.id" (change)="onSelectedAllergy($event, allergy)" />
+          <label>{{ allergy.name }}</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="prefrencias-second-container">
+      <h3 class="prefrencias-h3">Preferencias Dietéticas</h3>
+      <div class="prefrencias-third-container">
+        <div *ngFor="let preference of dietPreferenceService.allDietPreferences">
+          <input type="checkbox" [checked]="preference.isSelected" [value]="preference.id" (change)="onSelectedPreference($event, preference)" />
+          <label>{{ preference.name }}</label>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <h3>Preferencias Dietéticas</h3>
-  <div *ngFor="let preference of dietPreferenceService.allDietPreferences">
-    <input type="checkbox" [value]="preference.id" (change)="onSelectedPreference(preference)">
-    <label>{{ preference.name }}</label>
+  <div class="botones-container mt-5">
+    <button class="btn btn-preferences" (click)="updateSelections()">Guardar</button>
+    <button class="btn btn-preferences" (click)="logOut()">LogOut</button>
   </div>
-</div>
-
-<button (click)="updateSelections()">Guardar Selecciones</button>
-
-
-<button (click)="logOut()">LogOut</button>
+</section>

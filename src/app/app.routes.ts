@@ -91,7 +91,7 @@ export const routes: Routes = [
           authorities: [
             IRoleType.superAdmin
           ],
-          name: 'Users',
+          name: 'Usuarios',
           showInSidebar: true
         }
       },
@@ -139,7 +139,7 @@ export const routes: Routes = [
             IRoleType.superAdmin,
             IRoleType.user,
           ],
-          name: 'recipes',
+          name: 'Recetas',
           showInSidebar: true
         }
       },
