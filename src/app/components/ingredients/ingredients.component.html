@@ -2,7 +2,7 @@
   @for (item of ingredients; track item.id) {
     <div class="ingredientDiv" [class.selected]="selectedIngredients.includes(item.id ?? null)" (click)="selectIngredient(item.id ?? null)">
       @if (!item.image) {
-        <img class="w-100" src="../../../assets/gifs/default.gif" alt="img{{ item.name }}" />
+        <img class="w-100" src="assets/gifs/default.gif" alt="img{{ item.name }}" />
       } @else {
         <img class="w-100" src="{{ item.image }}" alt="img{{ item.name }}" />
       }

@@ -48,7 +48,7 @@ export const routes: Routes = [
     canActivate: [GuestGuard],
   },
   {
-    path:'forgotPassword',
+    path: 'forgotPassword',
     component: ForgotPasswordComponent,
     canActivate: [GuestGuard],
   },
@@ -57,17 +57,17 @@ export const routes: Routes = [
     path: 'access-denied',
     component: AccessDeniedComponent,
   },
-    {
-      path: 'callback',
-      component: CallbackComponent,
-    },
+  {
+    path: 'callback',
+    component: CallbackComponent,
+  },
   {
     path: 'forgot-password',
-    component: ForgotPasswordComponent
+    component: ForgotPasswordComponent,
   },
   {
     path: 'reset-password',
-    component: ResetPasswordComponent
+    component: ResetPasswordComponent,
   },
   {
     path: '',
@@ -87,74 +87,48 @@ export const routes: Routes = [
       {
         path: 'users',
         component: UsersComponent,
-        canActivate:[AdminRoleGuard],
+        canActivate: [AdminRoleGuard],
         data: {
-          authorities: [
-            IRoleType.superAdmin
-          ],
+          authorities: [IRoleType.superAdmin],
           name: 'Usuarios',
-          showInSidebar: true
-        }
-      },
-      {
-        path: 'dashboard',
-        component: DashboardComponent,
-        data: {
-          authorities: [
-            IRoleType.superAdmin,
-            IRoleType.user
-          ],
-          name: 'Dashboard',
-          showInSidebar: true
-        }
+          showInSidebar: true,
+        },
       },
       {
         path: 'generateRecipes',
         component: GenerateRecipesComponent,
         data: {
-          authorities: [
-            IRoleType.superAdmin,
-            IRoleType.user
-          ],
+          authorities: [IRoleType.superAdmin, IRoleType.user],
           name: 'Generador',
-          showInSidebar: true
-        }
+          showInSidebar: true,
+        },
       },
       {
         path: 'interactiveMap',
         component: InteractiveMapComponent,
         data: {
-          authorities: [
-            IRoleType.superAdmin,
-            IRoleType.user
-          ],
+          authorities: [IRoleType.superAdmin, IRoleType.user],
           name: 'Mapa interactivo',
-          showInSidebar: true
-        }
+          showInSidebar: true,
+        },
       },
       {
         path: 'profile',
         component: ProfileComponent,
         data: {
-          authorities: [
-            IRoleType.superAdmin,
-            IRoleType.user
-          ],
+          authorities: [IRoleType.superAdmin, IRoleType.user],
           name: 'profile',
-          showInSidebar: false
-        }
+          showInSidebar: false,
+        },
       },
       {
         path: 'recipes',
         component: RecipeComponent,
         data: {
-          authorities: [
-            IRoleType.superAdmin,
-            IRoleType.user,
-          ],
+          authorities: [IRoleType.superAdmin, IRoleType.user],
           name: 'Recetas',
-          showInSidebar: true
-        }
+          showInSidebar: true,
+        },
       },
       /*       {
         path: 'games',

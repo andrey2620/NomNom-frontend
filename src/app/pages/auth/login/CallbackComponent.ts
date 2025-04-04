@@ -62,7 +62,7 @@ export class CallbackComponent implements OnInit {
     }
 
     localStorage.setItem('access_token', response.accessToken);
-    this.router.navigate(['/app/dashboard']);
+    this.router.navigate(['/app/generateRecipes']);
   }
 
   /** Manejar errores en el login */
