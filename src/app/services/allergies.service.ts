@@ -32,8 +32,6 @@ export class AllergiesService extends BaseService<IAllergies> {
                     { length: this.search.totalPages ? this.search.totalPages : 0 },
                     (_, i) => i + 1
                 );
-
-                // debugger;
                 this.allAllergies = response.data;
                 this.allergiesSignal.set(response.data);
             },
