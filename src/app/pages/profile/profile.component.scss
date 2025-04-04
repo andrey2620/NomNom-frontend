@@ -48,7 +48,6 @@
 }
 
 .prefrencias-main-container {
-  padding: 5% 5%;
   display: flex;
   flex-direction: row;
   gap: 20px;
@@ -75,7 +74,7 @@
         display: flex;
         align-items: center;
 
-        input[type="checkbox"] {
+        input[type='checkbox'] {
           accent-color: #fcb1a6;
           width: 18px;
           height: 18px;

@@ -1,4 +1,4 @@
-<div class="sous-chef-panel h-100 w-100 overflow-y-auto">
+<div class="sous-chef-panel h-100 w-100">
   <div class="sous-chef-icon text-center mb-2 mt-4">
     <div class="icon-box">SC</div>
   </div>
@@ -8,7 +8,8 @@
     <div class="d-flex gap-2 justify-content-center align-items-center">
       <input class="slider" type="range" id="volume" min="0" max="1" step="0.01" [(ngModel)]="volume" />
 
-      <p class="text-center  porcen">{{volume*100}}</p> <!-- cambiar por el porcentaje del volumen -->
+      <p class="text-center porcen">{{ volume * 100 }}</p>
+      <!-- cambiar por el porcentaje del volumen -->
     </div>
   </div>
 
