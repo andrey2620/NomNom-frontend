@@ -1,12 +1,81 @@
-<div class="login-container">
-  <div class="d-flex align-items-center justify-content-center h-100">
-    <div class="login-card">
-      <div class="w-100">
-        <div class="text-center">
-          <a class="logo text-center" routerLink="/">
-            <img width="200" class="img-fluid mb-4 logo" src="../../../../assets/icons/LogoNomNom.png" alt="Logo" />
-          </a>
+<section class="login-container">
+  <div class="login">
+    <a class="logo-container" routerLink="/">
+      <img width="250" class="img-fluid logo" src="../../../../assets/icons/LogoNomNom.png" alt="Logo" />
+    </a>
+    <h1 class="text-center mb-4" style="color: #2c5530; font-weight: bold">Inicio de Sesión</h1>
+    <form action="">
+      <div class="input-container mb-3">
+        <label for="" class="label-input">Correo Electronico</label>
+        <input
+          #email="ngModel"
+          type="text"
+          class="input-login email-input"
+          id="email"
+          name="email"
+          placeholder="ejemplo@nomnom.com"
+          [(ngModel)]="loginForm.email"
+          [ngClass]="{
+            'is-invalid': email.invalid && email.touched,
+            'is-valid': email.valid && email.touched,
+          }"
+          required />
+        <div *ngIf="email.invalid" class="invalid-feedback">Ingresa un correo válido</div>
+      </div>
+      <div class="input-container mb-4">
+        <label for="" class="label-input">Contraseña</label>
+        <div class="password-icon-container">
+          <input
+            #password="ngModel"
+            [type]="showPassword ? 'text' : 'password'"
+            class="input-login smallLetter"
+            id="password"
+            name="password"
+            placeholder="Entra al menos 8 caracteres"
+            [(ngModel)]="loginForm.password"
+            [ngClass]="{
+              'is-invalid': password.invalid && password.touched,
+              'is-valid': password.valid && password.touched,
+            }"
+            required />
+          <span class="passEye" (click)="toggleShowPassword()" (keydown.enter)="toggleShowPassword()" tabindex="0" style="cursor: pointer">
+            <i [class]="showPassword ? 'bi bi-eye' : 'bi bi-eye-slash'"></i>
+          </span>
+          <div *ngIf="password.invalid" class="invalid-feedback">Ingrese una contraseña válida</div>
         </div>
+        <div class="d-flex justify-content-between align-items-center mt-4 flex-wrap gap-4">
+          <label for="" class="text-center"> <input type="checkbox" name="" id="" /> Recuerdame </label>
+          <a href="" class="text-center">Olvide mi contraseña</a>
+        </div>
+        <div class="w-100 text-center mt-4">
+          <button class="btn btn-primary btn-signIn red-bg mx-auto w-50" type="submit">Inicio</button>
+          @if (loginError) {
+            <p class="text-danger">{{ loginError }}</p>
+          }
+        </div>
+        <div class="text-center mt-4">
+          <p class="p-0 m-0">
+            O <br />
+            inicia sesión con
+          </p>
+          <button (click)="signInWithGoogle()" class="shadow-sm border rounded-pill d-flex gap-3 mx-auto mt-4 btn-google">
+            <img width="24" class="img-fluid" src="../../../../assets/icons/google.png" alt="Logo" />
+            <span>Iniciar sesion con google</span>
+          </button>
+          <a href="/signup" class="light-green text-decoration-none mt-4 d-inline-block">Regístrate aquí</a>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- <div class="login-container">
+  <div class="w-50 mx-auto">
+    <div class="login-card">
+      <div class="text-center">
+        <a class="logo" routerLink="/">
+          <img width="200" class="img-fluid mb-4 logo" src="../../../../assets/icons/LogoNomNom.png" alt="Logo" />
+        </a>
         <div class="login-main">
           <form (ngSubmit)="handleLogin($event)" autocomplete="off" #frm="ngForm">
             <div class="mb-4">
@@ -65,7 +134,6 @@
             </div>
 
             <div class="form-group my-4 text-center">
-              <!-- en vez de btn-signIn btn-login ??  -->
               <button class="btn btn-primary btn-signIn red-bg" type="submit">Inicio</button>
               @if (loginError) {
                 <p class="text-danger">{{ loginError }}</p>
@@ -79,9 +147,8 @@
               <img width="40" class="img-fluid" src="../../../../assets/icons/google.png" alt="Logo" />
             </button>
           </div>
-          
         </div>
       </div>
     </div>
   </div>
-</div>
+</div> -->
