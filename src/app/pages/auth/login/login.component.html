@@ -4,7 +4,7 @@
       <img width="250" class="img-fluid logo" src="../../../../assets/icons/LogoNomNom.png" alt="Logo" />
     </a>
     <h1 class="text-center mb-4" style="color: #2c5530; font-weight: bold">Inicio de Sesión</h1>
-    <form action="">
+    <form (ngSubmit)="handleLogin()" #frm="ngForm">
       <div class="input-container mb-3">
         <label for="" class="label-input">Correo Electronico</label>
         <input

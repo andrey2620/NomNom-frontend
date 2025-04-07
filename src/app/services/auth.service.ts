@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { Observable, switchMap, tap, map } from 'rxjs';
 import { ILoginResponse, IUser, IAuthority, IRoleType, IResponse } from '../interfaces';
+import { IngredientService } from './ingredient.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +12,10 @@ export class AuthService {
   private expiresIn!: number;
   private user: IUser = { email: '', authorities: [] };
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private ingredientService: IngredientService
+  ) {
     this.load();
   }
 
@@ -63,6 +67,23 @@ export class AuthService {
     );
   }
 
+  public loginAndInitialize(credentials: { email: string; password: string }): Observable<void> {
+    return this.login(credentials).pipe(
+      tap((res: ILoginResponse) => {
+        this.setAuthData(res.authUser, res.token, true);
+      }),
+      switchMap((res: ILoginResponse) => {
+        const userId = res.authUser.id!;
+        return this.ingredientService.getFormattedIngredientsByUser(userId).pipe(
+          tap((ingredientsRes: IResponse<string[]>) => {
+            localStorage.setItem('user_ingredients', JSON.stringify(ingredientsRes.data));
+          }),
+          map(() => {}) // para que devuelva void
+        );
+      })
+    );
+  }
+
   public setAuthData(authUser: IUser, token: string, exists: boolean): void {
     this.user = authUser;
     this.accessToken = token;
@@ -70,6 +91,7 @@ export class AuthService {
 
     localStorage.setItem('access_token', token);
     localStorage.setItem('auth_user', JSON.stringify(authUser));
+    localStorage.setItem('expiresIn', JSON.stringify(this.expiresIn));
   }
 
   public isAuthenticated(): boolean {
@@ -146,7 +168,7 @@ export class AuthService {
     return this.http.post<IResponse<any>>('auth/reset-password', newPassword, { params });
   }
 
-  getCurrentUserId(): number | null {
+  public getCurrentUserId(): number | null {
     const userJson = localStorage.getItem('auth_user');
     if (!userJson) return null;
 
