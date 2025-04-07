@@ -8,7 +8,7 @@ export class ToastService {
 
   constructor(private toastr: ToastrService) {}
 
-  showSuccess(message: string, title: string = '¡Éxito!', options?: Partial<IndividualConfig>) {
+  showSuccess(message: string, title = '¡Éxito!', options?: Partial<IndividualConfig>) {
     this.toastr.success(message, title, {
       timeOut: 3000,
       positionClass: 'toast-top-right',
@@ -19,7 +19,7 @@ export class ToastService {
     });
   }
 
-  showError(message: string, title: string = '¡Error!', options?: Partial<IndividualConfig>) {
+  showError(message: string, title = '¡Error!', options?: Partial<IndividualConfig>) {
     this.toastr.error(message, title, {
       timeOut: 3000,
       positionClass: 'toast-top-right',
@@ -30,7 +30,7 @@ export class ToastService {
     });
   }
 
-  showWarning(message: string, title: string = 'Advertencia', options?: Partial<IndividualConfig>) {
+  showWarning(message: string, title = 'Advertencia', options?: Partial<IndividualConfig>) {
     this.toastr.warning(message, title, {
       timeOut: 3000,
       positionClass: 'toast-top-right',
@@ -41,7 +41,7 @@ export class ToastService {
     });
   }
 
-  showInfo(message: string, title: string = 'Información', options?: Partial<IndividualConfig>) {
+  showInfo(message: string, title = 'Información', options?: Partial<IndividualConfig>) {
     this.toastr.info(message, title, {
       timeOut: 3000,
       positionClass: 'toast-top-right',
