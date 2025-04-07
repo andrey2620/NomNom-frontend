@@ -1,22 +1,26 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { Router, RouterLink } from '@angular/router';
-import { AuthService } from '../../../../services/auth.service';
-import { IUser } from '../../../../interfaces';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { LayoutService } from '../../../../services/layout.service';
+import { CommonModule } from '@angular/common';
+import { Router, RouterModule } from '@angular/router';
+import { AuthService } from '../../../../services/auth.service';
+
+import { IUser } from '../../../../interfaces';
 import { MyAccountComponent } from '../../../my-account/my-account.component';
+
+declare let bootstrap: any;
 
 @Component({
   selector: 'app-topbar',
   standalone: true,
-  imports: [CommonModule, RouterModule, RouterLink, MyAccountComponent],
+  imports: [CommonModule, RouterModule, MyAccountComponent],
   templateUrl: './topbar.component.html',
   styleUrls: ['./topbar.component.scss'],
 })
 export class TopbarComponent implements OnInit {
   public user?: IUser;
   public menuItems: { path: string; name: string }[] = [];
+
+  @ViewChild('navbarContent', { static: false }) navbarContent!: ElementRef;
 
   constructor(
     public router: Router,
@@ -46,6 +50,33 @@ export class TopbarComponent implements OnInit {
         path: `/app/${r.path}`,
         name: r.data?.['name'] || r.path,
       }));
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent): void {
+    const targetElement = event.target as HTMLElement;
+    const isToggler = targetElement.closest('.navbar-toggler');
+
+    if (
+      this.navbarContent &&
+      !this.navbarContent.nativeElement.contains(targetElement) &&
+      !isToggler &&
+      this.navbarContent.nativeElement.classList.contains('show')
+    ) {
+      const bsCollapse = bootstrap.Collapse.getInstance(this.navbarContent.nativeElement);
+      if (bsCollapse) {
+        bsCollapse.hide();
+      }
+    }
+  }
+
+  handleMenuClick(): void {
+    if (this.navbarContent?.nativeElement?.classList.contains('show')) {
+      const bsCollapse = bootstrap.Collapse.getInstance(this.navbarContent.nativeElement);
+      if (bsCollapse) {
+        bsCollapse.hide();
+      }
+    }
   }
 
   public logout(): void {

@@ -1,9 +1,10 @@
-import { Component, ViewChild, inject, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule, NgModel } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
 import { IUser } from '../../../interfaces';
 import { CommonModule } from '@angular/common';
+import { ToastService } from '../../../services/toast.service';
 
 @Component({
   selector: 'app-signup',
@@ -15,7 +16,7 @@ import { CommonModule } from '@angular/common';
 export class SignUpComponent implements OnInit {
   public signUpError!: string;
   public validSignup!: boolean;
-  public showPassword: boolean = false; // Estado inicial para mostrar/ocultar contraseña
+  public showPassword = false; // Estado inicial para mostrar/ocultar contraseña
 
   @ViewChild('name') nameModel!: NgModel;
   @ViewChild('lastname') lastnameModel!: NgModel;
@@ -24,15 +25,19 @@ export class SignUpComponent implements OnInit {
   //@ViewChild('confPassword') confPasswordModel!: NgModel;
 
   public user: IUser = {
-    email: '', name: '', lastname: '', password: '',
+    email: '',
+    name: '',
+    lastname: '',
+    password: '',
   };
   public isGoogleSignUp = false;
 
   constructor(
     private router: Router,
     private authService: AuthService,
-    private route: ActivatedRoute
-  ) { }
+    private route: ActivatedRoute,
+    private toastService: ToastService
+  ) {}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
@@ -49,25 +54,32 @@ export class SignUpComponent implements OnInit {
     });
   }
 
-  public handleSignup(event: Event) {
-    event.preventDefault();
+  handleSignup(): void {
+    const password = this.user.password;
+    const name = this.user.name;
+    const email = this.user.email;
 
-    if (!this.nameModel.valid || !this.lastnameModel.valid || (!this.passwordModel.valid && !this.isGoogleSignUp)) {
-      this.nameModel.control.markAsTouched();
-      this.lastnameModel.control.markAsTouched();
-      if (!this.isGoogleSignUp) {
-        this.passwordModel.control.markAsTouched();
-      }
+    if (!email) {
+      this.toastService.showWarning('Se necesita ingresar un correo.');
+      return;
+    }
+    if (!name) {
+      this.toastService.showWarning('Debe de asignar una nombre.');
+      return;
+    }
+    if (!password || password.length < 8) {
+      this.toastService.showWarning('La contraseña debe tener al menos 8 caracteres.');
       return;
     }
 
     this.authService.signup(this.user).subscribe({
       next: () => {
+        this.toastService.showSuccess('Usuario registrado correctamente. Iniciá sesión.');
         this.validSignup = true;
         this.router.navigate(['/login']);
       },
-      error: (err: any) => {
-        this.signUpError = err.description || 'Error en el registro.';
+      error: () => {
+        this.toastService.showWarning('Correo ya se encuentra en uso.');
       },
     });
   }

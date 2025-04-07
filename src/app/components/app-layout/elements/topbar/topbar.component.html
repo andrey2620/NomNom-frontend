@@ -1,13 +1,19 @@
 <header
   class="px-3 px-md-5 shadow border-bottom border-2 border-danger d-flex justify-content-between align-items-center fixed-top"
-  style="z-index: 99; height: 80px" [ngClass]="{ close_icon: !layoutService.sidebarOpen }">
+  style="z-index: 99; height: 80px"
+  [ngClass]="{ close_icon: !layoutService.sidebarOpen }">
   <div class="d-flex justify-content-between align-items-center w-100">
-    <a routerLink="/" class="header-logo-wrapper">
+    <a routerLink="/app/generateRecipes" class="header-logo-wrapper">
       <img src="../../../../../assets/icons/LogoNomNom.png" alt="Logo" style="height: 60px; width: 60px" />
     </a>
 
-    <button class="navbar-toggler d-lg-none shadow" type="button" data-bs-toggle="collapse"
-      data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false"
+    <button
+      class="navbar-toggler d-lg-none shadow"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarContent"
+      aria-controls="navbarContent"
+      aria-expanded="false"
       aria-label="Toggle navigation">
       <div class="hamburger-lines">
         <span class="line line1"></span>
@@ -16,11 +22,28 @@
       </div>
     </button>
 
+    <nav #navbarContent class="collapse navbar-collapse d-lg-none" id="navbarContent">
+      <ul class="nav custom-top-menu d-flex list-unstyled d-lg-none">
+        <li class="nav-item" *ngFor="let item of menuItems">
+          <a
+            class="nav-link"
+            [routerLink]="item.path"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            (click)="handleMenuClick()">
+            {{ item.name }}
+          </a>
+        </li>
+        <li class="w-100 d-flex justify-content-center align-items-center d-lg-none">
+          <app-my-account></app-my-account>
+        </li>
+      </ul>
+    </nav>
+
     <nav class="d-none d-lg-flex justify-content-center flex-grow-1 px-4">
       <ul class="nav custom-top-menu d-flex justify-content-center align-items-center list-unstyled mb-0">
         <li class="nav-item" *ngFor="let item of menuItems">
-          <a class="nav-link" [routerLink]="item.path" routerLinkActive="active"
-            [routerLinkActiveOptions]="{ exact: true }">
+          <a class="nav-link" [routerLink]="item.path" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
             {{ item.name }}
           </a>
         </li>
@@ -28,19 +51,6 @@
     </nav>
   </div>
 
-  <nav class="collapse navbar-collapse d-lg-none" id="navbarContent">
-    <ul class="nav custom-top-menu d-flex list-unstyled d-lg-none">
-      <li class="nav-item" *ngFor="let item of menuItems">
-        <a class="nav-link" [routerLink]="item.path" routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }">
-          {{ item.name }}
-        </a>
-      </li>
-      <li class="w-100 d-flex justify-content-center align-items-center d-lg-none">
-        <app-my-account></app-my-account>
-      </li>
-    </ul>
-  </nav>
   <div class="d-none d-lg-block">
     <app-my-account></app-my-account>
   </div>

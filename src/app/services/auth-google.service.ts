@@ -1,7 +1,7 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
-import { IGoogleLoginResponse, ILoginResponse, IUser } from '../interfaces';
+import { IGoogleLoginResponse, IUser } from '../interfaces';
 import { authConfig } from '../pages/auth/login/auth-config'; // Commented out as the module does not exist
 import { OAuthService } from 'angular-oauth2-oidc';
 import { AuthService } from './auth.service';
@@ -10,6 +10,7 @@ import { AuthService } from './auth.service';
   providedIn: 'root',
 })
 export class AuthGoogleService {
+  [x: string]: any;
   private accessToken!: string;
   private expiresIn!: number;
   private user: IUser = { email: '', authorities: [] };

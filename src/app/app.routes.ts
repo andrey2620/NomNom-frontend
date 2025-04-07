@@ -13,7 +13,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { GamesComponent } from './pages/games/games.component';
 import { OrdersComponent } from './pages/orders/orders.component';
 import { PreferenceListPageComponent } from './pages/preferenceList/preference-list.component';
-import { CallbackComponent } from './pages/auth/login/CallbackComponent';
+import { CallbackComponent } from './pages/auth/login/callbackComponent';
 import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgotPassword.component';
 import { ResetPasswordComponent } from './pages/auth/reset-password/reset-password.component';
 

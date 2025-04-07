@@ -2,6 +2,7 @@ import { inject, Injectable, signal } from '@angular/core';
 import { IIngredients, IResponse, ISearch } from '../interfaces';
 import { AlertService } from './alert.service';
 import { BaseService } from './base-service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -11,14 +12,14 @@ export class IngredientService extends BaseService<IIngredients> {
   private allIngredients: IIngredients[] = [];
   private filteredIngredients: IIngredients[] = [];
   private alertService: AlertService = inject(AlertService);
-  protected override source: string = 'ingredients';
+  protected override source = 'ingredients';
 
   public search: ISearch = {
     page: 1,
     size: 18,
   };
 
-  public totalItems: any = [];
+  public totalItems: number[] = [];
 
   get ingredient$() {
     return this.ingredientsSignal;
@@ -32,22 +33,22 @@ export class IngredientService extends BaseService<IIngredients> {
         this.allIngredients = response.data;
         this.ingredientsSignal.set(response.data); // Muestra todos los ingredientes inicialmente
       },
-      error: (err: any) => {
+      error: (err: Error) => {
         console.error('error', err);
       },
     });
   }
 
-  getIngredientByName(name: string, page: number = 1) {
+  getIngredientByName(name: string, page = 1) {
     this.search.page = page; // Reinicia la búsqueda desde la página 1
 
     this.findAllWithParamsAndCustomSource(`name/${name}`, { page: this.search.page, size: this.search.size }).subscribe({
-      next: (response: any) => {
+      next: (response: IResponse<IIngredients[]>) => {
         this.search = { ...this.search, ...response.meta };
         this.totalItems = Array.from({ length: this.search.totalPages ? this.search.totalPages : 0 }, (_, i) => i + 1);
         this.ingredientsSignal.set(response.data);
       },
-      error: (err: any) => {
+      error: (err: Error) => {
         console.error('Error fetching ingredient by name:', err);
       },
     });
@@ -69,5 +70,13 @@ export class IngredientService extends BaseService<IIngredients> {
 
   linkIngredientToUser(ingredientId: number, userId: number) {
     return this.addCustomSource(`link/${ingredientId}/user/${userId}`, {});
+  }
+
+  bulkLinkIngredientsToUser(ingredientIds: number[], userId: number): Observable<IResponse<Record<number, string>>> {
+    return this.addCustomSource(`bulk-link/user/${userId}`, ingredientIds) as Observable<IResponse<Record<number, string>>>;
+  }
+
+  getFormattedIngredientsByUser(userId: number) {
+    return this.findAllWithParamsAndCustomSource(`formated/user/${userId}`);
   }
 }

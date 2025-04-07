@@ -1,12 +1,10 @@
-import { Component, inject, ViewChild } from '@angular/core';
-import { FormBuilder, FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { IngredientsComponent } from '../../components/ingredients/ingredients.component';
 import { LoaderComponent } from '../../components/loader/loader.component';
 import { IngredientService } from '../../services/ingredient.service';
 import { PaginationComponent } from '../../components/pagination/pagination.component';
-import { IIngredients } from '../../interfaces';
 import { AuthService } from '../../services/auth.service';
 import { ToastService } from '../../services/toast.service';
 
@@ -30,14 +28,17 @@ export class GenerateRecipesComponent {
   //public modalService: ModalService = inject(ModalService);
   //public fb: FormBuilder = inject(FormBuilder);
   //@ViewChild('addIngredientModal') public addIngredientModal: any;
-  public title: string = 'Buscar ingredientes';
+  public title = 'Buscar ingredientes';
 
-  public searchQuery: string = ''; // Cadena de búsqueda
-  public currentPage: number = 1; // Página actual
-  public itemsPerPage: number = 18; // Elementos por página
+  public searchQuery = ''; // Cadena de búsqueda
+  public currentPage = 1; // Página actual
+  public itemsPerPage = 18; // Elementos por página
   selectedIngredients: number[] = [];
 
-  constructor(private authService: AuthService, private toastService: ToastService) {
+  constructor(
+    private authService: AuthService,
+    private toastService: ToastService
+  ) {
     this.ingredientService.getAll();
   }
 
@@ -66,6 +67,7 @@ export class GenerateRecipesComponent {
 
   saveSelectedIngredients(): void {
     const userId = this.authService.getCurrentUserId();
+
     if (!userId) {
       this.toastService.showError('No se pudo identificar al usuario.');
       return;
@@ -76,17 +78,34 @@ export class GenerateRecipesComponent {
       return;
     }
 
-    this.selectedIngredients.forEach(ingredientId => {
-      this.ingredientService.linkIngredientToUser(ingredientId, userId).subscribe({
-        next: response => {
-          const message = response?.message || 'Ingrediente vinculado correctamente.';
-          this.toastService.showSuccess(message + ' Verifique su correo electrónico para continuar.');
-        },
-        error: error => {
-          const errorMessage = error?.error?.message || 'Error al vincular ingrediente.';
-          this.toastService.showError(errorMessage);
-        },
-      });
+    this.ingredientService.bulkLinkIngredientsToUser(this.selectedIngredients, userId).subscribe({
+      next: response => {
+        const result = response.data;
+        let successCount = 0;
+        let warningCount = 0;
+
+        for (const [ingredientId, status] of Object.entries(result)) {
+          if (status === 'Vinculado correctamente') {
+            successCount++;
+          } else if (status === 'Ya está vinculado') {
+            warningCount++;
+          } else {
+            this.toastService.showError(`Error con ingrediente ${ingredientId}: ${status}`);
+          }
+        }
+
+        if (successCount > 0) {
+          this.toastService.showSuccess(`${successCount} ingrediente(s) vinculados correctamente.`);
+        }
+
+        if (warningCount > 0) {
+          this.toastService.showWarning(`${warningCount} ingrediente(s) ya estaban vinculados.`);
+        }
+      },
+      error: error => {
+        const errorMessage = error?.error?.message || 'Ocurrió un error al vincular los ingredientes.';
+        this.toastService.showError(errorMessage);
+      },
     });
   }
 }

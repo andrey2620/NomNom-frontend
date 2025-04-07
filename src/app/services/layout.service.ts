@@ -1,21 +1,15 @@
-import { Injectable } from '@angular/core';
-import {
-  BehaviorSubject,
-  Subject,
-  debounceTime,
-  fromEvent,
-  takeUntil,
-} from 'rxjs';
+import { Injectable, OnDestroy } from '@angular/core';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
-export class LayoutService {
-  private unsubscriber: Subject<any> = new Subject();
+export class LayoutService implements OnDestroy {
+  private unsubscriber = new Subject<any>();
   private pageTitle = new BehaviorSubject<string>('');
 
   public title = this.pageTitle.asObservable();
-  public sidebarOpen: boolean = true;
+  public sidebarOpen = true;
 
   constructor() {
     // fromEvent(window, 'resize')
