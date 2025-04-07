@@ -10,7 +10,7 @@ import { IIngredients } from '../../interfaces';
   styleUrls: ['./ingredients.component.scss'],
 })
 export class IngredientsComponent {
-  @Input() title: string = '';
+  @Input() title = '';
   @Input() ingredients: IIngredients[] = [];
   @Output() selectedChange = new EventEmitter<number[]>();
 
@@ -23,7 +23,8 @@ export class IngredientsComponent {
 
     if (index !== -1) {
       this.selectedIngredients.splice(index, 1);
-    } else if (this.selectedIngredients.length < 5) {
+    } else {
+      // } else if (this.selectedIngredients.length < 5) {
       this.selectedIngredients.push(id);
     }
 
