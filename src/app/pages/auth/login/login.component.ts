@@ -39,16 +39,25 @@ export class LoginComponent {
 
   /** Login normal */
   handleLogin() {
-    this.authService.login(this.loginForm).pipe(
-      switchMap(res => this.authService.initializeUserSession(res.authUser, res.token, res.expiresIn))
-    ).subscribe({
-      next: () => {
-        this.router.navigate(['/app/generateRecipes']);
-      },
-      error: () => {
-        this.loginError = 'Credenciales inválidas. Intente de nuevo.';
-      },
-    });
+    const { email, password } = this.loginForm;
+
+    // Validación previa
+    if (!email?.trim() || !password?.trim()) {
+      this.loginError = 'Por favor complete todos los campos.';
+      return;
+    }
+
+    this.authService
+      .login(this.loginForm)
+      .pipe(switchMap(res => this.authService.initializeUserSession(res.authUser, res.token, res.expiresIn)))
+      .subscribe({
+        next: () => {
+          this.router.navigate(['/app/generateRecipes']);
+        },
+        error: () => {
+          this.loginError = 'Credenciales inválidas. Intente de nuevo.';
+        },
+      });
   }
 
   /** Login con Google */
