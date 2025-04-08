@@ -6,25 +6,24 @@ import { AuthService } from '../../../services/auth.service';
 import { ToastService } from '../../../services/toast.service';
 
 @Component({
-  selector: 'app-forgotPassword',
+  selector: 'app-forgot-password',
   standalone: true,
   imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './forgotPassword.component.html',
-  styleUrl: './forgotPassword.component.scss'
+  styleUrl: './forgotPassword.component.scss',
 })
 export class ForgotPasswordComponent {
-
   forgotSuccessMessage: string | null = null;
   forgotError: string | null = null;
 
   @ViewChild('email') emailModel!: NgModel;
 
-  public forgotForm : { email: string } = {
-    email: ''
+  public forgotForm: { email: string } = {
+    email: '',
   };
 
   constructor(
-    private router: Router, 
+    private router: Router,
     private authService: AuthService,
     private toastService: ToastService
   ) {}
@@ -36,15 +35,15 @@ export class ForgotPasswordComponent {
       this.emailModel.control.markAsTouched();
       return;
     }
-    if(this.emailModel.valid){
+    if (this.emailModel.valid) {
       this.authService.sendResetLink(this.forgotForm.email).subscribe({
-        next: (response) => {
+        next: response => {
           this.toastService.showSuccess(response.message + ' Verfique su correo electrónico para continuar.');
           this.router.navigateByUrl('login');
         },
-        error: (response) => {
+        error: response => {
           this.toastService.showError(response.error.message ?? 'Error desconocido');
-        }
+        },
       });
     }
   }

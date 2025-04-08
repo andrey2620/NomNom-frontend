@@ -4,9 +4,8 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { AuthGoogleService } from '../../../services/auth-google.service';
 import { CommonModule } from '@angular/common';
-import { OAuthService } from 'angular-oauth2-oidc';
-import { IngredientService } from '../../../services/ingredient.service';
 import { switchMap } from 'rxjs';
+import { ToastService } from '../../../services/toast.service';
 
 @Component({
   selector: 'app-login',
@@ -33,17 +32,20 @@ export class LoginComponent {
     private router: Router,
     private authService: AuthService,
     private authGoogleService: AuthGoogleService,
-    private oauthService: OAuthService,
-    private ingredientService: IngredientService
+    private toastService: ToastService
   ) {}
 
   /** Login normal */
   handleLogin() {
     const { email, password } = this.loginForm;
 
-    // Validación previa
     if (!email?.trim() || !password?.trim()) {
-      this.loginError = 'Por favor complete todos los campos.';
+      this.toastService.showWarning('Por favor complete todos los campos.');
+
+      // Marca visual para los campos tocados si están vacíos
+      if (!email?.trim()) this.emailModel.control.markAsTouched();
+      if (!password?.trim()) this.passwordModel.control.markAsTouched();
+
       return;
     }
 
@@ -52,9 +54,11 @@ export class LoginComponent {
       .pipe(switchMap(res => this.authService.initializeUserSession(res.authUser, res.token, res.expiresIn)))
       .subscribe({
         next: () => {
+          this.toastService.showSuccess('¡Bienvenido de nuevo!');
           this.router.navigate(['/app/generateRecipes']);
         },
         error: () => {
+          this.toastService.showError('Credenciales inválidas. Intente de nuevo.');
           this.loginError = 'Credenciales inválidas. Intente de nuevo.';
         },
       });
