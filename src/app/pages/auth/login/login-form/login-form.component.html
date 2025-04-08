@@ -1,0 +1,54 @@
+<form (ngSubmit)="handleLogin()" #frm="ngForm">
+  <div class="input-container mb-3">
+    <label class="label-input">Correo Electrónico</label>
+    <input
+      #email="ngModel"
+      type="text"
+      class="input-login email-input"
+      id="email"
+      name="email"
+      placeholder="ejemplo@nomnom.com"
+      [(ngModel)]="loginForm.email"
+      [ngClass]="{
+        'is-invalid': email.invalid && email.touched,
+        'is-valid': email.valid && email.touched,
+      }"
+      required />
+    <div *ngIf="email.invalid" class="invalid-feedback">Ingresa un correo válido</div>
+  </div>
+
+  <div class="input-container mb-4">
+    <label class="label-input">Contraseña</label>
+    <div class="password-icon-container">
+      <input
+        #password="ngModel"
+        [type]="showPassword ? 'text' : 'password'"
+        class="input-login smallLetter"
+        id="password"
+        name="password"
+        placeholder="Entra al menos 8 caracteres"
+        [(ngModel)]="loginForm.password"
+        [ngClass]="{
+          'is-invalid': password.invalid && password.touched,
+          'is-valid': password.valid && password.touched,
+        }"
+        required />
+      <span class="passEye" (click)="toggleShowPassword()" tabindex="0" style="cursor: pointer">
+        <i [class]="showPassword ? 'bi bi-eye' : 'bi bi-eye-slash'"></i>
+      </span>
+      <div *ngIf="password.invalid" class="invalid-feedback">Ingrese una contraseña válida</div>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center mt-4 flex-wrap gap-4">
+      <label><input type="checkbox" /> Recuérdame</label>
+      <a href="/forgot-password" class="text-center">Olvidé mi contraseña</a>
+    </div>
+
+    <div class="w-100 text-center mt-4">
+      <button class="btn btn-primary btn-signIn red-bg mx-auto w-50" type="submit">Inicio</button>
+      @if (loginError) {
+        <p class="text-danger">{{ loginError }}</p>
+      }
+    </div>
+  </div>
+</form>

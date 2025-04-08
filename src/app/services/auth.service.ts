@@ -60,27 +60,24 @@ export class AuthService {
 
         this.user.picture = response.authUser.picture || 'assets/default-avatar.png';
 
-        localStorage.setItem('auth_user', JSON.stringify(this.user));
-        localStorage.setItem('access_token', response.token);
-        localStorage.setItem('expiresIn', JSON.stringify(this.expiresIn));
+        this.save();
       })
     );
   }
 
-  public loginAndInitialize(credentials: { email: string; password: string }): Observable<void> {
-    return this.login(credentials).pipe(
-      tap((res: ILoginResponse) => {
-        this.setAuthData(res.authUser, res.token, true);
+  public initializeUserSession(authUser: IUser, token: string, expiresIn = 3600): Observable<void> {
+    this.user = authUser;
+    this.accessToken = token;
+    this.expiresIn = expiresIn;
+
+    this.save();
+
+    const userId = authUser.id!;
+    return this.ingredientService.getFormattedIngredientsByUser(userId).pipe(
+      tap((ingredientsRes: IResponse<string[]>) => {
+        localStorage.setItem('user_ingredients', JSON.stringify(ingredientsRes.data));
       }),
-      switchMap((res: ILoginResponse) => {
-        const userId = res.authUser.id!;
-        return this.ingredientService.getFormattedIngredientsByUser(userId).pipe(
-          tap((ingredientsRes: IResponse<string[]>) => {
-            localStorage.setItem('user_ingredients', JSON.stringify(ingredientsRes.data));
-          }),
-          map(() => {}) // para que devuelva void
-        );
-      })
+      map(() => {})
     );
   }
 
@@ -89,9 +86,7 @@ export class AuthService {
     this.accessToken = token;
     this.expiresIn = 3600;
 
-    localStorage.setItem('access_token', token);
-    localStorage.setItem('auth_user', JSON.stringify(authUser));
-    localStorage.setItem('expiresIn', JSON.stringify(this.expiresIn));
+    this.save();
   }
 
   public isAuthenticated(): boolean {
@@ -100,18 +95,18 @@ export class AuthService {
 
   public hasRole(role: string): boolean {
     const user = this.getUser();
-    if (!user || !user.authorities) {
-      return false;
-    }
+    if (!user || !user.authorities) return false;
     return user.authorities.some(authority => authority.authority === role);
   }
 
   public isSuperAdmin(): boolean {
-    return this.user.authorities ? this.user?.authorities.some(authority => authority.authority == IRoleType.superAdmin) : false;
+    return this.user.authorities
+      ? this.user?.authorities.some(authority => authority.authority == IRoleType.superAdmin)
+      : false;
   }
 
   public getUserAuthorities(): IAuthority[] | undefined {
-    return this.getUser()?.authorities ? this.getUser()?.authorities : [];
+    return this.getUser()?.authorities ?? [];
   }
 
   public areActionsAvailable(routeAuthorities: string[]): boolean {
@@ -130,19 +125,14 @@ export class AuthService {
       isAdmin = true;
     }
 
-    return allowedUser && isAdmin;
+    return !!allowedUser && !!isAdmin;
   }
 
+
   public getPermittedRoutes(routes: any[]): any[] {
-    let permittedRoutes: any[] = [];
-    for (const route of routes) {
-      if (route.data && route.data.authorities) {
-        if (this.hasRole(route.data.authorities)) {
-          permittedRoutes.unshift(route);
-        }
-      }
-    }
-    return permittedRoutes;
+    return routes.filter(route =>
+      route.data && route.data.authorities && this.hasRole(route.data.authorities)
+    );
   }
 
   public signup(user: IUser): Observable<ILoginResponse> {
@@ -171,7 +161,6 @@ export class AuthService {
   public getCurrentUserId(): number | null {
     const userJson = localStorage.getItem('auth_user');
     if (!userJson) return null;
-
     try {
       const user = JSON.parse(userJson);
       return user?.id ?? null;
