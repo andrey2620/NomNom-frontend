@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { AuthGoogleService } from '../../../services/auth-google.service';
 import { AuthService } from '../../../services/auth.service';
+import { ToastService } from '../../../services/toast.service';
 
 @Component({
   selector: 'app-callback',
@@ -14,7 +15,8 @@ export class CallbackComponent implements OnInit {
     private router: Router,
     private authGoogleService: AuthGoogleService,
     private oauthService: OAuthService,
-    private authService: AuthService
+    private authService: AuthService,
+    private toastService: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -28,7 +30,7 @@ export class CallbackComponent implements OnInit {
       .loadDiscoveryDocumentAndTryLogin()
       .then(() => {
         if (!this.oauthService.hasValidAccessToken()) {
-          console.error('No se encontró un token válido de Google');
+          this.toastService.showError('No se encontró un token válido de Google');
           this.router.navigate(['/login']);
           return;
         }
@@ -39,7 +41,7 @@ export class CallbackComponent implements OnInit {
         const userLastname = identityClaims?.['family_name'] || '';
 
         if (!userEmail) {
-          console.error('No se encontró un email válido de Google.');
+          this.toastService.showError('No se encontró un email válido de Google.');
           this.router.navigate(['/login']);
           return;
         }
@@ -50,6 +52,7 @@ export class CallbackComponent implements OnInit {
         });
       })
       .catch(err => {
+        this.toastService.showError('Error inesperado en el inicio de sesión con Google');
         console.error('Error en Google OAuth:', err);
         this.router.navigate(['/login']);
       });
@@ -57,24 +60,27 @@ export class CallbackComponent implements OnInit {
 
   private handleLoginResponse(response: any, userEmail: string, userName: string, userLastname: string): void {
     if (!response.exists) {
-      console.warn('Usuario no encontrado, redirigiendo a registro...');
+      const mensaje = 'Bienvenido a NomNom.<br>Te redirigimos para completar tu registro.';
+      this.toastService.showInfo(mensaje, 'Registro', {
+        enableHtml: true
+      });
       this.router.navigate(['/signup'], {
-        queryParams: { email: userEmail, name: userName, lastname: userLastname }
+        queryParams: { email: userEmail, name: userName, lastname: userLastname },
       });
       return;
     }
 
-    this.authService
-    .initializeUserSession(response.authUser, response.accessToken)
-    .subscribe({
-      next: () => this.router.navigate(['/app/generateRecipes']),
-      error: () => this.handleLoginError()
+    this.authService.initializeUserSession(response.authUser, response.accessToken).subscribe({
+      next: () => {
+        this.toastService.showSuccess(`¡Bienvenido, ${response.authUser.name || 'usuario'}!`);
+        this.router.navigate(['/app/generateRecipes']);
+      },
+      error: () => this.handleLoginError(),
     });
-
   }
 
   private handleLoginError(): void {
-    console.error('Error en Google login, redirigiendo a /login');
+    this.toastService.showError('Error al iniciar sesión con Google. Intenta de nuevo.');
     this.router.navigate(['/login']);
   }
 }
