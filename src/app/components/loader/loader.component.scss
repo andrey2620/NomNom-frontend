@@ -1,7 +1,7 @@
 /**=====================
      04. Loader CSS Start
 ==========================**/
-@import '../../../assets/utils/variables';
+@import "../../../assets/utils/variables";
 .loader-wrapper {
   height: 100%;
   width: 100%;
@@ -18,17 +18,17 @@
     align-items: center;
     justify-content: center;
     position: relative;
-    filter: url('#goo');
+    filter: url("#goo");
 
     &:after {
-      content: '';
+      content: "";
       width: 4em;
       height: 4em;
       background: var(--theme-deafult);
       border-radius: 50%;
       position: absolute;
       transform: scale(0.5);
-      animation: grow 2s cubic-bezier(0.14, 0.05, 0.55, 0.5) infinite alternate;
+      animation: grow 2s cubic-bezier(.14, 0.05, 0.55, 0.5) infinite alternate;
     }
 
     span {
@@ -42,7 +42,7 @@
       animation: move 4s ease-in-out infinite;
 
       &:before {
-        content: '';
+        content: "";
         width: 2em;
         height: 2em;
         background: var(--theme-deafult);
@@ -54,7 +54,7 @@
       }
 
       &:after {
-        content: '';
+        content: "";
         width: 2em;
         height: 2em;
         background: $info-color;
@@ -85,17 +85,17 @@
     }
 
     50% {
-      transform: translateX(-5em);
+      transform: translateX(-5em)
     }
   }
 
   @keyframes shrink {
     0% {
-      transform: translateX(0em);
+      transform: translateX(0em)
     }
 
     50% {
-      transform: translateX(-1em);
+      transform: translateX(-1em)
     }
   }
 
@@ -124,7 +124,7 @@
 
     &:before {
       position: absolute;
-      content: '';
+      content: "";
       height: 1px;
       background: linear-gradient(to right, var(--theme-secondary), var(--theme-deafult), $info-color);
       color: #fff;
@@ -144,13 +144,9 @@
   align-items: center;
   vertical-align: middle;
   justify-content: center;
-  transition:
-    0.3s color,
-    0.3s border,
-    0.3s transform,
-    0.3s opacity;
+  transition: .3s color, .3s border, .3s transform, .3s opacity;
 
-  [class*='loader-'] {
+  [class*="loader-"] {
     display: inline-block;
     width: 50px;
     height: 50px;
@@ -159,7 +155,7 @@
   }
 
   .loader-3 {
-    border: 0.2em solid $info-color;
+    border: .2em solid $info-color;
     border-bottom-color: transparent;
     border-radius: 50%;
     animation: 1s loader-03 linear infinite;
@@ -176,74 +172,75 @@
     }
   }
   .loader-box {
-    &.contrast {
-      background-color: #1e3932;
-
-      .loader-3 {
-        border-color: #fff;
-        border-bottom-color: transparent;
-      }
-    }
-
-    &.sm {
-      .loader-3 {
-        width: 30px;
-        height: 30px;
-        border-width: 0.15em;
-      }
-    }
-
-    &.md {
-      .loader-3 {
-        width: 50px;
-        height: 50px;
-      }
-    }
-
-    &.full {
-      height: 100vh;
-
-      .loader-3 {
-        width: 70px;
-        height: 70px;
-        border-width: 0.3em;
-      }
-    }
-
-    &.contrast {
-      background-color: #1e3932;
-
-      .loader-3 {
-        border-color: #fff;
-        border-bottom-color: transparent;
-      }
-    }
-
-    &.sm {
-      .loader-3 {
-        width: 30px;
-        height: 30px;
-        border-width: 0.15em;
-      }
-    }
-
-    &.md {
-      .loader-3 {
-        width: 50px;
-        height: 50px;
-      }
-    }
-
-    &.full {
-      height: 100vh;
-
-      .loader-3 {
-        width: 70px;
-        height: 70px;
-        border-width: 0.3em;
-      }
+  &.contrast {
+    background-color: #1e3932;
+    
+    .loader-3 {
+      border-color: #fff;
+      border-bottom-color: transparent;
     }
   }
+
+  &.sm {
+    .loader-3 {
+      width: 30px;
+      height: 30px;
+      border-width: 0.15em;
+    }
+  }
+
+  &.md {
+    .loader-3 {
+      width: 50px;
+      height: 50px;
+    }
+  }
+
+  &.full {
+    height: 100vh;
+
+    .loader-3 {
+      width: 70px;
+      height: 70px;
+      border-width: 0.3em;
+    }
+  }
+
+  &.contrast {
+    background-color: #1e3932;
+    
+    .loader-3 {
+      border-color: #fff;
+      border-bottom-color: transparent;
+    }
+  }
+
+  &.sm {
+    .loader-3 {
+      width: 30px;
+      height: 30px;
+      border-width: 0.15em;
+    }
+  }
+
+  &.md {
+    .loader-3 {
+      width: 50px;
+      height: 50px;
+    }
+  }
+
+  &.full {
+    height: 100vh;
+
+    .loader-3 {
+      width: 70px;
+      height: 70px;
+      border-width: 0.3em;
+    }
+  }
+}
+
 }
 /**=====================
      04. Loader CSS Ends

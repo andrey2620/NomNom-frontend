@@ -16,13 +16,12 @@ import { ToastService } from '../../../services/toast.service';
 export class SignUpComponent implements OnInit {
   public signUpError!: string;
   public validSignup!: boolean;
-  public showPassword = false; // Estado inicial para mostrar/ocultar contraseña
+  public showPassword = false;
 
   @ViewChild('name') nameModel!: NgModel;
   @ViewChild('lastname') lastnameModel!: NgModel;
   @ViewChild('email') emailModel!: NgModel;
   @ViewChild('password') passwordModel!: NgModel;
-  //@ViewChild('confPassword') confPasswordModel!: NgModel;
 
   public user: IUser = {
     email: '',
@@ -54,37 +53,65 @@ export class SignUpComponent implements OnInit {
     });
   }
 
-  handleSignup(): void {
-    const password = this.user.password;
-    const name = this.user.name;
-    const email = this.user.email;
+  public handleSignup(event: Event) {
+    event.preventDefault();
 
-    if (!email) {
-      this.toastService.showWarning('Se necesita ingresar un correo.');
-      return;
+    const camposFaltantes: string[] = [];
+
+    if (!this.nameModel.valid) {
+      this.nameModel.control.markAsTouched();
+      camposFaltantes.push('Nombre');
     }
-    if (!name) {
-      this.toastService.showWarning('Debe de asignar una nombre.');
-      return;
+
+    if (!this.lastnameModel.valid) {
+      this.lastnameModel.control.markAsTouched();
+      camposFaltantes.push('Apellido');
     }
-    if (!password || password.length < 8) {
-      this.toastService.showWarning('La contraseña debe tener al menos 8 caracteres.');
+
+    if (!this.emailModel.valid) {
+      this.emailModel.control.markAsTouched();
+      camposFaltantes.push('Correo electrónico');
+    }
+
+    if (!this.isGoogleSignUp && !this.passwordModel.valid) {
+      this.passwordModel.control.markAsTouched();
+      camposFaltantes.push('Contraseña');
+    }
+
+    if (camposFaltantes.length > 0) {
+      this.toastService.showWarning(`Por favor complete los siguientes campos: ${camposFaltantes.join(', ')}`);
       return;
     }
 
     this.authService.signup(this.user).subscribe({
       next: () => {
-        this.toastService.showSuccess('Usuario registrado correctamente. Iniciá sesión.');
         this.validSignup = true;
+        this.toastService.showSuccess('Registro exitoso. Inicia sesión para continuar.');
         this.router.navigate(['/login']);
       },
-      error: () => {
-        this.toastService.showWarning('Correo ya se encuentra en uso.');
+      error: err => {
+        console.error('Error al registrar:', err);
+
+        let mensaje = 'Error en el registro.';
+
+        if (typeof err.error === 'string') {
+          mensaje = err.error;
+        } else if (err.error?.message) {
+          mensaje = err.error.message;
+        } else if (err.message) {
+          mensaje = err.message;
+        }
+
+        this.signUpError = mensaje;
+        this.toastService.showError(mensaje);
+
+        if (mensaje.toLowerCase().includes('email')) {
+          this.emailModel.control.setErrors({ emailEnUso: true });
+        }
       },
     });
   }
 
-  // Método para alternar visibilidad de la contraseña
   public togglePassword() {
     this.showPassword = !this.showPassword;
   }

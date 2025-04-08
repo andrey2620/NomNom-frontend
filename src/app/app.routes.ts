@@ -6,25 +6,24 @@ import { UsersComponent } from './pages/users/users.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AccessDeniedComponent } from './pages/access-denied/access-denied.component';
 import { AdminRoleGuard } from './guards/admin-role.guard';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { GuestGuard } from './guards/guest.guard';
 import { IRoleType } from './interfaces';
 import { ProfileComponent } from './pages/profile/profile.component';
-import { GamesComponent } from './pages/games/games.component';
-import { OrdersComponent } from './pages/orders/orders.component';
-import { PreferenceListPageComponent } from './pages/preferenceList/preference-list.component';
-import { CallbackComponent } from './pages/auth/login/callbackComponent';
 import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgotPassword.component';
 import { ResetPasswordComponent } from './pages/auth/reset-password/reset-password.component';
-
-import { RecipeFormComponent } from './components/recipe/recipe-form/recipe-form.component';
-import { RecipeListComponent } from './components/recipe/recipe-list/recipe-list.component';
 import { GenerateRecipesComponent } from './pages/generateRecipes/generateRecipes.component';
 import { RecipeComponent } from './pages/recipe/recipe.component';
 import { nomNomLandingComponent } from './pages/NomNomLandingPage/nomNomLanding';
 import { codeCollectiveLandingComponent } from './pages/CodeCollectiveLandingPage/codeCollectiveLanding';
 
 import { InteractiveMapComponent } from './pages/interactiveMap/interactiveMap.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { GamesComponent } from './pages/games/games.component';
+import { OrdersComponent } from './pages/orders/orders.component';
+import { PreferenceListPageComponent } from './pages/preferenceList/preference-list.component';
+import { RecipeFormComponent } from './components/recipe/recipe-form/recipe-form.component';
+import { RecipeListComponent } from './components/recipe/recipe-list/recipe-list.component';
+import { CallbackComponent } from './pages/auth/login/callbackComponent';
 
 export const routes: Routes = [
   {

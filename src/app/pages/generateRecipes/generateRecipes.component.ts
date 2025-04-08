@@ -79,7 +79,7 @@ export class GenerateRecipesComponent {
     }
 
     this.ingredientService.bulkLinkIngredientsToUser(this.selectedIngredients, userId).subscribe({
-      next: response => {
+      next: (response: { data: any; }) => {
         const result = response.data;
         let successCount = 0;
         let warningCount = 0;
@@ -102,7 +102,7 @@ export class GenerateRecipesComponent {
           this.toastService.showWarning(`${warningCount} ingrediente(s) ya estaban vinculados.`);
         }
       },
-      error: error => {
+      error: (error: { error: { message: string; }; }) => {
         const errorMessage = error?.error?.message || 'Ocurrió un error al vincular los ingredientes.';
         this.toastService.showError(errorMessage);
       },

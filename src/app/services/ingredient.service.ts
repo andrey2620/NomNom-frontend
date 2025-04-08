@@ -76,7 +76,8 @@ export class IngredientService extends BaseService<IIngredients> {
     return this.addCustomSource(`bulk-link/user/${userId}`, ingredientIds) as Observable<IResponse<Record<number, string>>>;
   }
 
-  getFormattedIngredientsByUser(userId: number) {
-    return this.findAllWithParamsAndCustomSource(`formated/user/${userId}`);
+  getFormattedIngredientsByUser(userId: number): Observable<IResponse<string[]>> {
+    return this.http.get<IResponse<string[]>>(`${this.source}/formated/user/${userId}`);
   }
+
 }

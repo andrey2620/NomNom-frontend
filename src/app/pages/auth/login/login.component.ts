@@ -1,10 +1,11 @@
-import { Component, ViewChild, inject } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormsModule, NgModel } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { AuthGoogleService } from '../../../services/auth-google.service';
 import { CommonModule } from '@angular/common';
-import { OAuthService } from 'angular-oauth2-oidc';
+import { switchMap } from 'rxjs';
+import { ToastService } from '../../../services/toast.service';
 
 @Component({
   selector: 'app-login',
@@ -20,11 +21,9 @@ export class LoginComponent {
 
   public loginForm: { email: string; password: string } = { email: '', password: '' };
 
-  // Variables para mostrar/ocultar contraseña
   showPassword = false;
   showConfirmPassword = false;
 
-  // Método para alternar la visibilidad de la contraseña
   toggleShowPassword() {
     this.showPassword = !this.showPassword;
   }
@@ -33,31 +32,40 @@ export class LoginComponent {
     private router: Router,
     private authService: AuthService,
     private authGoogleService: AuthGoogleService,
-    private oauthService: OAuthService
+    private toastService: ToastService
   ) {}
 
-  /**  Método para Login Normal (Email y Password) */
-  public handleLogin(event: Event) {
-    event.preventDefault();
-    if (!this.emailModel.valid || !this.passwordModel.valid) {
-      this.emailModel.control.markAsTouched();
-      this.passwordModel.control.markAsTouched();
+  /** Login normal */
+  handleLogin() {
+    const { email, password } = this.loginForm;
+
+    if (!email?.trim() || !password?.trim()) {
+      this.toastService.showWarning('Por favor complete todos los campos.');
+
+      // Marca visual para los campos tocados si están vacíos
+      if (!email?.trim()) this.emailModel.control.markAsTouched();
+      if (!password?.trim()) this.passwordModel.control.markAsTouched();
+
       return;
     }
 
-    this.authService.login(this.loginForm).subscribe({
-      next: () => {
-        this.router.navigateByUrl('/app/generateRecipes');
-      },
-      error: (err: any) => {
-        console.error('Error en login normal:', err);
-        this.loginError = err.error?.description || 'Error en login.';
-      },
-    });
+    this.authService
+      .login(this.loginForm)
+      .pipe(switchMap(res => this.authService.initializeUserSession(res.authUser, res.token, res.expiresIn)))
+      .subscribe({
+        next: () => {
+          this.toastService.showSuccess('¡Bienvenido de nuevo!');
+          this.router.navigate(['/app/generateRecipes']);
+        },
+        error: () => {
+          this.toastService.showError('Credenciales inválidas. Intente de nuevo.');
+          this.loginError = 'Credenciales inválidas. Intente de nuevo.';
+        },
+      });
   }
 
-  /** Método para Login con Google */
+  /** Login con Google */
   public signInWithGoogle(): void {
-    this.oauthService.initLoginFlow(); // Esto redirige a la página de login de Google
+    this.authGoogleService.startGoogleFlow();
   }
 }
