@@ -65,7 +65,7 @@ export class AuthService {
     );
   }
 
-  public initializeUserSession(authUser: IUser, token: string, expiresIn = 3600): Observable<void> {
+  public initializeUserSession(authUser: IUser, token: string, expiresIn = 3600000000): Observable<void> {
     this.user = authUser;
     this.accessToken = token;
     this.expiresIn = expiresIn;
@@ -84,7 +84,7 @@ export class AuthService {
   public setAuthData(authUser: IUser, token: string, exists: boolean): void {
     this.user = authUser;
     this.accessToken = token;
-    this.expiresIn = 3600;
+    this.expiresIn = 3600000000;
 
     this.save();
   }

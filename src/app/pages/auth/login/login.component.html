@@ -4,16 +4,67 @@
       <img width="250" class="img-fluid logo" src="../../../../assets/icons/LogoNomNom.png" alt="Logo" />
     </a>
     <h1 class="text-center mb-4" style="color: #2c5530; font-weight: bold">Inicio de Sesión</h1>
-
-    <!-- Login tradicional -->
-    <app-login-form></app-login-form>
-
-    <!-- Separador -->
-    <div class="text-center mt-4">
-      <p class="p-0 m-0">O <br />inicia sesión con</p>
-    </div>
-
-    <!-- Botón Google separado -->
-    <app-login-google-button></app-login-google-button>
+    <form (ngSubmit)="handleLogin()" #frm="ngForm">
+      <div class="input-container mb-3">
+        <label for="" class="label-input">Correo Electronico</label>
+        <input
+          #email="ngModel"
+          type="text"
+          class="input-login email-input"
+          id="email"
+          name="email"
+          placeholder="ejemplo@nomnom.com"
+          [(ngModel)]="loginForm.email"
+          [ngClass]="{
+            'is-invalid': email.invalid && email.touched,
+            'is-valid': email.valid && email.touched,
+          }"
+          required />
+        <div *ngIf="email.invalid" class="invalid-feedback">Ingresa un correo válido</div>
+      </div>
+      <div class="input-container mb-4">
+        <label for="" class="label-input">Contraseña</label>
+        <div class="password-icon-container">
+          <input
+            #password="ngModel"
+            [type]="showPassword ? 'text' : 'password'"
+            class="input-login smallLetter"
+            id="password"
+            name="password"
+            placeholder="Entra al menos 8 caracteres"
+            [(ngModel)]="loginForm.password"
+            [ngClass]="{
+              'is-invalid': password.invalid && password.touched,
+              'is-valid': password.valid && password.touched,
+            }"
+            required />
+          <span class="passEye" (click)="toggleShowPassword()" (keydown.enter)="toggleShowPassword()" tabindex="0" style="cursor: pointer">
+            <i [class]="showPassword ? 'bi bi-eye' : 'bi bi-eye-slash'"></i>
+          </span>
+          <div *ngIf="password.invalid" class="invalid-feedback">Ingrese una contraseña válida</div>
+        </div>
+        <div class="d-flex justify-content-between align-items-center mt-4 flex-wrap gap-4">
+          <label for="" class="text-center"> <input type="checkbox" name="" id="" /> Recuerdame </label>
+          <a href="/forgot-password" class="text-center">Olvide mi contraseña</a>
+        </div>
+        <div class="w-100 text-center mt-4">
+          <button class="btn btn-primary btn-signIn red-bg mx-auto w-50" type="submit">Inicio</button>
+          @if (loginError) {
+            <p class="text-danger">{{ loginError }}</p>
+          }
+        </div>
+        <div class="text-center mt-4">
+          <p class="p-0 m-0">
+            O <br />
+            inicia sesión con
+          </p>
+          <button (click)="signInWithGoogle()" class="shadow-sm border rounded-pill d-flex gap-3 mx-auto mt-4 btn-google">
+            <img width="24" class="img-fluid" src="../../../../assets/icons/google.png" alt="Logo" />
+            <span>Iniciar sesion con google</span>
+          </button>
+          <a href="/signup" class="light-green text-decoration-none mt-4 d-inline-block">Regístrate aquí</a>
+        </div>
+      </div>
+    </form>
   </div>
 </section>
