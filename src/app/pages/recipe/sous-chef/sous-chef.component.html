@@ -21,19 +21,13 @@
     </div>
   </div>
 
-  <div class="d-flex justify-content-center gap-2 mb-3">
-    <button class="btn control-btn rounded-circle"><i class="bi bi-skip-backward-fill"></i></button>
-    <button class="btn control-btn rounded-circle" [ngClass]="{ 'btn-dark': isSousChefOn, 'btn-success': !isSousChefOn }" (click)="toggleSousChef()">
-
-      <i class="bi bi-play-fill"></i></button>
-    <button class="btn control-btn rounded-circle"><i class="bi bi-skip-forward-fill"></i></button>
-  </div>
-
-<!--   <div class="text-center">
-    <button class="btn toggle-btn" >
-      {{ isSousChefOn ? 'Apagar' : 'Prender' }}
-    </button>
-  </div> -->
+  <button
+    class="btn control-btn rounded-circle d-flex align-items-center justify-content-center"
+    style="width: 60px; height: 60px"
+    [ngClass]="{ 'btn-dark': isSousChefOn, 'btn-success': !isSousChefOn }"
+    (click)="toggleSousChef()">
+    <i [ngClass]="isSousChefOn ? 'bi bi-stop-fill' : 'bi bi-play-fill'"></i>
+  </button>
 
   <label for="speed" class="form-label mt-4">Sugerencias de presentación</label>
   <div class="text-center">
