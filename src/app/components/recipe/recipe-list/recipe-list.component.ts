@@ -1,7 +1,6 @@
-import { Component, EventEmitter, AfterViewInit, OnInit, inject, Input, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { catchError, of, delay, EMPTY } from 'rxjs';
+import { catchError, of, delay } from 'rxjs';
 import { CATEGORY_IMAGE_MAP, IRecipe } from '../../../interfaces';
 import { RecipesService } from '../../../services/recipes.service';
 import { ViewRecipeComponent } from '../../../pages/recipe/view-recipe/view-recipe.component';
@@ -17,12 +16,12 @@ import { RecipeFormComponent } from '../recipe-form/recipe-form.component';
 })
 export class RecipeListComponent implements OnInit {
   @Input() areActionsAvailable = false;
-  @Output() cook = new EventEmitter<any>();
-  @Output() listInitialized = new EventEmitter<any[]>();
-  itemList: any[] = [];
-  selectedItem: any = null;
+  @Output() cook = new EventEmitter<IRecipe>();
+  @Output() listInitialized = new EventEmitter<IRecipe[]>();
+  itemList: IRecipe[] = [];
+  selectedItem: IRecipe | null = null;
   isLoading = true;
-  skeletonList: any[] = [];
+  skeletonList: null[] = [];
 
   constructor(private recipesService: RecipesService) {}
 
@@ -73,15 +72,17 @@ export class RecipeListComponent implements OnInit {
     fetchRecipe();
   }
 
-  isValidRecipe(recipe: any): boolean {
-    return recipe && recipe.name && Array.isArray(recipe.ingredients) && recipe.ingredients.length > 0;
+  isValidRecipe(recipe: IRecipe): boolean {
+    return (
+      recipe && typeof recipe.name === 'string' && recipe.name.trim() !== '' && Array.isArray(recipe.ingredients) && recipe.ingredients.length > 0
+    );
   }
 
-  trackById(index: number, _item: any): number {
+  trackById(index: number): number {
     return index;
   }
 
-  onCook(recipe: any): void {
+  onCook(recipe: IRecipe): void {
     this.cook.emit(recipe);
   }
 

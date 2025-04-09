@@ -20,7 +20,7 @@ export class ViewRecipeComponent {
     ingredients: { name: string; quantity: string; measurement: string }[];
   };
 
-  @Input() areActionsAvailable: boolean = false;
+  @Input() areActionsAvailable = false;
 
   @Output() save = new EventEmitter<IRecipe>();
   @Output() delete = new EventEmitter<IRecipe>();
