@@ -10,15 +10,7 @@ import { CATEGORY_IMAGE_MAP, IRecipe } from '../../../interfaces';
   styleUrls: ['./view-recipe.component.scss'],
 })
 export class ViewRecipeComponent {
-  @Input() recipe!: {
-    name: string;
-    recipeCategory: string;
-    preparationTime: number;
-    description: string;
-    nutritionalInfo: string;
-    instructions: string;
-    ingredients: { name: string; quantity: string; measurement: string }[];
-  };
+  @Input() recipe!: IRecipe;
 
   @Input() areActionsAvailable = false;
 
@@ -34,8 +26,9 @@ export class ViewRecipeComponent {
   }
 
   getCategoryImage(category: string): string {
-    const normalized = category.toLowerCase();
-    return `assets/img/recipe/${CATEGORY_IMAGE_MAP[normalized] || 'meal1.png'}`;
+    const normalized = category.trim().toLowerCase();
+    const fileName = CATEGORY_IMAGE_MAP[normalized] || 'meal1.png';
+    return `assets/img/recipe/${fileName}`;
   }
 
   getCleanedSteps(instructions?: string): string[] {
@@ -45,10 +38,7 @@ export class ViewRecipeComponent {
       .filter(s => s.length > 0);
   }
   onImageError(event: Event): void {
-    const imgElement = event.target as HTMLImageElement | null;
-    if (imgElement) {
-      imgElement.src = 'assets/img/recipe/meal1.png';
-    }
+    const target = event.target as HTMLImageElement;
+    target.src = 'assets/img/recipe/meal1.png';
   }
-
 }

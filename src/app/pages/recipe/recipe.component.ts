@@ -1,6 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IRecipe } from '../../interfaces';
+
+import fallbackRecipes from '../../components/recipe/recipe-list/recipes.json';
+import { RecipesService } from '../../services/recipes.service';
+import { catchError, finalize, of } from 'rxjs';
 import { RecipeListComponent } from '../../components/recipe/recipe-list/recipe-list.component';
 import { ViewRecipeComponent } from './view-recipe/view-recipe.component';
 import { SousChefComponent } from './sous-chef/sous-chef.component';
@@ -21,7 +25,7 @@ export class RecipeComponent {
 
   onRecipeListInitialized(recipes: IRecipe[]) {
     if (recipes.length > 0 && !this.selectedRecipe) {
-      this.selectedRecipe = recipes[0]; //para que no se me ponda vacio
+      this.selectedRecipe = recipes[0];
     }
   }
 
