@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable, tap, map } from 'rxjs';
+import { Observable, tap, map, of } from 'rxjs';
 import { ILoginResponse, IUser, IAuthority, IRoleType, IResponse } from '../interfaces';
 import { IngredientService } from './ingredient.service';
 
@@ -81,11 +81,11 @@ export class AuthService {
     );
   }
 
+
   public setAuthData(authUser: IUser, token: string, exists: boolean): void {
     this.user = authUser;
     this.accessToken = token;
     this.expiresIn = 3600000000;
-
     this.save();
   }
 
@@ -163,5 +163,11 @@ export class AuthService {
       console.error('Error parsing auth_user from localStorage:', e);
       return null;
     }
+  }
+  public loginWithGoogleCode(code: string, codeVerifier: string): Observable<ILoginResponse | any> {
+    return this.http.post<ILoginResponse | any>('http://localhost:8080/auth/exchange-google-code', {
+      code,
+      codeVerifier,
+    });
   }
 }

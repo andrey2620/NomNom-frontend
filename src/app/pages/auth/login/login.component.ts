@@ -1,11 +1,13 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormsModule, NgModel } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { AuthService } from '../../../services/auth.service';
-import { AuthGoogleService } from '../../../services/auth-google.service';
 import { CommonModule } from '@angular/common';
 import { switchMap } from 'rxjs';
+
+import { AuthService } from '../../../services/auth.service';
+import { AuthGoogleService } from '../../../services/auth-google.service';
 import { ToastService } from '../../../services/toast.service';
+import { OAuthService } from 'angular-oauth2-oidc';
 
 @Component({
   selector: 'app-login',
@@ -15,37 +17,36 @@ import { ToastService } from '../../../services/toast.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-  public loginError!: string;
   @ViewChild('email') emailModel!: NgModel;
   @ViewChild('password') passwordModel!: NgModel;
 
-  public loginForm: { email: string; password: string } = { email: '', password: '' };
+  public loginForm: { email: string; password: string } = {
+    email: '',
+    password: '',
+  };
 
-  showPassword = false;
-  showConfirmPassword = false;
-
-  toggleShowPassword() {
-    this.showPassword = !this.showPassword;
-  }
+  public loginError!: string;
+  public showPassword = false;
 
   constructor(
     private router: Router,
     private authService: AuthService,
     private authGoogleService: AuthGoogleService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private oauthService: OAuthService
   ) {}
 
-  /** Login normal */
-  handleLogin() {
+  toggleShowPassword(): void {
+    this.showPassword = !this.showPassword;
+  }
+
+  handleLogin(): void {
     const { email, password } = this.loginForm;
 
     if (!email?.trim() || !password?.trim()) {
       this.toastService.showWarning('Por favor complete todos los campos.');
-
-      // Marca visual para los campos tocados si están vacíos
       if (!email?.trim()) this.emailModel.control.markAsTouched();
       if (!password?.trim()) this.passwordModel.control.markAsTouched();
-
       return;
     }
 
@@ -64,8 +65,9 @@ export class LoginComponent {
       });
   }
 
-  /** Login con Google */
-  public signInWithGoogle(): void {
-    this.authGoogleService.startGoogleFlow();
+  loginWithGoogle(): void {
+    console.log('[LoginComponent] Redirigiendo al flujo de Google...');
+    this.oauthService.initCodeFlow();
   }
+
 }

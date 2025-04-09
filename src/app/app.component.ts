@@ -1,26 +1,26 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { RouterOutlet } from '@angular/router';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { authCodeFlowConfig } from './pages/auth/login/auth-config';
+import { CommonModule } from '@angular/common';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CommonModule, FormsModule],
+  imports: [RouterOutlet, CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  title = 'demo-angular-front';
-
   constructor(private oauthService: OAuthService) {
     this.configureSSO();
   }
 
   private configureSSO(): void {
+    console.log('[AppComponent] Iniciando carga del documento de descubrimiento...');
     this.oauthService.configure(authCodeFlowConfig);
-    this.oauthService.loadDiscoveryDocumentAndTryLogin();
+    this.oauthService.loadDiscoveryDocument().then(() => {
+      console.log('[AppComponent] Documento de descubrimiento cargado correctamente');
+    });
   }
 }

@@ -50,14 +50,12 @@
 
       <div class="d-flex justify-content-between align-items-center mt-4 flex-wrap gap-4">
         <label class="text-center"> <input type="checkbox" /> Recuérdame </label>
-        <a href="/forgot-password" class="text-center">Olvidé mi contraseña</a>
+        <a routerLink="/forgot-password" class="text-center">Olvidé mi contraseña</a>
       </div>
 
       <div class="w-100 text-center mt-4">
         <button class="btn btn-primary btn-signIn red-bg mx-auto w-50" type="submit">Inicio</button>
-        @if (loginError) {
-          <p class="text-danger">{{ loginError }}</p>
-        }
+        <p class="text-danger mt-3" *ngIf="loginError">{{ loginError }}</p>
       </div>
     </form>
 
@@ -67,12 +65,12 @@
         inicia sesión con
       </p>
 
-      <button type="button" (click)="signInWithGoogle()" class="shadow-sm border rounded-pill d-flex gap-3 mx-auto mt-4 btn-google">
+      <button type="button" (click)="loginWithGoogle()" class="shadow-sm border rounded-pill d-flex gap-3 mx-auto mt-4 btn-google">
         <img width="24" class="img-fluid" src="../../../../assets/icons/google.png" alt="Logo" />
         <span>Iniciar sesión con Google</span>
       </button>
 
-      <a href="/signup" class="light-green text-decoration-none mt-4 d-inline-block">Regístrate aquí</a>
+      <a routerLink="/signup" class="light-green text-decoration-none mt-4 d-inline-block">Regístrate aquí</a>
     </div>
   </div>
 </section>
