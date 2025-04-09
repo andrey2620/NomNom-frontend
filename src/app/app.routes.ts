@@ -15,15 +15,15 @@ import { GenerateRecipesComponent } from './pages/generateRecipes/generateRecipe
 import { RecipeComponent } from './pages/recipe/recipe.component';
 import { nomNomLandingComponent } from './pages/NomNomLandingPage/nomNomLanding';
 import { codeCollectiveLandingComponent } from './pages/CodeCollectiveLandingPage/codeCollectiveLanding';
-
 import { InteractiveMapComponent } from './pages/interactiveMap/interactiveMap.component';
+import { CallbackComponent } from './pages/auth/login/callbackComponent';
+
+//hay que borrar todo esto
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { GamesComponent } from './pages/games/games.component';
 import { OrdersComponent } from './pages/orders/orders.component';
 import { PreferenceListPageComponent } from './pages/preferenceList/preference-list.component';
 import { RecipeFormComponent } from './components/recipe/recipe-form/recipe-form.component';
 import { RecipeListComponent } from './components/recipe/recipe-list/recipe-list.component';
-import { CallbackComponent } from './pages/auth/login/callbackComponent';
 
 export const routes: Routes = [
   {
@@ -129,18 +129,7 @@ export const routes: Routes = [
           showInSidebar: true,
         },
       },
-      /*       {
-        path: 'games',
-        component: GamesComponent,
-        data: {
-          authorities: [
-            IRoleType.superAdmin,
-            IRoleType.user,
-          ],
-          name: 'games',
-          showInSidebar: true
-        }
-      },
+      /*
       {
         path: 'orders',
         component: OrdersComponent,

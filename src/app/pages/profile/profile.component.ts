@@ -42,14 +42,17 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.profileService.getUserInfoSignal();
+
     effect(() => {
       const user = this.profileService.user$();
       if (user?.id) {
         this.user = user;
         // console.log('User cargado correctamente:', this.user);
 
-        this.selectedAllergies = new Set(this.user.allergies || []);
-        this.selectedPreferences = new Set(this.user.preferences || []);
+        this.selectedAllergies = new Set(this.user.allergies ?? []);
+        this.selectedPreferences = new Set(this.user.preferences ?? []);
+
       }
     });
   }
@@ -100,8 +103,11 @@ export class ProfileComponent implements OnInit {
       return;
     }
 
-    const selectedAllergiesArray = Array.from(this.selectedAllergies);
-    const selectedPreferencesArray = Array.from(this.selectedPreferences);
+    // 🔍 Recolectamos TODAS las alergias que estén marcadas
+    const selectedAllergiesArray = this.allergiesService.allAllergies.filter(a => a.isSelected);
+
+    // 🔍 Recolectamos TODAS las preferencias que estén marcadas
+    const selectedPreferencesArray = this.dietPreferenceService.allDietPreferences.filter(p => p.isSelected);
 
     const updatedUser: IUser = {
       ...user,
@@ -110,8 +116,8 @@ export class ProfileComponent implements OnInit {
       role: user.role,
     };
 
-    // console.log('Actualizando usuario con:', updatedUser);
-
+    console.log('Actualizando usuario con:', updatedUser);
     this.profileService.updateUserProfile(updatedUser);
   }
+
 }

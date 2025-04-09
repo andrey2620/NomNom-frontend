@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable, switchMap, tap, map } from 'rxjs';
+import { Observable, tap, map } from 'rxjs';
 import { ILoginResponse, IUser, IAuthority, IRoleType, IResponse } from '../interfaces';
 import { IngredientService } from './ingredient.service';
 
@@ -100,9 +100,7 @@ export class AuthService {
   }
 
   public isSuperAdmin(): boolean {
-    return this.user.authorities
-      ? this.user?.authorities.some(authority => authority.authority == IRoleType.superAdmin)
-      : false;
+    return this.user.authorities ? this.user?.authorities.some(authority => authority.authority == IRoleType.superAdmin) : false;
   }
 
   public getUserAuthorities(): IAuthority[] | undefined {
@@ -128,11 +126,8 @@ export class AuthService {
     return !!allowedUser && !!isAdmin;
   }
 
-
   public getPermittedRoutes(routes: any[]): any[] {
-    return routes.filter(route =>
-      route.data && route.data.authorities && this.hasRole(route.data.authorities)
-    );
+    return routes.filter(route => route.data && route.data.authorities && this.hasRole(route.data.authorities));
   }
 
   public signup(user: IUser): Observable<ILoginResponse> {

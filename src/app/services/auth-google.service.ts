@@ -16,7 +16,7 @@ export class AuthGoogleService {
   /** Inicia el flujo OAuth con Google */
   public startGoogleFlow(): void {
     console.log('[AuthGoogleService] Iniciando login de Google...');
-    this.oauthService.initLoginFlow();
+    this.oauthService.initCodeFlow();
   }
 
   /** Llama a backend con el email extraído de Google */

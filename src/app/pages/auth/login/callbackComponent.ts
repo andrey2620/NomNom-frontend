@@ -27,7 +27,8 @@ export class CallbackComponent implements OnInit {
 
   private handleGoogleAuthentication(): void {
     this.oauthService
-      .loadDiscoveryDocumentAndTryLogin()
+      .loadDiscoveryDocument()
+      .then(() => this.oauthService.tryLoginCodeFlow())
       .then(() => {
         if (!this.oauthService.hasValidAccessToken()) {
           this.toastService.showError('No se encontró un token válido de Google');
@@ -35,7 +36,7 @@ export class CallbackComponent implements OnInit {
           return;
         }
 
-        const identityClaims = this.oauthService.getIdentityClaims();
+        const identityClaims: any = this.oauthService.getIdentityClaims();
         const userEmail = identityClaims?.['email'] || null;
         const userName = identityClaims?.['given_name'] || '';
         const userLastname = identityClaims?.['family_name'] || '';
@@ -62,7 +63,7 @@ export class CallbackComponent implements OnInit {
     if (!response.exists) {
       const mensaje = 'Bienvenido a NomNom.<br>Te redirigimos para completar tu registro.';
       this.toastService.showInfo(mensaje, 'Registro', {
-        enableHtml: true
+        enableHtml: true,
       });
       this.router.navigate(['/signup'], {
         queryParams: { email: userEmail, name: userName, lastname: userLastname },

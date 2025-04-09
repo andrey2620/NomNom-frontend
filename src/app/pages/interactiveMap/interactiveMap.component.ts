@@ -7,7 +7,7 @@ import { IRecipe } from "../../interfaces";
 
 @Component({
     standalone: true,
-    selector: 'app-interactiveMap',
+    selector: 'app-interactive-map',
     templateUrl: './interactiveMap.component.html',
     styleUrls: ['./interactiveMap.component.scss'],
     imports: [
@@ -23,5 +23,5 @@ export class InteractiveMapComponent {
 
     onRecipesSelected(recipes: IRecipe[]) {
         this.selectedRecipes = recipes;
-      }      
+      }
 }

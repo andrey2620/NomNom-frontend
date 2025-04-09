@@ -4,18 +4,19 @@ import { AuthService } from '../services/auth.service';
 
 export const accessTokenInterceptor: HttpInterceptorFn = (req, next) => {
   const authService = inject(AuthService);
-  let headers = {};
+  const token = authService.getAccessToken();
 
-  if (!authService.check()) return next(req);
-  if (!req.url.includes('auth')) {
-    headers = {
-        setHeaders: {
-          Authorization: `Bearer ${authService.getAccessToken()?.replace(/"/g, '')}`,
-        },
-    }
-};
+  const isExternalRequest =
+    req.url.startsWith('https://accounts.google.com') || req.url.startsWith('https://oauth2.googleapis.com') || req.url.includes('googleapis.com');
 
-  const clonedRequest = req.clone(headers);
+  if (token && !isExternalRequest) {
+    const cloned = req.clone({
+      setHeaders: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return next(cloned);
+  }
 
-  return next(clonedRequest);
+  return next(req);
 };
