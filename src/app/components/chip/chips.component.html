@@ -1,0 +1,12 @@
+<div class="mb-3">
+<div class="d-flex flex-wrap gap-2">
+  <span *ngFor="let chip of chips; let i = index" class="badge bg-primary pb-2" style="background-color: var(--secondary-color) !important;">
+    {{ chip }}
+    <button
+      type="button"
+      class="btn-close btn-close-white btn-sm ms-2"
+      aria-label="Eliminar"
+      (click)="removeChip(i)"
+    ></button>
+  </span>
+</div>

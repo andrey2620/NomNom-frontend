@@ -32,11 +32,13 @@
       </div>
     </div>
 
-    <div class="">
+    <div class="d-flex">
       <app-ingredients
         [ingredients]="ingredientService.ingredient$()"
-        (selectedChange)="selectedIngredients = $event">
+        (selectedChange)="selectedIngredients = $event"
+        (selectedChips)="chips = $event">
       </app-ingredients>
+      <app-chips [chips]="chips"></app-chips>
     </div>
 
     <button class="btn btn-danger my-4" (click)="saveSelectedIngredients()">

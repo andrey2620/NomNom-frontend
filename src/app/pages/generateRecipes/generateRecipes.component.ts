@@ -8,6 +8,7 @@ import { PaginationComponent } from '../../components/pagination/pagination.comp
 import { AuthService } from '../../services/auth.service';
 import { ToastService } from '../../services/toast.service';
 import { DropdownComponent } from '../../components/dropdown/dropdown.component';
+import { ChipsComponent } from '../../components/chip/chips.component';
 
 @Component({
   standalone: true,
@@ -21,6 +22,7 @@ import { DropdownComponent } from '../../components/dropdown/dropdown.component'
     PaginationComponent,
     FormsModule,
     DropdownComponent,
+    ChipsComponent
     //ModalComponent,
     //PreferenceListFormComponent
   ],
@@ -37,6 +39,7 @@ export class GenerateRecipesComponent {
   public currentPage = 1; // Página actual
   public itemsPerPage = 18; // Elementos por página
   selectedIngredients: number[] = [];
+  public chips: string[] = [];
 
   constructor(
     private authService: AuthService,
