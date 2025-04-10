@@ -77,11 +77,11 @@ export class AuthService {
       tap((ingredientsRes: IResponse<string[]>) => {
         localStorage.setItem('user_ingredients', JSON.stringify(ingredientsRes.data));
       }),
-      map(() => {})
+      map(() => undefined)
     );
   }
 
-  public setAuthData(authUser: IUser, token: string, exists: boolean): void {
+  public setAuthData(authUser: IUser, token: string): void {
     this.user = authUser;
     this.accessToken = token;
     this.expiresIn = 3600000000;
@@ -110,7 +110,7 @@ export class AuthService {
   public areActionsAvailable(routeAuthorities: string[]): boolean {
     let allowedUser = false;
     let isAdmin = false;
-    let userAuthorities = this.getUserAuthorities();
+    const userAuthorities = this.getUserAuthorities();
 
     for (const authority of routeAuthorities) {
       if (userAuthorities?.some(item => item.authority == authority)) {
@@ -126,8 +126,8 @@ export class AuthService {
     return !!allowedUser && !!isAdmin;
   }
 
-  public getPermittedRoutes(routes: any[]): any[] {
-    return routes.filter(route => route.data && route.data.authorities && this.hasRole(route.data.authorities));
+  public getPermittedRoutes(routes: { data?: { authorities?: string[] } }[]): { data?: { authorities?: string[] } }[] {
+    return routes.filter(route => route.data && route.data.authorities && route.data.authorities.some(auth => this.hasRole(auth)));
   }
 
   public signup(user: IUser): Observable<ILoginResponse> {
@@ -144,13 +144,13 @@ export class AuthService {
     localStorage.clear();
   }
 
-  public sendResetLink(email: string): Observable<IResponse<any>> {
-    return this.http.post<IResponse<any>>(`auth/forgot-password?email=${encodeURIComponent(email)}`, {});
+  public sendResetLink(email: string): Observable<IResponse<{ message: string }>> {
+    return this.http.post<IResponse<{ message: string }>>(`auth/forgot-password?email=${encodeURIComponent(email)}`, {});
   }
 
-  public resetPassword(token: string, newPassword: string): Observable<IResponse<any>> {
+  public resetPassword(token: string, newPassword: string): Observable<IResponse<{ success: boolean; message: string }>> {
     const params = new HttpParams().set('token', token);
-    return this.http.post<IResponse<any>>('auth/reset-password', newPassword, { params });
+    return this.http.post<IResponse<{ success: boolean; message: string }>>('auth/reset-password', newPassword, { params });
   }
 
   public getCurrentUserId(): number | null {
