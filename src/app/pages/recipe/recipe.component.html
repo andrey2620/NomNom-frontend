@@ -5,7 +5,7 @@
       <app-recipe-list #recipeList [areActionsAvailable]="true" (cook)="onRecipeSelected($event)" (listInitialized)="onRecipeListInitialized($event)">
         <!-- Este botón se renderiza DENTRO del recipe-list -->
         <div class="text-end">
-          <button class="btn btn-load-more text-white" (click)="recipeListComponent.onGenerateMore()">Cargar más</button>
+          <button class="btn btn-load-more text-white" (click)="onGenerateMore()">Cargar más</button>
         </div>
       </app-recipe-list>
     </div>
@@ -24,3 +24,13 @@
     </ng-container>
   </div>
 </div>
+<app-modal
+  #missingIngredientsModal
+  [confirmAction]="'Generar receta aleatoria'"
+  [cancelAction]="'Ir a ingredientes'"
+  (callConfirmationMethod)="onConfirmGenerateRandom()"
+  (callCancelMethod)="onGoToIngredients()"
+  [hideCancelOption]="false">
+  <h4 class="text-center">😅 No seleccionaste ingredientes</h4>
+  <p class="text-center">¿Querés generar una receta aleatoria o ir a seleccionar tus ingredientes?</p>
+</app-modal>

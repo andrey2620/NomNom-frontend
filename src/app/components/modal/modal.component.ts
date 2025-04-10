@@ -1,49 +1,58 @@
-import { Component, inject, Input, ViewChild, Output, EventEmitter, ElementRef } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { LoaderComponent } from '../loader/loader.component';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  ViewChild,
+  TemplateRef,
+  inject,
+} from '@angular/core';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
+import { LoaderComponent } from '../loader/loader.component';
 
 @Component({
   selector: 'app-modal',
   standalone: true,
-  imports: [
-    LoaderComponent,
-    CommonModule
-  ],
+  imports: [CommonModule, LoaderComponent],
   templateUrl: './modal.component.html',
-  styleUrl: './modal.component.scss',
+  styleUrls: ['./modal.component.scss'],
 })
 export class ModalComponent {
-  @Input() title?: string;
-  @Input() confirmAction = '';
-  @Input() cancelAction = '';
+  private modalService = inject(NgbModal);
+  private modalRef: NgbModalRef | null = null;
+
+  @ViewChild('modalContent') modalContent!: TemplateRef<unknown>;
+
+  @Input() confirmAction = 'Confirmar';
+  @Input() cancelAction = 'Cancelar';
+  @Input() modalBodyClass = 'modal-body';
+  @Input() modalFooterClass = 'modal-footer d-flex justify-content-end';
+  @Input() modalContentClass = 'modal-content';
+  @Input() hideFooter = false;
+  @Input() hideCancelOption = false;
+  @Input() hideConfirmAction = false;
   @Input() customValidation = false;
+  @Input() useCustomBackGround = false;
   @Input() isLoading = false;
   @Input() loadingConfirmationMethod = false;
-  @Input() hideConfirmAction = false;
-  @Input() useCustomBackGround = false;
-  @Input() hideCancelOption = false;
-  @Input() hideFooter = false;
-  @Input() modalBodyClass = "modal-body";
-  @Input() modalFooterClass = "modal-footer";
-  @Input() modalContentClass = "modal-content";
-  @Output() callCancelMethod = new EventEmitter();
-  @Output() callConfirmationMethod = new EventEmitter();
 
-  public modalService: NgbModal = inject(NgbModal);
+  @Output() callConfirmationMethod = new EventEmitter<void>();
+  @Output() callCancelMethod = new EventEmitter<void>();
 
-  @ViewChild('modalContent', { static: true }) modalContent!: ElementRef;
-
-  public show() {
-    this.modalService.open(this.modalContent, { centered: true });
+  showModal(): void {
+    if (this.modalRef) return;
+    this.modalRef = this.modalService.open(this.modalContent, {
+      centered: true,
+      backdrop: 'static',
+      keyboard: false,
+    });
   }
 
-  public hide() {
-    this.modalService.dismissAll();
-  }
-
-  public hideModal() {
-    this.hide();
-    this.callCancelMethod.emit();
+  hideModal(): void {
+    if (this.modalRef) {
+      this.modalRef.close();
+      this.modalRef = null;
+    }
   }
 }
