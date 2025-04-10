@@ -7,6 +7,7 @@ import { IngredientService } from '../../services/ingredient.service';
 import { PaginationComponent } from '../../components/pagination/pagination.component';
 import { AuthService } from '../../services/auth.service';
 import { ToastService } from '../../services/toast.service';
+import { DropdownComponent } from '../../components/dropdown/dropdown.component';
 
 @Component({
   standalone: true,
@@ -19,6 +20,7 @@ import { ToastService } from '../../services/toast.service';
     LoaderComponent,
     PaginationComponent,
     FormsModule,
+    DropdownComponent,
     //ModalComponent,
     //PreferenceListFormComponent
   ],
@@ -31,6 +33,7 @@ export class GenerateRecipesComponent {
   public title = 'Buscar ingredientes';
 
   public searchQuery = ''; // Cadena de búsqueda
+  public chosenCategory = ''; // Categoría
   public currentPage = 1; // Página actual
   public itemsPerPage = 18; // Elementos por página
   selectedIngredients: number[] = [];
@@ -42,22 +45,32 @@ export class GenerateRecipesComponent {
     this.ingredientService.getAll();
   }
 
+  onCategoryChange(category: string | null) {
+    this.chosenCategory = category || '';
+    this.filterIngredients();
+  }
+
   // Se activa cuando el usuario escribe en la barra de búsqueda
   filterIngredients() {
+
     this.currentPage = 1; // Reinicia la paginación a la primera página
 
-    if (!this.searchQuery.trim()) {
-      // Si la búsqueda está vacía, muestra todos los ingredientes
+    if (!this.searchQuery.trim() && !this.chosenCategory) {
+      // Si la búsqueda y la categoria estan vacías, muestra todos los ingredientes
       this.ingredientService.getAll();
-    } else {
-      // Si hay una búsqueda, filtra por nombre usando el backend
-      this.ingredientService.getIngredientByName(this.searchQuery, this.currentPage);
+    } 
+    
+    else {
+      const category = this.chosenCategory || '';
+      this.ingredientService.getIngredientByNameAndCategory(this.searchQuery, category, this.currentPage);
     }
-  }
+
+  }  
 
   // Se activa cuando cambia de página
   changePage(page: number) {
     this.currentPage = page;
+    console.log('changepage: ' + this.chosenCategory);
     this.ingredientService.paginateIngredients(this.currentPage, this.itemsPerPage);
   }
 
