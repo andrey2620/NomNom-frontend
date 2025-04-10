@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class RecipesService extends BaseService<IRecipe> {
-  protected override source: string = 'recipes';
+  protected override source = 'recipes';
 
   private recipeListSignal = signal<IRecipe[]>([]);
   get recipes$() {

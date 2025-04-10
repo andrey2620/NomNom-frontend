@@ -65,7 +65,7 @@ export class RecipeComponent implements OnInit, AfterViewInit {
   onConfirmGenerateRandom(): void {
     this.missingIngredientsModal.hideModal();
     this.recipeListComponent.clearRecipes();
-    this.recipeListComponent.loadAllFallbackAnimated();
+    this.recipeListComponent.loadRandomRecipes(5);
   }
 
   onGoToIngredients(): void {

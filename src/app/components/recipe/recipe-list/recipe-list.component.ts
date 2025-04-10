@@ -67,7 +67,6 @@ export class RecipeListComponent implements OnInit {
     }, 1200); // 🕒 Delay de 1.2 segundos antes de comenzar
   }
 
-
   loadValidRecipes(userId: number, count: number): void {
     let attempts = 0;
     let loaded = 0;
@@ -104,6 +103,46 @@ export class RecipeListComponent implements OnInit {
     };
 
     fetchRecipe();
+  }
+
+  loadRandomRecipes(count: number): void {
+    this.loadSkeletons(count);
+
+    let loaded = 0;
+    let attempts = 0;
+    const maxAttempts = count * 4;
+
+    const fetchRandom = () => {
+      this.recipesService
+        .getRandomRecipes()
+        .pipe(
+          catchError(err => {
+            console.error('❌ Error receta aleatoria:', err.message);
+            return of(null); // fallback a null para seguir el flujo
+          }),
+          delay(300)
+        )
+        .subscribe((recipe: IRecipe | null) => {
+          attempts++;
+
+          if (recipe && this.isValidRecipe(recipe)) {
+            this.itemList.push(recipe);
+            this.skeletonList.pop();
+            this.listInitialized.emit(this.itemList);
+            loaded++;
+          }
+
+          if (loaded < count && attempts < maxAttempts) {
+            fetchRandom();
+          }
+
+          if (attempts >= maxAttempts && loaded < count) {
+            this.loadAllFallbackAnimated();
+          }
+        });
+    };
+
+    fetchRandom();
   }
 
   onGenerateMore(): void {
