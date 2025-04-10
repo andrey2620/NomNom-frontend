@@ -1,11 +1,23 @@
-.ingredientContainer{
-    max-height: 50px !important;
-}
-
 .searchBar{
     max-width: 300px;
     min-width: 300px;
 }
+
+.ingredientContainer{
+    width: 75% !important;
+    flex-shrink: 0;
+}
+
+.chipsContainer{
+    border: solid 5px var(--primary-color);
+    border-radius: 25px;
+    padding: 5px;
+    overflow-y: auto;
+    width: 15% !important;
+    flex-shrink: 0;
+    max-height: 40vh;
+}
+
 
 @media (max-width: 768px) {
     .searchBar{

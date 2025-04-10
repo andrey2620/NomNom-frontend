@@ -1,0 +1,8 @@
+.chip{
+    background-color: var(--secondary-color) !important;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.chip-hovered {
+    background-color: var(--primary-color) !important;
+  }
