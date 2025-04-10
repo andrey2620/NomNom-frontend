@@ -2,9 +2,9 @@
   @for (item of ingredients; track item.id) {
     <div
       class="ingredientDiv"
-      [class.selected]="item.id !== null && selectedIngredients.includes(item.id!) && chips.includes(item.name!)"
-      (click)="item.id !== null && selectIngredient(item.id, item.name)"
-      (keydown)="item.id !== null && $event.key === 'Enter' && selectIngredient(item.id, item.name)"
+      [class.selected]="item.id !== null && selectedIngredients.includes(item.id!)"
+      (click)="item.id !== null && selectIngredient(item.id)"
+      (keydown)="item.id !== null && $event.key === 'Enter' && selectIngredient(item.id)"
       tabindex="0">
       @if (!item.image) {
         <img class="w-100" src="assets/gifs/default.gif" alt="img{{ item.name }}" />

@@ -9,6 +9,7 @@ import { AuthService } from '../../services/auth.service';
 import { ToastService } from '../../services/toast.service';
 import { DropdownComponent } from '../../components/dropdown/dropdown.component';
 import { ChipsComponent } from '../../components/chip/chips.component';
+import { IIngredients } from '../../interfaces';
 
 @Component({
   standalone: true,
@@ -41,11 +42,41 @@ export class GenerateRecipesComponent {
   selectedIngredients: number[] = [];
   public chips: string[] = [];
 
+  private selectedIngredientNames: Map<number, string> = new Map();
+
   constructor(
     private authService: AuthService,
     private toastService: ToastService
   ) {
     this.ingredientService.getAll();
+  }
+
+  onIngredientsChange(selectedIds: number[]) {
+    this.selectedIngredients = selectedIds;
+    
+    // Actualiza el mapa de nombres
+    const currentIngredients = this.ingredientService.ingredient$();
+    selectedIds.forEach(id => {
+      if (!this.selectedIngredientNames.has(id)) {
+        const ingredient = currentIngredients.find(i => i.id === id);
+        if (ingredient?.name) {
+          this.selectedIngredientNames.set(id, ingredient.name);
+        }
+      }
+    });
+    this.chips = selectedIds.map(id => this.selectedIngredientNames.get(id) || '').filter(name => name !== '');
+  }
+
+  onChipRemoved(chipName: string) {
+    // Busca en el mapa para encontrar el ID
+    for (const [id, name] of this.selectedIngredientNames.entries()) {
+      if (name === chipName) {
+        this.selectedIngredients = this.selectedIngredients.filter(selectedId => selectedId !== id);
+        this.selectedIngredientNames.delete(id);
+        break;
+      }
+    }
+    this.chips = this.chips.filter(name => name !== chipName);
   }
 
   onCategoryChange(category: string | null) {
@@ -80,6 +111,7 @@ export class GenerateRecipesComponent {
   get totalPages(): number {
     return this.ingredientService.getTotalPages(this.itemsPerPage);
   }
+  
 
   saveSelectedIngredients(): void {
     const userId = this.authService.getCurrentUserId();

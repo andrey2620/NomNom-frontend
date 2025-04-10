@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -16,19 +16,11 @@ import { FormsModule } from '@angular/forms';
 
 export class ChipsComponent {
   @Input() chips: string[] = [];
+  @Output() chipRemoved = new EventEmitter<string>();
 
   hoveredIndex: number | null = null;
-  chipInput: string = '';
 
-  addChip() {
-    const trimmed = this.chipInput.trim();
-    if (trimmed && !this.chips.includes(trimmed)) {
-      this.chips.push(trimmed);
-    }
-    this.chipInput = '';
-  }
-
-  removeChip(index: number) {
-    this.chips.splice(index, 1);
+  removeChip(chip: string) {
+    this.chipRemoved.emit(chip);
   }
 }

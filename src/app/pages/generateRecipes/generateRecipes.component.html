@@ -36,13 +36,16 @@
       <div class="ingredientsContainer">
         <app-ingredients
           [ingredients]="ingredientService.ingredient$()"
-          (selectedChange)="selectedIngredients = $event"
-          (selectedChips)="chips = $event">
+          [selectedIds]="selectedIngredients"
+          (selectedChange)="onIngredientsChange($event)">
         </app-ingredients>
       </div>
       <div class="chipsContainer">
-        <h2 class="bold">Ingredientes seleccionados</h2>
-        <app-chips [chips]="chips"></app-chips>
+        <h2 class="bold chipTitle">Ingredientes seleccionados</h2>
+        <app-chips 
+        [chips]="chips"
+        (chipRemoved)="onChipRemoved($event)"
+        ></app-chips>
       </div>      
     </div>
 

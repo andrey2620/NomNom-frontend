@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IIngredients } from '../../interfaces';
 
@@ -12,13 +12,18 @@ import { IIngredients } from '../../interfaces';
 export class IngredientsComponent {
   @Input() title = '';
   @Input() ingredients: IIngredients[] = [];
+  @Input() selectedIds: number[] = [];
   @Output() selectedChange = new EventEmitter<number[]>();
-  @Output() selectedChips = new EventEmitter<string[]>();
 
   selectedIngredients: number[] = [];
-  chips: string[] = [];
 
-  selectIngredient(id: number | undefined | null, name: string | undefined | null) {
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['selectedIds']) {
+      this.selectedIngredients = [...this.selectedIds];
+    }
+  }
+
+  selectIngredient(id: number | undefined | null) {
     if (id === undefined || id === null) return;
 
     const index = this.selectedIngredients.indexOf(id);
@@ -26,12 +31,9 @@ export class IngredientsComponent {
     if (index !== -1) {
       this.selectedIngredients.splice(index, 1);
     } else {
-      // } else if (this.selectedIngredients.length < 5) {
       this.selectedIngredients.push(id);
-      this.chips.push(name || '');
     }
 
-    this.selectedChange.emit(this.selectedIngredients);
-    this.selectedChips.emit(this.chips);
+    this.selectedChange.emit([...this.selectedIngredients]);
   }
 }
