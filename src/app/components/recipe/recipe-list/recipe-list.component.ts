@@ -1,10 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-
-import fallbackRecipes from './recipes.json';
-import { catchError, finalize, of } from 'rxjs';
-import { CATEGORY_IMAGE_MAP, IRecipe } from '../../../interfaces';
-import { RecipesService } from '../../../services/recipes.service'; // Adjust the path as needed
 import { CommonModule } from '@angular/common';
+import { catchError, delay, of } from 'rxjs';
+import { IRecipe, CATEGORY_IMAGE_MAP } from '../../../interfaces';
+import fallbackRecipes from './recipes.json';
+import { RecipesService } from '../../../services/recipes.service';
 
 @Component({
   selector: 'app-recipe-list',
@@ -15,45 +14,91 @@ import { CommonModule } from '@angular/common';
 })
 export class RecipeListComponent implements OnInit {
   @Input() areActionsAvailable = false;
-
   @Output() cook = new EventEmitter<IRecipe>();
   @Output() listInitialized = new EventEmitter<IRecipe[]>();
 
+  userId: number | null = null;
   itemList: IRecipe[] = [];
-  skeletonList = Array(3);
+  skeletonList: null[] = [];
 
-  constructor(private recipeService: RecipesService) {}
+  private fallbackIndex = 0; // para no repetir recetas locales si las agregás
+
+  constructor(private recipesService: RecipesService) {}
 
   ngOnInit(): void {
-    this.loadRecipesFromIA();
+    const authUser = localStorage.getItem('auth_user');
+    if (authUser) {
+      this.userId = JSON.parse(authUser).id;
+    }
+
+    this.loadSkeletons(3);
+    this.loadValidRecipes(this.userId ?? 0, 3);
   }
 
-  loadRecipesFromIA(): void {
-    this.skeletonList = Array(3);
-    const userId = 3;
+  loadSkeletons(count: number): void {
+    this.skeletonList.push(...Array(count).fill(null));
+  }
 
-    this.recipeService
-      .getRecipesByUser(userId)
-      .pipe(
-        catchError(error => {
-          if (error.status === 500) {
-            console.warn('Error 500 - usando recetas locales');
-            this.itemList = fallbackRecipes;
+  loadFallbackRecipesAnimated(count: number): void {
+    console.warn(`[FALLBACK] Cargando ${count} recetas locales con animación...`);
+
+    for (let i = 0; i < count; i++) {
+      const recipe = fallbackRecipes[this.fallbackIndex % fallbackRecipes.length];
+      setTimeout(() => {
+        this.itemList.push(recipe);
+        this.skeletonList.pop();
+        this.listInitialized.emit(this.itemList);
+      }, i * 1000);
+      this.fallbackIndex++;
+    }
+  }
+
+  loadValidRecipes(userId: number, count: number): void {
+    let attempts = 0;
+    const maxAttempts = count * 4;
+
+    const fetchRecipe = () => {
+      this.recipesService
+        .getRecipesByUser(userId)
+        .pipe(
+          catchError(err => {
+            console.error('❌ Error al generar receta IA:', err.message);
+            return of(null);
+          }),
+          delay(300)
+        )
+        .subscribe(recipe => {
+          attempts++;
+
+          if (recipe && this.isValidRecipe(recipe)) {
+            this.itemList.push(recipe);
+            this.skeletonList.pop();
             this.listInitialized.emit(this.itemList);
-            return of([]);
           }
-          throw error;
-        }),
-        finalize(() => {
-          this.skeletonList = [];
-        })
-      )
-      .subscribe(data => {
-        if (data.length > 0) {
-          this.itemList = data;
-          this.listInitialized.emit(this.itemList);
-        }
-      });
+
+          if (this.itemList.length % 3 !== 0 && attempts < maxAttempts) {
+            fetchRecipe();
+          }
+
+          if (this.itemList.length % 3 === 0 || attempts >= maxAttempts) {
+            if (this.itemList.length === 0) {
+              this.loadFallbackRecipesAnimated(count);
+            }
+          }
+        });
+    };
+
+    fetchRecipe();
+  }
+
+  onGenerateMore(): void {
+    const count = 3;
+    this.loadSkeletons(count);
+    this.loadValidRecipes(this.userId ?? 0, count);
+  }
+
+  isValidRecipe(recipe: IRecipe): boolean {
+    return recipe && typeof recipe.name === 'string' && Array.isArray(recipe.ingredients) && recipe.ingredients.length > 0;
   }
 
   onCook(recipe: IRecipe): void {
