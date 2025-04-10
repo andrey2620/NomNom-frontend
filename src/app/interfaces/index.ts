@@ -103,17 +103,13 @@ export interface IDietPreferences {
 export interface IRecipe {
   id_recipe?: number;
   name: string;
-  description: string;
+  description?: string; // ← este
   instructions: string;
   preparationTime: number;
-  nutritionalInfo: string;
+  nutritionalInfo?: string; // ← este
   image_url?: string;
   recipeCategory: string;
-  ingredients: {
-    name: string;
-    quantity: string;
-    measurement: string;
-  }[];
+  ingredients: IIngredient[];
   suggestion?: ISuggestions;
 }
 
@@ -122,6 +118,12 @@ export interface IIngredients {
   name?: string;
   description?: string;
   image?: string;
+}
+
+export interface IIngredient {
+  name: string;
+  quantity: string;
+  measurement?: string;
 }
 
 export const CATEGORY_IMAGE_MAP: Record<string, string> = {
