@@ -26,8 +26,8 @@
 </div>
 <app-modal
   #missingIngredientsModal
-  [confirmAction]="'Generar receta aleatoria'"
-  [cancelAction]="'Ir a ingredientes'"
+  [confirmAction]="'Receta aleatoria'"
+  [cancelAction]="'Seleccionar ingredientes'"
   (callConfirmationMethod)="onConfirmGenerateRandom()"
   (callCancelMethod)="onGoToIngredients()"
   [hideCancelOption]="false">
