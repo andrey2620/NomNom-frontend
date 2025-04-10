@@ -22,7 +22,7 @@ export class RecipeListComponent implements OnInit {
   skeletonList: null[] = [];
 
   private fallbackIndex = 0;
-  private fallbackMode = false; // 🔥 controla si estamos usando fallback
+  private fallbackMode = false;
 
   constructor(private recipesService: RecipesService) {}
 
@@ -32,56 +32,46 @@ export class RecipeListComponent implements OnInit {
       this.userId = JSON.parse(authUser).id;
     }
 
-    this.loadSkeletons(3);
-
-    const userIngredients = localStorage.getItem('user_ingredients');
-    const hasIngredients = userIngredients && JSON.parse(userIngredients).length > 0;
-
-    if (hasIngredients) {
-      this.loadValidRecipes(this.userId ?? 0, 3);
-    }
+    this.loadSkeletons(5); // siempre mostrar skeletons desde el inicio
   }
 
   clearRecipes(): void {
     this.itemList = [];
     this.skeletonList = [];
     this.fallbackIndex = 0;
-    this.fallbackMode = false; // 🔄 reset al modo fallback
+    this.fallbackMode = false;
   }
 
   loadSkeletons(count: number): void {
     this.skeletonList.push(...Array(count).fill(null));
   }
 
-  loadFallbackRecipesAnimated(count: number): void {
-    console.warn(`[FALLBACK] Cargando ${count} recetas locales con animación...`);
-    this.fallbackMode = true; // 🔥 activamos el modo fallback
+  loadAllFallbackAnimated(): void {
+    this.fallbackMode = true;
+    const total = fallbackRecipes.length;
+    console.warn(`[FALLBACK] Mostrando todas las ${total} recetas locales.`);
 
-    let shown = 0;
+    this.skeletonList = Array(total).fill(null); // Mostrar todos los skeletons
 
-    const showNext = () => {
-      if (shown >= count) return;
+    // Delay inicial antes de empezar a mostrar las cards reales
+    setTimeout(() => {
+      fallbackRecipes.forEach((recipe, i) => {
+        setTimeout(() => {
+          this.itemList.push(recipe);
+          this.skeletonList.pop();
+          this.listInitialized.emit(this.itemList);
+        }, i * 500);
+      });
 
-      const index = (this.fallbackIndex + shown) % fallbackRecipes.length;
-      const recipe = fallbackRecipes[index];
-
-      setTimeout(() => {
-        this.itemList.push(recipe);
-        this.skeletonList.pop();
-        this.listInitialized.emit(this.itemList);
-        shown++;
-        showNext();
-      }, 1000);
-    };
-
-    showNext();
-    this.fallbackIndex += count;
+      this.fallbackIndex += total;
+    }, 1200); // 🕒 Delay de 1.2 segundos antes de comenzar
   }
+
 
   loadValidRecipes(userId: number, count: number): void {
     let attempts = 0;
-    const maxAttempts = count * 4;
     let loaded = 0;
+    const maxAttempts = count * 4;
 
     const fetchRecipe = () => {
       this.recipesService
@@ -108,8 +98,7 @@ export class RecipeListComponent implements OnInit {
           }
 
           if (attempts >= maxAttempts && loaded < count) {
-            const fallbackCount = count - loaded;
-            this.loadFallbackRecipesAnimated(fallbackCount);
+            this.loadAllFallbackAnimated();
           }
         });
     };
@@ -117,53 +106,10 @@ export class RecipeListComponent implements OnInit {
     fetchRecipe();
   }
 
-  loadRandomRecipes(count: number): void {
-    this.loadSkeletons(count);
-    let loaded = 0;
-    let attempts = 0;
-    const maxAttempts = count * 4;
-
-    const fetchRandom = () => {
-      this.recipesService
-        .getRandomRecipes()
-        .pipe(
-          catchError(err => {
-            console.error('❌ Error receta aleatoria:', err.message);
-            return of(null);
-          }),
-          delay(300)
-        )
-        .subscribe((recipe: IRecipe | null) => {
-          attempts++;
-
-          if (recipe && this.isValidRecipe(recipe)) {
-            this.itemList.push(recipe);
-            this.skeletonList.pop();
-            this.listInitialized.emit(this.itemList);
-            loaded++;
-          }
-
-          if (loaded < count && attempts < maxAttempts) {
-            fetchRandom();
-          }
-
-          if (attempts >= maxAttempts) {
-            const fallbackCount = count - loaded;
-            if (fallbackCount > 0) {
-              console.warn(`⚠️ No se pudieron generar ${fallbackCount} recetas aleatorias. Usando fallback.`);
-              this.loadFallbackRecipesAnimated(fallbackCount);
-            }
-          }
-        });
-    };
-
-    fetchRandom();
-  }
-
   onGenerateMore(): void {
     this.loadSkeletons(3);
     if (this.fallbackMode) {
-      this.loadFallbackRecipesAnimated(3); // 🔁 si estamos en modo fallback, usamos local
+      this.loadAllFallbackAnimated();
     } else {
       this.loadValidRecipes(this.userId ?? 0, 3);
     }

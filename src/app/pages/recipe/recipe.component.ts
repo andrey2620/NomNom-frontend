@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalComponent } from '../../components/modal/modal.component';
 import { RecipeListComponent } from '../../components/recipe/recipe-list/recipe-list.component';
@@ -14,20 +14,29 @@ import { SousChefComponent } from './sous-chef/sous-chef.component';
   templateUrl: './recipe.component.html',
   styleUrls: ['./recipe.component.scss'],
 })
-export class RecipeComponent implements OnInit {
+export class RecipeComponent implements OnInit, AfterViewInit {
   @ViewChild('recipeList') recipeListComponent!: RecipeListComponent;
   @ViewChild('missingIngredientsModal') missingIngredientsModal!: ModalComponent;
 
   selectedRecipe: IRecipe | null = null;
+  hasIngredients = false;
 
   constructor(private router: Router) {}
 
   ngOnInit(): void {
     const userIngredients = localStorage.getItem('user_ingredients');
-    const hasIngredients = userIngredients && JSON.parse(userIngredients).length > 0;
+    this.hasIngredients = userIngredients !== null && Array.isArray(JSON.parse(userIngredients)) && JSON.parse(userIngredients).length > 0;
 
-    if (!hasIngredients) {
+    if (!this.hasIngredients) {
       setTimeout(() => this.missingIngredientsModal.showModal(), 100);
+    }
+  }
+
+  ngAfterViewInit(): void {
+    // ejecutamos solo si tiene ingredientes, y ya está inicializado el ViewChild
+    if (this.hasIngredients) {
+      this.recipeListComponent.loadSkeletons(5);
+      this.recipeListComponent.loadValidRecipes(this.recipeListComponent.userId ?? 0, 5);
     }
   }
 
@@ -56,8 +65,7 @@ export class RecipeComponent implements OnInit {
   onConfirmGenerateRandom(): void {
     this.missingIngredientsModal.hideModal();
     this.recipeListComponent.clearRecipes();
-    this.recipeListComponent.loadSkeletons(3);
-    this.recipeListComponent.loadRandomRecipes(3);
+    this.recipeListComponent.loadAllFallbackAnimated();
   }
 
   onGoToIngredients(): void {
