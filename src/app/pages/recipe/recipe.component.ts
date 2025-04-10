@@ -1,11 +1,12 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalComponent } from '../../components/modal/modal.component';
 import { RecipeListComponent } from '../../components/recipe/recipe-list/recipe-list.component';
-import { IRecipe } from '../../interfaces';
+import { IRecipe, IResponse } from '../../interfaces';
 import { CommonModule } from '@angular/common';
 import { ViewRecipeComponent } from './view-recipe/view-recipe.component';
 import { SousChefComponent } from './sous-chef/sous-chef.component';
+import { IngredientService } from '../../services/ingredient.service';
 
 @Component({
   selector: 'app-recipe',
@@ -14,29 +15,48 @@ import { SousChefComponent } from './sous-chef/sous-chef.component';
   templateUrl: './recipe.component.html',
   styleUrls: ['./recipe.component.scss'],
 })
-export class RecipeComponent implements OnInit, AfterViewInit {
+export class RecipeComponent implements OnInit {
   @ViewChild('recipeList') recipeListComponent!: RecipeListComponent;
   @ViewChild('missingIngredientsModal') missingIngredientsModal!: ModalComponent;
 
   selectedRecipe: IRecipe | null = null;
   hasIngredients = false;
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private ingredientService: IngredientService
+  ) {}
 
   ngOnInit(): void {
-    const userIngredients = localStorage.getItem('user_ingredients');
-    this.hasIngredients = userIngredients !== null && Array.isArray(JSON.parse(userIngredients)) && JSON.parse(userIngredients).length > 0;
+    const authUser = localStorage.getItem('auth_user');
+    if (!authUser) return;
 
-    if (!this.hasIngredients) {
-      setTimeout(() => this.missingIngredientsModal.showModal(), 100);
-    }
+    const userId = JSON.parse(authUser).id;
+
+    // ✅ actualizar localStorage antes de cualquier flujo
+    this.ingredientService.getFormattedIngredientsByUser(userId).subscribe({
+      next: (res: IResponse<string[]>) => {
+        localStorage.setItem('user_ingredients', JSON.stringify(res.data));
+        this.hasIngredients = res.data.length > 0;
+      },
+      error: () => {
+        this.hasIngredients = false;
+      },
+      complete: () => {
+        // Esperar a que se haya seteado hasIngredients
+        setTimeout(() => this.initFlow(), 100);
+      },
+    });
   }
 
-  ngAfterViewInit(): void {
-    // ejecutamos solo si tiene ingredientes, y ya está inicializado el ViewChild
+  initFlow(): void {
+    this.recipeListComponent.clearRecipes();
+    this.recipeListComponent.loadSkeletons(3);
+
     if (this.hasIngredients) {
-      this.recipeListComponent.loadSkeletons(5);
-      this.recipeListComponent.loadValidRecipes(this.recipeListComponent.userId ?? 0, 5);
+      this.recipeListComponent.loadValidRecipes(this.recipeListComponent.userId ?? 0, 3);
+    } else {
+      this.missingIngredientsModal.showModal();
     }
   }
 
@@ -65,7 +85,7 @@ export class RecipeComponent implements OnInit, AfterViewInit {
   onConfirmGenerateRandom(): void {
     this.missingIngredientsModal.hideModal();
     this.recipeListComponent.clearRecipes();
-    this.recipeListComponent.loadRandomRecipes(5);
+    this.recipeListComponent.loadRandomRecipes(3);
   }
 
   onGoToIngredients(): void {

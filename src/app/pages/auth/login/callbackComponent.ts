@@ -71,13 +71,8 @@ export class CallbackComponent implements OnInit {
       return;
     }
 
-    this.authService.initializeUserSession(response.authUser, response.accessToken).subscribe({
-      next: () => {
-        this.toastService.showSuccess(`¡Bienvenido, ${response.authUser.name || 'usuario'}!`);
-        this.router.navigate(['/app/generateRecipes']);
-      },
-      error: () => this.handleLoginError(),
-    });
+    this.authService.initializeUserSession(response.authUser, response.accessToken);
+    this.router.navigate(['/app/generateRecipes']);
   }
 
   private handleLoginError(): void {

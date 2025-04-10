@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable, tap, map } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { ILoginResponse, IUser, IAuthority, IRoleType, IResponse } from '../interfaces';
 import { IngredientService } from './ingredient.service';
 
@@ -65,20 +65,12 @@ export class AuthService {
     );
   }
 
-  public initializeUserSession(authUser: IUser, token: string, expiresIn = 3600000000): Observable<void> {
+  public initializeUserSession(authUser: IUser, token: string, expiresIn = 3600000000) {
     this.user = authUser;
     this.accessToken = token;
     this.expiresIn = expiresIn;
 
     this.save();
-
-    const userId = authUser.id!;
-    return this.ingredientService.getFormattedIngredientsByUser(userId).pipe(
-      tap((ingredientsRes: IResponse<string[]>) => {
-        localStorage.setItem('user_ingredients', JSON.stringify(ingredientsRes.data));
-      }),
-      map(() => undefined)
-    );
   }
 
   public setAuthData(authUser: IUser, token: string): void {
