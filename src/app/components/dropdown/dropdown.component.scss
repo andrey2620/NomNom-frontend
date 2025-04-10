@@ -1,0 +1,25 @@
+.btn:hover{
+    background-color: #8e1121;
+    border-color: #8e1121;
+}
+
+.btn:focus{
+    background-color: #8e1121;
+    border-color: #8e1121;
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(142, 17, 33, 0.5);
+}
+
+.scrollable-options {
+    max-height: 200px; /* o la altura que prefieras */
+    overflow-y: auto;
+}
+
+/*
+@media screen and (max-width: 768px) {
+    .btn{
+        max-width: 100px;
+    }
+    
+}
+    */

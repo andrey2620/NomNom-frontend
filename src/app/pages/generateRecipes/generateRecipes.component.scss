@@ -1,3 +1,15 @@
 .ingredientContainer{
     max-height: 50px !important;
 }
+
+.searchBar{
+    max-width: 300px;
+    min-width: 300px;
+}
+
+@media (max-width: 768px) {
+    .searchBar{
+        max-width: 150px;
+        min-width: 150px;
+    }
+}
