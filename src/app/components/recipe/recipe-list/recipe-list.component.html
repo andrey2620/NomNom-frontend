@@ -1,5 +1,10 @@
 <div class="recipe-panel p-3">
-  <h2 class="section-title mb-4">Mis Recetas</h2>
+  <div class="d-flex justify-content-between">
+    <h2 class="section-title mb-4">Mis Recetas</h2>
+    <ng-content></ng-content>
+  </div>
+
+  <!-- Aquí va el botón externo -->
 
   <div class="d-flex flex-column gap-4">
     <ng-container *ngFor="let recipe of itemList; trackBy: trackById">

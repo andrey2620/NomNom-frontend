@@ -1,4 +1,4 @@
-import { Component, inject, Input, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, inject, Input, ViewChild, Output, EventEmitter, ElementRef } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoaderComponent } from '../loader/loader.component';
 import { CommonModule } from '@angular/common';
@@ -15,24 +15,24 @@ import { CommonModule } from '@angular/common';
 })
 export class ModalComponent {
   @Input() title?: string;
-  @Input() confirmAction: string = '';
-  @Input() cancelAction: string = '';
-  @Input() customValidation: boolean = false;
-  @Input() isLoading: boolean = false;
-  @Input() loadingConfirmationMethod: boolean = false;
-  @Input() hideConfirmAction: boolean = false;
-  @Input() useCustomBackGround: boolean = false;
-  @Input() hideCancelOption: boolean = false;
-  @Input() hideFooter: boolean = false;
-  @Input() modalBodyClass: string = "modal-body";
-  @Input() modalFooterClass: string = "modal-footer";
-  @Input() modalContentClass: string = "modal-content";
+  @Input() confirmAction = '';
+  @Input() cancelAction = '';
+  @Input() customValidation = false;
+  @Input() isLoading = false;
+  @Input() loadingConfirmationMethod = false;
+  @Input() hideConfirmAction = false;
+  @Input() useCustomBackGround = false;
+  @Input() hideCancelOption = false;
+  @Input() hideFooter = false;
+  @Input() modalBodyClass = "modal-body";
+  @Input() modalFooterClass = "modal-footer";
+  @Input() modalContentClass = "modal-content";
   @Output() callCancelMethod = new EventEmitter();
   @Output() callConfirmationMethod = new EventEmitter();
 
   public modalService: NgbModal = inject(NgbModal);
 
-  @ViewChild('modalContent', { static: true }) modalContent!: any;
+  @ViewChild('modalContent', { static: true }) modalContent!: ElementRef;
 
   public show() {
     this.modalService.open(this.modalContent, { centered: true });

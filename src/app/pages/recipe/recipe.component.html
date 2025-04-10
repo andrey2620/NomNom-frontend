@@ -1,11 +1,12 @@
 <div class="container-fluid p-2 h-100">
   <div class="d-flex h-100 gap-4 w-100 flex-md-wrap flex-lg-nowrap">
-    <!-- <div class="text-end mb-3">
-      <button class="btn btn-outline-success" (click)="onGenerateMore()">➕ Cargar 3 recetas más</button>
-    </div> -->
     <!-- Lista de recetas: siempre visible -->
     <div class="app-recipe-list-container h-100 w-100">
       <app-recipe-list #recipeList [areActionsAvailable]="true" (cook)="onRecipeSelected($event)" (listInitialized)="onRecipeListInitialized($event)">
+        <!-- Este botón se renderiza DENTRO del recipe-list -->
+        <div class="text-end">
+          <button class="btn btn-load-more text-white" (click)="recipeListComponent.onGenerateMore()">Cargar más</button>
+        </div>
       </app-recipe-list>
     </div>
 
