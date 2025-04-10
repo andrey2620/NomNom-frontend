@@ -1,0 +1,25 @@
+<div class="dropdown">
+    <button
+      class="btn btn-primary dropdown-toggle red-bg"
+      type="button"
+      id="categoryDropdown"
+      data-bs-toggle="dropdown"
+      aria-expanded="false"
+    >
+      {{ selectedCategory || 'Categoria' }}
+    </button>
+    <ul class="dropdown-menu scrollable-options" aria-labelledby="categoryDropdown">
+        <li>
+          <a class="dropdown-item text-muted" (click)="selectCategory(null)">
+            --- Ninguno ---
+          </a>
+        </li>
+        <li><hr class="dropdown-divider" /></li>
+        <li *ngFor="let category of categories">
+          <a class="dropdown-item" (click)="selectCategory(category)">
+            {{ category }}
+          </a>
+        </li>
+      </ul>
+    </div>
+  
