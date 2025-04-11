@@ -1,10 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, effect, inject, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
 import { IAllergies, IDietPreferences, IUser } from '../../interfaces';
 import { AllergiesService } from '../../services/allergies.service';
-import { AuthService } from '../../services/auth.service';
 import { DietPreferenceService } from '../../services/dietPreference.service';
 import { ProfileService } from '../../services/profile.service';
 
@@ -23,10 +21,8 @@ export class ProfileComponent implements OnInit {
   selectedPreferences: Set<IDietPreferences> = new Set<IDietPreferences>();
 
   constructor(
-    private authService: AuthService,
     public dietPreferenceService: DietPreferenceService,
-    public allergiesService: AllergiesService,
-    private router: Router
+    public allergiesService: AllergiesService
   ) {
     this.profileService.getUserInfoSignal();
     this.dietPreferenceService.getAll();
@@ -49,68 +45,5 @@ export class ProfileComponent implements OnInit {
         this.selectedPreferences = new Set(this.user.preferences || []);
       }
     });
-  }
-
-  logOut() {
-    this.authService.logout();
-    this.router.navigate(['/login']);
-  }
-
-  onSelectedAllergy(event: Event, allergy: IAllergies) {
-    const checked = (event.target as HTMLInputElement).checked;
-
-    if (checked) {
-      this.selectedAllergies.add(allergy);
-      allergy.isSelected = true;
-    } else {
-      this.selectedAllergies.delete(allergy);
-      allergy.isSelected = false;
-    }
-
-    // console.log('Alergias seleccionadas:', Array.from(this.selectedAllergies));
-  }
-
-  onSelectedPreference(event: Event, preference: IDietPreferences) {
-    const checked = (event.target as HTMLInputElement).checked;
-
-    if (checked) {
-      this.selectedPreferences.add(preference);
-      preference.isSelected = true;
-    } else {
-      this.selectedPreferences.delete(preference);
-      preference.isSelected = false;
-    }
-
-    // console.log('Preferencias seleccionadas:', Array.from(this.selectedPreferences));
-  }
-
-  updateSelections() {
-    const user = this.profileService.user$();
-
-    if (!user || !user.id) {
-      console.error('Error: Usuario no cargado correctamente.');
-      this.snackBar.open('Error: El usuario no está cargado correctamente.', 'Cerrar', {
-        horizontalPosition: 'right',
-        verticalPosition: 'top',
-        panelClass: ['error-snackbar'],
-      });
-      return;
-    }
-
-    // 🔍 Recolectamos TODAS las alergias que estén marcadas
-    const selectedAllergiesArray = this.allergiesService.allAllergies.filter(a => a.isSelected);
-
-    // 🔍 Recolectamos TODAS las preferencias que estén marcadas
-    const selectedPreferencesArray = this.dietPreferenceService.allDietPreferences.filter(p => p.isSelected);
-
-    const updatedUser: IUser = {
-      ...user,
-      allergies: selectedAllergiesArray,
-      preferences: selectedPreferencesArray,
-      role: user.role,
-    };
-
-    console.log('Actualizando usuario con:', updatedUser);
-    this.profileService.updateUserProfile(updatedUser);
   }
 }

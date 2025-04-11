@@ -1,14 +1,14 @@
 import { Injectable, inject, signal } from '@angular/core';
-import { BaseService } from './base-service';
-import { IUser } from '../interfaces';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { IUser } from '../interfaces';
 import { AllergiesService } from './allergies.service';
+import { BaseService } from './base-service';
 import { DietPreferenceService } from './dietPreference.service';
-
+import { ToastService } from './toast.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProfileService extends BaseService<IUser> {
   protected override source: string = 'users';
@@ -16,13 +16,13 @@ export class ProfileService extends BaseService<IUser> {
   private snackBar = inject(MatSnackBar);
 
   constructor(
-    http: HttpClient,
     private dietPreferenceService: DietPreferenceService,
-    private allergiesService: AllergiesService
+    private allergiesService: AllergiesService,
+    private toastService: ToastService,
+    private router: Router
   ) {
     super();
   }
-
 
   get user$() {
     return this.userSignal;
@@ -48,46 +48,28 @@ export class ProfileService extends BaseService<IUser> {
       },
 
       error: (error: any) => {
-        this.snackBar.open(
-          `Error getting user profile info ${error.message}`,
-          'Close',
-          {
-            horizontalPosition: 'right',
-            verticalPosition: 'top',
-            panelClass: ['error-snackbar']
-          }
-        );
-      }
+        this.snackBar.open(`Error getting user profile info ${error.message}`, 'Close', {
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+          panelClass: ['error-snackbar'],
+        });
+      },
     });
   }
 
   updateUserProfile(user: IUser) {
     return this.http.put(`${this.source}/${user.id}`, user).subscribe({
       next: (response: any) => {
-        this.snackBar.open(
-          'Perfil actualizado correctamente',
-          'Cerrar',
-          {
-            horizontalPosition: 'right',
-            verticalPosition: 'top',
-            panelClass: ['success-snackbar'],
-            duration: 4000
-          }
-        );
+        this.toastService.showSuccess('Perfil actualizado correctamente', '', {
+          positionClass: 'toast-bottom-right',
+        });
+
         this.getUserInfoSignal();
+        this.router.navigateByUrl('/app/profile');
       },
       error: (error: any) => {
-        this.snackBar.open(
-          `Error al actualizar perfil: ${error.message}`,
-          'Cerrar',
-          {
-            horizontalPosition: 'right',
-            verticalPosition: 'top',
-            panelClass: ['error-snackbar']
-          }
-        );
-      }
+        this.toastService.showWarning(`Error al actualizar perfil: ${error.message}`);
+      },
     });
   }
-
 }
