@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, effect, inject, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+
+import { SelectCustomComponent } from '../../components/select-custom/select-custom';
 import { IAllergies, IDietPreferences, IUser } from '../../interfaces';
 import { AllergiesService } from '../../services/allergies.service';
 import { AuthService } from '../../services/auth.service';
@@ -10,17 +12,19 @@ import { ProfileService } from '../../services/profile.service';
 
 @Component({
   standalone: true,
-  selector: 'app-profile',
-  imports: [CommonModule],
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss'],
+  selector: 'app-profile-edit',
+  imports: [CommonModule, SelectCustomComponent],
+  templateUrl: './profile-edit.component.html',
+  styleUrls: ['./profile-edit.component.scss'],
 })
-export class ProfileComponent implements OnInit {
+export class ProfileEditComponent implements OnInit {
   public profileService = inject(ProfileService);
   public user!: IUser;
   public snackBar = inject(MatSnackBar);
   selectedAllergies: Set<IAllergies> = new Set<IAllergies>();
   selectedPreferences: Set<IDietPreferences> = new Set<IDietPreferences>();
+  public selectedAllergiesArray: IAllergies[] = [];
+  public selectedPreferencesArray: IDietPreferences[] = [];
 
   constructor(
     private authService: AuthService,
@@ -45,8 +49,8 @@ export class ProfileComponent implements OnInit {
         this.user = user;
         // console.log('User cargado correctamente:', this.user);
 
-        this.selectedAllergies = new Set(this.user.allergies || []);
-        this.selectedPreferences = new Set(this.user.preferences || []);
+        this.selectedAllergies = new Set(this.user.allergies ?? []);
+        this.selectedPreferences = new Set(this.user.preferences ?? []);
       }
     });
   }
@@ -98,19 +102,63 @@ export class ProfileComponent implements OnInit {
     }
 
     // 🔍 Recolectamos TODAS las alergias que estén marcadas
-    const selectedAllergiesArray = this.allergiesService.allAllergies.filter(a => a.isSelected);
+    this.selectedAllergiesArray = this.allergiesService.allAllergies.filter(a => a.isSelected);
 
     // 🔍 Recolectamos TODAS las preferencias que estén marcadas
-    const selectedPreferencesArray = this.dietPreferenceService.allDietPreferences.filter(p => p.isSelected);
+    this.selectedPreferencesArray = this.dietPreferenceService.allDietPreferences.filter(p => p.isSelected);
 
     const updatedUser: IUser = {
       ...user,
-      allergies: selectedAllergiesArray,
-      preferences: selectedPreferencesArray,
+      allergies: this.selectedAllergiesArray,
+      preferences: this.selectedPreferencesArray,
       role: user.role,
     };
 
     console.log('Actualizando usuario con:', updatedUser);
     this.profileService.updateUserProfile(updatedUser);
+  }
+
+  getAllergiesNames() {
+    return this.allergiesService.allAllergies.map(allergy => allergy.name);
+  }
+  getAllergiesUserIsSelected() {
+    return this.allergiesService.allAllergies.filter(allergy => allergy.isSelected).map(allergy => allergy.name);
+  }
+  syncSelectedAllergies(selectedNames: string[]) {
+    // Actualizar el estado isSelected de cada alergia basado en los nombres seleccionados
+    this.allergiesService.allAllergies.forEach(allergy => {
+      allergy.isSelected = selectedNames.includes(allergy.name);
+    });
+
+    // Actualizar el array de alergias seleccionadas
+    this.selectedAllergiesArray = this.allergiesService.allAllergies.filter(a => a.isSelected);
+
+    this.allergiesService.allAllergies = [...this.allergiesService.allAllergies];
+  }
+
+  getDietPreferencesNames() {
+    return this.dietPreferenceService.allDietPreferences
+      .map(preference => preference.name)
+      .filter((name): name is string => name !== undefined && name !== null);
+  }
+
+  getDietPreferencesUserIsSelected() {
+    return this.dietPreferenceService.allDietPreferences
+      .filter(preference => preference.isSelected)
+      .map(preference => preference.name)
+      .filter((name): name is string => name !== undefined && name !== null);
+  }
+
+  syncSelectedPreferences(selectedNames: string[]) {
+    // Actualizar el estado isSelected de cada preferencia basado en los nombres seleccionados
+    this.dietPreferenceService.allDietPreferences.forEach(preference => {
+      preference.isSelected = preference.name ? selectedNames.includes(preference.name) : false;
+    });
+
+    // Actualizar el array de preferencias seleccionadas
+    this.selectedPreferences = new Set(this.dietPreferenceService.allDietPreferences.filter(p => p.isSelected));
+
+    // Forzar detección de cambios para actualizar los chips inmediatamente
+    this.dietPreferenceService.allDietPreferences = [...this.dietPreferenceService.allDietPreferences];
   }
 }

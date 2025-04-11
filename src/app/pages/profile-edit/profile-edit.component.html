@@ -1,8 +1,7 @@
-<section class="container profile-container w-75 p-0 pb-4">
+<section class="container profile-container w-75 p-0 pb-5">
   <div class="row mx-auto">
     <div class="d-flex justify-content-between align-items-center p-0">
       <h1 class="my-4 p-0">Perfil</h1>
-      <a href="/app/profile/edit" class="btn-edit-profile">Editar</a>
     </div>
     <div class="image-profile-contaienr col-3 d-flex justify-content-center aling-items-center flex-column">
       <figure class="image-container mx-auto img-fluid">
@@ -58,45 +57,54 @@
   <hr class="my-4" />
   <div class="row mx-auto">
     <h2 class="title p-0">Alergias</h2>
+    <div class="mb-3 p-0">
+      <app-select-custom
+        [data]="getAllergiesNames()"
+        [selectedValues]="getAllergiesUserIsSelected()"
+        [placeholder]="'Seleccione sus alergias'"
+        (selectionChange)="syncSelectedAllergies($event)" />
+    </div>
+
     <div class="d-flex flex-wrap gap-2 p-0">
-      @for (allergy of allergiesService.allAllergies; track allergy.id) {
-        <div
-          class="badge rounded-pill px-3 py-2"
-          [class.border]="allergy.isSelected"
-          [class.border-danger]="allergy.isSelected"
-          [class.text-danger]="allergy.isSelected"
-          [class.d-block]="allergy.isSelected"
-          [class.d-none]="!allergy.isSelected">
-          <span class="d-inline-block pe-1">
-            <i class="fa-solid fa-triangle-exclamation"></i>
-          </span>
-          <span>{{ allergy.name }}</span>
-        </div>
-      } @empty {
-        <p class="text-muted">No hay alergias seleccionadas</p>
-      }
+      <div
+        *ngFor="let allergy of allergiesService.allAllergies"
+        class="badge rounded-pill px-3 py-2"
+        [ngClass]="{ 'border border-danger text-danger d-block': allergy.isSelected, 'd-none': !allergy.isSelected }">
+        <span class="d-inline-block pe-1">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+        </span>
+        <span>
+          {{ allergy.name }}
+        </span>
+      </div>
     </div>
   </div>
   <hr class="my-4" />
   <div class="row mx-auto">
     <h2 class="title p-0">Preferencias Dietéticas</h2>
-    <div class="d-flex flex-wrap gap-2 p-0">
-      @for (preference of dietPreferenceService.allDietPreferences; track preference.id) {
-        <div
-          class="badge rounded-pill px-3 py-2"
-          [class.border]="preference.isSelected"
-          [class.border-success]="preference.isSelected"
-          [class.text-success]="preference.isSelected"
-          [class.d-block]="preference.isSelected"
-          [class.d-none]="!preference.isSelected">
-          <span class="d-inline-block pe-1">
-            <i class="fa-solid fa-utensils"></i>
-          </span>
-          <span>{{ preference.name }}</span>
-        </div>
-      } @empty {
-        <p class="text-muted">No hay preferencias dietéticas seleccionadas</p>
-      }
+    <div class="mb-3 p-0">
+      <app-select-custom
+        [data]="getDietPreferencesNames()"
+        [selectedValues]="getDietPreferencesUserIsSelected()"
+        [placeholder]="'Seleccione sus alergias'"
+        (selectionChange)="syncSelectedPreferences($event)" />
     </div>
+    <div class="d-flex flex-wrap gap-2 p-0">
+      <div
+        *ngFor="let preference of dietPreferenceService.allDietPreferences"
+        class="badge rounded-pill px-3 py-2"
+        [ngClass]="{ 'border border-success text-success d-block': preference.isSelected, 'd-none': !preference.isSelected }">
+        <span class="d-inline-block pe-1">
+          <i class="fa-solid fa-utensils"></i>
+        </span>
+        <span>
+          {{ preference.name }}
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="botones-container my-4">
+    <button class="btn btn-preferences" (click)="updateSelections()">Guardar</button>
+    <button class="btn btn-preferences" (click)="logOut()">Cerrar Sesión</button>
   </div>
 </section>

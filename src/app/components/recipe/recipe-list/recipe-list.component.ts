@@ -1,10 +1,9 @@
-import { Component, EventEmitter, AfterViewInit, OnInit, inject, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { catchError, of, delay, EMPTY } from 'rxjs';
-import { CATEGORY_IMAGE_MAP, IRecipe } from '../../../interfaces';
-import { RecipesService } from '../../../services/recipes.service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { catchError, delay, of } from 'rxjs';
+import { CATEGORY_IMAGE_MAP } from '../../../interfaces';
 import { ViewRecipeComponent } from '../../../pages/recipe/view-recipe/view-recipe.component';
+import { RecipesService } from '../../../services/recipes.service';
 import { ModalComponent } from '../../modal/modal.component';
 import { RecipeFormComponent } from '../recipe-form/recipe-form.component';
 

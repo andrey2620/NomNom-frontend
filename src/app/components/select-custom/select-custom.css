@@ -1,0 +1,154 @@
+.custom-select-container {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  font-family: Arial, sans-serif;
+}
+
+.select-wrapper {
+  position: relative;
+}
+
+.select-trigger {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 24px;
+}
+
+.placeholder-text {
+  color: #666;
+}
+
+.placeholder-text.has-value {
+  color: inherit;
+}
+
+.additional-selection {
+  color: #666;
+  margin-left: 8px;
+}
+
+.dropdown-panel {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.dropdown-panel.open {
+  display: block;
+}
+
+.search-container {
+  padding: 8px;
+  border-bottom: 1px solid #eee;
+  position: relative;
+}
+
+.search-input {
+  width: 100%;
+  padding: 8px 32px 8px 8px;
+  border: 1px solid #ccc;
+  outline: none;
+  box-shadow: none;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.clear-button {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666;
+  padding: 4px;
+}
+
+.options-container {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.option-item {
+  padding: 8px 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.option-item:hover {
+  background-color: #f5f5f5;
+}
+
+.option-item.selected {
+  background-color: #e3f2fd;
+}
+
+.no-results {
+  padding: 16px;
+  text-align: center;
+}
+
+.add-option-button {
+  margin-top: 8px;
+  padding: 8px 16px;
+  background-color: #1976d2;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.add-option-button:hover {
+  background-color: #1565c0;
+}
+
+.tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.tag-item {
+  display: flex;
+  align-items: center;
+  background-color: #e3f2fd;
+  border-radius: 16px;
+  padding: 4px 12px;
+}
+
+.tag {
+  margin-right: 4px;
+}
+
+.remove-tag {
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  padding: 2px;
+  font-size: 12px;
+}
+
+.selection-info {
+  margin-top: 16px;
+  color: #666;
+}
