@@ -49,9 +49,24 @@
       </div>      
     </div>
 
+    <button class="btn btn-secondary my-4 me-4" (click)="deleteIngredients()">
+      Borrar los ingredientes
+    </button>
     <button class="btn btn-danger my-4" (click)="saveSelectedIngredients()">
       Guardar
     </button>
+
+    <app-modal
+    #confirmModal
+    [confirmAction]="'Borrar'"
+    [cancelAction]="'Cancelar'"
+    (callConfirmationMethod)="onModalConfirm()"
+    (callCancelMethod)="onModalCancel()"
+    [hideCancelOption]="false">
+    <h1 class="text-center">¡OJO!</h1>
+    <h2 class="text-center">¿Estás seguro de que desea eliminar todos los ingredientes?</h2>
+  </app-modal>
+
   </div>
 } @loading (minimum 1.5s) {
   <app-loader></app-loader>

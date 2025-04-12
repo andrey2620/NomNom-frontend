@@ -38,6 +38,7 @@ export class IngredientService extends BaseService<IIngredients> {
       },
     });
   }
+  
 
   getIngredientByName(name: string, page = 1) {
     this.search.page = page; // Reinicia la búsqueda desde la página 1
