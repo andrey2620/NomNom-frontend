@@ -32,16 +32,41 @@
       </div>
     </div>
 
-    <div class="">
-      <app-ingredients
-        [ingredients]="ingredientService.ingredient$()"
-        (selectedChange)="selectedIngredients = $event">
-      </app-ingredients>
+    <div class="d-flex gap-5">
+      <div class="ingredientsContainer">
+        <app-ingredients
+          [ingredients]="ingredientService.ingredient$()"
+          [selectedIds]="selectedIngredients"
+          (selectedChange)="onIngredientsChange($event)">
+        </app-ingredients>
+      </div>
+      <div class="chipsContainer">
+        <h2 class="bold chipTitle">Ingredientes seleccionados</h2>
+        <app-chips 
+        [chips]="chips"
+        (chipRemoved)="onChipRemoved($event)"
+        ></app-chips>
+      </div>      
     </div>
 
+    <button class="btn btn-secondary my-4 me-4" (click)="deleteIngredients()">
+      Borrar los ingredientes
+    </button>
     <button class="btn btn-danger my-4" (click)="saveSelectedIngredients()">
       Guardar
     </button>
+
+    <app-modal
+    #confirmModal
+    [confirmAction]="'Borrar'"
+    [cancelAction]="'Cancelar'"
+    (callConfirmationMethod)="onModalConfirm()"
+    (callCancelMethod)="onModalCancel()"
+    [hideCancelOption]="false">
+    <h1 class="text-center">¡OJO!</h1>
+    <h2 class="text-center">¿Estás seguro de que desea eliminar todos los ingredientes?</h2>
+  </app-modal>
+
   </div>
 } @loading (minimum 1.5s) {
   <app-loader></app-loader>

@@ -12,3 +12,11 @@
 .modal-content.custom-bg {
   background-color: var(--bg-color);
 }
+
+.btn-primary{
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+.btn-primary:hover{
+  background-color: #780f1d;
+}

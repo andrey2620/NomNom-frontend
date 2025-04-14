@@ -63,6 +63,7 @@
 
   /* Negrita */
   --font-weight: 400;
+  
 }
 
 body[class='dark-only'] {
@@ -151,4 +152,8 @@ body {
 
 .red {
   color: #b5152a;
+}
+
+.bold{
+  font-weight: bold !important;
 }

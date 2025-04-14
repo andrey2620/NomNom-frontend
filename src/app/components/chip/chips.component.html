@@ -1,0 +1,18 @@
+<div class="mb-3">
+<div class=" gap-2">
+  <span 
+    *ngFor="let chip of chips; let i = index"
+    class="badge bg-primary pb-2 chip"
+    [ngClass]="{ 'chip-hovered': hoveredIndex === i }"
+  >
+    {{ chip }}
+    <button
+      type="button"
+      class="btn-close btn-close-white btn-sm ms-2"
+      aria-label="Eliminar"
+      (mouseenter)="hoveredIndex = i"
+      (mouseleave)="hoveredIndex = null"
+      (click)="removeChip(chip)"
+    ></button>
+  </span>
+</div>
