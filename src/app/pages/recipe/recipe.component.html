@@ -28,6 +28,8 @@
   #missingIngredientsModal
   [confirmAction]="'Receta aleatoria'"
   [cancelAction]="'Seleccionar ingredientes'"
+  [confirmButtonClass]="'btn btn-primary'"
+  [cancelButtonClass]="'btn btn-danger'"
   (callConfirmationMethod)="onConfirmGenerateRandom()"
   (callCancelMethod)="onGoToIngredients()"
   [hideCancelOption]="false">

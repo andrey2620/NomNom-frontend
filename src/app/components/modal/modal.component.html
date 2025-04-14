@@ -13,19 +13,20 @@
 
       @if (!hideFooter) {
         <div [class]="modalFooterClass">
-<!-- test          <button type="button" [disabled]="loadingConfirmationMethod" (click)="callCancelMethod.emit()" class="btn btn-danger"> -->
-
-<!-- Gabriel-Chips          <button type="button" [disabled]="loadingConfirmationMethod" (click)="callCancelMethod.emit()" class="btn btn-secondary"> -->
-
+          <button type="button" [disabled]="loadingConfirmationMethod" (click)="callCancelMethod.emit()" [class]="cancelButtonClass">
             {{ cancelAction }}
           </button>
+
+          <!-- test          <button type="button" [disabled]="loadingConfirmationMethod" (click)="callCancelMethod.emit()" class="btn btn-danger"> -->
+
+          <!-- Gabriel-Chips          <button type="button" [disabled]="loadingConfirmationMethod" (click)="callCancelMethod.emit()" class="btn btn-secondary"> -->
 
           @if (!hideConfirmAction) {
             <button
               type="button"
               [disabled]="customValidation || loadingConfirmationMethod"
               (click)="callConfirmationMethod.emit()"
-              class="btn btn-primary">
+              [class]="confirmButtonClass">
               @if (loadingConfirmationMethod === true) {
                 <app-loader />
               } @else {

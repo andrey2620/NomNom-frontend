@@ -42,11 +42,11 @@
       </div>
       <div class="chipsContainer">
         <h2 class="bold chipTitle">Ingredientes seleccionados</h2>
-        <app-chips 
+        <app-chips
         [chips]="chips"
         (chipRemoved)="onChipRemoved($event)"
         ></app-chips>
-      </div>      
+      </div>
     </div>
 
     <button class="btn btn-secondary my-4 me-4" (click)="deleteIngredients()">
@@ -60,12 +60,15 @@
     #confirmModal
     [confirmAction]="'Borrar'"
     [cancelAction]="'Cancelar'"
+    [confirmButtonClass]="'btn btn-danger'"
+    [cancelButtonClass]="'btn btn-secondary'" <!-- <- estilo Gabriel-Chips -->
     (callConfirmationMethod)="onModalConfirm()"
     (callCancelMethod)="onModalCancel()"
     [hideCancelOption]="false">
     <h1 class="text-center">¡OJO!</h1>
     <h2 class="text-center">¿Estás seguro de que desea eliminar todos los ingredientes?</h2>
   </app-modal>
+
 
   </div>
 } @loading (minimum 1.5s) {
