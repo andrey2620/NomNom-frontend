@@ -1,98 +1,185 @@
-import { Component, EventEmitter, AfterViewInit, OnInit, inject, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { catchError, of, delay, EMPTY } from 'rxjs';
-import { CATEGORY_IMAGE_MAP, IRecipe } from '../../../interfaces';
+import { catchError, delay, of } from 'rxjs';
+import { IRecipe, CATEGORY_IMAGE_MAP } from '../../../interfaces';
+import fallbackRecipes from './recipes.json';
 import { RecipesService } from '../../../services/recipes.service';
-import { ViewRecipeComponent } from '../../../pages/recipe/view-recipe/view-recipe.component';
-import { ModalComponent } from '../../modal/modal.component';
-import { RecipeFormComponent } from '../recipe-form/recipe-form.component';
 
 @Component({
   selector: 'app-recipe-list',
   standalone: true,
-  imports: [CommonModule, ModalComponent, RecipeFormComponent, ViewRecipeComponent],
+  imports: [CommonModule],
   templateUrl: './recipe-list.component.html',
   styleUrls: ['./recipe-list.component.scss'],
 })
 export class RecipeListComponent implements OnInit {
   @Input() areActionsAvailable = false;
-  @Output() cook = new EventEmitter<any>();
-  @Output() listInitialized = new EventEmitter<any[]>();
-  itemList: any[] = [];
-  selectedItem: any = null;
-  isLoading = true;
-  skeletonList: any[] = [];
+  @Output() cook = new EventEmitter<IRecipe>();
+  @Output() listInitialized = new EventEmitter<IRecipe[]>();
+
+  userId: number | null = null;
+  itemList: IRecipe[] = [];
+  skeletonList: null[] = [];
+
+  private fallbackIndex = 0;
+  private fallbackMode = false;
+  private randomMode = false;
 
   constructor(private recipesService: RecipesService) {}
 
   ngOnInit(): void {
     const authUser = localStorage.getItem('auth_user');
-    if (!authUser) return;
+    if (authUser) {
+      this.userId = JSON.parse(authUser).id;
+    }
+  }
 
-    const userId = JSON.parse(authUser).id;
-    this.loadValidRecipes(userId, 3);
+  clearRecipes(): void {
+    this.itemList = [];
+    this.skeletonList = [];
+    this.fallbackIndex = 0;
+    this.fallbackMode = false;
+    this.randomMode = false;
+  }
+
+  loadSkeletons(count: number): void {
+    this.skeletonList.push(...Array(count).fill(null));
+  }
+
+  loadAllFallbackAnimated(count: number): void {
+    this.fallbackMode = true;
+    const available = fallbackRecipes.slice(this.fallbackIndex, this.fallbackIndex + count);
+    const safeCount = available.length;
+
+    this.skeletonList = Array(safeCount).fill(null);
+
+    available.forEach((recipe, i) => {
+      setTimeout(() => {
+        this.itemList.push(recipe);
+        this.skeletonList.pop();
+        this.listInitialized.emit(this.itemList);
+      }, i * 500);
+    });
+
+    this.fallbackIndex += safeCount;
   }
 
   loadValidRecipes(userId: number, count: number): void {
     let attempts = 0;
-    const maxAttempts = 20;
-
-    // Initialize with skeleton placeholders
-    this.skeletonList = Array(count).fill(null);
+    let loaded = 0;
+    const maxAttempts = count * 4;
 
     const fetchRecipe = () => {
       this.recipesService
         .getRecipesByUser(userId)
         .pipe(
           catchError(err => {
-            console.error('Error al generar receta, reintentando...', err);
+            console.error('❌ Error al generar receta IA:', err.message);
             return of(null);
           }),
-          delay(0)
+          delay(300)
         )
         .subscribe(recipe => {
           attempts++;
+
           if (recipe && this.isValidRecipe(recipe)) {
             this.itemList.push(recipe);
-            // Reduce skeleton count as recipes load
             this.skeletonList.pop();
+            this.listInitialized.emit(this.itemList);
+            loaded++;
           }
 
-          if (this.itemList.length < count && attempts < maxAttempts) {
+          if (loaded < count && attempts < maxAttempts) {
             fetchRecipe();
           }
 
-          if (this.itemList.length === count || attempts >= maxAttempts) {
-            this.listInitialized.emit(this.itemList);
-            this.isLoading = false;
-            this.skeletonList = [];
+          if (attempts >= maxAttempts && loaded < count) {
+            const fallbackCount = count - loaded;
+            this.loadAllFallbackAnimated(fallbackCount);
           }
         });
     };
+
     fetchRecipe();
   }
 
-  isValidRecipe(recipe: any): boolean {
-    return recipe && recipe.name && Array.isArray(recipe.ingredients) && recipe.ingredients.length > 0;
+  loadRandomRecipes(count: number): void {
+    if (this.skeletonList.length === 0) {
+      this.loadSkeletons(count);
+    }
+
+    this.randomMode = true;
+    let loaded = 0;
+    let attempts = 0;
+    const maxAttempts = count * 4;
+
+    const fetchRandom = () => {
+      this.recipesService
+        .getRandomRecipes()
+        .pipe(
+          catchError(err => {
+            console.error('❌ Error receta aleatoria:', err.message);
+            return of(null);
+          }),
+          delay(300)
+        )
+        .subscribe((recipe: IRecipe | null) => {
+          attempts++;
+
+          if (recipe && this.isValidRecipe(recipe)) {
+            this.itemList.push(recipe);
+            this.skeletonList.pop();
+            this.listInitialized.emit(this.itemList);
+            loaded++;
+          }
+
+          if (loaded < count && attempts < maxAttempts) {
+            fetchRandom();
+          }
+
+          if (attempts >= maxAttempts && loaded < count) {
+            const fallbackCount = count - loaded;
+            this.loadAllFallbackAnimated(fallbackCount);
+          }
+        });
+    };
+
+    fetchRandom();
   }
 
-  trackById(index: number, _item: any): number {
-    return index;
+  onGenerateMore(): void {
+    const count = 3;
+    this.loadSkeletons(count);
+
+    if (this.fallbackMode) {
+      this.loadAllFallbackAnimated(count);
+    } else if (this.randomMode) {
+      this.loadRandomRecipes(count);
+    } else {
+      this.loadValidRecipes(this.userId ?? 0, count);
+    }
   }
 
-  onCook(recipe: any): void {
+  isValidRecipe(recipe: IRecipe): boolean {
+    return recipe && typeof recipe.name === 'string' && Array.isArray(recipe.ingredients) && recipe.ingredients.length > 0;
+  }
+
+  onCook(recipe: IRecipe): void {
     this.cook.emit(recipe);
   }
 
   getCategoryImage(category: string): string {
-    const normalized = category.toLowerCase();
-    return `assets/img/recipe/${CATEGORY_IMAGE_MAP[normalized] || 'meal1.png'}`;
+    const normalized = category.trim().toLowerCase();
+    const fileName = CATEGORY_IMAGE_MAP[normalized] || 'meal1.png';
+    return `assets/img/recipe/${fileName}`;
   }
+
   onImageError(event: Event): void {
-    const imgElement = event.target as HTMLImageElement | null;
-    if (imgElement) {
-      imgElement.src = 'assets/img/recipe/meal1.png';
-    }
+    const img = event.target as HTMLImageElement;
+    img.src = 'assets/img/recipe/meal1.png';
+  }
+
+  trackById(index: number, item: IRecipe): string {
+    return item.name;
   }
 }

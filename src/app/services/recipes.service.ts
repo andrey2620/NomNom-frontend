@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class RecipesService extends BaseService<IRecipe> {
-  protected override source: string = 'recipes';
+  protected override source = 'recipes';
 
   private recipeListSignal = signal<IRecipe[]>([]);
   get recipes$() {
@@ -64,8 +64,8 @@ export class RecipesService extends BaseService<IRecipe> {
     });
   }
 
-  getRecipesByIngredientsList(userId: number): Observable<any> {
-    return this.findAllWithParamsAndCustomSource(`generator/user/${userId}`);
+  getRandomRecipes(): Observable<any> {
+    return this.findAllWithParamsAndCustomSource(`generator`);
   }
 
   getRecipesByUser(userId: number): Observable<any> {

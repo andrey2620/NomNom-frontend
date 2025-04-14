@@ -4,7 +4,7 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { AuthGoogleService } from '../../../services/auth-google.service';
 import { CommonModule } from '@angular/common';
-import { switchMap } from 'rxjs';
+import { tap } from 'rxjs';
 import { ToastService } from '../../../services/toast.service';
 
 @Component({
@@ -51,7 +51,11 @@ export class LoginComponent {
 
     this.authService
       .login(this.loginForm)
-      .pipe(switchMap(res => this.authService.initializeUserSession(res.authUser, res.token, res.expiresIn)))
+      .pipe(
+        tap(res => {
+          this.authService.initializeUserSession(res.authUser, res.token, res.expiresIn);
+        })
+      )
       .subscribe({
         next: () => {
           this.toastService.showSuccess('¡Bienvenido de nuevo!');
