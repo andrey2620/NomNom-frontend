@@ -1,4 +1,9 @@
 <div *ngIf="recipe" class="card shadow-sm view-recipe h-100 p-0">
+  <div class="position-relative">
+    <div class="position-absolute end-0">
+      <app-tooltip></app-tooltip>
+    </div>
+  </div>
   <img
     [src]="getCategoryImage(recipe.recipeCategory)"
     class="card-img-top"

@@ -1,11 +1,12 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { TooltipComponent } from '../../../components/tooltip/Tooltip.component';
 import { CATEGORY_IMAGE_MAP, IRecipe } from '../../../interfaces';
 
 @Component({
   selector: 'app-view-recipe',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TooltipComponent],
   templateUrl: './view-recipe.component.html',
   styleUrls: ['./view-recipe.component.scss'],
 })
