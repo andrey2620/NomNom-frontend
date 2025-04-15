@@ -1,28 +1,24 @@
-.chipsContainer {
-  flex: 1;
-  min-width: 0;
-  overflow-x: hidden;
-}
-
 .chip-scroll-container {
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  height: 100%;
+  max-height: 400px;
   overflow-y: auto;
-  max-height: 350px;
-  padding-right: 4px;
   width: 100%;
-  box-sizing: border-box;
 }
 
 .chip-badge {
+  align-items: center;
   background-color: #2c5530;
-  color: white;
-  padding: 8px 12px;
-  margin-bottom: 8px;
   border-radius: 10px;
-  width: 100%;
-  justify-content: space-between;
+  color: white;
   cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  padding: 8px 12px;
+  width: 100%;
 }
 
 .chip-hovered {
@@ -30,7 +26,6 @@
 }
 
 .chip-label {
-  flex-grow: 1;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

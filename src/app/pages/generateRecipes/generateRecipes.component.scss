@@ -1,68 +1,35 @@
-/*
 .searchBar {
   max-width: 300px;
   min-width: 300px;
 }
 
 .ingredientContainer {
-  width: 75% !important;
   flex-shrink: 0;
+  width: 75% !important;
 }
 
 .chipsContainer {
-  border: solid 5px var(--primary-color);
+  border: solid 2px var(--primary-color);
   border-radius: 25px;
-  padding: 5px;
-  overflow-y: hidden;
-  width: 15% !important;
-  flex-shrink: 0;
-  max-height: 40vh;
-  text-align: center;
-}
-
-.chipTitle {
-  border-bottom: solid 5px var(--primary-color);
-}
-
-@media (max-width: 768px) {
-  .searchBar {
-    max-width: 150px;
-    min-width: 150px;
-  }
-}
- */
-.searchBar {
-  max-width: 300px;
-  min-width: 300px;
-}
-
-.ingredientContainer {
-  width: 75% !important;
-  flex-shrink: 0;
-}
-
-.chipsContainer {
-  border: solid 5px var(--primary-color);
-  border-radius: 25px;
-  padding: 5px; // 👍 ya lo usabas y está bien
-  overflow-y: hidden; // ⛔ evita scroll innecesario
-  width: 15% !important;
-  flex-shrink: 0;
-  max-height: 40vh;
-  text-align: center;
-
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  -ms-border-radius: 25px;
+  -o-border-radius: 25px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: stretch;
+  max-width: 280px;
+  overflow: hidden;
+  padding: 6px 4px;
+  width: 100% !important;
 }
 
 .chipTitle {
-  border-bottom: solid 5px var(--primary-color);
+  border-bottom: solid 2px var(--primary-color);
+  color: #2c5530;
   font-size: 20px;
   font-weight: bold;
-  color: #2c5530;
   margin-bottom: 10px;
+  text-align: center;
 }
 
 @media (max-width: 768px) {

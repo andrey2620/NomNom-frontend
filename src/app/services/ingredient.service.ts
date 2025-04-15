@@ -1,8 +1,8 @@
 import { inject, Injectable, signal } from '@angular/core';
+import { Observable } from 'rxjs';
 import { IIngredients, IResponse, ISearch } from '../interfaces';
 import { AlertService } from './alert.service';
 import { BaseService } from './base-service';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +16,7 @@ export class IngredientService extends BaseService<IIngredients> {
 
   public search: ISearch = {
     page: 1,
-    size: 18,
+    size: 16,
   };
 
   public totalItems: number[] = [];
@@ -38,7 +38,6 @@ export class IngredientService extends BaseService<IIngredients> {
       },
     });
   }
-  
 
   getIngredientByName(name: string, page = 1) {
     this.search.page = page; // Reinicia la búsqueda desde la página 1
@@ -57,13 +56,13 @@ export class IngredientService extends BaseService<IIngredients> {
 
   getIngredientByNameAndCategory(name: string, category: string, page = 1) {
     this.search.page = page; // Reinicia la búsqueda desde la página 1
-  
+
     // Llamada a la API con nombre y categoría en el endpoint /ingredients/filter
-    this.findAllWithParamsAndCustomSource('filter', { 
-      name: name, 
-      category: category, 
-      page: this.search.page, 
-      size: this.search.size 
+    this.findAllWithParamsAndCustomSource('filter', {
+      name: name,
+      category: category,
+      page: this.search.page,
+      size: this.search.size,
     }).subscribe({
       next: (response: IResponse<IIngredients[]>) => {
         this.search = { ...this.search, ...response.meta };
@@ -75,8 +74,6 @@ export class IngredientService extends BaseService<IIngredients> {
       },
     });
   }
-  
-  
 
   // Aplica la paginación sobre la lista filtrada
   paginateIngredients(page: number, size: number) {
@@ -103,5 +100,4 @@ export class IngredientService extends BaseService<IIngredients> {
   getFormattedIngredientsByUser(userId: number): Observable<IResponse<string[]>> {
     return this.http.get<IResponse<string[]>>(`${this.source}/formated/user/${userId}`);
   }
-
 }
