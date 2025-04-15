@@ -19,7 +19,7 @@ export class ModalComponent {
   @Input() confirmAction = 'Confirmar';
   @Input() cancelAction = 'Cancelar';
   @Input() modalBodyClass = 'modal-body';
-  @Input() modalFooterClass = 'modal-footer d-flex justify-content-end';
+  @Input() modalFooterClass = 'modal-footer d-flex justify-content-center gap-3';
   @Input() modalContentClass = 'modal-content';
   @Input() confirmButtonClass = 'btn btn-primary';
   @Input() cancelButtonClass = 'btn btn-secondary';
