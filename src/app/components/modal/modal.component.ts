@@ -1,12 +1,4 @@
-import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  ViewChild,
-  TemplateRef,
-  inject,
-} from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, TemplateRef, inject } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { LoaderComponent } from '../loader/loader.component';
@@ -29,6 +21,8 @@ export class ModalComponent {
   @Input() modalBodyClass = 'modal-body';
   @Input() modalFooterClass = 'modal-footer d-flex justify-content-end';
   @Input() modalContentClass = 'modal-content';
+  @Input() confirmButtonClass = 'btn btn-primary';
+  @Input() cancelButtonClass = 'btn btn-secondary';
   @Input() hideFooter = false;
   @Input() hideCancelOption = false;
   @Input() hideConfirmAction = false;
