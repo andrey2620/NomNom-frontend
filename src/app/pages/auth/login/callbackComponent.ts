@@ -73,6 +73,7 @@ export class CallbackComponent implements OnInit {
 
     this.authService.initializeUserSession(response.authUser, response.accessToken);
     this.router.navigate(['/app/generateRecipes']);
+    this.toastService.showSuccess('¡Bienvenido de nuevo!');
   }
 
   private handleLoginError(): void {

@@ -58,7 +58,7 @@ export class RecipeListComponent implements OnInit {
         this.itemList.push(recipe);
         this.skeletonList.pop();
         this.listInitialized.emit(this.itemList);
-      }, i * 500);
+      }, i * 300);
     });
 
     this.fallbackIndex += safeCount;
@@ -77,7 +77,7 @@ export class RecipeListComponent implements OnInit {
             console.error('❌ Error al generar receta IA:', err.message);
             return of(null);
           }),
-          delay(300)
+          delay(100)
         )
         .subscribe(recipe => {
           attempts++;
@@ -121,7 +121,7 @@ export class RecipeListComponent implements OnInit {
             console.error('❌ Error receta aleatoria:', err.message);
             return of(null);
           }),
-          delay(300)
+          delay(100)
         )
         .subscribe((recipe: IRecipe | null) => {
           attempts++;

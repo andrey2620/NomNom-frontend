@@ -33,9 +33,8 @@ export class RecipeComponent implements OnInit {
 
     const userId = JSON.parse(authUser).id;
 
-    // ✅ actualizar localStorage antes de cualquier flujo
     this.ingredientService.getFormattedIngredientsByUser(userId).subscribe({
-      next: (res: IResponse<string[]>) => {
+      next: (res: IResponse<{ id: number; name: string }[]>) => {
         localStorage.setItem('user_ingredients', JSON.stringify(res.data));
         this.hasIngredients = res.data.length > 0;
       },
@@ -43,7 +42,6 @@ export class RecipeComponent implements OnInit {
         this.hasIngredients = false;
       },
       complete: () => {
-        // Esperar a que se haya seteado hasIngredients
         setTimeout(() => this.initFlow(), 100);
       },
     });

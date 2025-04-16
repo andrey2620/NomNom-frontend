@@ -20,6 +20,7 @@ export class IngredientService extends BaseService<IIngredients> {
   };
 
   public totalItems: number[] = [];
+  bulkReplaceIngredientsForUser: any;
 
   get ingredient$() {
     return this.ingredientsSignal;
@@ -97,7 +98,11 @@ export class IngredientService extends BaseService<IIngredients> {
     return this.addCustomSource(`bulk-link/user/${userId}`, ingredientIds) as Observable<IResponse<Record<number, string>>>;
   }
 
-  getFormattedIngredientsByUser(userId: number): Observable<IResponse<string[]>> {
-    return this.http.get<IResponse<string[]>>(`${this.source}/formated/user/${userId}`);
+  bulkDeleteIngredientsFromUser(ingredientIds: number[], userId: number): Observable<any> {
+    return this.http.post(`${this.source}/bulk-delete/user/${userId}`, ingredientIds);
+  }
+
+  getFormattedIngredientsByUser(userId: number): Observable<IResponse<{ id: number; name: string }[]>> {
+    return this.http.get<IResponse<{ id: number; name: string }[]>>(`${this.source}/formated/user/${userId}`);
   }
 }
