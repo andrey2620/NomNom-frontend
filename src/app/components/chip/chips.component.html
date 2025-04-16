@@ -2,7 +2,11 @@
   <span
     *ngFor="let chip of chips; let i = index"
     class="badge chip-badge"
-    [ngClass]="{ 'chip-hovered': hoveredIndex === i }"
+    [ngClass]="{
+      'chip-db': chip.fromDb,
+      'chip-temp': !chip.fromDb,
+      'chip-hovered': hoveredIndex === i,
+    }"
     role="button"
     tabindex="0"
     (click)="removeChip(chip)"
@@ -10,7 +14,7 @@
     (keydown.space)="removeChip(chip)"
     (mouseenter)="hoveredIndex = i"
     (mouseleave)="hoveredIndex = null">
-    <span class="chip-label">{{ chip }}</span>
+    <span class="chip-label">{{ chip.name }}</span>
     <button type="button" class="btn-close btn-close-white" aria-label="Eliminar" (click)="removeChip(chip)"></button>
   </span>
 </div>

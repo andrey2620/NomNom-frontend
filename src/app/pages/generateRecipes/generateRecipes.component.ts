@@ -21,18 +21,18 @@ import { forkJoin } from 'rxjs';
 })
 export class GenerateRecipesComponent implements OnInit {
   public ingredientService: IngredientService = inject(IngredientService);
-  public title = 'Buscar ingredientes';
-
   public searchQuery = '';
   public chosenCategory = '';
   public currentPage = 1;
   public itemsPerPage = 18;
   public selectedIngredients: number[] = [];
-  public chips: string[] = [];
-
+  public chips: { id: number; name: string; fromDb: boolean }[] = [];
+  private initialUserIngredientIds: number[] = [];
   private selectedIngredientNames = new Map<number, string>();
   @ViewChild('confirmModal') confirmModal!: ModalComponent;
   hasIngredients: boolean | undefined;
+
+  public title = 'Buscar ingredientes';
 
   constructor(
     private authService: AuthService,
@@ -47,31 +47,23 @@ export class GenerateRecipesComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     const stored = localStorage.getItem('user_ingredients');
-
     if (stored) {
       const ingredientObjects: { id: number; name: string }[] = JSON.parse(stored);
       this.selectedIngredients = ingredientObjects.map(i => i.id);
+      this.initialUserIngredientIds = [...this.selectedIngredients];
       this.selectedIngredientNames.clear();
-
       ingredientObjects.forEach(obj => {
         this.selectedIngredientNames.set(obj.id, obj.name);
       });
-
-      this.chips = ingredientObjects.map(i => i.name);
-    } else {
-      this.selectedIngredients = [];
-      this.selectedIngredientNames.clear();
-      this.chips = [];
+      this.updateChips();
     }
   }
 
-  onIngredientsChange(selectedIds: number[]) {
+  onIngredientsChange(selectedIds: number[]): void {
     this.selectedIngredients = selectedIds;
-
     const currentIngredients = this.ingredientService.ingredient$();
-
     selectedIds.forEach(id => {
       if (!this.selectedIngredientNames.has(id)) {
         const ingredient = currentIngredients.find(i => i.id === id);
@@ -80,18 +72,21 @@ export class GenerateRecipesComponent implements OnInit {
         }
       }
     });
-    this.chips = selectedIds.map(id => this.selectedIngredientNames.get(id) || '').filter(name => name !== '');
+    this.updateChips();
   }
 
-  onChipRemoved(chipName: string) {
-    for (const [id, name] of this.selectedIngredientNames.entries()) {
-      if (name === chipName) {
-        this.selectedIngredients = this.selectedIngredients.filter(selectedId => selectedId !== id);
-        this.selectedIngredientNames.delete(id);
-        break;
-      }
-    }
-    this.chips = this.chips.filter(name => name !== chipName);
+  updateChips(): void {
+    this.chips = this.selectedIngredients.map(id => ({
+      id,
+      name: this.selectedIngredientNames.get(id) || '',
+      fromDb: this.initialUserIngredientIds.includes(id),
+    }));
+  }
+
+  onChipRemoved(chipId: number): void {
+    this.selectedIngredients = this.selectedIngredients.filter(id => id !== chipId);
+    this.selectedIngredientNames.delete(chipId);
+    this.updateChips();
   }
 
   onCategoryChange(category: string | null) {
@@ -128,13 +123,44 @@ export class GenerateRecipesComponent implements OnInit {
   }
 
   onModalConfirm(): void {
-    localStorage.removeItem('user_ingredients');
-    localStorage.removeItem('user_ingredients_names');
-    this.selectedIngredients = [];
-    this.chips = [];
-    this.selectedIngredientNames.clear();
-    this.confirmModal.hideModal();
-    this.toastService.showSuccess('Se han eliminado todos los ingredientes seleccionados.');
+    const userId = this.authService.getCurrentUserId();
+
+    if (!userId) {
+      this.toastService.showError('No se pudo identificar al usuario.');
+      return;
+    }
+
+    const currentIngredientIds = [...this.selectedIngredients];
+
+    if (!currentIngredientIds.length) {
+      this.toastService.showInfo('No hay ingredientes que borrar.');
+      this.confirmModal.hideModal();
+      return;
+    }
+
+    this.ingredientService.bulkDeleteIngredientsFromUser(currentIngredientIds, userId).subscribe({
+      next: (res: { data: Record<string, string> }) => {
+        let deletedCount = 0;
+        for (const msg of Object.values(res.data)) {
+          if (msg === 'Eliminado correctamente') deletedCount++;
+        }
+
+        this.toastService.showSuccess(`${deletedCount} ingrediente(s) eliminado(s).`);
+
+        // Limpiar local y visual
+        this.selectedIngredients = [];
+        this.chips = [];
+        this.selectedIngredientNames.clear();
+        localStorage.removeItem('user_ingredients');
+        this.initialUserIngredientIds = [];
+
+        this.confirmModal.hideModal();
+      },
+      error: () => {
+        this.toastService.showError('Error al eliminar los ingredientes.');
+        this.confirmModal.hideModal();
+      },
+    });
   }
 
   saveSelectedIngredients(): void {
@@ -187,6 +213,10 @@ export class GenerateRecipesComponent implements OnInit {
 
         if (added > 0) this.toastService.showSuccess(`${added} ingrediente(s) añadido(s).`);
         if (removed > 0) this.toastService.showSuccess(`${removed} ingrediente(s) eliminado(s).`);
+        if (added === 0 && removed === 0) this.toastService.showInfo('No se realizaron cambios.');
+
+        this.initialUserIngredientIds = [...this.selectedIngredients];
+        this.updateChips();
       },
       error: err => {
         this.toastService.showError('Error al guardar cambios: ' + err?.error?.message || err.message);
