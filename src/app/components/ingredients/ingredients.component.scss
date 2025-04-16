@@ -1,64 +1,80 @@
 .ingredientContainer {
-    display: grid;
-    grid-template-columns: repeat(9, 1fr); // 5 columnas fijas
-    gap: 10px;
-    padding: 2x;
-    // border: 2px solid red;
-}
-
-/* responsive ingredientContainer */
-@media (max-width: 1200px) {
-    .ingredientContainer {
-        grid-template-columns: repeat(8, 1fr); // 6 columnas fijas
-    }
-}
-@media (max-width: 900px) {
-    .ingredientContainer {
-        grid-template-columns: repeat(5, 1fr); // 4 columnas fijas
-    }
-}
-@media (max-width: 600px) {
-    .ingredientContainer {
-        grid-template-columns: repeat(3, 1fr); // 2 columnas fijas
-    }
-}
-@media (max-width: 400px) {
-    .ingredientContainer {
-        grid-template-columns: repeat(2, 1fr); // 2 columnas fijas
-    }
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  width: 100%;
 }
 
 .ingredient {
-    object-fit: contain;
-    opacity: 0; // Ocultar hasta que cargue
-    transition: opacity 0.3s ease-in-out;
+  object-fit: contain;
+  opacity: 0; // Ocultar hasta que cargue
+  transition: opacity 0.3s ease-in-out;
 }
 
-.ingredientDiv{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1px;
-    padding: 5px 5px 0 5px;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-
-    &:hover {
-        background-color: #b5152a; // Rojo oscuro en hover
-        transform: scale(1.05); // Pequeño zoom al pasar el mouse
-        color: #ffffff;
-    }
+.ingredient-name {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 1rem;
+  text-align: center;
 }
 
-.ingredientDiv.selected{
-    background-color: #2c5530;
-    box-shadow: 0px 4px 10px rgba(44, 85, 48, 0.5);
-    border-radius: 5px;
-    transform: scale(1.08);
+
+.ingredientDiv {
+  align-items: center;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  max-width: 120px;
+  padding: 4px;
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  -webkit-transition:
+    background-color 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  -moz-transition:
+    background-color 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  -ms-transition:
+    background-color 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  -o-transition:
+    background-color 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  width: 100%;
+  width: 100%;
+  &:hover {
+    background-color: #b5152a;
     color: #ffffff;
+    transform: scale(1.03);
+    -webkit-transform: scale(1.03);
+    -moz-transform: scale(1.03);
+    -ms-transform: scale(1.03);
+    -o-transform: scale(1.03);
+  }
 }
 
+.ingredientDiv.selected {
+  background-color: #2c5530;
+  border-radius: 5px;
+  box-shadow: 0px 4px 10px rgba(44, 85, 48, 0.5);
+  color: #ffffff;
+  transform: scale(1.03);
+  -webkit-transform: scale(1.03);
+  -moz-transform: scale(1.03);
+  -ms-transform: scale(1.03);
+  -o-transform: scale(1.03);
+}
+.ingredient-img {
+}
 
-
-
+.errorMessage {
+  width: 400px !important;
+}

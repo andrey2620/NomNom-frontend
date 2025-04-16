@@ -11,7 +11,7 @@ import { baseUrlInterceptor } from './interceptors/base-url.interceptor';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { headersInterceptor } from './interceptors/headers.interceptor';
+import { headersInterceptor } from './interceptors/headersInterceptor.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [

@@ -18,8 +18,9 @@ import { ProfileEditComponent } from './pages/profile-edit/profile-edit.componen
 import { ProfileComponent } from './pages/profile/profile.component';
 import { RecipeComponent } from './pages/recipe/recipe.component';
 import { UsersComponent } from './pages/users/users.component';
-
-//hay que borrar todo esto
+import { ShoppingListComponent } from './pages/shoppingList/shoppingList.component';
+import { ShoppingListCreateComponent } from './pages/shoppingList/shoppingListCreate/shoppingList-create.component';
+import { ShoppingListViewComponent } from './pages/shoppingList/shoppingListView/shoppingList-view.component';
 
 export const routes: Routes = [
   {
@@ -133,31 +134,25 @@ export const routes: Routes = [
           showInSidebar: true,
         },
       },
-      /*
       {
-        path: 'orders',
-        component: OrdersComponent,
+        path: 'shoppingList',
+        component: ShoppingListComponent,
         data: {
-          authorities: [
-            IRoleType.superAdmin,
-            IRoleType.user,
-          ],
-          name: 'orders',
-          showInSidebar: true
-        }
+          authorities: [IRoleType.superAdmin, IRoleType.user],
+          name: 'Lista de compras',
+          showInSidebar: true,
+        },
+        children: [
+          {
+            path: 'create',
+            component: ShoppingListCreateComponent,
+          },
+          {
+            path: 'view',
+            component: ShoppingListViewComponent,
+          },
+        ],
       },
-      {
-        path: 'preference-list',
-        component: PreferenceListPageComponent,
-        data: {
-          authorities: [
-            IRoleType.superAdmin,
-            IRoleType.user,
-          ],
-          name: 'preference list',
-          showInSidebar: true
-        }
-      }, */
     ],
   },
 ];

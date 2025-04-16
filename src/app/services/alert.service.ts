@@ -4,11 +4,10 @@ import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition
 @Injectable({
   providedIn: 'root',
 })
-
 export class AlertService {
   private snackBar = inject(MatSnackBar);
   displayAlert(type: string, message: string, horizontalPosition?: MatSnackBarHorizontalPosition, verticalPosition?: MatSnackBarVerticalPosition, panelClass?: string[]) {
-    let finalMessage = !message && type == 'error' ? 'An error occurred, please try again later' : !message && type == 'success' ? 'Success' : message 
+    let finalMessage = !message && type == 'error' ? 'An error occurred, please try again later' : !message && type == 'success' ? 'Success' : message
     this.snackBar.open(finalMessage, 'Cerrar', {
       horizontalPosition: horizontalPosition ?? 'center',
       verticalPosition: verticalPosition ?? 'top',
@@ -16,5 +15,4 @@ export class AlertService {
       duration: 3000
     });
   }
-
 }

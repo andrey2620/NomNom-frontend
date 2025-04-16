@@ -1,0 +1,148 @@
+[
+  {
+    "name": "Ensalada de Pepino y Fresas con Almendras",
+    "recipeCategory": "Ensalada",
+    "preparationTime": 20,
+    "description": "Una deliciosa ensalada de verano con pepino, fresas y almendras.",
+    "nutritionalInfo": "60cal, 3g proteínas, 15g carbohidratos, 5g grasas",
+    "instructions": "Corta el pepino en rodajas finas. Mezcla las fresas cortadas por la mitad con un poco de azúcar y un chorrito de jugo de naranja. Mezcla todo junto con las almendras picadas y un poco de aceite de oliva. Sazona con sal al gusto.",
+    "ingredients": [
+      {
+        "name": "Pepino",
+        "quantity": "1",
+        "measurement": "unidad"
+      },
+      {
+        "name": "Fresas",
+        "quantity": "250g",
+        "measurement": "gramos"
+      },
+      {
+        "name": "Almendras",
+        "quantity": "50g",
+        "measurement": "gramos"
+      },
+      {
+        "name": "Aceite de oliva",
+        "quantity": "2 cucharadas",
+        "measurement": "cucharada"
+      }
+    ]
+  },
+  {
+    "name": "Ensalada de Espinaca y Pepino con Queso Feta",
+    "recipeCategory": "Ensalada",
+    "preparationTime": 25,
+    "description": "Una ensalada fresca y deliciosa para el verano.",
+    "nutritionalInfo": "150cal, 10g proteínas, 20g carbohidratos, 8g grasas",
+    "instructions": "Lava las hojas de espinaca y colócalas en un plato grande. Corta los pepinos en rodajas y colócalos encima de la espinaca. Ralla el queso feta y colócalo sobre los pepinos. Añade una cucharada de aceite de oliva y una pizca de sal.",
+    "ingredients": [
+      {
+        "name": "Espinacas",
+        "quantity": "4 tazas"
+      },
+      {
+        "name": "Pepino",
+        "quantity": "1",
+        "measurement": "pepino grande"
+      },
+      {
+        "name": "Queso Feta",
+        "quantity": "100g"
+      }
+    ]
+  },
+  {
+    "name": "Tartina de Espinacas y Pepino con Queso Feta",
+    "recipeCategory": "Comida",
+    "preparationTime": 20,
+    "instructions": "Paso 1. Precalienta el horno a 180°C. Paso 2. Mezcla las espinacas frescas, pepino cortado en rodajas finas y queso feta picado. Paso 3. Unta pan integral con mantequilla y hornea durante 10 minutos.",
+    "ingredients": [
+      {
+        "name": "Espinaca",
+        "quantity": "2",
+        "measurement": "manojos"
+      },
+      {
+        "name": "Pepino",
+        "quantity": "1",
+        "measurement": "unidad"
+      },
+      {
+        "name": "Queso Feta",
+        "quantity": "100g",
+        "measurement": "gramos"
+      },
+      {
+        "name": "Pan Integral",
+        "quantity": "2",
+        "measurement": "rebanadas"
+      },
+      {
+        "name": "Mantequilla",
+        "quantity": "20g",
+        "measurement": "gramos"
+      }
+    ]
+  },
+  {
+    "name": "Tostada de Bruselas con Queso y Pepino",
+    "recipeCategory": "Comida",
+    "preparationTime": 25,
+    "description": "Una receta fácil y deliciosa para acompañar en cualquier momento.",
+    "nutritionalInfo": "350cal, 10g proteínas, 30g carbohidratos, 20g grasas",
+    "instructions": "Lava las coles de Bruselas. Precalienta el horno a 200°C. Mezcla la queso rallado con el pepino picado. Coloca las coles en una bandeja y cubre con el mezcla de queso y pepino. Hornea durante 15 minutos.",
+    "ingredients": [
+      {
+        "name": "Coles de Bruselas",
+        "quantity": "1",
+        "measurement": "unidad"
+      },
+      {
+        "name": "Queso Cheddar rallado",
+        "quantity": "2 tazas",
+        "measurement": "taza"
+      },
+      {
+        "name": "Pepino picado",
+        "quantity": "0.5",
+        "measurement": "cucharada"
+      }
+    ]
+  },
+  {
+    "name": "Ensalada de Espinacas con Pepino y Queso",
+    "recipeCategory": "Comida",
+    "preparationTime": 20,
+    "description": "Una ensalada refrescante para cualquier momento del día.",
+    "nutritionalInfo": "40cal, 10g proteínas, 5g carbohidratos, 2g grasas",
+    "instructions": "Lava las espinacas y colócalas en un bol. Corta el pepino en rodajas finas y agrégalas a las espinacas. En un tazón aparte, mezcla 1/2 taza de queso blando con 1 cucharada de jugo de limón. Agrega la mezcla a las espinacas y revuelve suavemente. Decora con albahaca fresca.",
+    "ingredients": [
+      {
+        "name": "Espinacas",
+        "quantity": "2.5",
+        "measurement": "tazas"
+      },
+      {
+        "name": "Pepino",
+        "quantity": "1",
+        "measurement": "unidad"
+      },
+      {
+        "name": "Queso blando",
+        "quantity": "0.5",
+        "measurement": "taza"
+      },
+      {
+        "name": "Jugo de limón",
+        "quantity": "1",
+        "measurement": "cucharada"
+      },
+      {
+        "name": "Albahaca fresca",
+        "quantity": "1/4",
+        "measurement": "taza"
+      }
+    ]
+  }
+]

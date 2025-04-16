@@ -1,0 +1,16 @@
+<div #scrollContainer class="chip-scroll-container">
+  <span
+    *ngFor="let chip of chips; let i = index"
+    class="badge chip-badge"
+    [ngClass]="{ 'chip-hovered': hoveredIndex === i }"
+    role="button"
+    tabindex="0"
+    (click)="removeChip(chip)"
+    (keydown.enter)="removeChip(chip)"
+    (keydown.space)="removeChip(chip)"
+    (mouseenter)="hoveredIndex = i"
+    (mouseleave)="hoveredIndex = null">
+    <span class="chip-label">{{ chip }}</span>
+    <button type="button" class="btn-close btn-close-white" aria-label="Eliminar" (click)="removeChip(chip)"></button>
+  </span>
+</div>

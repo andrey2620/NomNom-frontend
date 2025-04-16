@@ -1,40 +1,60 @@
 @defer {
-  <div class="py-4 w-75 mx-auto h-100">
+  <div class="py-4 w-75 mx-auto">
     <div>
-      <div class="d-flex justify-content-between align-items-center">
-        <h2>{{ title }}</h2>
+      <div class="poppins-title d-flex justify-content-between align-items-center">
+        <h2 class="poppins-title">{{ title }}</h2>
       </div>
     </div>
 
     <div row>
       <div class="col col-12 col-md-6 col-lg-4">
-        <input
-          type="text"
-          [(ngModel)]="searchQuery"
-          placeholder="Buscar..."
-          (input)="filterIngredients()"
-          class="form-control w-100 mb-3"
-        />
+        <div class="d-flex align-items-start gap-2 mb-3">
+          <input
+            type="text"
+            [(ngModel)]="searchQuery"
+            placeholder="Buscar..."
+            (input)="filterIngredients()"
+            class="form-control w-100 mb-3 searchBar" />
+          <app-dropdown-category (categorySelected)="onCategoryChange($event)"></app-dropdown-category>
+        </div>
       </div>
       <div class="d-flex justify-content-between align-items-center flex-wrap">
-        <h1 class="h3 text-center text-md-start">Escoge tus ingredientes</h1>
-        <app-pagination
-          [service]="ingredientService"
-          (pageChange)="changePage($event)">
+        <h1 class="poppins-title h3 text-center text-md-start">Escoge tus ingredientes</h1>
+        <app-pagination [service]="ingredientService" [category]="chosenCategory" [name]="searchQuery" (pageChange)="changePage($event)">
         </app-pagination>
       </div>
     </div>
 
-    <div class="">
-      <app-ingredients
-        [ingredients]="ingredientService.ingredient$()"
-        (selectedChange)="selectedIngredients = $event">
-      </app-ingredients>
+    <div class="d-flex w-100 gap-2 h-100">
+      <div class="ingredientsContainer w-100">
+        <app-ingredients
+          [ingredients]="ingredientService.ingredient$()"
+          [selectedIds]="selectedIngredients"
+          (selectedChange)="onIngredientsChange($event)">
+        </app-ingredients>
+      </div>
+
+      <div class="chipsContainer">
+        <h2 class="poppins-title bold chipTitle">Ingredientes seleccionados</h2>
+        <app-chips [chips]="chips" (chipRemoved)="onChipRemoved($event)"></app-chips>
+      </div>
     </div>
 
-    <button class="btn btn-danger my-4" (click)="saveSelectedIngredients()">
-      Guardar
-    </button>
+    <button class="btn-green-rounded my-4" (click)="deleteIngredients()">Borrar ingredientes</button>
+    <button class="btn-red-rounded my-4" (click)="saveSelectedIngredients()">Guardar ingredientes</button>
+
+    <app-modal
+      #confirmModal
+      [confirmAction]="'Borrar'"
+      [cancelAction]="'Cancelar'"
+      [confirmButtonClass]="'btn btn-danger'"
+      [cancelButtonClass]="'btn btn-secondary'"
+      (callConfirmationMethod)="onModalConfirm()"
+      (callCancelMethod)="onModalCancel()"
+      [hideCancelOption]="false">
+      <h1 class="text-center">¡OJO!</h1>
+      <h2 class="text-center">¿Estás seguro de que desea eliminar todos los ingredientes?</h2>
+    </app-modal>
   </div>
 } @loading (minimum 1.5s) {
   <app-loader></app-loader>

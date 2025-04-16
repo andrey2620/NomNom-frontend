@@ -2,7 +2,11 @@
   <div class="d-flex h-100 gap-4 w-100 flex-md-wrap flex-lg-nowrap">
     <!-- Lista de recetas: siempre visible -->
     <div class="app-recipe-list-container h-100 w-100">
-      <app-recipe-list [areActionsAvailable]="true" (cook)="onRecipeSelected($event)" (listInitialized)="onRecipeListInitialized($event)">
+      <app-recipe-list #recipeList [areActionsAvailable]="true" (cook)="onRecipeSelected($event)" (listInitialized)="onRecipeListInitialized($event)">
+        <!-- Este botón se renderiza DENTRO del recipe-list -->
+        <div class="text-end">
+          <button class="btn btn-load-more text-white" (click)="onGenerateMore()">Cargar más</button>
+        </div>
       </app-recipe-list>
     </div>
 
@@ -20,3 +24,15 @@
     </ng-container>
   </div>
 </div>
+<app-modal
+  #missingIngredientsModal
+  [confirmAction]="'Receta aleatoria'"
+  [cancelAction]="'Seleccionar ingredientes'"
+  [confirmButtonClass]="'btn btn-primary'"
+  [cancelButtonClass]="'btn btn-danger'"
+  (callConfirmationMethod)="onConfirmGenerateRandom()"
+  (callCancelMethod)="onGoToIngredients()"
+  [hideCancelOption]="false">
+  <h4 class="text-center">😅 No seleccionaste ingredientes</h4>
+  <p class="text-center">¿Querés generar una receta aleatoria o ir a seleccionar tus ingredientes?</p>
+</app-modal>
