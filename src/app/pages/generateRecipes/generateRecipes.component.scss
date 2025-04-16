@@ -1,3 +1,8 @@
+.poppins-title {
+  font-family: 'Poppins';
+  font-weight: 600;
+}
+
 .searchBar {
   max-width: 300px;
   min-width: 300px;
@@ -31,6 +36,40 @@
   margin-bottom: 10px;
   text-align: center;
 }
+
+.btn-red-rounded {
+  background-color: #bb0a21; // rojo oscuro personalizado
+  color: white;
+  border: none;
+  border-radius: 999px; // borde bien redondeado
+  padding: 10px 30px;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #fcb1a6;
+  }
+}
+
+.btn-green-rounded {
+  background-color: #c3bf6d; 
+  color: white;
+  border: none;
+  border-radius: 999px; 
+  padding: 10px 30px;
+  margin: 2%;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #daefb3;
+    color: #2c5530;
+
+  }
+}
+
 
 @media (max-width: 768px) {
   .searchBar {

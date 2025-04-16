@@ -1,11 +1,16 @@
+.btn {
+    border-radius: 999px;
+  }
+
 .btn:hover{
-    background-color: #8e1121;
-    border-color: #8e1121;
+    background-color: #fcb1a6;
+    border-color: #fcb1a6;
+    border-radius: 999px;
 }
 
 .btn:focus{
-    background-color: #8e1121;
-    border-color: #8e1121;
+    background-color: #bb0a21;
+    border-color: #bb0a21;
     outline: none;
     box-shadow: 0 0 0 0.2rem rgba(142, 17, 33, 0.5);
 }

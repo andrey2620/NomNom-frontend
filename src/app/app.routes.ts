@@ -24,6 +24,10 @@ import { OrdersComponent } from './pages/orders/orders.component';
 import { PreferenceListPageComponent } from './pages/preferenceList/preference-list.component';
 import { RecipeFormComponent } from './components/recipe/recipe-form/recipe-form.component';
 import { RecipeListComponent } from './components/recipe/recipe-list/recipe-list.component';
+import { ShoppingListComponent } from './pages/shoppingList/shoppingList.component';
+import { ShoppingListCreateComponent } from './pages/shoppingList/shoppingListCreate/shoppingList-create.component';
+import { ShoppingListViewComponent } from './pages/shoppingList/shoppingListView/shoppingList-view.component';
+
 
 export const routes: Routes = [
   {
@@ -129,6 +133,27 @@ export const routes: Routes = [
           showInSidebar: true,
         },
       },
+      {
+        path: 'shoppingList',
+        component: ShoppingListComponent,
+        data: {
+          authorities: [IRoleType.superAdmin, IRoleType.user],
+          name: 'Lista de compras',
+          showInSidebar: true,
+        },
+        children: [
+          {
+            path: 'create',
+            component: ShoppingListCreateComponent
+          },
+          {
+            path: 'view',
+            component: ShoppingListViewComponent
+          }
+        ]
+      },
+      
+      
       /*
       {
         path: 'orders',
