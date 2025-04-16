@@ -144,5 +144,150 @@
         "measurement": "taza"
       }
     ]
-  }
+  },
+  {
+    "name": "Gallo Pinto",
+    "country": "Costa Rica",
+    "recipeCategory": "Comida",
+    "preparationTime": 30,
+    "description": "Es un plato típico del desayuno costarricense hecho con arroz y frijoles mezclados. Se acompaña con natilla, plátano maduro, pan o tortillas, y a veces huevo o queso.",
+    "instructions": "Sofríe cebolla y chile dulce en aceite hasta que estén dorados. Agrega arroz cocido y frijoles negros cocidos con un poco de su caldo. Mezcla bien y sazona con sal, pimienta y salsa Lizano al gusto. Cocina hasta que esté bien integrado.",
+    "ingredients": [
+      {
+        "name": "Arroz Cocido",
+        "quantity": "2",
+        "measurement": "tazas"
+      },
+      {
+        "name": "Frijoles Negros Cocidos",
+        "quantity": "1.5",
+        "measurement": "tazas"
+      },
+      {
+        "name": "Cebolla",
+        "quantity": "1/2",
+        "measurement": "unidad"
+      },
+      {
+        "name": "Chile Dulce",
+        "quantity": "1/2",
+        "measurement": "unidad"
+      },
+      {
+        "name": "Salsa Lizano",
+        "quantity": "2",
+        "measurement": "cucharadas"
+      },
+      {
+        "name": "Aceite",
+        "quantity": "1",
+        "measurement": "cucharada"
+      }
+    ]
+  },
+  {
+    "name": "Casado",
+    "country": "Costa Rica",
+    "description": "Es una comida completa que combina arroz, frijoles, una porción de carne, ensalada, plátano maduro frito y a veces huevo o picadillo. Es muy común en almuerzos y refleja el balance típico de la dieta costarricense.",
+    "recipeCategory": "Comida",
+    "preparationTime": 45,
+    "instructions": "Cocina arroz y frijoles por separado. Asa carne o pollo al gusto. Prepara una ensalada con lechuga, tomate y repollo. Fríe plátanos maduros en rodajas. Sirve todo junto en un plato con tortillas.",
+    "ingredients": [
+      {
+        "name": "Arroz",
+        "quantity": "1",
+        "measurement": "taza"
+      },
+      {
+        "name": "Frijoles",
+        "quantity": "1",
+        "measurement": "taza"
+      },
+      {
+        "name": "Carne o Pollo",
+        "quantity": "200",
+        "measurement": "gramos"
+      },
+      {
+        "name": "Plátano Maduro",
+        "quantity": "1",
+        "measurement": "unidad"
+      },
+      {
+        "name": "Lechuga",
+        "quantity": "1",
+        "measurement": "hoja"
+      },
+      {
+        "name": "Tomate",
+        "quantity": "1/2",
+        "measurement": "unidad"
+      },
+      {
+        "name": "Repollo",
+        "quantity": "1/2",
+        "measurement": "taza"
+      },
+      {
+        "name": "Tortillas",
+        "quantity": "2",
+        "measurement": "unidades"
+      }
+    ]
+  },
+  {
+    "name": "Olla de Carne",
+    "country": "Costa Rica",
+    "description": "Es un caldo abundante y sustancioso preparado con trozos de carne de res y una variedad de verduras. Es ideal para compartir en familia, especialmente los fines de semana.",
+    "recipeCategory": "Comida",
+    "preparationTime": 120,
+    "instructions": "Cocina la carne en agua con sal, ajo y cebolla por 1 hora. Agrega los vegetales picados y cocina por 1 hora más. Sazona al gusto y sirve caliente con arroz blanco.",
+    "ingredients": [
+      {
+        "name": "Carne de Res para Sopa",
+        "quantity": "500",
+        "measurement": "gramos"
+      },
+      {
+        "name": "Yuca",
+        "quantity": "1",
+        "measurement": "unidad"
+      },
+      {
+        "name": "Papa",
+        "quantity": "2",
+        "measurement": "unidades"
+      },
+      {
+        "name": "Chayote",
+        "quantity": "1",
+        "measurement": "unidad"
+      },
+      {
+        "name": "Zanahoria",
+        "quantity": "2",
+        "measurement": "unidades"
+      },
+      {
+        "name": "Ayote",
+        "quantity": "1",
+        "measurement": "taza"
+      },
+      {
+        "name": "Cebolla",
+        "quantity": "1",
+        "measurement": "unidad"
+      },
+      {
+        "name": "Ajo",
+        "quantity": "2",
+        "measurement": "dientes"
+      },
+      {
+        "name": "Sal",
+        "quantity": "al gusto",
+        "measurement": ""
+      }
+    ]
+  }  
 ]

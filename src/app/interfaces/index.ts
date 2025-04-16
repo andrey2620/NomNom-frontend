@@ -111,6 +111,7 @@ export interface IRecipe {
   recipeCategory: string;
   ingredients: IIngredient[];
   suggestion?: ISuggestions;
+  country?: string;
 }
 
 export interface IIngredients {

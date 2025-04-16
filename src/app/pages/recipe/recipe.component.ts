@@ -53,6 +53,11 @@ export class RecipeComponent implements OnInit {
     this.recipeListComponent.clearRecipes();
     this.recipeListComponent.loadSkeletons(3);
 
+    if(localStorage.getItem('mapRecipe')) {
+      this.selectedRecipe = JSON.parse(localStorage.getItem('mapRecipe') ?? '');
+      localStorage.removeItem('mapRecipe');
+    }
+
     if (this.hasIngredients) {
       this.recipeListComponent.loadValidRecipes(this.recipeListComponent.userId ?? 0, 3);
     } else {

@@ -17,7 +17,7 @@ export class MapComponent implements AfterViewInit {
   private info!: L.Control;
   private geojson!: L.GeoJSON;
 
-  @Output() recipesSelected = new EventEmitter<IRecipe[]>();
+  @Output() countrySelected = new EventEmitter<string>();
 
   ngAfterViewInit(): void {
     this.map = L.map('map', {
@@ -28,7 +28,7 @@ export class MapComponent implements AfterViewInit {
         [-85, 180], // Southwest corner
       ],
       maxBoundsViscosity: 1.0, // Makes the map "bounce" back when panned outside
-    }).setView([37.8, -96], 2); // Centered on the US
+    }).setView([37.8, -96], 3); // Centered on the US
 
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 7,
@@ -118,40 +118,21 @@ export class MapComponent implements AfterViewInit {
   private updateInfo(props?: any): void {
     const div = document.querySelector('.info') as HTMLDivElement;
     if (div) {
-      let content = 'Haz click en tu país:';
+      
 
-      if (props && !props?.recipes) {
+      /*if (props && !props?.recipes) {
         content = `<b>${props.name}</b><br/> <ul> No hay recetas disponibles para este país. </ul>`;
         this.recipesSelected.emit([]);
+      }*/
+
+      if (props) {
+        let content = 'Haz click en tu país:';
+        this.countrySelected.emit(props.name);
+        content = `<h1>${props.name}</h1>`;
+        div.innerHTML = `<h3>Recetas de todo el mundo!</h3>${content}`;
       }
 
-      if (props && props.recipes) {
-        const recipesList = Object.entries(props.recipes).map(([key, recipe]: [string, any]) => ({
-          name: recipe.name,
-          description: recipe.description,
-          image_url: recipe.image_url,
-        }));
-
-        /*this.recipesSelected.emit(recipesList);
-                content = `<b>${props.name}</b><br /><ul>${recipesList
-                    .map(recipe => `<li><b>${recipe.name}</b></li>`)
-                    .join('')}</ul>`;*/
-      }
-
-      /*if (props && props.recipes) {
-                const recipesList = Object.entries(props.recipes)
-                    .map(([key, recipe]: [string, any]) => ({
-                        name: recipe.name,
-                        description: recipe.description,
-                    }));
-
-                this.recipesSelected.emit(recipesList);
-                content = `<b>${props.name}</b><br /><ul>${recipesList
-                    .map(recipe => `<li><b>${recipe.name}</b>: ${recipe.description}</li>`)
-                    .join('')}</ul>`;
-            }*/
-
-      div.innerHTML = `<h3>Recetas de todo el mundo!</h3>${content}`;
+      
     }
   }
 

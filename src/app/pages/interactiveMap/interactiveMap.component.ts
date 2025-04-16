@@ -2,8 +2,8 @@ import { CommonModule } from "@angular/common";
 import { Component } from "@angular/core";
 import { LoaderComponent } from "../../components/loader/loader.component";
 import { MapComponent } from "../../components/map/map.component";
-import { RecipeListComponent } from "../../components/recipe/recipe-list/recipe-list.component";
 import { IRecipe } from "../../interfaces";
+import { MapRecipeViewComponent } from "../../components/map-recipeView/map-recipeView.component";
 
 @Component({
     standalone: true,
@@ -14,14 +14,22 @@ import { IRecipe } from "../../interfaces";
         CommonModule,
         LoaderComponent,
         MapComponent,
-        RecipeListComponent
+        MapRecipeViewComponent
     ]
 })
 
-export class InteractiveMapComponent {
-    selectedRecipes: IRecipe[] = [];
 
-    onRecipesSelected(recipes: IRecipe[]) {
-        this.selectedRecipes = recipes;
-      }
+export class InteractiveMapComponent {
+    selectedRecipe: IRecipe | null = null;
+    countrySelected: string = '';
+
+    onCountrySelected(country: string) {
+        this.countrySelected = country;
+    }
+
+    onRecipeSelected(recipe: IRecipe) {
+        this.selectedRecipe = recipe;
+        localStorage.setItem('mapRecipe', JSON.stringify(this.selectedRecipe));
+        window.location.href = "/app/recipes";
+    }
 }
