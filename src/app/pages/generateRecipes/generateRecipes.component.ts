@@ -48,17 +48,28 @@ export class GenerateRecipesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const stored = localStorage.getItem('user_ingredients');
-    if (stored) {
-      const ingredientObjects: { id: number; name: string }[] = JSON.parse(stored);
-      this.selectedIngredients = ingredientObjects.map(i => i.id);
-      this.initialUserIngredientIds = [...this.selectedIngredients];
-      this.selectedIngredientNames.clear();
-      ingredientObjects.forEach(obj => {
-        this.selectedIngredientNames.set(obj.id, obj.name);
-      });
-      this.updateChips();
-    }
+    const authUser = localStorage.getItem('auth_user');
+    if (!authUser) return;
+
+    const userId = JSON.parse(authUser).id;
+
+    this.ingredientService.getFormattedIngredientsByUser(userId).subscribe({
+      next: res => {
+        localStorage.setItem('user_ingredients', JSON.stringify(res.data));
+        this.hasIngredients = res.data.length > 0;
+
+        this.selectedIngredients = res.data.map((i: { id: number }) => i.id);
+        this.initialUserIngredientIds = [...this.selectedIngredients];
+        this.selectedIngredientNames.clear();
+        res.data.forEach((i: { id: number; name: string }) => {
+          this.selectedIngredientNames.set(i.id, i.name);
+        });
+        this.updateChips();
+      },
+      error: () => {
+        this.hasIngredients = false;
+      },
+    });
   }
 
   onIngredientsChange(selectedIds: number[]): void {

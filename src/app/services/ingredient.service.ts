@@ -20,7 +20,6 @@ export class IngredientService extends BaseService<IIngredients> {
   };
 
   public totalItems: number[] = [];
-  bulkReplaceIngredientsForUser: any;
 
   get ingredient$() {
     return this.ingredientsSignal;
