@@ -4,6 +4,7 @@ import { IRecipe, ISearch, ISuggestions, IResponsev2 } from '../interfaces';
 import { AuthService } from './auth.service';
 import { AlertService } from './alert.service';
 import { map, Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -27,19 +28,31 @@ export class RecipesService extends BaseService<IRecipe> {
 
   getRandomRecipes(): Observable<IResponsev2<IRecipe[]>> {
     return this.http.get<IResponsev2<{ recipe: IRecipe; prompt: string }>>(`${this.source}/generator`).pipe(
-      map(res => ({
-        ...res,
-        data: [res.data.recipe],
-      }))
+      map(res => {
+        if (environment.dev) {
+          console.warn('[DEBUG] Prompt generado:\n', res.data.prompt);
+        }
+
+        return {
+          ...res,
+          data: [res.data.recipe],
+        };
+      })
     );
   }
 
   getRecipesByUser(userId: number): Observable<IResponsev2<IRecipe[]>> {
     return this.http.get<IResponsev2<{ recipe: IRecipe; prompt: string }>>(`${this.source}/generator/user/${userId}`).pipe(
-      map(res => ({
-        ...res,
-        data: [res.data.recipe],
-      }))
+      map(res => {
+        if (environment.dev) {
+          console.warn('[DEBUG] Prompt generado:\n', res.data.prompt);
+        }
+
+        return {
+          ...res,
+          data: [res.data.recipe],
+        };
+      })
     );
   }
 

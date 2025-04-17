@@ -68,21 +68,33 @@ export class RecipeListComponent implements OnInit {
   loadValidRecipes(userId: number, count: number): void {
     let attempts = 0;
     let loaded = 0;
-    const maxAttempts = count * 4;
+    const maxJsonAttempts = count * 50;
+    const maxIaAttempts = 2;
 
     const fetchRecipe = () => {
       this.recipesService
         .getRecipesByUser(userId)
         .pipe(
           catchError(err => {
-            console.error('❌ Error al generar receta IA:', err.message);
+            const detail = err?.error?.detail || '';
+            console.error('❌ Error al generar receta IA:', detail || err.message);
+
+            const isJsonInvalid = detail.includes('JSON inválido generado por el modelo');
+            const maxAttempts = isJsonInvalid ? maxJsonAttempts : maxIaAttempts;
+
+            attempts++;
+            if (attempts < maxAttempts) {
+              setTimeout(fetchRecipe, 150);
+            } else {
+              const fallbackCount = count - loaded;
+              this.loadAllFallbackAnimated(fallbackCount);
+            }
+
             return of(null);
           }),
           delay(100)
         )
         .subscribe((res: IResponsev2<IRecipe[]> | null) => {
-          attempts++;
-
           const recipes = res?.data ?? [];
 
           for (const recipe of recipes) {
@@ -94,13 +106,8 @@ export class RecipeListComponent implements OnInit {
             }
           }
 
-          if (loaded < count && attempts < maxAttempts) {
+          if (loaded < count) {
             fetchRecipe();
-          }
-
-          if (attempts >= maxAttempts && loaded < count) {
-            const fallbackCount = count - loaded;
-            this.loadAllFallbackAnimated(fallbackCount);
           }
         });
     };
@@ -116,21 +123,33 @@ export class RecipeListComponent implements OnInit {
     this.randomMode = true;
     let loaded = 0;
     let attempts = 0;
-    const maxAttempts = count * 4;
+    const maxJsonAttempts = count * 50;
+    const maxIaAttempts = 2;
 
     const fetchRandom = () => {
       this.recipesService
         .getRandomRecipes()
         .pipe(
           catchError(err => {
-            console.error('❌ Error receta aleatoria:', err.message);
+            const detail = err?.error?.detail || '';
+            console.error('❌ Error receta aleatoria:', detail || err.message);
+
+            const isJsonInvalid = detail.includes('JSON inválido generado por el modelo');
+            const maxAttempts = isJsonInvalid ? maxJsonAttempts : maxIaAttempts;
+
+            attempts++;
+            if (attempts < maxAttempts) {
+              setTimeout(fetchRandom, 150);
+            } else {
+              const fallbackCount = count - loaded;
+              this.loadAllFallbackAnimated(fallbackCount);
+            }
+
             return of(null);
           }),
           delay(100)
         )
         .subscribe((res: IResponsev2<IRecipe[]> | null) => {
-          attempts++;
-
           const recipes = res?.data ?? [];
 
           for (const recipe of recipes) {
@@ -142,13 +161,8 @@ export class RecipeListComponent implements OnInit {
             }
           }
 
-          if (loaded < count && attempts < maxAttempts) {
+          if (loaded < count) {
             fetchRandom();
-          }
-
-          if (attempts >= maxAttempts && loaded < count) {
-            const fallbackCount = count - loaded;
-            this.loadAllFallbackAnimated(fallbackCount);
           }
         });
     };
