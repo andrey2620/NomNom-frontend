@@ -52,7 +52,7 @@ export class RecipeComponent implements OnInit {
     this.recipeListComponent.loadSkeletons(3);
 
     if (this.hasIngredients) {
-      this.recipeListComponent.loadValidRecipes(this.recipeListComponent.userId ?? 0, 3);
+      this.recipeListComponent.loadValidRecipesFromLocalStorage(3);
     } else {
       this.missingIngredientsModal.showModal();
     }
