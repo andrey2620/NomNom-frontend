@@ -76,7 +76,7 @@ export const routes: Routes = [
     path: '',
     redirectTo: 'nomNomLanding',
     pathMatch: 'full',
-  },
+  }, 
   {
     path: 'app',
     component: AppLayoutComponent,
@@ -135,25 +135,21 @@ export const routes: Routes = [
       },
       {
         path: 'shoppingList',
-        component: ShoppingListComponent,
+        component: ShoppingListCreateComponent,
         data: {
           authorities: [IRoleType.superAdmin, IRoleType.user],
           name: 'Lista de compras',
           showInSidebar: true,
         },
-        children: [
-          {
-            path: 'create',
-            component: ShoppingListCreateComponent
-          },
-          {
-            path: 'view',
-            component: ShoppingListViewComponent
-          }
-        ]
       },
-      
-      
+      {
+        path: 'shoppingList/view',
+        component: ShoppingListViewComponent,
+        data: {
+          authorities: [IRoleType.superAdmin, IRoleType.user],
+          showInSidebar: false,
+        }
+      },
       /*
       {
         path: 'orders',

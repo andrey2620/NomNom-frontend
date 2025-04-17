@@ -1,37 +1,99 @@
-.shopping-list-title {
+h1 {
+  color: #2c5530;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+h4 {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+input[type="text"] {
+  border-radius: 12px;
+}
+
+button {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+}
+
+.btn {
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-danger {
+  background-color: #9c1d24;
+  border-color: #9c1d24;
+  color: white;
+
+  &:hover {
+    background-color: #7d1c1c;
+    border-color: #7d1c1c;
+  }
+}
+
+.btn-outline-danger {
+  color: #9c1d24;
+  border-color: #9c1d24;
+
+  &:hover {
+    background-color: #9c1d24;
+    color: white;
+  }
+}
+
+.btn-outline-success {
+  border-color: #2c5530;
+  color: #2c5530;
+
+  &:hover {
+    background-color: #2c5530;
+    color: white;
+  }
+}
+
+.btn-success {
+  background-color: #2c5530;
+  border-color: #2c5530;
+  color: white;
+
+  &:hover {
+    background-color: #224422;
+  }
+}
+
+.table {
+  th,
+  td {
+    vertical-align: middle;
+    font-size: 0.95rem;
+  }
+
+  input[type="checkbox"] {
+    margin-right: 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  h2 {
+    font-size: 1.5rem;
     text-align: center;
-    font-family: 'Poppins', sans-serif;
-    font-size: 24px;
-    font-weight: 600;
-    color: #7e1b1b;
-    margin-bottom: 1rem;
   }
-  
-  .shopping-list-options {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    background-color: #aa2323;
-    padding: 1.5rem;
-    border-radius: 20px;
-    width: fit-content;
-    margin: 0 auto;
+
+  .d-flex {
+    flex-direction: column !important;
   }
-  
-  .btn-red-rounded {
-    background-color: white;
-    color: #aa2323;
-    border: none;
-    border-radius: 999px;
-    padding: 10px 30px;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 500;
-    text-align: center;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-  
-    &:hover {
-      background-color: #f3d6d6;
-    }
+
+  .table {
+    font-size: 0.85rem;
   }
-  
+}

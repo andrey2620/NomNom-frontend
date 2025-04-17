@@ -19,29 +19,39 @@
     <nav class="d-none d-lg-flex justify-content-center flex-grow-1 px-4">
       <ul class="nav custom-top-menu d-flex justify-content-center align-items-center list-unstyled mb-0">
         <li class="nav-item" *ngFor="let item of menuItems">
-          <a class="nav-link" [routerLink]="item.path" routerLinkActive="active"
-            [routerLinkActiveOptions]="{ exact: true }">
-            {{ item.name }}
-          </a>
+          <ng-container *ngIf="item.name === 'Lista de compras'; else normalLink">
+            <app-shopping-list-drop-down></app-shopping-list-drop-down>
+          </ng-container>
+        
+          <ng-template #normalLink>
+            <a class="nav-link" 
+            [routerLink]="item.path" 
+            routerLinkActive="active"
+               [routerLinkActiveOptions]="{ exact: false }">
+              {{ item.name }}
+            </a>
+          </ng-template>
         </li>
+        
+        
       </ul>
     </nav>
   </div>
 
   <nav class="collapse navbar-collapse d-lg-none" id="navbarContent">
-    <ul class="nav custom-top-menu d-flex list-unstyled d-lg-none">
-      <li class="nav-item" *ngFor="let item of menuItems">
-        <a class="nav-link" [routerLink]="item.path" routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }">
+    <ul class="nav custom-top-menu d-flex justify-content-center align-items-center list-unstyled mb-0">
+      <li class="nav-item" *ngFor="let item of menuItems" [ngIf]="item.name !== 'Lista de compras'">
+        <a class="nav-link"
+           [routerLink]="item.path"
+           routerLinkActive="active"
+           [routerLinkActiveOptions]="{ exact: true }">
           {{ item.name }}
         </a>
       </li>
-      <li class="w-100 d-flex justify-content-center align-items-center d-lg-none">
-        <app-my-account></app-my-account>
-      </li>
     </ul>
+    
   </nav>
   <div class="d-none d-lg-block">
     <app-my-account></app-my-account>
-  </div>
+  </div>  
 </header>

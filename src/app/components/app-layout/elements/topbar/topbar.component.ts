@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject,HostListener, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Router, RouterLink } from '@angular/router';
@@ -6,11 +6,12 @@ import { AuthService } from '../../../../services/auth.service';
 import { IUser } from '../../../../interfaces';
 import { LayoutService } from '../../../../services/layout.service';
 import { MyAccountComponent } from '../../../my-account/my-account.component';
+import { ShoppingListDropDownComponent } from '../../../shoppingListDropDown/shoppingListDropDown.component';
 
 @Component({
   selector: 'app-topbar',
   standalone: true,
-  imports: [CommonModule, RouterModule, RouterLink, MyAccountComponent],
+  imports: [CommonModule, RouterModule, RouterLink,ShoppingListDropDownComponent, MyAccountComponent],
   templateUrl: './topbar.component.html',
   styleUrls: ['./topbar.component.scss'],
 })
@@ -21,7 +22,8 @@ export class TopbarComponent implements OnInit {
   constructor(
     public router: Router,
     public layoutService: LayoutService,
-    public authService: AuthService
+    public authService: AuthService,
+    private eRef: ElementRef
   ) {}
 
   ngOnInit(): void {
@@ -51,5 +53,18 @@ export class TopbarComponent implements OnInit {
   public logout(): void {
     this.authService.logout();
     this.router.navigateByUrl('/login');
+  }
+
+  showShoppingDropdown = false;
+
+  toggleShoppingDropdown() {
+    this.showShoppingDropdown = !this.showShoppingDropdown;
+  }
+
+  @HostListener('document:click', ['$event'])
+  handleClickOutside(event: MouseEvent) {
+    if (this.showShoppingDropdown && !this.eRef.nativeElement.contains(event.target)) {
+      this.showShoppingDropdown = false;
+    }
   }
 }
