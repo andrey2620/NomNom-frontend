@@ -15,6 +15,19 @@ export interface IResponse<T> {
   message: string;
   meta: T;
 }
+export interface IResponsev2<T> {
+  data: T;
+  message: string;
+  meta: {
+    method: string;
+    url: string;
+    totalPages?: number;
+    totalElements?: number;
+    pageNumber?: number;
+    pageSize?: number;
+    [key: string]: unknown;
+  };
+}
 
 export interface IUser {
   id?: number;

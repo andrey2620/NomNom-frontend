@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { catchError, delay, of } from 'rxjs';
-import { IRecipe, CATEGORY_IMAGE_MAP } from '../../../interfaces';
+import { IRecipe, CATEGORY_IMAGE_MAP, IResponsev2 } from '../../../interfaces';
 import fallbackRecipes from './recipes.json';
 import { RecipesService } from '../../../services/recipes.service';
+import {} from '../../../interfaces';
 
 @Component({
   selector: 'app-recipe-list',
@@ -79,14 +80,18 @@ export class RecipeListComponent implements OnInit {
           }),
           delay(100)
         )
-        .subscribe(recipe => {
+        .subscribe((res: IResponsev2<IRecipe[]> | null) => {
           attempts++;
 
-          if (recipe && this.isValidRecipe(recipe)) {
-            this.itemList.push(recipe);
-            this.skeletonList.pop();
-            this.listInitialized.emit(this.itemList);
-            loaded++;
+          const recipes = res?.data ?? [];
+
+          for (const recipe of recipes) {
+            if (this.isValidRecipe(recipe)) {
+              this.itemList.push(recipe);
+              this.skeletonList.pop();
+              this.listInitialized.emit(this.itemList);
+              loaded++;
+            }
           }
 
           if (loaded < count && attempts < maxAttempts) {
@@ -123,14 +128,18 @@ export class RecipeListComponent implements OnInit {
           }),
           delay(100)
         )
-        .subscribe((recipe: IRecipe | null) => {
+        .subscribe((res: IResponsev2<IRecipe[]> | null) => {
           attempts++;
 
-          if (recipe && this.isValidRecipe(recipe)) {
-            this.itemList.push(recipe);
-            this.skeletonList.pop();
-            this.listInitialized.emit(this.itemList);
-            loaded++;
+          const recipes = res?.data ?? [];
+
+          for (const recipe of recipes) {
+            if (this.isValidRecipe(recipe)) {
+              this.itemList.push(recipe);
+              this.skeletonList.pop();
+              this.listInitialized.emit(this.itemList);
+              loaded++;
+            }
           }
 
           if (loaded < count && attempts < maxAttempts) {
