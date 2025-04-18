@@ -12,6 +12,10 @@ import { environment } from '../../environments/environment';
 export class RecipesService extends BaseService<IRecipe> {
   protected override source = 'recipes';
 
+  addRecipe(recipeDto: Partial<IRecipe>): Observable<IRecipe> {
+    return this.http.post<IRecipe>(`${this.source}`, recipeDto);
+  }
+
   private recipeListSignal = signal<IRecipe[]>([]);
   get recipes$() {
     return this.recipeListSignal;

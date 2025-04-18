@@ -4,9 +4,10 @@ import { ModalComponent } from '../../components/modal/modal.component';
 import { RecipeListComponent } from '../../components/recipe/recipe-list/recipe-list.component';
 import { IRecipe, IResponse } from '../../interfaces';
 import { CommonModule } from '@angular/common';
-import { ViewRecipeComponent } from './view-recipe/view-recipe.component';
-import { SousChefComponent } from './sous-chef/sous-chef.component';
+import { ViewRecipeComponent } from '../../components/recipe/view-recipe/view-recipe.component';
+import { SousChefComponent } from '../../components/recipe/sous-chef/sous-chef.component';
 import { IngredientService } from '../../services/ingredient.service';
+import { RecipesService } from '../../services/recipes.service';
 
 @Component({
   selector: 'app-recipe',
@@ -24,7 +25,8 @@ export class RecipeComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private ingredientService: IngredientService
+    private ingredientService: IngredientService,
+    private recipeService: RecipesService
   ) {}
 
   ngOnInit(): void {
@@ -69,7 +71,30 @@ export class RecipeComponent implements OnInit {
   }
 
   onRecipeSaved(recipe: IRecipe): void {
-    console.log('Receta guardada:', recipe);
+    // Crea el objeto DTO para enviar al backend
+    const recipeDto = {
+      name: recipe.name,
+      recipeCategory: recipe.recipeCategory,
+      preparationTime: recipe.preparationTime,
+      description: recipe.description || '', // Si es opcional, asegúrate de enviar un valor vacío si no está presente
+      nutritionalInfo: recipe.nutritionalInfo || '', // Lo mismo para propiedades opcionales
+      instructions: recipe.instructions,
+      ingredients: recipe.ingredients.map(ingredient => ({
+        name: ingredient.name,
+        quantity: ingredient.quantity,
+        measurement: ingredient.measurement || '', // Si measurement es opcional
+      })),
+    };
+
+    // Llama al servicio para guardar la receta
+    this.recipeService.addRecipe(recipeDto).subscribe({
+      next: response => {
+        console.log('Receta guardada:', response);
+      },
+      error: err => {
+        console.error('Error al guardar receta:', err);
+      },
+    });
   }
 
   onRecipeDeleted(recipe: IRecipe): void {

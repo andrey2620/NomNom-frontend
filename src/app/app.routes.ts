@@ -95,7 +95,7 @@ export const routes: Routes = [
         component: GenerateRecipesComponent,
         data: {
           authorities: [IRoleType.superAdmin, IRoleType.user],
-          name: 'Generador',
+          name: 'Ingredientes',
           showInSidebar: true,
         },
       },
@@ -130,7 +130,7 @@ export const routes: Routes = [
         component: RecipeComponent,
         data: {
           authorities: [IRoleType.superAdmin, IRoleType.user],
-          name: 'Recetas',
+          name: 'Generar Recetas',
           showInSidebar: true,
         },
       },
