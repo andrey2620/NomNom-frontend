@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalComponent } from '../../components/modal/modal.component';
 import { RecipeListComponent } from '../../components/recipe/recipe-list/recipe-list.component';
@@ -16,9 +16,10 @@ import { RecipesService } from '../../services/recipes.service';
   templateUrl: './recipe.component.html',
   styleUrls: ['./recipe.component.scss'],
 })
-export class RecipeComponent implements OnInit {
+export class RecipeComponent implements OnInit, AfterViewInit {
   @ViewChild('recipeList') recipeListComponent!: RecipeListComponent;
   @ViewChild('missingIngredientsModal') missingIngredientsModal!: ModalComponent;
+  public mostrarRecipeList = false;
 
   selectedRecipe: IRecipe | null = null;
   hasIngredients = false;
@@ -46,6 +47,12 @@ export class RecipeComponent implements OnInit {
       complete: () => {
         setTimeout(() => this.initFlow(), 100);
       },
+    });
+  }
+
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.mostrarRecipeList = true;
     });
   }
 

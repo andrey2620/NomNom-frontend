@@ -21,7 +21,6 @@ export class RecipeListComponent implements OnInit {
   userId: number | null = null;
   itemList: IRecipe[] = [];
   skeletonList: null[] = [];
-
   private fallbackIndex = 0;
   private fallbackMode = false;
   private randomMode = false;
@@ -115,7 +114,7 @@ export class RecipeListComponent implements OnInit {
             }
           }
 
-          if (loaded < count) {
+          if (loaded < count && attempts < maxIaAttempts) {
             fetch();
           }
         });
