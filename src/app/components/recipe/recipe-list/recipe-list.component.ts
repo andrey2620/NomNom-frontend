@@ -127,8 +127,8 @@ export class RecipeListComponent implements OnInit {
   loadValidRecipes(userId: number, count: number): void {
     let attempts = 0;
     let loaded = 0;
-    const maxJsonAttempts = count * 50;
-    const maxIaAttempts = 2;
+    const maxJsonGenerationAttempts = count * 50;
+    const maxIaConnectionAttempts = 2;
 
     const fetchRecipe = () => {
       this.recipesService
@@ -139,7 +139,7 @@ export class RecipeListComponent implements OnInit {
             console.error('❌ Error al generar receta IA:', detail || err.message);
 
             const isJsonInvalid = detail.includes('JSON inválido generado por el modelo');
-            const maxAttempts = isJsonInvalid ? maxJsonAttempts : maxIaAttempts;
+            const maxAttempts = isJsonInvalid ? maxJsonGenerationAttempts : maxIaConnectionAttempts;
 
             attempts++;
             if (attempts < maxAttempts) {
