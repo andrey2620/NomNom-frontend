@@ -1,11 +1,11 @@
 <div *ngIf="recipe" class="card shadow-sm view-recipe h-100 p-0">
   <div class="position-relative">
-    <div class="position-absolute end-0">
+    <div class="position-absolute end-0 tooltip-container">
       <app-tool-tip
         [tooltipText]="'Guardar receta'"
         [tooltipPosition]="'below'"
         [iconClass]="'fa-solid fa-floppy-disk'"
-        [buttonClass]="'btn btn-success'"
+        [buttonClass]="'btn btn-success  border-0 shadow-none pt-1  btn-save-recipe'"
         (clicked)="saveRecipe()"></app-tool-tip>
     </div>
   </div>
