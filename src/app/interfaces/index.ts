@@ -30,7 +30,7 @@ export interface IResponsev2<T> {
 }
 
 export interface IUser {
-  id?: number;
+  id?: number | string;
   name?: string;
   lastname?: string;
   email?: string;
@@ -43,6 +43,7 @@ export interface IUser {
   picture?: string;
   allergies?: IAllergies[];
   preferences?: IDietPreferences[];
+  recipes?: IRecipe[];
 }
 
 export interface IAuthority {
