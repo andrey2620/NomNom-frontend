@@ -1,6 +1,7 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 import { IUser } from '../interfaces';
 import { AllergiesService } from './allergies.service';
 import { BaseService } from './base-service';
@@ -70,6 +71,28 @@ export class ProfileService extends BaseService<IUser> {
       error: (error: any) => {
         this.toastService.showWarning(`Error al actualizar perfil: ${error.message}`);
       },
+    });
+  }
+
+  getUserRecipes(userId: string | number | undefined) {
+    if (!userId) return;
+    
+    // Check if recipes are already loaded to prevent unnecessary calls
+    const currentUser = this.userSignal();
+    if (currentUser.recipes && currentUser.recipes.length > 0) return;
+    
+    return this.http.get(`${environment.apiUrl}/user-recipes/all?userId=${userId}`).subscribe({
+      next: (response: any) => {
+        const currentUser = this.userSignal();
+        this.userSignal.set({ ...currentUser, recipes: response.data });
+      },
+      error: (error: any) => {
+        this.snackBar.open(`Error getting user recipes: ${error.message}`, 'Close', {
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+          panelClass: ['error-snackbar'],
+        });
+      }
     });
   }
 }
