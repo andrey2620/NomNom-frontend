@@ -1,6 +1,8 @@
+
+//fonts
 h1 {
   color: #2c5530;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Poppins';
   font-weight: 700;
 }
 
@@ -13,6 +15,27 @@ h4 {
   font-size: 1rem;
   font-weight: bold;
 }
+
+
+.paso1 {
+  background-color: #bb0a21;
+}
+.paso1 h3{
+  color: #fff;
+}
+
+.paso1 h1{
+  color: #bb0a21;
+}
+
+.paso2 {
+  background-color: #2c5530;
+}
+
+.paso2 h3 {
+  color: #fff;
+}
+
 
 input[type="text"] {
   border-radius: 12px;
@@ -28,47 +51,6 @@ button {
   border-radius: 999px;
   font-size: 0.9rem;
   transition: all 0.2s ease-in-out;
-}
-
-.btn-danger {
-  background-color: #9c1d24;
-  border-color: #9c1d24;
-  color: white;
-
-  &:hover {
-    background-color: #7d1c1c;
-    border-color: #7d1c1c;
-  }
-}
-
-.btn-outline-danger {
-  color: #9c1d24;
-  border-color: #9c1d24;
-
-  &:hover {
-    background-color: #9c1d24;
-    color: white;
-  }
-}
-
-.btn-outline-success {
-  border-color: #2c5530;
-  color: #2c5530;
-
-  &:hover {
-    background-color: #2c5530;
-    color: white;
-  }
-}
-
-.btn-success {
-  background-color: #2c5530;
-  border-color: #2c5530;
-  color: white;
-
-  &:hover {
-    background-color: #224422;
-  }
 }
 
 .table {
@@ -90,10 +72,11 @@ button {
   }
 
   .d-flex {
-    flex-direction: column !important;
+    flex-direction: column ;
   }
 
   .table {
     font-size: 0.85rem;
   }
+
 }
