@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { TooltipComponent } from '../../tool-tip/tool-tip.component';
+import { TooltipComponent } from '../../../components/tooltip/Tooltip.component';
 import { CATEGORY_IMAGE_MAP, IRecipe } from '../../../interfaces';
 
 @Component({
@@ -18,9 +18,12 @@ export class ViewRecipeComponent {
   @Output() save = new EventEmitter<IRecipe>();
   @Output() delete = new EventEmitter<IRecipe>();
 
-  //el padre lo guarda
-  saveRecipe(): void {
+  onSave() {
     this.save.emit(this.recipe);
+  }
+
+  onDelete() {
+    this.delete.emit(this.recipe);
   }
 
   getCategoryImage(category: string): string {
