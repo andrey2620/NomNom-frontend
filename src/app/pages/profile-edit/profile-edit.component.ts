@@ -82,23 +82,38 @@ export class ProfileEditComponent implements OnInit {
     const user = this.profileService.user$();
 
     if (!user || !user.id) {
-      console.error('Error: Usuario no cargado correctamente.');
       return this.toastService.showWarning('El usuario no está cargado correctamente.');
     }
 
     this.selectedAllergiesArray = this.allergiesService.allAllergies.filter(a => a.isSelected);
-
     this.selectedPreferencesArray = this.dietPreferenceService.allDietPreferences.filter(p => p.isSelected);
 
     const updatedUser: IUser = {
       ...user,
-      allergies: this.selectedAllergiesArray,
+      allergies: this.selectedAllergiesArray, // ✅ incluye isSelected
       preferences: this.selectedPreferencesArray,
       role: user.role,
     };
 
-    console.log('Actualizando usuario con:', updatedUser);
     this.profileService.updateUserProfile(updatedUser);
+
+    const authUserRaw = localStorage.getItem('auth_user');
+    if (authUserRaw) {
+      const localUser = JSON.parse(authUserRaw);
+
+      const cleanedAllergies = this.selectedAllergiesArray.map(a => ({ id: a.id, name: a.name }));
+      const cleanedPreferences = this.selectedPreferencesArray.map(p => ({ id: p.id, name: p.name }));
+
+      const updatedLocalUser = {
+        ...localUser,
+        allergies: cleanedAllergies,
+        preferences: cleanedPreferences,
+      };
+
+      localStorage.setItem('auth_user', JSON.stringify(updatedLocalUser));
+    }
+
+    this.router.navigateByUrl('/app/profile');
   }
 
   getAllergiesNames() {
