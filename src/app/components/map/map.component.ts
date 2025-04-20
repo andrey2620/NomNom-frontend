@@ -109,19 +109,17 @@ export class MapComponent implements AfterViewInit {
 
   private onEachFeature(_: any, layer: L.Layer) {
     layer.on({
-      click: (e: L.LeafletEvent) => {
-        this.zoomToFeature(e);
-        const layer = e.target as any;
-        this.updateInfo(layer.feature.properties);
-      },
+      mouseover: this.highlightFeature,
+      mouseout: this.resetHighlight,
+      click: this.zoomToFeature,
     });
   }
-  
 
   private updateInfo(props?: any): void {
     const div = document.querySelector('.info') as HTMLDivElement;
     if (div) {
       
+
       /*if (props && !props?.recipes) {
         content = `<b>${props.name}</b><br/> <ul> No hay recetas disponibles para este país. </ul>`;
         this.recipesSelected.emit([]);
@@ -133,6 +131,7 @@ export class MapComponent implements AfterViewInit {
         content = `<h1>${props.name}</h1>`;
         div.innerHTML = `<h3>Recetas de todo el mundo!</h3>${content}`;
       }
+
       
     }
   }
