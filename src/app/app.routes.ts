@@ -1,26 +1,29 @@
 import { Routes } from '@angular/router';
+import { LoginComponent } from './pages/auth/login/login.component';
 import { AppLayoutComponent } from './components/app-layout/app-layout.component';
-import { AdminRoleGuard } from './guards/admin-role.guard';
+import { SignUpComponent } from './pages/auth/sign-up/signup.component';
+import { UsersComponent } from './pages/users/users.component';
 import { AuthGuard } from './guards/auth.guard';
+import { AccessDeniedComponent } from './pages/access-denied/access-denied.component';
+import { AdminRoleGuard } from './guards/admin-role.guard';
 import { GuestGuard } from './guards/guest.guard';
 import { IRoleType } from './interfaces';
-import { codeCollectiveLandingComponent } from './pages/CodeCollectiveLandingPage/codeCollectiveLanding';
-import { nomNomLandingComponent } from './pages/NomNomLandingPage/nomNomLanding';
-import { AccessDeniedComponent } from './pages/access-denied/access-denied.component';
-import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgotPassword.component';
-import { CallbackComponent } from './pages/auth/login/callbackComponent';
-import { LoginComponent } from './pages/auth/login/login.component';
-import { ResetPasswordComponent } from './pages/auth/reset-password/reset-password.component';
-import { SignUpComponent } from './pages/auth/sign-up/signup.component';
-import { GenerateRecipesComponent } from './pages/generateRecipes/generateRecipes.component';
-import { InteractiveMapComponent } from './pages/interactiveMap/interactiveMap.component';
-import { ProfileEditComponent } from './pages/profile-edit/profile-edit.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgotPassword.component';
+import { ResetPasswordComponent } from './pages/auth/reset-password/reset-password.component';
+import { GenerateRecipesComponent } from './pages/generateRecipes/generateRecipes.component';
 import { RecipeComponent } from './pages/recipe/recipe.component';
-import { UsersComponent } from './pages/users/users.component';
-import { ShoppingListComponent } from './pages/shoppingList/shoppingList.component';
-import { ShoppingListCreateComponent } from './pages/shoppingList/shoppingListCreate/shoppingList-create.component';
-import { ShoppingListViewComponent } from './pages/shoppingList/shoppingListView/shoppingList-view.component';
+import { nomNomLandingComponent } from './pages/NomNomLandingPage/nomNomLanding';
+import { codeCollectiveLandingComponent } from './pages/CodeCollectiveLandingPage/codeCollectiveLanding';
+import { InteractiveMapComponent } from './pages/interactiveMap/interactiveMap.component';
+import { CallbackComponent } from './pages/auth/login/callbackComponent';
+
+//hay que borrar todo esto
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { OrdersComponent } from './pages/orders/orders.component';
+import { PreferenceListPageComponent } from './pages/preferenceList/preference-list.component';
+import { RecipeFormComponent } from './components/recipe/recipe-form/recipe-form.component';
+import { RecipeListComponent } from './components/recipe/recipe-list/recipe-list.component';
 
 export const routes: Routes = [
   {
@@ -95,7 +98,7 @@ export const routes: Routes = [
         component: GenerateRecipesComponent,
         data: {
           authorities: [IRoleType.superAdmin, IRoleType.user],
-          name: 'Ingredientes',
+          name: 'Generador',
           showInSidebar: true,
         },
       },
@@ -118,41 +121,39 @@ export const routes: Routes = [
         },
       },
       {
-        path: 'profile/edit',
-        component: ProfileEditComponent,
-        data: {
-          authorities: [IRoleType.superAdmin, IRoleType.user],
-          name: 'profile-edit',
-        },
-      },
-      {
         path: 'recipes',
         component: RecipeComponent,
         data: {
           authorities: [IRoleType.superAdmin, IRoleType.user],
-          name: 'Generar Recetas',
+          name: 'Recetas',
           showInSidebar: true,
         },
+      },
+      /*
+      {
+        path: 'orders',
+        component: OrdersComponent,
+        data: {
+          authorities: [
+            IRoleType.superAdmin,
+            IRoleType.user,
+          ],
+          name: 'orders',
+          showInSidebar: true
+        }
       },
       {
-        path: 'shoppingList',
-        component: ShoppingListComponent,
+        path: 'preference-list',
+        component: PreferenceListPageComponent,
         data: {
-          authorities: [IRoleType.superAdmin, IRoleType.user],
-          name: 'Lista de compras',
-          showInSidebar: true,
-        },
-        children: [
-          {
-            path: 'create',
-            component: ShoppingListCreateComponent,
-          },
-          {
-            path: 'view',
-            component: ShoppingListViewComponent,
-          },
-        ],
-      },
+          authorities: [
+            IRoleType.superAdmin,
+            IRoleType.user,
+          ],
+          name: 'preference list',
+          showInSidebar: true
+        }
+      }, */
     ],
   },
 ];

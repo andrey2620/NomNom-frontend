@@ -1,4 +1,4 @@
-import { Component, effect, inject, ViewChild, OnInit } from '@angular/core';
+import { Component, effect, inject, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { IngredientsComponent } from '../../components/ingredients/ingredients.component';
@@ -9,30 +9,38 @@ import { AuthService } from '../../services/auth.service';
 import { ToastService } from '../../services/toast.service';
 import { DropdownComponent } from '../../components/dropdown/dropdown.component';
 import { ChipsComponent } from '../../components/chip/chips.component';
+import { IIngredients } from '../../interfaces';
 import { ModalComponent } from '../../components/modal/modal.component';
-import { forkJoin } from 'rxjs';
 
 @Component({
   standalone: true,
   selector: 'app-ingredients-page',
   templateUrl: './generateRecipes.component.html',
   styleUrls: ['./generateRecipes.component.scss'],
-  imports: [CommonModule, IngredientsComponent, LoaderComponent, PaginationComponent, FormsModule, DropdownComponent, ChipsComponent, ModalComponent],
+  imports: [
+    CommonModule,
+    IngredientsComponent,
+    LoaderComponent,
+    PaginationComponent,
+    FormsModule,
+    DropdownComponent,
+    ChipsComponent,
+    ModalComponent
+  ],
 })
-export class GenerateRecipesComponent implements OnInit {
+export class GenerateRecipesComponent {
   public ingredientService: IngredientService = inject(IngredientService);
-  public searchQuery = '';
-  public chosenCategory = '';
-  public currentPage = 1;
-  public itemsPerPage = 18;
-  public selectedIngredients: number[] = [];
-  public chips: { id: number; name: string; fromDb: boolean }[] = [];
-  private initialUserIngredientIds: number[] = [];
-  private selectedIngredientNames = new Map<number, string>();
-  @ViewChild('confirmModal') confirmModal!: ModalComponent;
-  hasIngredients: boolean | undefined;
-
   public title = 'Buscar ingredientes';
+
+  public searchQuery = ''; // Cadena de búsqueda
+  public chosenCategory = ''; // Categoría
+  public currentPage = 1; // Página actual
+  public itemsPerPage = 18; // Elementos por página
+  public selectedIngredients: number[] = [];
+  public chips: string[] = [];
+
+  private selectedIngredientNames: Map<number, string> = new Map();
+  @ViewChild('confirmModal') confirmModal!: ModalComponent;
 
   constructor(
     private authService: AuthService,
@@ -47,34 +55,34 @@ export class GenerateRecipesComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    const authUser = localStorage.getItem('auth_user');
-    if (!authUser) return;
+  ngOnInit() {
+    const savedIngredients = localStorage.getItem('user_ingredients');
+    const savedNames = localStorage.getItem('user_ingredients_names');
 
-    const userId = JSON.parse(authUser).id;
-
-    this.ingredientService.getFormattedIngredientsByUser(userId).subscribe({
-      next: res => {
-        localStorage.setItem('user_ingredients', JSON.stringify(res.data));
-        this.hasIngredients = res.data.length > 0;
-
-        this.selectedIngredients = res.data.map((i: { id: number }) => i.id);
-        this.initialUserIngredientIds = [...this.selectedIngredients];
+    if (savedIngredients && savedNames) {
+        // Recuperamos los IDs
+        this.selectedIngredients = JSON.parse(savedIngredients);
+        
+        // Recuperamos los nombres y los asignamos al Map
+        const namesArray = JSON.parse(savedNames);
         this.selectedIngredientNames.clear();
-        res.data.forEach((i: { id: number; name: string }) => {
-          this.selectedIngredientNames.set(i.id, i.name);
+        
+        // Mapeamos los IDs con sus nombres
+        this.selectedIngredients.forEach((id, index) => {
+            this.selectedIngredientNames.set(id, namesArray[index]);
         });
-        this.updateChips();
-      },
-      error: () => {
-        this.hasIngredients = false;
-      },
-    });
+    } else {
+        this.selectedIngredients = [];
+        this.selectedIngredientNames.clear();
+    }
   }
 
-  onIngredientsChange(selectedIds: number[]): void {
+  onIngredientsChange(selectedIds: number[]) {
     this.selectedIngredients = selectedIds;
+    
+    // Actualiza el mapeo de chips
     const currentIngredients = this.ingredientService.ingredient$();
+    
     selectedIds.forEach(id => {
       if (!this.selectedIngredientNames.has(id)) {
         const ingredient = currentIngredients.find(i => i.id === id);
@@ -83,21 +91,20 @@ export class GenerateRecipesComponent implements OnInit {
         }
       }
     });
-    this.updateChips();
+    this.chips = selectedIds.map(id => this.selectedIngredientNames.get(id) || '').filter(name => name !== '');
+    
   }
 
-  updateChips(): void {
-    this.chips = this.selectedIngredients.map(id => ({
-      id,
-      name: this.selectedIngredientNames.get(id) || '',
-      fromDb: this.initialUserIngredientIds.includes(id),
-    }));
-  }
-
-  onChipRemoved(chipId: number): void {
-    this.selectedIngredients = this.selectedIngredients.filter(id => id !== chipId);
-    this.selectedIngredientNames.delete(chipId);
-    this.updateChips();
+  onChipRemoved(chipName: string) {
+    // Busca en el mapa para encontrar el ID
+    for (const [id, name] of this.selectedIngredientNames.entries()) {
+      if (name === chipName) {
+        this.selectedIngredients = this.selectedIngredients.filter(selectedId => selectedId !== id);
+        this.selectedIngredientNames.delete(id);
+        break;
+      }
+    }
+    this.chips = this.chips.filter(name => name !== chipName);
   }
 
   onCategoryChange(category: string | null) {
@@ -105,17 +112,24 @@ export class GenerateRecipesComponent implements OnInit {
     this.filterIngredients();
   }
 
+  // Se activa cuando el usuario escribe en la barra de búsqueda
   filterIngredients() {
-    this.currentPage = 1;
+
+    this.currentPage = 1; // Reinicia la paginación a la primera página
 
     if (!this.searchQuery.trim() && !this.chosenCategory) {
+      // Si la búsqueda y la categoria estan vacías, muestra todos los ingredientes
       this.ingredientService.getAll();
-    } else {
+    } 
+    
+    else {
       const category = this.chosenCategory || '';
       this.ingredientService.getIngredientByNameAndCategory(this.searchQuery, category, this.currentPage);
     }
-  }
 
+  }  
+
+  // Se activa cuando cambia de página
   changePage(page: number) {
     this.currentPage = page;
     this.ingredientService.paginateIngredients(this.currentPage, this.itemsPerPage);
@@ -125,112 +139,77 @@ export class GenerateRecipesComponent implements OnInit {
     return this.ingredientService.getTotalPages(this.itemsPerPage);
   }
 
-  deleteIngredients(): void {
+
+  deleteIngredients(): void{
     this.confirmModal.showModal();
   }
-
   onModalCancel(): void {
     this.confirmModal.hideModal();
-  }
 
+  }
   onModalConfirm(): void {
-    const userId = this.authService.getCurrentUserId();
-
-    if (!userId) {
-      this.toastService.showError('No se pudo identificar al usuario.');
-      return;
-    }
-
-    const currentIngredientIds = [...this.selectedIngredients];
-
-    if (!currentIngredientIds.length) {
-      this.toastService.showInfo('No hay ingredientes que borrar.');
-      this.confirmModal.hideModal();
-      return;
-    }
-
-    this.ingredientService.bulkDeleteIngredientsFromUser(currentIngredientIds, userId).subscribe({
-      next: (res: { data: Record<string, string> }) => {
-        let deletedCount = 0;
-        for (const msg of Object.values(res.data)) {
-          if (msg === 'Eliminado correctamente') deletedCount++;
-        }
-
-        this.toastService.showSuccess(`${deletedCount} ingrediente(s) eliminado(s).`);
-
-        // Limpiar local y visual
-        this.selectedIngredients = [];
-        this.chips = [];
-        this.selectedIngredientNames.clear();
-        localStorage.removeItem('user_ingredients');
-        this.initialUserIngredientIds = [];
-
-        this.confirmModal.hideModal();
-      },
-      error: () => {
-        this.toastService.showError('Error al eliminar los ingredientes.');
-        this.confirmModal.hideModal();
-      },
-    });
+    localStorage.removeItem('user_ingredients');
+    localStorage.removeItem('user_ingredients_names');
+    this.selectedIngredients = [];
+    this.chips = [];
+    this.selectedIngredientNames.clear();
+    this.confirmModal.hideModal();
+    this.toastService.showSuccess('Se han eliminado todos los ingredientes seleccionados.');
   }
+  
 
   saveSelectedIngredients(): void {
     const userId = this.authService.getCurrentUserId();
+
     if (!userId) {
       this.toastService.showError('No se pudo identificar al usuario.');
       return;
     }
 
-    const storedRaw = localStorage.getItem('user_ingredients');
-    const storedObjs = storedRaw ? (JSON.parse(storedRaw) as { id: number; name: string }[]) : [];
-    const storedIds = storedObjs.map(i => i.id);
-    const currentIds = this.selectedIngredients;
-
-    const toAdd = currentIds.filter(id => !storedIds.includes(id));
-    const toRemove = storedIds.filter(id => !currentIds.includes(id));
-
-    if (!toAdd.length && !toRemove.length) {
-      this.toastService.showInfo('No se detectaron cambios en la selección.');
+    if (!this.selectedIngredients.length) {
+      this.toastService.showError('Debe seleccionar al menos un ingrediente.');
       return;
     }
 
-    const ingredientObjects = currentIds.map(id => ({
-      id,
-      name: this.selectedIngredientNames.get(id) || '',
-    }));
-    localStorage.setItem('user_ingredients', JSON.stringify(ingredientObjects));
+    this.ingredientService.bulkLinkIngredientsToUser(this.selectedIngredients, userId).subscribe({
+      next: (response: { data: any; }) => {
+        const result = response.data;
+        let successCount = 0;
+        let warningCount = 0;
 
-    const requests = [];
-
-    if (toAdd.length) {
-      requests.push(this.ingredientService.bulkLinkIngredientsToUser(toAdd, userId));
-    }
-
-    if (toRemove.length) {
-      requests.push(this.ingredientService.bulkDeleteIngredientsFromUser(toRemove, userId));
-    }
-
-    forkJoin(requests).subscribe({
-      next: responses => {
-        let added = 0,
-          removed = 0;
-
-        for (const res of responses) {
-          for (const msg of Object.values(res.data)) {
-            if (msg === 'Vinculado correctamente' || msg === 'Ya está vinculado') added++;
-            if (msg === 'Eliminado correctamente') removed++;
+        for (const [ingredientId, status] of Object.entries(result)) {
+          if (status === 'Vinculado correctamente' || status === 'Ya está vinculado') {
+            successCount++;
+          } /*else if (status === 'Ya está vinculado') {
+            warningCount++;
+          }*/ else {
+            this.toastService.showError(`Error con ingrediente ${ingredientId}: ${status}`);
           }
         }
 
-        if (added > 0) this.toastService.showSuccess(`${added} ingrediente(s) añadido(s).`);
-        if (removed > 0) this.toastService.showSuccess(`${removed} ingrediente(s) eliminado(s).`);
-        if (added === 0 && removed === 0) this.toastService.showInfo('No se realizaron cambios.');
+        this.toastService.showSuccess(`${successCount} ingrediente(s) vinculados correctamente.`);
+        // Suponiendo que selectedIngredients es un array con los IDs de los ingredientes
+        const ingredientNames = this.selectedIngredients.map(id => this.selectedIngredientNames.get(id) || '');
 
-        this.initialUserIngredientIds = [...this.selectedIngredients];
-        this.updateChips();
+        // Guardamos solo los IDs en selectedIngredients
+        localStorage.setItem('user_ingredients', JSON.stringify(this.selectedIngredients));
+
+        // Guardamos los nombres en localStorage como un array de nombres
+        localStorage.setItem('user_ingredients_names', JSON.stringify(ingredientNames));
+
+
+
+        /*if (successCount > 0) {
+          this.toastService.showSuccess(`${successCount} ingrediente(s) vinculados correctamente.`);
+        }
+
+        if (warningCount > 0) {
+          this.toastService.showWarning(`${warningCount} ingrediente(s) ya estaban vinculados.`);          
+        }*/
       },
-      error: err => {
-        this.toastService.showError('Error al guardar cambios: ' + err?.error?.message || err.message);
+      error: (error: { error: { message: string; }; }) => {
+        const errorMessage = error?.error?.message || 'Ocurrió un error al vincular los ingredientes.';
+        this.toastService.showError(errorMessage);
       },
     });
   }

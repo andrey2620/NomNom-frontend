@@ -1,13 +1,12 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalComponent } from '../../components/modal/modal.component';
 import { RecipeListComponent } from '../../components/recipe/recipe-list/recipe-list.component';
 import { IRecipe, IResponse } from '../../interfaces';
 import { CommonModule } from '@angular/common';
-import { ViewRecipeComponent } from '../../components/recipe/view-recipe/view-recipe.component';
-import { SousChefComponent } from '../../components/recipe/sous-chef/sous-chef.component';
+import { ViewRecipeComponent } from './view-recipe/view-recipe.component';
+import { SousChefComponent } from './sous-chef/sous-chef.component';
 import { IngredientService } from '../../services/ingredient.service';
-import { RecipesService } from '../../services/recipes.service';
 
 @Component({
   selector: 'app-recipe',
@@ -16,18 +15,16 @@ import { RecipesService } from '../../services/recipes.service';
   templateUrl: './recipe.component.html',
   styleUrls: ['./recipe.component.scss'],
 })
-export class RecipeComponent implements OnInit, AfterViewInit {
+export class RecipeComponent implements OnInit {
   @ViewChild('recipeList') recipeListComponent!: RecipeListComponent;
   @ViewChild('missingIngredientsModal') missingIngredientsModal!: ModalComponent;
-  public mostrarRecipeList = false;
 
   selectedRecipe: IRecipe | null = null;
   hasIngredients = false;
 
   constructor(
     private router: Router,
-    private ingredientService: IngredientService,
-    private recipeService: RecipesService
+    private ingredientService: IngredientService
   ) {}
 
   ngOnInit(): void {
@@ -36,8 +33,9 @@ export class RecipeComponent implements OnInit, AfterViewInit {
 
     const userId = JSON.parse(authUser).id;
 
+    // ✅ actualizar localStorage antes de cualquier flujo
     this.ingredientService.getFormattedIngredientsByUser(userId).subscribe({
-      next: (res: IResponse<{ id: number; name: string }[]>) => {
+      next: (res: IResponse<string[]>) => {
         localStorage.setItem('user_ingredients', JSON.stringify(res.data));
         this.hasIngredients = res.data.length > 0;
       },
@@ -45,14 +43,9 @@ export class RecipeComponent implements OnInit, AfterViewInit {
         this.hasIngredients = false;
       },
       complete: () => {
+        // Esperar a que se haya seteado hasIngredients
         setTimeout(() => this.initFlow(), 100);
       },
-    });
-  }
-
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      this.mostrarRecipeList = true;
     });
   }
 
@@ -66,7 +59,7 @@ export class RecipeComponent implements OnInit, AfterViewInit {
     }
 
     if (this.hasIngredients) {
-      this.recipeListComponent.loadValidRecipesFromLocalStorage(3);
+      this.recipeListComponent.loadValidRecipes(this.recipeListComponent.userId ?? 0, 3);
     } else {
       this.missingIngredientsModal.showModal();
     }
@@ -83,30 +76,7 @@ export class RecipeComponent implements OnInit, AfterViewInit {
   }
 
   onRecipeSaved(recipe: IRecipe): void {
-    // Crea el objeto DTO para enviar al backend
-    const recipeDto = {
-      name: recipe.name,
-      recipeCategory: recipe.recipeCategory,
-      preparationTime: recipe.preparationTime,
-      description: recipe.description || '', // Si es opcional, asegúrate de enviar un valor vacío si no está presente
-      nutritionalInfo: recipe.nutritionalInfo || '', // Lo mismo para propiedades opcionales
-      instructions: recipe.instructions,
-      ingredients: recipe.ingredients.map(ingredient => ({
-        name: ingredient.name,
-        quantity: ingredient.quantity,
-        measurement: ingredient.measurement || '', // Si measurement es opcional
-      })),
-    };
-
-    // Llama al servicio para guardar la receta
-    this.recipeService.addRecipe(recipeDto).subscribe({
-      next: response => {
-        console.log('Receta guardada:', response);
-      },
-      error: err => {
-        console.error('Error al guardar receta:', err);
-      },
-    });
+    console.log('Receta guardada:', recipe);
   }
 
   onRecipeDeleted(recipe: IRecipe): void {

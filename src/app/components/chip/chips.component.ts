@@ -10,8 +10,8 @@ import { FormsModule } from '@angular/forms';
   imports: [CommonModule, FormsModule],
 })
 export class ChipsComponent implements AfterViewInit, OnChanges {
-  @Input() chips: { id: number; name: string; fromDb: boolean }[] = [];
-  @Output() chipRemoved = new EventEmitter<number>();
+  @Input() chips: string[] = [];
+  @Output() chipRemoved = new EventEmitter<string>();
 
   @ViewChild('scrollContainer') scrollContainer!: ElementRef<HTMLDivElement>;
   hoveredIndex: number | null = null;
@@ -24,8 +24,8 @@ export class ChipsComponent implements AfterViewInit, OnChanges {
     setTimeout(() => this.scrollToBottom(), 100);
   }
 
-  removeChip(chip: { id: number; name: string; fromDb: boolean }) {
-    this.chipRemoved.emit(chip.id);
+  removeChip(chip: string): void {
+    this.chipRemoved.emit(chip);
   }
 
   scrollToBottom(): void {
