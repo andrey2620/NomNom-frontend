@@ -28,14 +28,11 @@ export class MapRecipeViewComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['country'] && this.country) {
       this.loadRecipes();
-      this.loadSkeletons(3);
       const sectionTitle = document.querySelector('.section-title') as HTMLElement;
       if (sectionTitle) {
         sectionTitle.innerHTML = `Recetas de ${this.country}`;
       }
     }
-    console.log('country', this.country);
-    console.log('itemList', this.itemList);
   }
 
   loadRecipes(): void {
