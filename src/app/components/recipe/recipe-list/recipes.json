@@ -4199,5 +4199,71 @@
       "measurement": ""
     }
   ]
+},
+{
+  "name": "Butter Chicken",
+  "country": "India",
+  "recipeCategory": "Comida",
+  "preparationTime": 90,
+  "description": "Uno de los platos más icónicos de la India, el pollo a la mantequilla se caracteriza por su salsa cremosa, ligeramente picante y rica en especias.",
+  "instructions": "Marina el pollo en yogur, ajo, jengibre, garam masala y jugo de limón durante al menos una hora. Luego, cocínalo en sartén hasta dorar. Aparte, derrite mantequilla, sofríe cebolla, ajo y jengibre. Añade puré de tomate y especias, cocina unos minutos y agrega crema. Incorpora el pollo a la salsa y cocina todo junto por 15 minutos. Sirve con arroz o naan.",
+  "ingredients": [
+    { "name": "Pechuga de pollo", "quantity": "500", "measurement": "gramos" },
+    { "name": "Yogur natural", "quantity": "1/2", "measurement": "taza" },
+    { "name": "Jugo de limón", "quantity": "2", "measurement": "cucharadas" },
+    { "name": "Garam masala", "quantity": "2", "measurement": "cucharaditas" },
+    { "name": "Jengibre fresco rallado", "quantity": "1", "measurement": "cucharadita" },
+    { "name": "Ajo picado", "quantity": "2", "measurement": "dientes" },
+    { "name": "Mantequilla", "quantity": "3", "measurement": "cucharadas" },
+    { "name": "Cebolla", "quantity": "1", "measurement": "unidad" },
+    { "name": "Puré de tomate", "quantity": "1", "measurement": "taza" },
+    { "name": "Crema de leche", "quantity": "1/2", "measurement": "taza" },
+    { "name": "Sal", "quantity": "al gusto", "measurement": "" },
+    { "name": "Cilantro fresco", "quantity": "al gusto", "measurement": "" }
+  ]
+},
+{
+  "name": "Chana Masala",
+  "country": "India",
+  "recipeCategory": "Comida",
+  "preparationTime": 45,
+  "description": "Un curry vegetariano picante y sabroso a base de garbanzos, muy popular en el norte de India y frecuentemente acompañado de arroz o pan plano.",
+  "instructions": "Sofríe cebolla, ajo, jengibre y chile verde hasta que estén dorados. Añade las especias y puré de tomate, y cocina hasta que se espese. Agrega los garbanzos cocidos y agua según se requiera para la consistencia. Cocina a fuego medio durante 20 minutos. Sirve con arroz basmati o chapati.",
+  "ingredients": [
+    { "name": "Garbanzos cocidos", "quantity": "2", "measurement": "tazas" },
+    { "name": "Cebolla", "quantity": "1", "measurement": "unidad" },
+    { "name": "Ajo", "quantity": "2", "measurement": "dientes" },
+    { "name": "Jengibre", "quantity": "1", "measurement": "cucharadita" },
+    { "name": "Chile verde", "quantity": "1", "measurement": "unidad" },
+    { "name": "Puré de tomate", "quantity": "1/2", "measurement": "taza" },
+    { "name": "Comino molido", "quantity": "1", "measurement": "cucharadita" },
+    { "name": "Cúrcuma", "quantity": "1/2", "measurement": "cucharadita" },
+    { "name": "Garam masala", "quantity": "1", "measurement": "cucharadita" },
+    { "name": "Agua", "quantity": "1", "measurement": "taza" },
+    { "name": "Aceite vegetal", "quantity": "2", "measurement": "cucharadas" },
+    { "name": "Sal", "quantity": "al gusto", "measurement": "" },
+    { "name": "Cilantro", "quantity": "al gusto", "measurement": "" }
+  ]
+},
+{
+  "name": "Samosas",
+  "country": "India",
+  "recipeCategory": "Entrada",
+  "preparationTime": 75,
+  "description": "Frituras rellenas de papa, arvejas y especias, muy populares como snack callejero en toda la India.",
+  "instructions": "Hierve las papas y tritúralas. Sofríe cebolla, jengibre y especias, y mezcla con las papas y arvejas. Prepara una masa con harina, aceite y agua. Divide en porciones, estira en círculos y corta por la mitad. Forma conos, rellena con la mezcla y cierra. Fríe en aceite caliente hasta dorar. Sirve con chutney.",
+  "ingredients": [
+    { "name": "Papas", "quantity": "3", "measurement": "unidades" },
+    { "name": "Arvejas", "quantity": "1/2", "measurement": "taza" },
+    { "name": "Cebolla picada", "quantity": "1", "measurement": "unidad" },
+    { "name": "Jengibre picado", "quantity": "1", "measurement": "cucharadita" },
+    { "name": "Comino", "quantity": "1", "measurement": "cucharadita" },
+    { "name": "Cúrcuma", "quantity": "1/2", "measurement": "cucharadita" },
+    { "name": "Garam masala", "quantity": "1", "measurement": "cucharadita" },
+    { "name": "Harina de trigo", "quantity": "2", "measurement": "tazas" },
+    { "name": "Agua", "quantity": "1/2", "measurement": "taza" },
+    { "name": "Aceite vegetal", "quantity": "para freír", "measurement": "" },
+    { "name": "Sal", "quantity": "al gusto", "measurement": "" }
+  ]
 }
 ]

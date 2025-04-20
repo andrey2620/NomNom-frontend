@@ -109,32 +109,39 @@ export class MapComponent implements AfterViewInit {
 
   private onEachFeature(_: any, layer: L.Layer) {
     layer.on({
-      mouseover: this.highlightFeature,
-      mouseout: this.resetHighlight,
-      click: this.zoomToFeature,
+      mouseover: (e: L.LeafletEvent) => {
+        const layer = e.target as any;
+        this.updateInfo(layer.feature.properties, false);
+      },
+      mouseout: () => {
+        this.updateInfo(); // limpia el panel
+      },
+      click: (e: L.LeafletEvent) => {
+        const layer = e.target as any;
+        this.updateInfo(layer.feature.properties, true); // true indica que se emitirá el país
+        this.zoomToFeature(e);
+      },
     });
   }
+  
 
-  private updateInfo(props?: any): void {
+  private updateInfo(props?: any, emit: boolean = false): void {
     const div = document.querySelector('.info') as HTMLDivElement;
+  
     if (div) {
-      
-
-      /*if (props && !props?.recipes) {
-        content = `<b>${props.name}</b><br/> <ul> No hay recetas disponibles para este país. </ul>`;
-        this.recipesSelected.emit([]);
-      }*/
-
       if (props) {
-        let content = 'Haz click en tu país:';
-        this.countrySelected.emit(props.name);
-        content = `<h1>${props.name}</h1>`;
+        let content = `<h1>${props.name}</h1>`;
         div.innerHTML = `<h3>Recetas de todo el mundo!</h3>${content}`;
+  
+        if (emit) {
+          this.countrySelected.emit(props.name);
+        }
+      } else {
+        div.innerHTML = '<h3>Recetas de todo el mundo!</h3>Haz click en tu país.';
       }
-
-      
     }
   }
+  
 
   private addLegend() {
     const legend = new L.Control({ position: 'bottomright' });
