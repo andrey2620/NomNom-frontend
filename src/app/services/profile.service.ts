@@ -76,15 +76,21 @@ export class ProfileService extends BaseService<IUser> {
 
   getUserRecipes(userId: string | number | undefined) {
     if (!userId) return;
-    
+
     // Check if recipes are already loaded to prevent unnecessary calls
     const currentUser = this.userSignal();
     if (currentUser.recipes && currentUser.recipes.length > 0) return;
-    
+
     return this.http.get(`${environment.apiUrl}/user-recipes/all?userId=${userId}`).subscribe({
       next: (response: any) => {
+        const authUser = localStorage.getItem('auth_user');
         const currentUser = this.userSignal();
         this.userSignal.set({ ...currentUser, recipes: response.data });
+        if (authUser) {
+          const parsedUser = JSON.parse(authUser);
+          parsedUser.recipes = response.data;
+          localStorage.setItem('auth_user', JSON.stringify(parsedUser));
+        }
       },
       error: (error: any) => {
         this.snackBar.open(`Error getting user recipes: ${error.message}`, 'Close', {
@@ -92,7 +98,7 @@ export class ProfileService extends BaseService<IUser> {
           verticalPosition: 'top',
           panelClass: ['error-snackbar'],
         });
-      }
+      },
     });
   }
 }

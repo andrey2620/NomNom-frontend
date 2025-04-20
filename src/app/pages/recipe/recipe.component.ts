@@ -8,6 +8,7 @@ import { ViewRecipeComponent } from '../../components/recipe/view-recipe/view-re
 import { SousChefComponent } from '../../components/recipe/sous-chef/sous-chef.component';
 import { IngredientService } from '../../services/ingredient.service';
 import { RecipesService } from '../../services/recipes.service';
+import { ProfileService } from '../../services/profile.service';
 
 @Component({
   selector: 'app-recipe',
@@ -27,7 +28,8 @@ export class RecipeComponent implements OnInit, AfterViewInit {
   constructor(
     private router: Router,
     private ingredientService: IngredientService,
-    private recipeService: RecipesService
+    private recipeService: RecipesService,
+    public profileService: ProfileService
   ) {}
 
   ngOnInit(): void {
@@ -35,7 +37,7 @@ export class RecipeComponent implements OnInit, AfterViewInit {
     if (!authUser) return;
 
     const userId = JSON.parse(authUser).id;
-
+    this.profileService.getUserRecipes(userId);
     this.ingredientService.getFormattedIngredientsByUser(userId).subscribe({
       next: (res: IResponse<{ id: number; name: string }[]>) => {
         localStorage.setItem('user_ingredients', JSON.stringify(res.data));
