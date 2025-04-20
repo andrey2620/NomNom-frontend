@@ -9,20 +9,24 @@
 }
 
 .chip-badge {
+  padding: 0.5rem 1rem;
+  margin: 0.3rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  display: inline-flex;
   align-items: center;
-  background-color: #2c5530;
-  border-radius: 10px;
-  color: white;
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 8px;
-  padding: 8px 12px;
-  width: 100%;
+  transition: background-color 0.3s;
 }
-
+.chip-db {
+  background-color: #2c5530; // verde
+  color: white;
+}
+.chip-temp {
+  background-color: #c3bf6d; // gris dorado claro
+  color: black;
+}
 .chip-hovered {
-  background-color: #3b7040;
+  opacity: 0.85;
 }
 
 .chip-label {

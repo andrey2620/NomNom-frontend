@@ -1,15 +1,20 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { BaseService } from './base-service';
-import { IRecipe, ISearch, ISuggestions, IResponse } from '../interfaces';
+import { IRecipe, ISearch, ISuggestions, IResponsev2 } from '../interfaces';
 import { AuthService } from './auth.service';
 import { AlertService } from './alert.service';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RecipesService extends BaseService<IRecipe> {
   protected override source = 'recipes';
+
+  addRecipe(recipeDto: Partial<IRecipe>): Observable<IRecipe> {
+    return this.http.post<IRecipe>(`${this.source}`, recipeDto);
+  }
 
   private recipeListSignal = signal<IRecipe[]>([]);
   get recipes$() {
@@ -21,11 +26,60 @@ export class RecipesService extends BaseService<IRecipe> {
     size: 3,
   };
 
-  public totalItems: any = [];
+  public totalItems: number[] = [];
   private authService: AuthService = inject(AuthService);
   private alertService: AlertService = inject(AlertService);
 
-  getAll() {
+  getRandomRecipes(): Observable<IResponsev2<IRecipe[]>> {
+    return this.http.get<IResponsev2<{ recipe: IRecipe; prompt: string }>>(`${this.source}/generator`).pipe(
+      map(res => {
+        if (environment.dev) {
+          console.warn('[DEBUG] Prompt generado:\n', res.data.prompt);
+        }
+
+        return {
+          ...res,
+          data: [res.data.recipe],
+        };
+      })
+    );
+  }
+
+  getRecipesByUser(userId: number): Observable<IResponsev2<IRecipe[]>> {
+    return this.http.get<IResponsev2<{ recipe: IRecipe; prompt: string }>>(`${this.source}/generator/user/${userId}`).pipe(
+      map(res => {
+        if (environment.dev) {
+          console.warn('[DEBUG] Prompt generado:\n', res.data.prompt);
+        }
+
+        return {
+          ...res,
+          data: [res.data.recipe],
+        };
+      })
+    );
+  }
+
+  generateRecipeFromIngredients(ingredientNames: string[]): Observable<IResponsev2<IRecipe[]>> {
+    return this.http.post<IResponsev2<{ recipe: IRecipe; prompt: string }>>(`${this.source}/generator/ingredients`, ingredientNames).pipe(
+      map(res => {
+        if (environment.dev) {
+          console.warn('[DEBUG] Prompt generado:\n', res.data.prompt);
+        }
+
+        return {
+          ...res,
+          data: [res.data.recipe],
+        };
+      })
+    );
+  }
+
+  generateSuggestions(recipe: IRecipe): Observable<IResponsev2<ISuggestions>> {
+    return this.http.post<IResponsev2<ISuggestions>>(`${this.source}/generator/suggestions`, recipe);
+  }
+
+  /*   getAll() {
     this.findAllWithParams({ page: this.search.page, size: this.search.size }).subscribe({
       next: (response: any) => {
         this.search = { ...this.search, ...response.meta };
@@ -62,17 +116,5 @@ export class RecipesService extends BaseService<IRecipe> {
         console.error('Error', err);
       },
     });
-  }
-
-  getRandomRecipes(): Observable<any> {
-    return this.findAllWithParamsAndCustomSource(`generator`);
-  }
-
-  getRecipesByUser(userId: number): Observable<any> {
-    return this.findAllWithParamsAndCustomSource(`generator/user/${userId}`);
-  }
-
-  generateSuggestions(recipe: IRecipe): Observable<IResponse<ISuggestions>> {
-    return this.addCustomSource('generator/suggestions', recipe) as unknown as Observable<IResponse<ISuggestions>>;
-  }
+  } */
 }
