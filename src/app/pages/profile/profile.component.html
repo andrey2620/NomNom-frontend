@@ -43,11 +43,12 @@
               <div class="card-recipe shadow-sm rounded py-4 px-2 border relative my-3 position-relative">
                 <!-- button delete -->
                 <app-tool-tip
-                  id=""
                   [tooltipText]="'Eliminar receta'"
                   [tooltipPosition]="'below'"
                   [iconClass]="'fa-solid fa-trash-can'"
-                  [buttonClass]="'btn-delete-recipe rounded-circle border-0'"></app-tool-tip>
+                  [buttonClass]="'btn-delete-recipe rounded-circle border-0'"
+                  (clicked)="deleteRecipe(recipe)">
+                </app-tool-tip>
 
                 <div class="d-flex justify-content-center align-items-center gap-2">
                   <span class="text-center">{{ recipe.name }}</span>

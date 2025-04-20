@@ -129,10 +129,10 @@ export class RecipeComponent implements OnInit, AfterViewInit {
       next: (response: IRecipe) => {
         this.recipeService.linkUserRecipe(userId, (response as IRecipe).data.id).subscribe({
           next: () => {
-            console.log('✅ Receta guardada y vinculada correctamente. XD');
+            this.toastService.showSuccess('Receta guardada correctamente');
           },
           error: (err: unknown) => {
-            console.error('❌ Error al vincular receta al usuario:', err);
+            this.toastService.showSuccess('Error al vincular receta al usuario' + err);
           },
           complete: () => {
             this.profileService.getUserRecipes(userId, true);
@@ -140,13 +140,9 @@ export class RecipeComponent implements OnInit, AfterViewInit {
         });
       },
       error: (err: any) => {
-        console.error('❌ Error al guardar la receta:', err);
+        this.toastService.showSuccess('Error al guardar la receta:' + err);
       },
     });
-  }
-
-  onRecipeDeleted(recipe: IRecipe): void {
-    console.log('Receta eliminada:', recipe);
   }
 
   onGenerateMore(): void {

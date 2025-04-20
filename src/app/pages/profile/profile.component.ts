@@ -6,6 +6,7 @@ import { IAllergies, IDietPreferences, IRecipe, IUser } from '../../interfaces';
 import { AllergiesService } from '../../services/allergies.service';
 import { DietPreferenceService } from '../../services/dietPreference.service';
 import { ProfileService } from '../../services/profile.service';
+import { RecipesService } from '../../services/recipes.service';
 
 @Component({
   standalone: true,
@@ -27,7 +28,8 @@ export class ProfileComponent implements OnInit {
   constructor(
     public dietPreferenceService: DietPreferenceService,
     public allergiesService: AllergiesService,
-    public profileService: ProfileService
+    public profileService: ProfileService,
+    public recipesService: RecipesService
   ) {
     effect(
       () => {
@@ -36,7 +38,6 @@ export class ProfileComponent implements OnInit {
 
         this.user = user;
 
-        // Only call getUserRecipes if we don't already have recipes
         if (!user.recipes) {
           this.profileService.getUserRecipes(this.user.id);
         }
@@ -70,6 +71,15 @@ export class ProfileComponent implements OnInit {
       this.snackBar.open('Error loading profile data', 'Close', { duration: 3000 });
     }
   }
-  // Add this to your component class
-  console = console;
+
+  deleteRecipe(recipe: IRecipe): void {
+    if (typeof this.user.id === 'number' && typeof recipe.id === 'number') {
+      this.recipesService.deleteRecipe(this.user.id, recipe.id);
+    } else {
+      console.error('Invalid user ID or recipe ID');
+    }
+
+    // Eliminar visualmente de la lista (optimista)
+    this.userRecipes.delete(recipe);
+  }
 }

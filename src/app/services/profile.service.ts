@@ -75,7 +75,7 @@ export class ProfileService extends BaseService<IUser> {
     // Solo salteamos si NO queremos forzar y ya hay recetas
     if (!forceRefresh && currentUser.recipes && currentUser.recipes.length > 0) return;
 
-    return this.http.get(`${environment.apiUrl}/user-recipes/all?userId=${userId}`).subscribe({
+    return this.http.get(`user-recipes/all?userId=${userId}`).subscribe({
       next: (response: any) => {
         const authUser = localStorage.getItem('auth_user');
 
