@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, EventEmitter, Output, ViewEncapsulation } from '@angular/core';
-import * as statesData from '../../../assets/geoJSON/us-states.json';
+import * as statesData from '../../../assets/geoJSON/coords.json';
 import { IRecipe } from '../../interfaces';
 import L from 'leaflet';
 
