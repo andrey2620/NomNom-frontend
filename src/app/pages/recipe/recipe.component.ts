@@ -9,6 +9,7 @@ import { SousChefComponent } from '../../components/recipe/sous-chef/sous-chef.c
 import { IngredientService } from '../../services/ingredient.service';
 import { RecipesService } from '../../services/recipes.service';
 import { ProfileService } from '../../services/profile.service';
+import { ToastService } from '../../services/toast.service';
 
 @Component({
   selector: 'app-recipe',
@@ -21,7 +22,7 @@ export class RecipeComponent implements OnInit, AfterViewInit {
   @ViewChild('recipeList') recipeListComponent!: RecipeListComponent;
   @ViewChild('missingIngredientsModal') missingIngredientsModal!: ModalComponent;
   public mostrarRecipeList = false;
-
+  userId = JSON.parse(localStorage.getItem('auth_user') || '{}').id;
   selectedRecipe: IRecipe | null = null;
   hasIngredients = false;
 
@@ -29,16 +30,17 @@ export class RecipeComponent implements OnInit, AfterViewInit {
     private router: Router,
     private ingredientService: IngredientService,
     private recipeService: RecipesService,
-    public profileService: ProfileService
+    public profileService: ProfileService,
+    public toastService: ToastService
   ) {}
 
   ngOnInit(): void {
     const authUser = localStorage.getItem('auth_user');
     if (!authUser) return;
 
-    const userId = JSON.parse(authUser).id;
-    this.profileService.getUserRecipes(userId);
-    this.ingredientService.getFormattedIngredientsByUser(userId).subscribe({
+    this.userId = JSON.parse(authUser).id;
+    this.profileService.getUserRecipes(this.userId);
+    this.ingredientService.getFormattedIngredientsByUser(this.userId).subscribe({
       next: (res: IResponse<{ id: number; name: string }[]>) => {
         localStorage.setItem('user_ingredients', JSON.stringify(res.data));
         this.hasIngredients = res.data.length > 0;
@@ -80,28 +82,65 @@ export class RecipeComponent implements OnInit, AfterViewInit {
   }
 
   onRecipeSaved(recipe: IRecipe): void {
-    // Crea el objeto DTO para enviar al backend
-    const recipeDto = {
+    const user = localStorage.getItem('auth_user');
+    if (!user) return;
+
+    const parsedUser = JSON.parse(user);
+    const userId = parsedUser.id;
+
+    const normalize = (str: string) => str.replace(/\s+/g, ' ').replace(/[.,;]/g, '').trim().toLowerCase();
+
+    const newInstructions = normalize(recipe.instructions || '');
+
+    console.log('%c🔍 Instrucciones de la receta seleccionada (normalizadas):', 'color: #3498db');
+    console.log(newInstructions);
+
+    console.log('%c📋 Instrucciones de recetas del usuario (normalizadas):', 'color: #e67e22');
+    parsedUser.recipes?.forEach((r: IRecipe, index: number) => {
+      const normalized = normalize(r.instructions || '');
+      console.log(`Receta #${index + 1}:`, normalized);
+    });
+
+    const alreadyExists = parsedUser.recipes?.some((r: IRecipe) => {
+      const existingInstructions = normalize(r.instructions || '');
+      return existingInstructions === newInstructions;
+    });
+
+    if (alreadyExists) {
+      this.toastService.showWarning('Esta receta ya la guardaste, selecciona otra.');
+      return;
+    }
+
+    const dto = {
       name: recipe.name,
       recipeCategory: recipe.recipeCategory,
       preparationTime: recipe.preparationTime,
-      description: recipe.description || '', // Si es opcional, asegúrate de enviar un valor vacío si no está presente
-      nutritionalInfo: recipe.nutritionalInfo || '', // Lo mismo para propiedades opcionales
+      description: recipe.description || '',
+      nutritionalInfo: recipe.nutritionalInfo || '',
       instructions: recipe.instructions,
-      ingredients: recipe.ingredients.map(ingredient => ({
-        name: ingredient.name,
-        quantity: ingredient.quantity,
-        measurement: ingredient.measurement || '', // Si measurement es opcional
+      ingredients: recipe.ingredients.map(ing => ({
+        name: ing.name,
+        quantity: ing.quantity,
+        measurement: ing.measurement || '',
       })),
     };
 
-    // Llama al servicio para guardar la receta
-    this.recipeService.addRecipe(recipeDto).subscribe({
-      next: response => {
-        console.log('Receta guardada:', response);
+    this.recipeService.addRecipe(dto).subscribe({
+      next: (response: IRecipe) => {
+        this.recipeService.linkUserRecipe(userId, (response as IRecipe).data.id).subscribe({
+          next: () => {
+            console.log('✅ Receta guardada y vinculada correctamente. XD');
+          },
+          error: (err: unknown) => {
+            console.error('❌ Error al vincular receta al usuario:', err);
+          },
+          complete: () => {
+            this.profileService.getUserRecipes(userId, true);
+          },
+        });
       },
-      error: err => {
-        console.error('Error al guardar receta:', err);
+      error: (err: any) => {
+        console.error('❌ Error al guardar la receta:', err);
       },
     });
   }

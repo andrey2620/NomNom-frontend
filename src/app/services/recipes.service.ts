@@ -11,12 +11,11 @@ import { environment } from '../../environments/environment';
 })
 export class RecipesService extends BaseService<IRecipe> {
   protected override source = 'recipes';
-
-  addRecipe(recipeDto: Partial<IRecipe>): Observable<IRecipe> {
-    return this.http.post<IRecipe>(`${this.source}`, recipeDto);
-  }
-
+  public totalItems: number[] = [];
+  private authService: AuthService = inject(AuthService);
+  private alertService: AlertService = inject(AlertService);
   private recipeListSignal = signal<IRecipe[]>([]);
+
   get recipes$() {
     return this.recipeListSignal;
   }
@@ -26,15 +25,19 @@ export class RecipesService extends BaseService<IRecipe> {
     size: 3,
   };
 
-  public totalItems: number[] = [];
-  private authService: AuthService = inject(AuthService);
-  private alertService: AlertService = inject(AlertService);
+  linkUserRecipe(userId: number, recipeId: number): Observable<IResponsev2<IRecipe>> {
+    return this.http.post<IResponsev2<IRecipe>>(`user-recipes?userId=${userId}&recipeId=${recipeId}`, {});
+  }
+
+  addRecipe(recipeDto: Partial<IRecipe>): Observable<IRecipe> {
+    return this.http.post<IRecipe>(`${this.source}`, recipeDto);
+  }
 
   getRandomRecipes(): Observable<IResponsev2<IRecipe[]>> {
     return this.http.get<IResponsev2<{ recipe: IRecipe; prompt: string }>>(`${this.source}/generator`).pipe(
       map(res => {
         if (environment.dev) {
-          console.warn('[DEBUG] Prompt generado:\n', res.data.prompt);
+          //console.warn('[DEBUG] Prompt generado:\n', res.data.prompt);
         }
 
         return {
@@ -49,7 +52,7 @@ export class RecipesService extends BaseService<IRecipe> {
     return this.http.get<IResponsev2<{ recipe: IRecipe; prompt: string }>>(`${this.source}/generator/user/${userId}`).pipe(
       map(res => {
         if (environment.dev) {
-          console.warn('[DEBUG] Prompt generado:\n', res.data.prompt);
+          //console.warn('[DEBUG] Prompt generado:\n', res.data.prompt);
         }
 
         return {
@@ -64,7 +67,7 @@ export class RecipesService extends BaseService<IRecipe> {
     return this.http.post<IResponsev2<{ recipe: IRecipe; prompt: string }>>(`${this.source}/generator/ingredients`, ingredientNames).pipe(
       map(res => {
         if (environment.dev) {
-          console.warn('[DEBUG] Prompt generado:\n', res.data.prompt);
+          //console.warn('[DEBUG] Prompt generado:\n', res.data.prompt);
         }
 
         return {

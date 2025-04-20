@@ -1,5 +1,4 @@
-import { Injectable, inject, signal } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
 import { IUser } from '../interfaces';
@@ -12,9 +11,8 @@ import { ToastService } from './toast.service';
   providedIn: 'root',
 })
 export class ProfileService extends BaseService<IUser> {
-  protected override source: string = 'users';
+  protected override source = 'users';
   public userSignal = signal<IUser>({});
-  private snackBar = inject(MatSnackBar);
 
   constructor(
     private dietPreferenceService: DietPreferenceService,
@@ -47,13 +45,8 @@ export class ProfileService extends BaseService<IUser> {
           });
         }, 200); // Pequeña espera para asegurarnos que ya cargaron las listas
       },
-
       error: (error: any) => {
-        this.snackBar.open(`Error getting user profile info ${error.message}`, 'Close', {
-          horizontalPosition: 'right',
-          verticalPosition: 'top',
-          panelClass: ['error-snackbar'],
-        });
+        this.toastService.showWarning(`Error getting user profile info ${error.message}`);
       },
     });
   }
@@ -74,30 +67,34 @@ export class ProfileService extends BaseService<IUser> {
     });
   }
 
-  getUserRecipes(userId: string | number | undefined) {
+  getUserRecipes(userId: string | number | undefined, forceRefresh = false) {
     if (!userId) return;
 
-    // Check if recipes are already loaded to prevent unnecessary calls
     const currentUser = this.userSignal();
-    if (currentUser.recipes && currentUser.recipes.length > 0) return;
+
+    // Solo salteamos si NO queremos forzar y ya hay recetas
+    if (!forceRefresh && currentUser.recipes && currentUser.recipes.length > 0) return;
 
     return this.http.get(`${environment.apiUrl}/user-recipes/all?userId=${userId}`).subscribe({
       next: (response: any) => {
         const authUser = localStorage.getItem('auth_user');
-        const currentUser = this.userSignal();
+
         this.userSignal.set({ ...currentUser, recipes: response.data });
-        if (authUser) {
+
+        if (authUser && Array.isArray(response.data)) {
           const parsedUser = JSON.parse(authUser);
-          parsedUser.recipes = response.data;
-          localStorage.setItem('auth_user', JSON.stringify(parsedUser));
+          delete parsedUser.recipes;
+
+          const updatedUser = {
+            ...parsedUser,
+            recipes: response.data,
+          };
+
+          localStorage.setItem('auth_user', JSON.stringify(updatedUser));
         }
       },
       error: (error: any) => {
-        this.snackBar.open(`Error getting user recipes: ${error.message}`, 'Close', {
-          horizontalPosition: 'right',
-          verticalPosition: 'top',
-          panelClass: ['error-snackbar'],
-        });
+        this.toastService.showWarning(`Error getting user recipes: ${error.message}`);
       },
     });
   }

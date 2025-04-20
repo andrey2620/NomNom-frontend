@@ -115,6 +115,8 @@ export interface IDietPreferences {
 }
 
 export interface IRecipe {
+  id?: any;
+  data?: any;
   id_recipe?: number;
   name: string;
   description?: string; // ← este
