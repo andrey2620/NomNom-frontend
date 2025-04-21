@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, effect, inject, OnInit } from '@angular/core';
+import { Component, effect, EnvironmentInjector, inject, OnInit, runInInjectionContext } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 
@@ -25,7 +25,7 @@ export class ProfileEditComponent implements OnInit {
   selectedPreferences: Set<IDietPreferences> = new Set<IDietPreferences>();
   public selectedAllergiesArray: IAllergies[] = [];
   public selectedPreferencesArray: IDietPreferences[] = [];
-
+  envInjector = inject(EnvironmentInjector);
   constructor(
     public dietPreferenceService: DietPreferenceService,
     public allergiesService: AllergiesService,
@@ -42,6 +42,16 @@ export class ProfileEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.profileService.getUserInfoSignal();
+    runInInjectionContext(this.envInjector, () => {
+      effect(() => {
+        this.profileService.user$();
+        this.allergiesService.allergies$();
+        this.dietPreferenceService.dietPreferences$();
+      });
+    });
+  }
+
+  /*   ngOnInit(): void {
 
     effect(() => {
       const user = this.profileService.user$();
@@ -52,7 +62,7 @@ export class ProfileEditComponent implements OnInit {
         this.selectedPreferences = new Set(this.user.preferences ?? []);
       }
     });
-  }
+  } */
 
   onSelectedAllergy(event: Event, allergy: IAllergies) {
     const checked = (event.target as HTMLInputElement).checked;
@@ -90,7 +100,7 @@ export class ProfileEditComponent implements OnInit {
 
     const updatedUser: IUser = {
       ...user,
-      allergies: this.selectedAllergiesArray, // ✅ incluye isSelected
+      allergies: this.selectedAllergiesArray,
       preferences: this.selectedPreferencesArray,
       role: user.role,
     };
@@ -119,9 +129,11 @@ export class ProfileEditComponent implements OnInit {
   getAllergiesNames() {
     return this.allergiesService.allAllergies.map(allergy => allergy.name);
   }
+
   getAllergiesUserIsSelected() {
     return this.allergiesService.allAllergies.filter(allergy => allergy.isSelected).map(allergy => allergy.name);
   }
+
   syncSelectedAllergies(selectedNames: string[]) {
     this.allergiesService.allAllergies.forEach(allergy => {
       allergy.isSelected = selectedNames.includes(allergy.name);
