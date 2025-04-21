@@ -51,19 +51,6 @@ export class ProfileEditComponent implements OnInit {
     });
   }
 
-  /*   ngOnInit(): void {
-
-    effect(() => {
-      const user = this.profileService.user$();
-      if (user?.id) {
-        this.user = user;
-
-        this.selectedAllergies = new Set(this.user.allergies ?? []);
-        this.selectedPreferences = new Set(this.user.preferences ?? []);
-      }
-    });
-  } */
-
   onSelectedAllergy(event: Event, allergy: IAllergies) {
     const checked = (event.target as HTMLInputElement).checked;
 

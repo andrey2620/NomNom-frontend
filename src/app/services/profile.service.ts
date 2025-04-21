@@ -1,6 +1,5 @@
 import { Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { environment } from '../../environments/environment';
 import { IUser } from '../interfaces';
 import { AllergiesService } from './allergies.service';
 import { BaseService } from './base-service';
