@@ -1,0 +1,98 @@
+<section class="px-5 mx-auto pt-4 d-flex w-100 gap-4 planificator">
+  <!-- my menus -->
+  <div class="border shadow rounded py-4 w-25">
+    <div class="my-menu">
+      <h2 class="text-center">Mis Menús</h2>
+      <hr />
+      <div class="">
+        <div
+          cdkDropList
+          id="menu-list"
+          [cdkDropListData]="myMenus"
+          [cdkDropListConnectedTo]="getDropListIds()"
+          class="recipe-list"
+          (cdkDropListDropped)="drop($event)">
+          <div *ngFor="let menu of myMenus" class="menu-box">
+            <span>
+              {{ menu }}
+            </span>
+            <button class="menu-button">Ver</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- my recipes -->
+  <div class="border shadow rounded py-4 w-25">
+    <div class="my-recipes">
+      <h2 class="text-center">Mis Recetas</h2>
+      <hr />
+      <div
+        cdkDropList
+        id="recipe-list"
+        [cdkDropListData]="myRecipes"
+        [cdkDropListConnectedTo]="getDropListIds()"
+        class="recipe-list"
+        (cdkDropListDropped)="drop($event)">
+        <div *ngFor="let recipe of myRecipes" cdkDrag class="recipe-box">
+          <div *cdkDragPreview class="d-flex flex-column justify-content-center bg-white p-2 rounded align-items-center shadow">
+            <img [src]="getCategoryImage(recipe.recipeCategory)" class="recipe-image-preview mx-auto" alt="Recipe image" />
+            <span class="text-center recipe-text">{{ recipe.name }}</span>
+          </div>
+          <span>{{ recipe.name }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Planificator -->
+  <div class="border shadow rounded py-4 flex-grow-1 w-100">
+    <h2 class="text-center">Planificador Semanal</h2>
+    <hr />
+    <div class="planner-grid">
+      <!-- Days of the week header row -->
+      <div class="days-header-row">
+        <div class="empty-cell"></div>
+        <div *ngFor="let day of weekDays" class="day-header">
+          {{ day }}
+        </div>
+      </div>
+
+      <!-- Meal types as rows, days as columns -->
+      <div *ngFor="let mealType of mealTypes" class="meal-type-row">
+        <div class="meal-type-header">{{ mealType }}</div>
+        <div *ngFor="let day of weekDays" class="meal-cell">
+          <div
+            cdkDropList
+            [id]="getDropListId(day, mealType)"
+            [cdkDropListData]="weeklyPlan[day][mealType]"
+            [cdkDropListConnectedTo]="getDropListIds()"
+            class="meal-drop-list"
+            (cdkDropListDropped)="drop($event)">
+            <!-- In the meal cells section, update the cdkDrag to include cdkDragBoundary -->
+            <div
+              *ngFor="let item of weeklyPlan[day][mealType]"
+              cdkDrag
+              cdkDragBoundary=".planner-grid"
+              class="meal-item"
+              (mouseenter)="startDeleteTimer(day, mealType, item)"
+              (mouseleave)="cancelDeleteTimer()"
+              (cdkDragStarted)="dragStarted()">
+              <div class="d-flex justify-content-center align-items-center w-100 flex-column">
+                <img [src]="getCategoryImage(item.recipeCategory)" class="recipe-image me-2" alt="Recipe image" />
+                <span class="text-center">
+                  {{ item.name }}
+                </span>
+              </div>
+              <button
+                *ngIf="showDeleteButton && selectedItem === item && selectedDay === day && selectedMealType === mealType"
+                class="delete-btn"
+                (click)="deleteItem(day, mealType, item)">
+                ✕
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

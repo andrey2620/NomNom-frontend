@@ -14,13 +14,14 @@ import { ResetPasswordComponent } from './pages/auth/reset-password/reset-passwo
 import { SignUpComponent } from './pages/auth/sign-up/signup.component';
 import { GenerateRecipesComponent } from './pages/generateRecipes/generateRecipes.component';
 import { InteractiveMapComponent } from './pages/interactiveMap/interactiveMap.component';
+import { PlanificatorPageComponent } from './pages/planificator/planificator-page.component';
 import { ProfileEditComponent } from './pages/profile-edit/profile-edit.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { RecipeComponent } from './pages/recipe/recipe.component';
-import { UsersComponent } from './pages/users/users.component';
 import { ShoppingListComponent } from './pages/shoppingList/shoppingList.component';
 import { ShoppingListCreateComponent } from './pages/shoppingList/shoppingListCreate/shoppingList-create.component';
 import { ShoppingListViewComponent } from './pages/shoppingList/shoppingListView/shoppingList-view.component';
+import { UsersComponent } from './pages/users/users.component';
 
 export const routes: Routes = [
   {
@@ -105,6 +106,15 @@ export const routes: Routes = [
         data: {
           authorities: [IRoleType.superAdmin, IRoleType.user],
           name: 'Mapa interactivo',
+          showInSidebar: true,
+        },
+      },
+      {
+        path: 'planificator',
+        component: PlanificatorPageComponent,
+        data: {
+          authorities: [IRoleType.superAdmin, IRoleType.user],
+          name: 'Planificador',
           showInSidebar: true,
         },
       },

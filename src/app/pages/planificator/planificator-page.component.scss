@@ -1,0 +1,231 @@
+.planificator * {
+  user-select: none;
+}
+.recipe-list {
+  border-radius: 4px;
+  max-height: 650px;
+  overflow-y: auto;
+  padding: 10px;
+  scrollbar-width: thin;
+  width: 100%;
+}
+
+.recipe-box {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: move;
+  margin: 12px 0;
+  padding: 10px;
+
+  &:hover {
+    background: #f5f5f5;
+  }
+}
+
+.menu-box {
+  align-items: center;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  margin: 12px 0;
+  padding: 10px;
+
+  &:hover {
+    background: #f5f5f5;
+  }
+
+  .menu-button {
+    background-color: transparent;
+    border: 1px solid red;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+    color: red;
+
+    &:hover {
+      background-color: red;
+      color: white;
+    }
+  }
+}
+
+.planner-grid {
+  overflow: hidden; /* Change from overflow-x: auto to overflow: hidden */
+  position: relative;
+  width: 100%;
+}
+
+/* Add this to ensure the drag preview doesn't cause scrollbars */
+.cdk-drag-preview {
+  max-height: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  position: absolute;
+  z-index: 1000;
+
+  // Hide delete button in drag preview
+  .delete-btn {
+    display: none !important;
+  }
+}
+
+.days-header-row {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 100px repeat(7, 1fr);
+  margin-bottom: 10px;
+}
+
+.meal-type-row {
+  align-items: center;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 100px repeat(7, 1fr);
+  justify-content: center;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.meal-type-header,
+.day-header {
+  align-items: center;
+  display: flex;
+  font-weight: bold;
+  height: 100%;
+  justify-content: center;
+  text-align: center;
+}
+
+.empty-cell {
+  background: transparent;
+}
+
+.meal-cell {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  max-height: 150px;
+  min-height: 150px;
+  overflow-y: auto;
+  position: relative; /* Add position relative */
+}
+.meal-cell::-webkit-scrollbar {
+  width: 0;
+}
+
+.meal-drop-list {
+  height: 100%; /* Ensure it fills the cell */
+  min-height: 80px;
+  padding: 5px;
+}
+
+.meal-item {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: move;
+  margin: 4px;
+  padding: 8px;
+  z-index: 1; /* Ensure proper stacking */
+
+  &:hover {
+    background: #f5f5f5;
+  }
+}
+
+// Add these new styles
+.cdk-drag {
+  z-index: 1;
+}
+
+.meal-cell .cdk-drag-boundary {
+  height: 100%;
+  min-height: 80px;
+  width: 100%;
+}
+
+/* Modify the preview to be contained */
+.meal-cell .cdk-drag-preview {
+  border-radius: 4px;
+  box-shadow:
+    0 5px 5px -3px rgba(0, 0, 0, 0.2),
+    0 8px 10px 1px rgba(0, 0, 0, 0.14),
+    0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  box-sizing: border-box;
+  max-width: calc(100% - 10px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+// Add these styles for the delete button
+.meal-item {
+  position: relative;
+}
+
+.delete-btn {
+  align-items: center;
+  background-color: #ff4d4f;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  font-size: 10px;
+  height: 20px;
+  justify-content: center;
+  padding: 0;
+  position: absolute;
+  right: -8px;
+  top: -8px;
+  width: 20px;
+
+  &:hover {
+    background-color: #ff7875;
+  }
+}
+
+.recipe-image {
+  border-radius: 4px;
+  height: 36px;
+  object-fit: cover;
+  width: 36px;
+}
+
+.recipe-image-preview {
+  border-radius: 4px;
+  height: 120px;
+  object-fit: cover;
+  width: 120px;
+}
+.recipe-text {
+  display: block;
+  margin: 0 auto;
+  max-width: 160px;
+  width: 100%;
+}
+
+.recipe-box,
+.meal-item {
+  align-items: center;
+  display: flex;
+}
+
+.w-0 {
+  width: 0 !important;
+}
+.w-14 {
+  width: 24px !important;
+}
