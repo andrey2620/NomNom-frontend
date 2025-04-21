@@ -64,6 +64,11 @@ export class RecipeComponent implements OnInit, AfterViewInit {
     this.recipeListComponent.clearRecipes();
     this.recipeListComponent.loadSkeletons(3);
 
+    if(localStorage.getItem('mapRecipe')) {
+      this.selectedRecipe = JSON.parse(localStorage.getItem('mapRecipe') ?? '');
+      localStorage.removeItem('mapRecipe');
+    }
+
     if (this.hasIngredients) {
       this.recipeListComponent.loadValidRecipesFromLocalStorage(3);
     } else {

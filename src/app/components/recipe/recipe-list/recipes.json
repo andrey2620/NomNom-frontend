@@ -144,5 +144,4127 @@
         "measurement": "taza"
       }
     ]
-  }
+  },
+  {
+    "name": "Mac and Cheese",
+    "country": "Estados Unidos",
+    "recipeCategory": "Comida",
+    "preparationTime": 40,
+    "description": "Clásico plato estadounidense reconfortante, preparado con macarrones y una cremosa salsa de queso. Muy popular en cenas familiares y festividades.",
+    "instructions": "Hierve los macarrones hasta que estén al dente. En una olla, derrite mantequilla, añade harina y cocina por un minuto. Incorpora la leche poco a poco hasta formar una salsa. Agrega el queso rallado y mezcla hasta que se derrita. Mezcla con los macarrones cocidos. Opcionalmente, hornea con queso adicional por encima hasta que esté dorado.",
+    "ingredients": [
+      {
+        "name": "Macarrones",
+        "quantity": "2",
+        "measurement": "tazas"
+      },
+      {
+        "name": "Leche",
+        "quantity": "2",
+        "measurement": "tazas"
+      },
+      {
+        "name": "Queso cheddar",
+        "quantity": "2",
+        "measurement": "tazas"
+      },
+      {
+        "name": "Mantequilla",
+        "quantity": "2",
+        "measurement": "cucharadas"
+      },
+      {
+        "name": "Harina",
+        "quantity": "2",
+        "measurement": "cucharadas"
+      },
+      {
+        "name": "Sal",
+        "quantity": "al gusto",
+        "measurement": ""
+      },
+      {
+        "name": "Pimienta",
+        "quantity": "al gusto",
+        "measurement": ""
+      }
+    ]
+  },
+  {
+    "name": "Clam Chowder",
+    "country": "Estados Unidos",
+    "recipeCategory": "Comida",
+    "preparationTime": 60,
+    "description": "Sopa espesa típica de la región de Nueva Inglaterra, elaborada con almejas, papas, cebolla y crema. Es un ícono de la cocina del noreste del país.",
+    "instructions": "En una olla grande, sofríe tocino picado hasta que esté crujiente. Agrega cebolla y cocina hasta que esté translúcida. Añade papas, almejas, agua o caldo, y cocina hasta que las papas estén tiernas. Agrega leche y crema, y cocina unos minutos más sin que hierva. Sazona con sal, pimienta y tomillo. Sirve caliente con pan.",
+    "ingredients": [
+      {
+        "name": "Almejas",
+        "quantity": "500",
+        "measurement": "gramos"
+      },
+      {
+        "name": "Papas",
+        "quantity": "2",
+        "measurement": "unidades"
+      },
+      {
+        "name": "Cebolla",
+        "quantity": "1",
+        "measurement": "unidad"
+      },
+      {
+        "name": "Tocino",
+        "quantity": "100",
+        "measurement": "gramos"
+      },
+      {
+        "name": "Leche",
+        "quantity": "1",
+        "measurement": "taza"
+      },
+      {
+        "name": "Crema de leche",
+        "quantity": "1/2",
+        "measurement": "taza"
+      },
+      {
+        "name": "Agua o caldo",
+        "quantity": "2",
+        "measurement": "tazas"
+      },
+      {
+        "name": "Tomillo",
+        "quantity": "1/2",
+        "measurement": "cucharadita"
+      },
+      {
+        "name": "Sal y pimienta",
+        "quantity": "al gusto",
+        "measurement": ""
+      }
+    ]
+  },
+  {
+    "name": "Pulled Pork",
+    "country": "Estados Unidos",
+    "recipeCategory": "Comida",
+    "preparationTime": 360,
+    "description": "Plato típico del sur de Estados Unidos, el pulled pork se cocina lentamente hasta que la carne se deshace fácilmente, y se mezcla con salsa barbacoa.",
+    "instructions": "Sazona el cerdo con sal, pimienta, ajo en polvo, pimentón y azúcar. Cocínalo a fuego lento (en horno, olla de cocción lenta o ahumador) durante 5-6 horas hasta que esté muy tierno. Desmenúzalo con dos tenedores y mézclalo con salsa barbacoa. Sirve en sándwiches o con guarniciones como ensalada de col.",
+    "ingredients": [
+      {
+        "name": "Paleta de cerdo",
+        "quantity": "1.5",
+        "measurement": "kg"
+      },
+      {
+        "name": "Salsa barbacoa",
+        "quantity": "1",
+        "measurement": "taza"
+      },
+      {
+        "name": "Pimentón dulce",
+        "quantity": "1",
+        "measurement": "cucharada"
+      },
+      {
+        "name": "Ajo en polvo",
+        "quantity": "1",
+        "measurement": "cucharadita"
+      },
+      {
+        "name": "Sal",
+        "quantity": "1",
+        "measurement": "cucharadita"
+      },
+      {
+        "name": "Pimienta negra",
+        "quantity": "1/2",
+        "measurement": "cucharadita"
+      },
+      {
+        "name": "Azúcar moreno",
+        "quantity": "1",
+        "measurement": "cucharada"
+      }
+    ]
+  },      
+  {
+    "name": "Gallo Pinto",
+    "country": "Costa Rica",
+    "recipeCategory": "Comida",
+    "preparationTime": 30,
+    "description": "Es un plato típico del desayuno costarricense hecho con arroz y frijoles mezclados. Se acompaña con natilla, plátano maduro, pan o tortillas, y a veces huevo o queso.",
+    "instructions": "Sofríe cebolla y chile dulce en aceite hasta que estén dorados. Agrega arroz cocido y frijoles negros cocidos con un poco de su caldo. Mezcla bien y sazona con sal, pimienta y salsa Lizano al gusto. Cocina hasta que esté bien integrado.",
+    "ingredients": [
+      {
+        "name": "Arroz Cocido",
+        "quantity": "2",
+        "measurement": "tazas"
+      },
+      {
+        "name": "Frijoles Negros Cocidos",
+        "quantity": "1.5",
+        "measurement": "tazas"
+      },
+      {
+        "name": "Cebolla",
+        "quantity": "1/2",
+        "measurement": "unidad"
+      },
+      {
+        "name": "Chile Dulce",
+        "quantity": "1/2",
+        "measurement": "unidad"
+      },
+      {
+        "name": "Salsa Lizano",
+        "quantity": "2",
+        "measurement": "cucharadas"
+      },
+      {
+        "name": "Aceite",
+        "quantity": "1",
+        "measurement": "cucharada"
+      }
+    ]
+  },
+  {
+    "name": "Casado",
+    "country": "Costa Rica",
+    "description": "Es una comida completa que combina arroz, frijoles, una porción de carne, ensalada, plátano maduro frito y a veces huevo o picadillo. Es muy común en almuerzos y refleja el balance típico de la dieta costarricense.",
+    "recipeCategory": "Comida",
+    "preparationTime": 45,
+    "instructions": "Cocina arroz y frijoles por separado. Asa carne o pollo al gusto. Prepara una ensalada con lechuga, tomate y repollo. Fríe plátanos maduros en rodajas. Sirve todo junto en un plato con tortillas.",
+    "ingredients": [
+      {
+        "name": "Arroz",
+        "quantity": "1",
+        "measurement": "taza"
+      },
+      {
+        "name": "Frijoles",
+        "quantity": "1",
+        "measurement": "taza"
+      },
+      {
+        "name": "Carne o Pollo",
+        "quantity": "200",
+        "measurement": "gramos"
+      },
+      {
+        "name": "Plátano Maduro",
+        "quantity": "1",
+        "measurement": "unidad"
+      },
+      {
+        "name": "Lechuga",
+        "quantity": "1",
+        "measurement": "hoja"
+      },
+      {
+        "name": "Tomate",
+        "quantity": "1/2",
+        "measurement": "unidad"
+      },
+      {
+        "name": "Repollo",
+        "quantity": "1/2",
+        "measurement": "taza"
+      },
+      {
+        "name": "Tortillas",
+        "quantity": "2",
+        "measurement": "unidades"
+      }
+    ]
+  },
+  {
+    "name": "Olla de Carne",
+    "country": "Costa Rica",
+    "description": "Es un caldo abundante y sustancioso preparado con trozos de carne de res y una variedad de verduras. Es ideal para compartir en familia, especialmente los fines de semana.",
+    "recipeCategory": "Comida",
+    "preparationTime": 120,
+    "instructions": "Cocina la carne en agua con sal, ajo y cebolla por 1 hora. Agrega los vegetales picados y cocina por 1 hora más. Sazona al gusto y sirve caliente con arroz blanco.",
+    "ingredients": [
+      {
+        "name": "Carne de Res para Sopa",
+        "quantity": "500",
+        "measurement": "gramos"
+      },
+      {
+        "name": "Yuca",
+        "quantity": "1",
+        "measurement": "unidad"
+      },
+      {
+        "name": "Papa",
+        "quantity": "2",
+        "measurement": "unidades"
+      },
+      {
+        "name": "Chayote",
+        "quantity": "1",
+        "measurement": "unidad"
+      },
+      {
+        "name": "Zanahoria",
+        "quantity": "2",
+        "measurement": "unidades"
+      },
+      {
+        "name": "Ayote",
+        "quantity": "1",
+        "measurement": "taza"
+      },
+      {
+        "name": "Cebolla",
+        "quantity": "1",
+        "measurement": "unidad"
+      },
+      {
+        "name": "Ajo",
+        "quantity": "2",
+        "measurement": "dientes"
+      },
+      {
+        "name": "Sal",
+        "quantity": "al gusto",
+        "measurement": ""
+      }
+    ]
+  },
+  {
+    "name": "Tacos al Pastor",
+    "country": "México",
+    "recipeCategory": "Comida",
+    "preparationTime": 90,
+    "description": "Clásicos tacos mexicanos elaborados con carne de cerdo marinada en achiote y piña, servidos con tortillas de maíz y acompañamientos frescos.",
+    "instructions": "Marina la carne de cerdo en achiote, jugo de piña, vinagre y especias por al menos 1 hora. Cocina la carne en un sartén o al horno hasta que esté bien dorada. Sirve en tortillas de maíz con piña, cebolla y cilantro picado.",
+    "ingredients": [
+      {
+        "name": "Carne de Cerdo",
+        "quantity": "500",
+        "measurement": "gramos"
+      },
+      {
+        "name": "Achiote",
+        "quantity": "2",
+        "measurement": "cucharadas"
+      },
+      {
+        "name": "Jugo de Piña",
+        "quantity": "1/2",
+        "measurement": "taza"
+      },
+      {
+        "name": "Vinagre Blanco",
+        "quantity": "2",
+        "measurement": "cucharadas"
+      },
+      {
+        "name": "Tortillas de Maíz",
+        "quantity": "10",
+        "measurement": "unidades"
+      },
+      {
+        "name": "Piña",
+        "quantity": "1/2",
+        "measurement": "taza"
+      },
+      {
+        "name": "Cebolla",
+        "quantity": "1/2",
+        "measurement": "unidad"
+      },
+      {
+        "name": "Cilantro",
+        "quantity": "1/4",
+        "measurement": "taza"
+      }
+    ]
+  },
+  {
+    "name": "Chiles en Nogada",
+    "country": "México",
+    "recipeCategory": "Comida",
+    "preparationTime": 120,
+    "description": "Un platillo tradicional del estado de Puebla, compuesto por chiles poblanos rellenos de un picadillo dulce-salado y cubiertos con una salsa de nuez.",
+    "instructions": "Asa los chiles poblanos, quita la piel y desvena. Prepara el picadillo con carne molida, frutas, especias y cocina hasta integrar. Rellena los chiles con el picadillo. Licúa la nuez con crema y queso para hacer la nogada. Sirve los chiles cubiertos con la nogada y espolvorea granada y perejil.",
+    "ingredients": [
+      {
+        "name": "Chiles Poblanos",
+        "quantity": "4",
+        "measurement": "unidades"
+      },
+      {
+        "name": "Carne Molida de Res",
+        "quantity": "400",
+        "measurement": "gramos"
+      },
+      {
+        "name": "Manzana",
+        "quantity": "1",
+        "measurement": "unidad"
+      },
+      {
+        "name": "Pera",
+        "quantity": "1",
+        "measurement": "unidad"
+      },
+      {
+        "name": "Durazno",
+        "quantity": "1",
+        "measurement": "unidad"
+      },
+      {
+        "name": "Nuez",
+        "quantity": "1/2",
+        "measurement": "taza"
+      },
+      {
+        "name": "Crema",
+        "quantity": "1/2",
+        "measurement": "taza"
+      },
+      {
+        "name": "Queso Fresco",
+        "quantity": "100",
+        "measurement": "gramos"
+      },
+      {
+        "name": "Granada",
+        "quantity": "1/2",
+        "measurement": "unidad"
+      },
+      {
+        "name": "Perejil",
+        "quantity": "2",
+        "measurement": "cucharadas"
+      }
+    ]
+  },
+  {
+    "name": "Pozole Rojo",
+    "country": "México",
+    "recipeCategory": "Comida2",
+    "preparationTime": 180,
+    "description": "Un caldo espeso y reconfortante preparado con maíz pozolero y carne de cerdo, sazonado con chiles secos y acompañado de ingredientes frescos.",
+    "instructions": "Cocina el maíz pozolero con ajo hasta que reviente. Agrega carne de cerdo y cocina hasta que esté suave. Licúa chiles secos con especias y cuela la salsa. Añade la salsa al caldo y cocina por 30 minutos más. Sirve con lechuga, rábano, cebolla, orégano y limón.",
+    "ingredients": [
+      {
+        "name": "Maíz Pozolero",
+        "quantity": "2",
+        "measurement": "tazas"
+      },
+      {
+        "name": "Carne de Cerdo",
+        "quantity": "500",
+        "measurement": "gramos"
+      },
+      {
+        "name": "Chile Guajillo",
+        "quantity": "4",
+        "measurement": "unidades"
+      },
+      {
+        "name": "Ajo",
+        "quantity": "3",
+        "measurement": "dientes"
+      },
+      {
+        "name": "Orégano",
+        "quantity": "1",
+        "measurement": "cucharadita"
+      },
+      {
+        "name": "Lechuga",
+        "quantity": "1",
+        "measurement": "taza"
+      },
+      {
+        "name": "Rábanos",
+        "quantity": "4",
+        "measurement": "unidades"
+      },
+      {
+        "name": "Cebolla",
+        "quantity": "1/2",
+        "measurement": "unidad"
+      },
+      {
+        "name": "Limón",
+        "quantity": "2",
+        "measurement": "unidades"
+      }
+    ]
+  },
+  {
+    "name": "Ropa Vieja",
+    "country": "Cuba",
+    "recipeCategory": "Comida",
+    "preparationTime": 150,
+    "description": "Plato emblemático de la cocina cubana, elaborado con carne de res deshebrada en una sabrosa salsa de tomate, pimientos y especias, que refleja la riqueza cultural de la isla.",
+    "instructions": "Cocina la carne de res en agua con sal hasta que esté tierna y desmenúzala. En una sartén, sofríe cebolla, ajo y pimientos hasta que estén suaves. Agrega puré de tomate, comino, laurel, aceitunas y pasas. Incorpora la carne deshebrada y cocina a fuego lento hasta que los sabores se integren.",
+    "ingredients": [
+      {
+        "name": "Carne de Res (falda)",
+        "quantity": "500",
+        "measurement": "gramos"
+      },
+      {
+        "name": "Cebolla",
+        "quantity": "1",
+        "measurement": "unidad"
+      },
+      {
+        "name": "Pimiento Rojo",
+        "quantity": "1",
+        "measurement": "unidad"
+      },
+      {
+        "name": "Pimiento Verde",
+        "quantity": "1",
+        "measurement": "unidad"
+      },
+      {
+        "name": "Ajo",
+        "quantity": "3",
+        "measurement": "dientes"
+      },
+      {
+        "name": "Puré de Tomate",
+        "quantity": "1",
+        "measurement": "taza"
+      },
+      {
+        "name": "Aceitunas Verdes",
+        "quantity": "1/4",
+        "measurement": "taza"
+      },
+      {
+        "name": "Pasas",
+        "quantity": "2",
+        "measurement": "cucharadas"
+      },
+      {
+        "name": "Comino",
+        "quantity": "1",
+        "measurement": "cucharadita"
+      },
+      {
+        "name": "Hoja de Laurel",
+        "quantity": "1",
+        "measurement": "unidad"
+      },
+      {
+        "name": "Aceite",
+        "quantity": "2",
+        "measurement": "cucharadas"
+      },
+      {
+        "name": "Sal",
+        "quantity": "al gusto",
+        "measurement": ""
+      },
+      {
+        "name": "Pimienta",
+        "quantity": "al gusto",
+        "measurement": ""
+      }
+    ]
+  },
+  {
+    "name": "Moros y Cristianos",
+    "country": "Cuba",
+    "recipeCategory": "Comida",
+    "preparationTime": 60,
+    "description": "Clásico acompañamiento cubano que combina arroz blanco y frijoles negros, simbolizando la mezcla de culturas en la isla.",
+    "instructions": "Cocina los frijoles negros hasta que estén tiernos. En una olla, sofríe cebolla, ajo y pimiento verde en aceite. Agrega los frijoles cocidos con parte de su caldo, arroz, comino, orégano, laurel, sal y pimienta. Cocina a fuego medio hasta que el arroz esté listo y los sabores se hayan integrado.",
+    "ingredients": [
+      {
+        "name": "Arroz Blanco",
+        "quantity": "1",
+        "measurement": "taza"
+      },
+      {
+        "name": "Frijoles Negros Cocidos",
+        "quantity": "1",
+        "measurement": "taza"
+      },
+      {
+        "name": "Cebolla",
+        "quantity": "1/2",
+        "measurement": "unidad"
+      },
+      {
+        "name": "Pimiento Verde",
+        "quantity": "1/2",
+        "measurement": "unidad"
+      },
+      {
+        "name": "Ajo",
+        "quantity": "2",
+        "measurement": "dientes"
+      },
+      {
+        "name": "Comino",
+        "quantity": "1/2",
+        "measurement": "cucharadita"
+      },
+      {
+        "name": "Orégano",
+        "quantity": "1/2",
+        "measurement": "cucharadita"
+      },
+      {
+        "name": "Hoja de Laurel",
+        "quantity": "1",
+        "measurement": "unidad"
+      },
+      {
+        "name": "Aceite",
+        "quantity": "2",
+        "measurement": "cucharadas"
+      },
+      {
+        "name": "Sal",
+        "quantity": "al gusto",
+        "measurement": ""
+      },
+      {
+        "name": "Pimienta",
+        "quantity": "al gusto",
+        "measurement": ""
+      }
+    ]
+  },
+  {
+    "name": "Lechón Asado",
+    "country": "Cuba",
+    "recipeCategory": "Comida",
+    "preparationTime": 300,
+    "description": "Plato festivo tradicional cubano que consiste en cerdo marinado y asado lentamente, popular en celebraciones y reuniones familiares.",
+    "instructions": "Prepara un adobo mezclando ajo machacado, jugo de naranja agria, orégano, comino, sal y pimienta. Marina el cerdo con esta mezcla durante al menos 12 horas. Asa el cerdo lentamente en un horno o asador, bañándolo ocasionalmente con el adobo, hasta que la carne esté tierna y la piel crujiente.",
+    "ingredients": [
+      {
+        "name": "Pierna de Cerdo",
+        "quantity": "5",
+        "measurement": "kilogramos"
+      },
+      {
+        "name": "Ajo",
+        "quantity": "10",
+        "measurement": "dientes"
+      },
+      {
+        "name": "Jugo de Naranja Agria",
+        "quantity": "2",
+        "measurement": "tazas"
+      },
+      {
+        "name": "Orégano",
+        "quantity": "1",
+        "measurement": "cucharada"
+      },
+      {
+        "name": "Comino",
+        "quantity": "1",
+        "measurement": "cucharada"
+      },
+      {
+        "name": "Sal",
+        "quantity": "al gusto",
+        "measurement": ""
+      },
+      {
+        "name": "Pimienta",
+        "quantity": "al gusto",
+        "measurement": ""
+      }
+    ]
+  },
+  {
+    "name": "Bandeja Paisa",
+    "country": "Colombia",
+    "recipeCategory": "Comida",
+    "preparationTime": 90,
+    "description": "Plato emblemático de la región paisa, caracterizado por su abundancia y variedad de ingredientes, que refleja la riqueza culinaria de Colombia.",
+    "instructions": "Cocina los frijoles con cebolla, ajo y comino hasta que estén tiernos. Fríe la carne molida con cebolla y tomate hasta que esté bien cocida. Asa el chorizo y la morcilla hasta que estén dorados. Fríe el chicharrón hasta que esté crujiente. Cocina el arroz blanco y fríe los plátanos maduros en rodajas. Fríe los huevos hasta que las yemas estén cocidas a tu gusto. Sirve todo en un plato grande acompañado de arepa y aguacate.",
+    "ingredients": [
+      {
+        "name": "Frijoles rojos",
+        "quantity": "2",
+        "measurement": "tazas"
+      },
+      {
+        "name": "Arroz blanco",
+        "quantity": "1",
+        "measurement": "taza"
+      },
+      {
+        "name": "Carne molida de res",
+        "quantity": "250",
+        "measurement": "gramos"
+      },
+      {
+        "name": "Chorizo",
+        "quantity": "2",
+        "measurement": "unidades"
+      },
+      {
+        "name": "Morcilla",
+        "quantity": "2",
+        "measurement": "unidades"
+      },
+      {
+        "name": "Chicharrón",
+        "quantity": "200",
+        "measurement": "gramos"
+      },
+      {
+        "name": "Plátano maduro",
+        "quantity": "2",
+        "measurement": "unidades"
+      },
+      {
+        "name": "Huevos",
+        "quantity": "2",
+        "measurement": "unidades"
+      },
+      {
+        "name": "Arepas",
+        "quantity": "2",
+        "measurement": "unidades"
+      },
+      {
+        "name": "Aguacate",
+        "quantity": "1",
+        "measurement": "unidad"
+      },
+      {
+        "name": "Cebolla",
+        "quantity": "1",
+        "measurement": "unidad"
+      },
+      {
+        "name": "Tomate",
+        "quantity": "1",
+        "measurement": "unidad"
+      },
+      {
+        "name": "Ajo",
+        "quantity": "2",
+        "measurement": "dientes"
+      },
+      {
+        "name": "Comino",
+        "quantity": "1",
+        "measurement": "cucharadita"
+      },
+      {
+        "name": "Sal",
+        "quantity": "al gusto",
+        "measurement": ""
+      },
+      {
+        "name": "Aceite",
+        "quantity": "al gusto",
+        "measurement": ""
+      }
+    ]
+  },
+  {
+    "name": "Ajiaco Santafereño",
+    "country": "Colombia",
+    "recipeCategory": "Comida",
+    "preparationTime": 120,
+    "description": "Sopa tradicional de Bogotá, elaborada con tres tipos de papa, pollo y guascas, que ofrece un sabor único y reconfortante.",
+    "instructions": "En una olla grande, cocina las pechugas de pollo con agua, cebolla y ajo hasta que estén tiernas. Retira el pollo, desmenúzalo y resérvalo. Agrega las papas criolla, sabanera y pastusa al caldo y cocina hasta que se deshagan parcialmente, formando una sopa espesa. Añade las guascas y cocina por 10 minutos más. Sirve el ajiaco caliente con el pollo desmenuzado, alcaparras, crema de leche y aguacate al gusto.",
+    "ingredients": [
+      {
+        "name": "Pechugas de pollo",
+        "quantity": "2",
+        "measurement": "unidades"
+      },
+      {
+        "name": "Papa criolla",
+        "quantity": "500",
+        "measurement": "gramos"
+      },
+      {
+        "name": "Papa sabanera",
+        "quantity": "500",
+        "measurement": "gramos"
+      },
+      {
+        "name": "Papa pastusa",
+        "quantity": "500",
+        "measurement": "gramos"
+      },
+      {
+        "name": "Guascas",
+        "quantity": "2",
+        "measurement": "cucharadas"
+      },
+      {
+        "name": "Cebolla larga",
+        "quantity": "1",
+        "measurement": "unidad"
+      },
+      {
+        "name": "Ajo",
+        "quantity": "2",
+        "measurement": "dientes"
+      },
+      {
+        "name": "Alcaparras",
+        "quantity": "2",
+        "measurement": "cucharadas"
+      },
+      {
+        "name": "Crema de leche",
+        "quantity": "1/2",
+        "measurement": "taza"
+      },
+      {
+        "name": "Aguacate",
+        "quantity": "1",
+        "measurement": "unidad"
+      },
+      {
+        "name": "Sal",
+        "quantity": "al gusto",
+        "measurement": ""
+      },
+      {
+        "name": "Pimienta",
+        "quantity": "al gusto",
+        "measurement": ""
+      }
+    ]
+  },
+  {
+    "name": "Arepas de Queso",
+    "country": "Colombia",
+    "recipeCategory": "Comida",
+    "preparationTime": 30,
+    "description": "Deliciosas arepas colombianas rellenas de queso, ideales para el desayuno o como acompañamiento en cualquier comida.",
+    "instructions": "En un recipiente, mezcla la harina de maíz precocida con agua y sal hasta obtener una masa suave. Incorpora el queso rallado y amasa hasta que esté bien integrado. Divide la masa en porciones y forma discos de aproximadamente 1 cm de grosor. Cocina las arepas en una sartén caliente hasta que estén doradas por ambos lados y el queso se haya derretido en el interior.",
+    "ingredients": [
+      {
+        "name": "Harina de maíz precocida",
+        "quantity": "2",
+        "measurement": "tazas"
+      },
+      {
+        "name": "Queso rallado",
+        "quantity": "1",
+        "measurement": "taza"
+      },
+      {
+        "name": "Agua",
+        "quantity": "1.5",
+        "measurement": "tazas"
+      },
+      {
+        "name": "Sal",
+        "quantity": "1",
+        "measurement": "cucharadita"
+      },
+      {
+        "name": "Aceite",
+        "quantity": "al gusto",
+        "measurement": ""
+      }
+    ]
+  },
+  {
+    "name": "Pabellón Criollo",
+    "country": "Venezuela",
+    "recipeCategory": "Comida",
+    "preparationTime": 120,
+    "description": "Plato nacional de Venezuela que combina carne mechada, arroz blanco, caraotas negras y tajadas de plátano maduro, representando la diversidad cultural del país.",
+    "instructions": "Cocina la carne de res hasta que esté tierna y desmenúzala. En una sartén, sofríe cebolla, ajo y pimientos, luego añade la carne desmechada y cocina hasta integrar los sabores. Cocina las caraotas negras con ajo, cebolla y comino hasta que estén suaves. Fríe las tajadas de plátano maduro hasta que estén doradas. Sirve la carne, las caraotas, el arroz blanco y las tajadas en un plato.",
+    "ingredients": [
+      {
+        "name": "Carne de res (falda)",
+        "quantity": "500",
+        "measurement": "gramos"
+      },
+      {
+        "name": "Arroz blanco",
+        "quantity": "2",
+        "measurement": "tazas"
+      },
+      {
+        "name": "Caraotas negras",
+        "quantity": "1.5",
+        "measurement": "tazas"
+      },
+      {
+        "name": "Plátano maduro",
+        "quantity": "2",
+        "measurement": "unidades"
+      },
+      {
+        "name": "Cebolla",
+        "quantity": "1",
+        "measurement": "unidad"
+      },
+      {
+        "name": "Pimiento rojo",
+        "quantity": "1",
+        "measurement": "unidad"
+      },
+      {
+        "name": "Ajo",
+        "quantity": "3",
+        "measurement": "dientes"
+      },
+      {
+        "name": "Comino",
+        "quantity": "1",
+        "measurement": "cucharadita"
+      },
+      {
+        "name": "Sal",
+        "quantity": "al gusto",
+        "measurement": ""
+      },
+      {
+        "name": "Aceite",
+        "quantity": "2",
+        "measurement": "cucharadas"
+      }
+    ]
+  },
+  {
+    "name": "Arepa Reina Pepiada",
+    "country": "Venezuela",
+    "recipeCategory": "Comida",
+    "preparationTime": 45,
+    "description": "Arepa rellena de una mezcla cremosa de pollo desmenuzado, aguacate y mayonesa, nombrada en honor a la Miss Mundo venezolana Susana Duijm.",
+    "instructions": "Prepara las arepas mezclando harina de maíz precocida con agua y sal, forma discos y cocínalos en una plancha hasta que estén dorados. Cocina y desmenuza el pollo. En un bol, mezcla el pollo desmenuzado con aguacate triturado, mayonesa, cebolla picada, sal y pimienta. Abre las arepas y rellénalas con la mezcla.",
+    "ingredients": [
+      {
+        "name": "Harina de maíz precocida",
+        "quantity": "2",
+        "measurement": "tazas"
+      },
+      {
+        "name": "Agua",
+        "quantity": "2.5",
+        "measurement": "tazas"
+      },
+      {
+        "name": "Sal",
+        "quantity": "1",
+        "measurement": "cucharadita"
+      },
+      {
+        "name": "Pechuga de pollo",
+        "quantity": "300",
+        "measurement": "gramos"
+      },
+      {
+        "name": "Aguacate",
+        "quantity": "1",
+        "measurement": "unidad"
+      },
+      {
+        "name": "Mayonesa",
+        "quantity": "3",
+        "measurement": "cucharadas"
+      },
+      {
+        "name": "Cebolla",
+        "quantity": "1/4",
+        "measurement": "unidad"
+      },
+      {
+        "name": "Pimienta",
+        "quantity": "al gusto",
+        "measurement": ""
+      }
+    ]
+  },
+  {
+    "name": "Cachapas con Queso de Mano",
+    "country": "Venezuela",
+    "recipeCategory": "Comida",
+    "preparationTime": 30,
+    "description": "Tortas dulces de maíz tierno cocidas a la plancha y rellenas con queso de mano, tradicionales en la gastronomía venezolana.",
+    "instructions": "Licúa los granos de maíz tierno con leche, azúcar y sal hasta obtener una mezcla espesa. Calienta una plancha o sartén y vierte porciones de la mezcla, formando círculos. Cocina hasta que estén doradas por ambos lados. Coloca rebanadas de queso de mano sobre una cachapa caliente y cubre con otra para que el queso se derrita.",
+    "ingredients": [
+      {
+        "name": "Maíz tierno desgranado",
+        "quantity": "2",
+        "measurement": "tazas"
+      },
+      {
+        "name": "Leche",
+        "quantity": "1/4",
+        "measurement": "taza"
+      },
+      {
+        "name": "Azúcar",
+        "quantity": "2",
+        "measurement": "cucharadas"
+      },
+      {
+        "name": "Sal",
+        "quantity": "1/2",
+        "measurement": "cucharadita"
+      },
+      {
+        "name": "Queso de mano",
+        "quantity": "200",
+        "measurement": "gramos"
+      },
+      {
+        "name": "Aceite o mantequilla",
+        "quantity": "al gusto",
+        "measurement": ""
+      }
+    ]
+  },
+  {
+    "name": "Encebollado",
+    "country": "Ecuador",
+    "recipeCategory": "Comida",
+    "preparationTime": 60,
+    "description": "Sopa tradicional de la costa ecuatoriana, preparada con pescado, yuca y cebolla encurtida, considerada uno de los platos más emblemáticos del país.",
+    "instructions": "Cocina el pescado (como albacora o atún) en agua con sal y especias hasta que esté tierno. Retira el pescado y desmenúzalo. En el caldo, cocina la yuca pelada y cortada en trozos hasta que esté suave. Prepara un encurtido con cebolla roja, jugo de limón y sal. Añade el pescado desmenuzado y el encurtido al caldo con yuca. Sirve caliente, acompañado de chifles o canguil.",
+    "ingredients": [
+      {
+        "name": "Pescado (albacora o atún)",
+        "quantity": "500",
+        "measurement": "gramos"
+      },
+      {
+        "name": "Yuca",
+        "quantity": "2",
+        "measurement": "unidades"
+      },
+      {
+        "name": "Cebolla roja",
+        "quantity": "1",
+        "measurement": "unidad"
+      },
+      {
+        "name": "Jugo de limón",
+        "quantity": "1/2",
+        "measurement": "taza"
+      },
+      {
+        "name": "Cilantro",
+        "quantity": "1/4",
+        "measurement": "taza"
+      },
+      {
+        "name": "Sal",
+        "quantity": "al gusto",
+        "measurement": ""
+      },
+      {
+        "name": "Comino",
+        "quantity": "1",
+        "measurement": "cucharadita"
+      },
+      {
+        "name": "Ají en polvo",
+        "quantity": "1/2",
+        "measurement": "cucharadita"
+      }
+    ]
+  },
+  {
+    "name": "Hornado",
+    "country": "Ecuador",
+    "recipeCategory": "Comida",
+    "preparationTime": 180,
+    "description": "Plato típico de la Sierra ecuatoriana que consiste en cerdo marinado y horneado lentamente, servido con mote, llapingachos y ensalada.",
+    "instructions": "Marina la pierna de cerdo con ajo, comino, sal y cerveza o chicha durante varias horas o toda la noche. Hornea la carne a temperatura baja hasta que esté tierna y la piel crujiente. Sirve acompañado de mote cocido, llapingachos (tortillas de papa), ensalada de cebolla y tomate, y aguacate.",
+    "ingredients": [
+      {
+        "name": "Pierna de cerdo",
+        "quantity": "2",
+        "measurement": "kilogramos"
+      },
+      {
+        "name": "Ajo",
+        "quantity": "4",
+        "measurement": "dientes"
+      },
+      {
+        "name": "Comino",
+        "quantity": "1",
+        "measurement": "cucharada"
+      },
+      {
+        "name": "Sal",
+        "quantity": "al gusto",
+        "measurement": ""
+      },
+      {
+        "name": "Cerveza o chicha",
+        "quantity": "1",
+        "measurement": "taza"
+      },
+      {
+        "name": "Mote cocido",
+        "quantity": "2",
+        "measurement": "tazas"
+      },
+      {
+        "name": "Papas",
+        "quantity": "4",
+        "measurement": "unidades"
+      },
+      {
+        "name": "Queso fresco",
+        "quantity": "100",
+        "measurement": "gramos"
+      },
+      {
+        "name": "Cebolla roja",
+        "quantity": "1",
+        "measurement": "unidad"
+      },
+      {
+        "name": "Tomate",
+        "quantity": "2",
+        "measurement": "unidades"
+      },
+      {
+        "name": "Aguacate",
+        "quantity": "1",
+        "measurement": "unidad"
+      }
+    ]
+  },
+  {
+    "name": "Ceviche de Camarón",
+    "country": "Ecuador",
+    "recipeCategory": "Comida",
+    "preparationTime": 30,
+    "description": "Plato refrescante y popular en la costa ecuatoriana, elaborado con camarones cocidos y marinados en jugo de limón con cebolla, tomate y cilantro.",
+    "instructions": "Cocina los camarones en agua con sal hasta que estén rosados y cocidos. Enfría y pélalos. Mezcla los camarones con cebolla roja en rodajas finas, jugo de limón, tomate picado, cilantro y sal. Deja marinar durante 15 minutos. Sirve acompañado de chifles o canguil.",
+    "ingredients": [
+      {
+        "name": "Camarones",
+        "quantity": "500",
+        "measurement": "gramos"
+      },
+      {
+        "name": "Cebolla roja",
+        "quantity": "1",
+        "measurement": "unidad"
+      },
+      {
+        "name": "Jugo de limón",
+        "quantity": "1/2",
+        "measurement": "taza"
+      },
+      {
+        "name": "Tomate",
+        "quantity": "2",
+        "measurement": "unidades"
+      },
+      {
+        "name": "Cilantro",
+        "quantity": "1/4",
+        "measurement": "taza"
+      },
+      {
+        "name": "Sal",
+        "quantity": "al gusto",
+        "measurement": ""
+      },
+      {
+        "name": "Aceite",
+        "quantity": "2",
+        "measurement": "cucharadas"
+      }
+    ]
+  },
+  {
+    "name": "Ceviche Peruano",
+    "country": "Perú",
+    "recipeCategory": "Comida",
+    "preparationTime": 30,
+    "description": "Plato emblemático de la gastronomía peruana, elaborado con pescado fresco marinado en jugo de limón, acompañado de cebolla morada, ají y cilantro.",
+    "instructions": "Corta el pescado en cubos y colócalo en un bol. Añade sal y deja reposar unos minutos. Agrega el jugo de limón, cebolla morada en juliana, ají picado y cilantro. Mezcla bien y deja marinar durante 10 minutos. Sirve acompañado de camote cocido y maíz chulpe.",
+    "ingredients": [
+      {
+        "name": "Pescado blanco fresco (corvina o lenguado)",
+        "quantity": "500",
+        "measurement": "gramos"
+      },
+      {
+        "name": "Jugo de limón",
+        "quantity": "1",
+        "measurement": "taza"
+      },
+      {
+        "name": "Cebolla morada",
+        "quantity": "1",
+        "measurement": "unidad"
+      },
+      {
+        "name": "Ají limo",
+        "quantity": "1",
+        "measurement": "unidad"
+      },
+      {
+        "name": "Cilantro fresco",
+        "quantity": "2",
+        "measurement": "cucharadas"
+      },
+      {
+        "name": "Sal",
+        "quantity": "al gusto",
+        "measurement": ""
+      },
+      {
+        "name": "Camote cocido",
+        "quantity": "1",
+        "measurement": "unidad"
+      },
+      {
+        "name": "Maíz chulpe cocido",
+        "quantity": "1",
+        "measurement": "taza"
+      }
+    ]
+  },
+  {
+    "name": "Lomo Saltado",
+    "country": "Perú",
+    "recipeCategory": "Comida",
+    "preparationTime": 45,
+    "description": "Salteado de carne de res con cebolla, tomate y papas fritas, fusionando técnicas chinas con ingredientes peruanos.",
+    "instructions": "Corta la carne en tiras y sazona con sal y pimienta. En un wok o sartén grande, calienta aceite y saltea la carne a fuego alto. Retira y reserva. En el mismo sartén, saltea cebolla en juliana, tomate en gajos y ají amarillo en tiras. Añade la carne, salsa de soja y vinagre. Mezcla bien y cocina por unos minutos. Sirve acompañado de arroz blanco y papas fritas.",
+    "ingredients": [
+      {
+        "name": "Carne de res (lomo)",
+        "quantity": "500",
+        "measurement": "gramos"
+      },
+      {
+        "name": "Cebolla roja",
+        "quantity": "1",
+        "measurement": "unidad"
+      },
+      {
+        "name": "Tomate",
+        "quantity": "2",
+        "measurement": "unidades"
+      },
+      {
+        "name": "Ají amarillo",
+        "quantity": "1",
+        "measurement": "unidad"
+      },
+      {
+        "name": "Salsa de soja",
+        "quantity": "2",
+        "measurement": "cucharadas"
+      },
+      {
+        "name": "Vinagre",
+        "quantity": "1",
+        "measurement": "cucharada"
+      },
+      {
+        "name": "Papas fritas",
+        "quantity": "2",
+        "measurement": "tazas"
+      },
+      {
+        "name": "Arroz blanco cocido",
+        "quantity": "2",
+        "measurement": "tazas"
+      },
+      {
+        "name": "Sal y pimienta",
+        "quantity": "al gusto",
+        "measurement": ""
+      },
+      {
+        "name": "Aceite vegetal",
+        "quantity": "2",
+        "measurement": "cucharadas"
+      }
+    ]
+  },
+  {
+    "name": "Ají de Gallina",
+    "country": "Perú",
+    "recipeCategory": "Comida",
+    "preparationTime": 60,
+    "description": "Guiso cremoso de pollo desmenuzado en una salsa de ají amarillo, pan remojado y nueces, servido con arroz blanco y papas cocidas.",
+    "instructions": "Cocina la pechuga de pollo en agua con sal hasta que esté tierna. Desmenúzala y reserva. Remoja el pan en leche evaporada. En una sartén, sofríe cebolla picada, ajo y ají amarillo hasta que estén dorados. Añade el pan remojado y cocina hasta obtener una mezcla homogénea. Incorpora el pollo desmenuzado y nueces picadas. Cocina a fuego lento hasta que espese. Sirve con arroz blanco, papas cocidas, huevo duro y aceitunas negras.",
+    "ingredients": [
+      {
+        "name": "Pechuga de pollo",
+        "quantity": "500",
+        "measurement": "gramos"
+      },
+      {
+        "name": "Pan blanco",
+        "quantity": "4",
+        "measurement": "rebanadas"
+      },
+      {
+        "name": "Leche evaporada",
+        "quantity": "1",
+        "measurement": "taza"
+      },
+      {
+        "name": "Cebolla",
+        "quantity": "1",
+        "measurement": "unidad"
+      },
+      {
+        "name": "Ajo",
+        "quantity": "2",
+        "measurement": "dientes"
+      },
+      {
+        "name": "Ají amarillo",
+        "quantity": "2",
+        "measurement": "unidades"
+      },
+      {
+        "name": "Nueces picadas",
+        "quantity": "1/4",
+        "measurement": "taza"
+      },
+      {
+        "name": "Papas cocidas",
+        "quantity": "2",
+        "measurement": "unidades"
+      },
+      {
+        "name": "Arroz blanco cocido",
+        "quantity": "2",
+        "measurement": "tazas"
+      },
+      {
+        "name": "Huevos duros",
+        "quantity": "2",
+        "measurement": "unidades"
+      },
+      {
+        "name": "Aceitunas negras",
+        "quantity": "8",
+        "measurement": "unidades"
+      },
+      {
+        "name": "Sal y pimienta", 
+        "quantity": "al gusto",
+        "measurement": ""
+      },
+      {
+        "name": "Aceite vegetal",
+        "quantity": "2",
+        "measurement": "cucharadas"
+      }
+    ]
+  },
+  {
+    "name": "Asado Argentino",
+    "country": "Argentina",
+    "recipeCategory": "Comida",
+    "preparationTime": 180,
+    "description": "El asado es el plato nacional de Argentina, una tradición culinaria que consiste en una variedad de carnes asadas a la parrilla, acompañadas de chimichurri y otras guarniciones.",
+    "instructions": "Prepara la parrilla con brasas de leña o carbón hasta obtener una temperatura adecuada. Sazona las carnes con sal gruesa. Coloca los cortes de carne en la parrilla y cocínalos lentamente, dándoles vuelta ocasionalmente para asegurar una cocción uniforme. Sirve acompañado de chimichurri, ensaladas y pan.",
+    "ingredients": [
+      {
+        "name": "Costillas de res",
+        "quantity": "1",
+        "measurement": "kilogramo"
+      },
+      {
+        "name": "Chorizos",
+        "quantity": "4",
+        "measurement": "unidades"
+      },
+      {
+        "name": "Morcillas",
+        "quantity": "2",
+        "measurement": "unidades"
+      },
+      {
+        "name": "Sal gruesa",
+        "quantity": "al gusto",
+        "measurement": ""
+      },
+      {
+        "name": "Chimichurri",
+        "quantity": "al gusto",
+        "measurement": ""
+      }
+    ]
+  },
+  {
+    "name": "Empanadas de Carne",
+    "country": "Argentina",
+    "recipeCategory": "Comida",
+    "preparationTime": 90,
+    "description": "Las empanadas argentinas son una delicia tradicional, rellenas de carne picada sazonada y horneadas hasta obtener una masa dorada y crujiente.",
+    "instructions": "En una sartén, sofríe cebolla y ajo hasta que estén transparentes. Agrega la carne picada y cocina hasta que esté dorada. Incorpora huevo duro picado, aceitunas y condimentos al gusto. Deja enfriar el relleno. Rellena las tapas de empanada con la mezcla, ciérralas y sella los bordes. Hornea a 180°C hasta que estén doradas.",
+    "ingredients": [
+      {
+        "name": "Carne de res picada",
+        "quantity": "500",
+        "measurement": "gramos"
+      },
+      {
+        "name": "Cebolla",
+        "quantity": "1",
+        "measurement": "unidad"
+      },
+      {
+        "name": "Ajo",
+        "quantity": "2",
+        "measurement": "dientes"
+      },
+      {
+        "name": "Huevo duro",
+        "quantity": "2",
+        "measurement": "unidades"
+      },
+      {
+        "name": "Aceitunas verdes",
+        "quantity": "1/2",
+        "measurement": "taza"
+      },
+      {
+        "name": "Comino",
+        "quantity": "1",
+        "measurement": "cucharadita"
+      },
+      {
+        "name": "Pimentón dulce",
+        "quantity": "1",
+        "measurement": "cucharadita"
+      },
+      {
+        "name": "Tapas para empanadas",
+        "quantity": "12",
+        "measurement": "unidades"
+      }
+    ]
+  },
+  {
+    "name": "Milanesa a la Napolitana",
+    "country": "Argentina",
+    "recipeCategory": "Comida",
+    "preparationTime": 60,
+    "description": "La milanesa a la napolitana es una variante de la clásica milanesa, cubierta con salsa de tomate, jamón y queso, gratinada al horno.",
+    "instructions": "Sazona las escalopas de carne con sal y pimienta. Pásalas por huevo batido y luego por pan rallado. Fríelas en aceite caliente hasta que estén doradas. Colócalas en una bandeja para horno, cúbrelas con salsa de tomate, una loncha de jamón y queso. Gratina en el horno hasta que el queso se derrita y esté dorado.",
+    "ingredients": [
+      {
+        "name": "Escalopas de carne de res",
+        "quantity": "4",
+        "measurement": "unidades"
+      },
+      {
+        "name": "Huevos",
+        "quantity": "2",
+        "measurement": "unidades"
+      },
+      {
+        "name": "Pan rallado",
+        "quantity": "1",
+        "measurement": "taza"
+      },
+      {
+        "name": "Salsa de tomate",
+        "quantity": "1",
+        "measurement": "taza"
+      },
+      {
+        "name": "Jamón cocido",
+        "quantity": "4",
+        "measurement": "lonchas"
+      },
+      {
+        "name": "Queso mozzarella",
+        "quantity": "4",
+        "measurement": "lonchas"
+      },
+      {
+        "name": "Sal",
+        "quantity": "al gusto",
+        "measurement": ""
+      },
+      {
+        "name": "Pimienta",
+        "quantity": "al gusto",
+        "measurement": ""
+      },
+      {
+        "name": "Aceite",
+        "quantity": "al gusto",
+        "measurement": ""
+      }
+    ]
+  },
+  {
+    "name": "Empanadas de Pino",
+    "country": "Chile",
+    "recipeCategory": "Comida",
+    "preparationTime": 120,
+    "description": "Las empanadas de pino son un ícono de la cocina chilena, especialmente populares durante las Fiestas Patrias. Se caracterizan por su relleno jugoso de carne, cebolla y especias, envuelto en una masa dorada al horno.",
+    "instructions": "Prepara un sofrito con cebolla picada y ajo hasta que estén transparentes. Agrega la carne molida, comino, ají de color, sal y pimienta, y cocina hasta que la carne esté cocida. Deja enfriar el relleno. Estira la masa y corta círculos. Coloca una porción de relleno en el centro de cada círculo, añade una aceituna, un trozo de huevo duro y pasas. Dobla la masa formando una empanada y sella los bordes. Pinta con huevo batido y hornea a 180°C hasta que estén doradas.",
+    "ingredients": [
+      {
+        "name": "Carne molida de res",
+        "quantity": "500",
+        "measurement": "gramos"
+      },
+      {
+        "name": "Cebolla",
+        "quantity": "2",
+        "measurement": "unidades"
+      },
+      {
+        "name": "Ajo",
+        "quantity": "2",
+        "measurement": "dientes"
+      },
+      {
+        "name": "Comino",
+        "quantity": "1",
+        "measurement": "cucharadita"
+      },
+      {
+        "name": "Ají de color",
+        "quantity": "1",
+        "measurement": "cucharadita"
+      },
+      {
+        "name": "Sal",
+        "quantity": "al gusto",
+        "measurement": ""
+      },
+      {
+        "name": "Pimienta",
+        "quantity": "al gusto",
+        "measurement": ""
+      },
+      {
+        "name": "Aceitunas negras",
+        "quantity": "12",
+        "measurement": "unidades"
+      },
+      {
+        "name": "Huevos duros",
+        "quantity": "2",
+        "measurement": "unidades"
+      },
+      {
+        "name": "Pasas",
+        "quantity": "1/4",
+        "measurement": "taza"
+      },
+      {
+        "name": "Masa para empanadas",
+        "quantity": "12",
+        "measurement": "unidades"
+      },
+      {
+        "name": "Huevo batido",
+        "quantity": "1",
+        "measurement": "unidad"
+      }
+    ]
+  },
+  {
+  "name": "Pastel de Choclo",
+  "country": "Chile",
+  "recipeCategory": "Comida",
+  "preparationTime": 90,
+  "description": "El pastel de choclo es un plato tradicional chileno que combina un relleno sabroso de carne y pollo con una cubierta dulce de maíz molido, horneado hasta obtener una superficie dorada y crujiente.",
+  "instructions": "En una sartén, sofríe cebolla y ajo hasta que estén transparentes. Agrega la carne molida y cocina hasta que esté dorada. Incorpora comino, ají de color, sal y pimienta al gusto. Cocina y desmenuza el pollo. En una fuente para horno, coloca una capa de carne, luego una capa de pollo, y sobre esta, distribuye aceitunas, pasas y huevos duros en rodajas. Cubre todo con el maíz molido previamente cocido con albahaca y leche. Espolvorea azúcar sobre la superficie y hornea a 180°C hasta que esté dorado.",
+  "ingredients": [
+    {
+      "name": "Choclo (maíz) molido",
+      "quantity": "4",
+      "measurement": "tazas"
+    },
+    {
+      "name": "Carne molida de res",
+      "quantity": "500",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Pechuga de pollo",
+      "quantity": "1",
+      "measurement": "unidad"
+    },
+    {
+      "name": "Cebolla",
+      "quantity": "2",
+      "measurement": "unidades"
+    },
+    {
+      "name": "Ajo",
+      "quantity": "2",
+      "measurement": "dientes"
+    },
+    {
+      "name": "Comino",
+      "quantity": "1",
+      "measurement": "cucharadita"
+    },
+    {
+      "name": "Ají de color",
+      "quantity": "1",
+      "measurement": "cucharadita"
+    },
+    {
+      "name": "Sal",
+      "quantity": "al gusto",
+      "measurement": ""
+    },
+    {
+      "name": "Pimienta",
+      "quantity": "al gusto",
+      "measurement": ""
+    },
+    {
+      "name": "Aceitunas negras",
+      "quantity": "12",
+      "measurement": "unidades"
+    },
+    {
+      "name": "Pasas",
+      "quantity": "1/4",
+      "measurement": "taza"
+    },
+    {
+      "name": "Huevos duros",
+      "quantity": "2",
+      "measurement": "unidades"
+    },
+    {
+      "name": "Leche",
+      "quantity": "1/2",
+      "measurement": "taza"
+    },
+    {
+      "name": "Albahaca",
+      "quantity": "1/4",
+      "measurement": "taza"
+    },
+    {
+      "name": "Azúcar",
+      "quantity": "2",
+      "measurement": "cucharadas"
+    }
+  ]
+},
+{
+  "name": "Cazuela Chilena",
+  "country": "Chile",
+  "recipeCategory": "Comida",
+  "preparationTime": 90,
+  "description": "La cazuela chilena es una sopa tradicional y reconfortante que combina carne, papas, zapallo y otras verduras, cocidas lentamente para obtener un caldo sabroso y nutritivo.",
+  "instructions": "En una olla grande, dora los trozos de carne en aceite. Agrega agua suficiente para cubrir la carne y lleva a ebullición. Añade cebolla, zanahoria, apio, sal, pimienta y orégano. Cocina a fuego medio durante 45 minutos. Incorpora las papas, el zapallo y el choclo, y cocina hasta que las verduras estén tiernas. Sirve caliente, espolvoreado con cilantro picado.",
+  "ingredients": [
+    {
+      "name": "Carne de vacuno con hueso",
+      "quantity": "500",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Papas",
+      "quantity": "4",
+      "measurement": "unidades"
+    },
+    {
+      "name": "Zapallo",
+      "quantity": "500",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Choclo (maíz)",
+      "quantity": "2",
+      "measurement": "unidades"
+    },
+    {
+      "name": "Cebolla",
+      "quantity": "1",
+      "measurement": "unidad"
+    },
+    {
+      "name": "Zanahoria",
+      "quantity": "2",
+      "measurement": "unidades"
+    },
+    {
+      "name": "Apio",
+      "quantity": "2",
+      "measurement": "ramas"
+    },
+    {
+      "name": "Sal",
+      "quantity": "al gusto",
+      "measurement": ""
+    },
+    {
+      "name": "Pimienta",
+      "quantity": "al gusto",
+      "measurement": ""
+    },
+    {
+      "name": "Orégano",
+      "quantity": "1",
+      "measurement": "cucharadita"
+    },
+    {
+      "name": "Cilantro",
+      "quantity": "1/4",
+      "measurement": "taza"
+    },
+    {
+      "name": "Aceite",
+      "quantity": "2",
+      "measurement": "cucharadas"
+    },
+    {
+      "name": "Agua",
+      "quantity": "2",
+      "measurement": "litros"
+    }
+  ]
+},
+{
+  "name": "Tortilla de Patatas",
+  "country": "España",
+  "recipeCategory": "Comida",
+  "preparationTime": 45,
+  "description": "La tortilla de patatas es uno de los platos más emblemáticos de la gastronomía española, elaborada con huevos y patatas, y opcionalmente cebolla, cocinada en aceite de oliva.",
+  "instructions": "Pela y corta las patatas en rodajas finas. Fríelas en abundante aceite de oliva hasta que estén tiernas. Escurre el aceite y mezcla las patatas con los huevos batidos y la cebolla picada (si se desea). Vierte la mezcla en una sartén con un poco de aceite y cocina a fuego medio hasta que cuaje por un lado. Da la vuelta con ayuda de un plato y cocina el otro lado hasta que esté dorado.",
+  "ingredients": [
+    {
+      "name": "Patatas",
+      "quantity": "700",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Huevos",
+      "quantity": "6",
+      "measurement": "unidades"
+    },
+    {
+      "name": "Cebolla",
+      "quantity": "1",
+      "measurement": "unidad"
+    },
+    {
+      "name": "Aceite de oliva",
+      "quantity": "al gusto",
+      "measurement": ""
+    },
+    {
+      "name": "Sal",
+      "quantity": "al gusto",
+      "measurement": ""
+    }
+  ]
+},
+{
+  "name": "Paella Valenciana",
+  "country": "España",
+  "recipeCategory": "Comida",
+  "preparationTime": 90,
+  "description": "La paella valenciana es un plato tradicional de la Comunidad Valenciana, elaborado con arroz, pollo, conejo y verduras, cocinado en una paellera con aceite de oliva y azafrán.",
+  "instructions": "En una paellera, calienta aceite de oliva y sofríe el pollo y el conejo troceados hasta que estén dorados. Añade las judías verdes y el garrofón, y cocina unos minutos. Incorpora el tomate triturado y cocina hasta que se evapore el agua. Añade el arroz y el pimentón, y mezcla bien. Vierte el caldo caliente con el azafrán disuelto, y cocina a fuego fuerte durante 10 minutos. Reduce el fuego y cocina otros 10 minutos hasta que el arroz esté en su punto. Deja reposar unos minutos antes de servir.",
+  "ingredients": [
+    {
+      "name": "Arroz",
+      "quantity": "400",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Pollo",
+      "quantity": "500",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Conejo",
+      "quantity": "500",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Judías verdes",
+      "quantity": "200",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Garrofón",
+      "quantity": "100",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Tomate triturado",
+      "quantity": "200",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Pimentón dulce",
+      "quantity": "1",
+      "measurement": "cucharadita"
+    },
+    {
+      "name": "Azafrán",
+      "quantity": "1",
+      "measurement": "pizca"
+    },
+    {
+      "name": "Caldo de ave",
+      "quantity": "1.2",
+      "measurement": "litros"
+    },
+    {
+      "name": "Aceite de oliva",
+      "quantity": "al gusto",
+      "measurement": ""
+    },
+    {
+      "name": "Sal",
+      "quantity": "al gusto",
+      "measurement": ""
+    }
+  ]
+},
+{
+  "name": "Gazpacho Andaluz",
+  "country": "España",
+  "recipeCategory": "Comida",
+  "preparationTime": 20,
+  "description": "El gazpacho andaluz es una sopa fría tradicional del sur de España, elaborada con tomates, pimientos, pepino, ajo, pan, aceite de oliva y vinagre, ideal para los días calurosos.",
+  "instructions": "Lava y trocea los tomates, el pimiento y el pepino. Remoja el pan en agua. En una batidora, coloca los tomates, el pimiento, el pepino, el ajo, el pan escurrido, el aceite de oliva, el vinagre y la sal. Tritura hasta obtener una mezcla homogénea. Pasa por un colador fino para eliminar restos sólidos. Refrigera durante al menos 2 horas antes de servir.",
+  "ingredients": [
+    {
+      "name": "Tomates maduros",
+      "quantity": "1",
+      "measurement": "kilogramo"
+    },
+    {
+      "name": "Pimiento verde",
+      "quantity": "1",
+      "measurement": "unidad"
+    },
+    {
+      "name": "Pepino",
+      "quantity": "1",
+      "measurement": "unidad"
+    },
+    {
+      "name": "Ajo",
+      "quantity": "1",
+      "measurement": "diente"
+    },
+    {
+      "name": "Pan duro",
+      "quantity": "50",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Aceite de oliva virgen extra",
+      "quantity": "50",
+      "measurement": "mililitros"
+    },
+    {
+      "name": "Vinagre de vino",
+      "quantity": "30",
+      "measurement": "mililitros"
+    },
+    {
+      "name": "Sal",
+      "quantity": "al gusto",
+      "measurement": ""
+    }
+  ]
+},
+{
+  "name": "Ratatouille",
+  "country": "Francia",
+  "recipeCategory": "Comida",
+  "preparationTime": 60,
+  "description": "Plato tradicional de la región de Provenza, elaborado con una variedad de verduras cocidas a fuego lento, que destaca por su sabor y aroma a hierbas provenzales.",
+  "instructions": "Corta en rodajas finas berenjenas, calabacines, tomates y pimientos. En una sartén con aceite de oliva, sofríe cebolla y ajo picados hasta que estén dorados. Añade las verduras en capas, sazonando con sal, pimienta y hierbas provenzales. Cocina a fuego lento durante 40 minutos hasta que las verduras estén tiernas y los sabores se hayan mezclado.",
+  "ingredients": [
+    {
+      "name": "Berenjena",
+      "quantity": "1",
+      "measurement": "unidad"
+    },
+    {
+      "name": "Calabacín",
+      "quantity": "1",
+      "measurement": "unidad"
+    },
+    {
+      "name": "Tomate",
+      "quantity": "2",
+      "measurement": "unidades"
+    },
+    {
+      "name": "Pimiento rojo",
+      "quantity": "1",
+      "measurement": "unidad"
+    },
+    {
+      "name": "Cebolla",
+      "quantity": "1",
+      "measurement": "unidad"
+    },
+    {
+      "name": "Ajo",
+      "quantity": "2",
+      "measurement": "dientes"
+    },
+    {
+      "name": "Hierbas provenzales",
+      "quantity": "1",
+      "measurement": "cucharadita"
+    },
+    {
+      "name": "Aceite de oliva",
+      "quantity": "2",
+      "measurement": "cucharadas"
+    },
+    {
+      "name": "Sal",
+      "quantity": "al gusto",
+      "measurement": ""
+    },
+    {
+      "name": "Pimienta",
+      "quantity": "al gusto",
+      "measurement": ""
+    }
+  ]
+},
+{
+  "name": "Coq au Vin",
+  "country": "Francia",
+  "recipeCategory": "Comida",
+  "preparationTime": 150,
+  "description": "Estofado tradicional francés que combina pollo cocinado lentamente en vino tinto con verduras y hierbas aromáticas, originario de la región de Borgoña.",
+  "instructions": "Marina trozos de pollo en vino tinto con zanahorias, cebolla, ajo y hierbas durante varias horas. Escurre y dora el pollo en una olla con mantequilla. Añade las verduras de la marinada y cocina hasta que estén tiernas. Vierte el vino de la marinada y cocina a fuego lento durante 2 horas. Añade champiñones salteados y panceta dorada antes de servir.",
+  "ingredients": [
+    {
+      "name": "Pollo",
+      "quantity": "1.5",
+      "measurement": "kilogramos"
+    },
+    {
+      "name": "Vino tinto",
+      "quantity": "750",
+      "measurement": "mililitros"
+    },
+    {
+      "name": "Zanahoria",
+      "quantity": "2",
+      "measurement": "unidades"
+    },
+    {
+      "name": "Cebolla",
+      "quantity": "1",
+      "measurement": "unidad"
+    },
+    {
+      "name": "Ajo",
+      "quantity": "3",
+      "measurement": "dientes"
+    },
+    {
+      "name": "Champiñones",
+      "quantity": "200",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Panceta",
+      "quantity": "150",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Mantequilla",
+      "quantity": "2",
+      "measurement": "cucharadas"
+    },
+    {
+      "name": "Hierbas aromáticas",
+      "quantity": "1",
+      "measurement": "ramito"
+    },
+    {
+      "name": "Sal",
+      "quantity": "al gusto",
+      "measurement": ""
+    },
+    {
+      "name": "Pimienta",
+      "quantity": "al gusto",
+      "measurement": ""
+    }
+  ]
+},
+{
+  "name": "Crêpes",
+  "country": "Francia",
+  "recipeCategory": "Postre",
+  "preparationTime": 30,
+  "description": "Delgadas y suaves tortitas originarias de Bretaña, que pueden servirse con rellenos dulces o salados, siendo un símbolo de la repostería francesa.",
+  "instructions": "En un bol, mezcla harina, huevos, leche, mantequilla derretida y una pizca de sal hasta obtener una masa homogénea. Deja reposar la masa durante 30 minutos. Calienta una sartén antiadherente y vierte una pequeña cantidad de masa, extendiéndola para cubrir la superficie. Cocina por ambos lados hasta que estén doradas. Sirve con el relleno de tu elección.",
+  "ingredients": [
+    {
+      "name": "Harina de trigo",
+      "quantity": "250",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Huevos",
+      "quantity": "3",
+      "measurement": "unidades"
+    },
+    {
+      "name": "Leche",
+      "quantity": "500",
+      "measurement": "mililitros"
+    },
+    {
+      "name": "Mantequilla derretida",
+      "quantity": "50",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Sal",
+      "quantity": "1",
+      "measurement": "pizca"
+    }
+  ]
+},
+{
+  "name": "Pizza Margherita",
+  "country": "Italia",
+  "recipeCategory": "Comida",
+  "preparationTime": 90,
+  "description": "La Pizza Margherita es un símbolo de la cocina italiana, originaria de Nápoles. Se caracteriza por su masa fina y crujiente, cubierta con salsa de tomate, mozzarella fresca y hojas de albahaca, representando los colores de la bandera italiana.",
+  "instructions": "Prepara la masa mezclando harina, agua, levadura, sal y aceite de oliva. Amasa hasta obtener una textura suave y elástica. Deja reposar la masa hasta que duplique su tamaño. Estira la masa en forma de disco y colócala en una bandeja para hornear. Cubre con salsa de tomate, rodajas de mozzarella y hojas de albahaca fresca. Hornea en un horno precalentado a 250°C hasta que la masa esté dorada y crujiente.",
+  "ingredients": [
+    {
+      "name": "Harina de trigo",
+      "quantity": "500",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Agua",
+      "quantity": "325",
+      "measurement": "mililitros"
+    },
+    {
+      "name": "Levadura fresca",
+      "quantity": "25",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Sal",
+      "quantity": "10",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Aceite de oliva",
+      "quantity": "2",
+      "measurement": "cucharadas"
+    },
+    {
+      "name": "Salsa de tomate",
+      "quantity": "200",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Mozzarella fresca",
+      "quantity": "250",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Hojas de albahaca fresca",
+      "quantity": "al gusto",
+      "measurement": ""
+    }
+  ]
+},
+{
+  "name": "Risotto alla Milanese",
+  "country": "Italia",
+  "recipeCategory": "Comida",
+  "preparationTime": 60,
+  "description": "El Risotto alla Milanese es un plato tradicional de Milán, conocido por su color amarillo característico debido al uso de azafrán. Este cremoso arroz se cocina lentamente con caldo y se enriquece con queso parmesano.",
+  "instructions": "En una sartén, derrite mantequilla y sofríe cebolla picada hasta que esté transparente. Añade el arroz y remueve para que se impregne bien. Vierte vino blanco y deja que se evapore. Agrega el azafrán disuelto en un poco de caldo caliente. Incorpora el caldo poco a poco, removiendo constantemente, hasta que el arroz esté al dente y cremoso. Añade queso parmesano rallado y mezcla bien antes de servir.",
+  "ingredients": [
+    {
+      "name": "Arroz arborio",
+      "quantity": "350",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Cebolla",
+      "quantity": "1",
+      "measurement": "unidad"
+    },
+    {
+      "name": "Mantequilla",
+      "quantity": "50",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Vino blanco seco",
+      "quantity": "100",
+      "measurement": "mililitros"
+    },
+    {
+      "name": "Caldo de carne",
+      "quantity": "1",
+      "measurement": "litro"
+    },
+    {
+      "name": "Azafrán",
+      "quantity": "1",
+      "measurement": "pizca"
+    },
+    {
+      "name": "Queso parmesano rallado",
+      "quantity": "50",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Sal",
+      "quantity": "al gusto",
+      "measurement": ""
+    },
+    {
+      "name": "Pimienta",
+      "quantity": "al gusto",
+      "measurement": ""
+    }
+  ]
+},
+{
+  "name": "Tiramisú",
+  "country": "Italia",
+  "recipeCategory": "Postre",
+  "preparationTime": 30,
+  "description": "El Tiramisú es un postre italiano clásico, originario de la región del Véneto. Se compone de capas de bizcochos empapados en café, crema de mascarpone y cacao en polvo, ofreciendo una combinación perfecta de sabores y texturas.",
+  "instructions": "Prepara una mezcla de yemas de huevo y azúcar hasta obtener una crema espumosa. Añade el queso mascarpone y mezcla suavemente. En otro bol, bate las claras de huevo a punto de nieve y agrégalas a la mezcla anterior con movimientos envolventes. Sumerge los bizcochos en café frío y colócalos en el fondo de un molde. Cubre con una capa de la crema de mascarpone y repite el proceso hasta completar el molde. Espolvorea con cacao en polvo y refrigera durante al menos 4 horas antes de servir.",
+  "ingredients": [
+    {
+      "name": "Bizcochos de soletilla",
+      "quantity": "200",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Queso mascarpone",
+      "quantity": "500",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Huevos",
+      "quantity": "4",
+      "measurement": "unidades"
+    },
+    {
+      "name": "Azúcar",
+      "quantity": "100",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Café espresso",
+      "quantity": "300",
+      "measurement": "mililitros"
+    },
+    {
+      "name": "Cacao en polvo",
+      "quantity": "al gusto",
+      "measurement": ""
+    }
+  ]
+},
+{
+  "name": "Moussaka",
+  "country": "Grecia",
+  "recipeCategory": "Comida",
+  "preparationTime": 90,
+  "description": "La moussaka es un plato emblemático de la cocina griega. Se trata de una lasaña de berenjenas con carne picada de cordero o res, cubierta con una cremosa bechamel y gratinada al horno.",
+  "instructions": "Corta las berenjenas en rodajas y saltéalas ligeramente. Cocina la carne con cebolla, tomate, ajo, canela y orégano. En un molde, coloca una capa de berenjenas, luego carne, y repite hasta terminar. Cubre con salsa bechamel y espolvorea con queso. Hornea a 180°C hasta que esté dorado.",
+  "ingredients": [
+    {
+      "name": "Berenjenas",
+      "quantity": "2",
+      "measurement": "unidades"
+    },
+    {
+      "name": "Carne molida de cordero o res",
+      "quantity": "500",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Tomate triturado",
+      "quantity": "400",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Cebolla",
+      "quantity": "1",
+      "measurement": "unidad"
+    },
+    {
+      "name": "Ajo",
+      "quantity": "2",
+      "measurement": "dientes"
+    },
+    {
+      "name": "Canela en polvo",
+      "quantity": "1",
+      "measurement": "pizca"
+    },
+    {
+      "name": "Orégano seco",
+      "quantity": "1",
+      "measurement": "cucharadita"
+    },
+    {
+      "name": "Salsa bechamel",
+      "quantity": "500",
+      "measurement": "mililitros"
+    },
+    {
+      "name": "Queso rallado",
+      "quantity": "100",
+      "measurement": "gramos"
+    }
+  ]
+},
+{
+  "name": "Souvlaki",
+  "country": "Grecia",
+  "recipeCategory": "Comida",
+  "preparationTime": 40,
+  "description": "El souvlaki es una popular comida callejera griega que consiste en brochetas de carne marinada, generalmente de cerdo, pollo o cordero, asadas a la parrilla y servidas con pan pita, tzatziki y verduras.",
+  "instructions": "Corta la carne en cubos y marínala con aceite de oliva, limón, orégano, ajo, sal y pimienta. Inserta en brochetas y cocina en la parrilla o sartén hasta que estén doradas. Sirve con pan pita, salsa tzatziki y rodajas de tomate o cebolla.",
+  "ingredients": [
+    {
+      "name": "Carne de cerdo o pollo",
+      "quantity": "500",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Aceite de oliva",
+      "quantity": "3",
+      "measurement": "cucharadas"
+    },
+    {
+      "name": "Zumo de limón",
+      "quantity": "2",
+      "measurement": "cucharadas"
+    },
+    {
+      "name": "Orégano seco",
+      "quantity": "1",
+      "measurement": "cucharadita"
+    },
+    {
+      "name": "Ajo",
+      "quantity": "2",
+      "measurement": "dientes"
+    },
+    {
+      "name": "Sal",
+      "quantity": "al gusto",
+      "measurement": ""
+    },
+    {
+      "name": "Pimienta",
+      "quantity": "al gusto",
+      "measurement": ""
+    },
+    {
+      "name": "Pan pita",
+      "quantity": "4",
+      "measurement": "unidades"
+    },
+    {
+      "name": "Salsa tzatziki",
+      "quantity": "200",
+      "measurement": "gramos"
+    }
+  ]
+},
+{
+  "name": "Tzatziki",
+  "country": "Grecia",
+  "recipeCategory": "Acompañamiento",
+  "preparationTime": 15,
+  "description": "El tzatziki es una salsa griega refrescante a base de yogur, pepino y ajo. Se utiliza como acompañamiento para carnes, panes o como dip.",
+  "instructions": "Ralla el pepino y escúrrelo bien. Mezcla con yogur griego, ajo picado, aceite de oliva, eneldo y jugo de limón. Refrigera por al menos 30 minutos para que los sabores se integren.",
+  "ingredients": [
+    {
+      "name": "Yogur griego",
+      "quantity": "250",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Pepino",
+      "quantity": "1",
+      "measurement": "unidad"
+    },
+    {
+      "name": "Ajo",
+      "quantity": "1",
+      "measurement": "diente"
+    },
+    {
+      "name": "Aceite de oliva",
+      "quantity": "1",
+      "measurement": "cucharada"
+    },
+    {
+      "name": "Jugo de limón",
+      "quantity": "1",
+      "measurement": "cucharada"
+    },
+    {
+      "name": "Eneldo fresco o seco",
+      "quantity": "1",
+      "measurement": "cucharadita"
+    },
+    {
+      "name": "Sal",
+      "quantity": "al gusto",
+      "measurement": ""
+    }
+  ]
+},
+{
+  "name": "Köfte (Albóndigas Turcas)",
+  "country": "Turquía",
+  "recipeCategory": "Comida",
+  "preparationTime": 45,
+  "description": "Las köfte son albóndigas muy populares en la cocina turca, hechas con carne molida mezclada con especias. Se pueden freír, hornear o asar a la parrilla.",
+  "instructions": "Mezcla la carne molida con cebolla rallada, ajo, perejil picado, comino, sal, pimienta y pan rallado. Forma pequeñas albóndigas y cocínalas en sartén con un poco de aceite hasta que estén doradas por ambos lados. Sirve con arroz, pan o ensalada.",
+  "ingredients": [
+    {
+      "name": "Carne molida de res o cordero",
+      "quantity": "500",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Cebolla",
+      "quantity": "1",
+      "measurement": "unidad"
+    },
+    {
+      "name": "Ajo",
+      "quantity": "2",
+      "measurement": "dientes"
+    },
+    {
+      "name": "Perejil fresco",
+      "quantity": "2",
+      "measurement": "cucharadas"
+    },
+    {
+      "name": "Pan rallado",
+      "quantity": "3",
+      "measurement": "cucharadas"
+    },
+    {
+      "name": "Comino",
+      "quantity": "1",
+      "measurement": "cucharadita"
+    },
+    {
+      "name": "Sal",
+      "quantity": "al gusto",
+      "measurement": ""
+    },
+    {
+      "name": "Pimienta negra",
+      "quantity": "al gusto",
+      "measurement": ""
+    }
+  ]
+},
+{
+  "name": "Menemen",
+  "country": "Turquía",
+  "recipeCategory": "Desayuno",
+  "preparationTime": 20,
+  "description": "Menemen es un plato típico de desayuno turco preparado con huevos, tomate, pimientos y a veces cebolla. Se sirve caliente con pan para mojar.",
+  "instructions": "Sofríe cebolla y pimientos picados en aceite de oliva hasta que estén tiernos. Añade los tomates pelados y picados, cocina hasta que se forme una salsa espesa. Agrega los huevos y revuelve ligeramente hasta que cuajen al gusto. Sirve inmediatamente con pan.",
+  "ingredients": [
+    {
+      "name": "Huevos",
+      "quantity": "4",
+      "measurement": "unidades"
+    },
+    {
+      "name": "Tomates maduros",
+      "quantity": "3",
+      "measurement": "unidades"
+    },
+    {
+      "name": "Pimientos verdes",
+      "quantity": "2",
+      "measurement": "unidades"
+    },
+    {
+      "name": "Cebolla",
+      "quantity": "1",
+      "measurement": "unidad"
+    },
+    {
+      "name": "Aceite de oliva",
+      "quantity": "2",
+      "measurement": "cucharadas"
+    },
+    {
+      "name": "Sal",
+      "quantity": "al gusto",
+      "measurement": ""
+    },
+    {
+      "name": "Pimienta",
+      "quantity": "al gusto",
+      "measurement": ""
+    }
+  ]
+},
+{
+  "name": "Baklava",
+  "country": "Turquía",
+  "recipeCategory": "Postre",
+  "preparationTime": 90,
+  "description": "El baklava es un famoso postre turco hecho con capas de masa filo, nueces trituradas y un almíbar aromatizado con limón o agua de rosas.",
+  "instructions": "Precalienta el horno a 180°C. Unta una bandeja con mantequilla y coloca capas de masa filo, pincelando cada una con mantequilla derretida. Esparce nueces trituradas entre cada varias capas. Corta en forma de diamantes y hornea hasta que esté dorado. Prepara un almíbar con agua, azúcar y jugo de limón. Vierte sobre el baklava caliente. Deja enfriar antes de servir.",
+  "ingredients": [
+    {
+      "name": "Masa filo",
+      "quantity": "300",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Nueces picadas",
+      "quantity": "200",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Mantequilla derretida",
+      "quantity": "150",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Azúcar",
+      "quantity": "200",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Agua",
+      "quantity": "150",
+      "measurement": "mililitros"
+    },
+    {
+      "name": "Jugo de limón",
+      "quantity": "1",
+      "measurement": "cucharada"
+    }
+  ]
+},
+{
+  "name": "Doro Wat (Estofado Etíope de Pollo)",
+  "country": "Etiopía",
+  "recipeCategory": "Comida",
+  "preparationTime": 90,
+  "description": "Doro Wat es el platillo nacional de Etiopía, un guiso picante de pollo con huevo cocido, sazonado con berbere (mezcla de especias) y servido comúnmente con injera.",
+  "instructions": "En una olla grande, cocina la cebolla finamente picada sin aceite hasta que esté dorada. Agrega mantequilla clarificada, ajo, jengibre y berbere. Añade trozos de pollo y cocina bien. Vierte caldo o agua y deja hervir a fuego lento. Añade los huevos duros pelados en el guiso hacia el final de la cocción. Sirve con injera.",
+  "ingredients": [
+    {
+      "name": "Pollo",
+      "quantity": "1",
+      "measurement": "unidad (en trozos)"
+    },
+    {
+      "name": "Cebolla",
+      "quantity": "3",
+      "measurement": "unidades"
+    },
+    {
+      "name": "Ajo",
+      "quantity": "4",
+      "measurement": "dientes"
+    },
+    {
+      "name": "Jengibre fresco",
+      "quantity": "1",
+      "measurement": "cucharada"
+    },
+    {
+      "name": "Berbere (mezcla de especias etíope)",
+      "quantity": "2",
+      "measurement": "cucharadas"
+    },
+    {
+      "name": "Mantequilla clarificada (niter kibbeh)",
+      "quantity": "3",
+      "measurement": "cucharadas"
+    },
+    {
+      "name": "Huevos duros",
+      "quantity": "4",
+      "measurement": "unidades"
+    },
+    {
+      "name": "Sal",
+      "quantity": "al gusto",
+      "measurement": ""
+    }
+  ]
+},
+{
+  "name": "Injera",
+  "country": "Etiopía",
+  "recipeCategory": "Pan",
+  "preparationTime": 1440,
+  "description": "La injera es un pan plano esponjoso y fermentado, base de muchas comidas etíopes. Tiene un sabor ligeramente ácido y se usa como plato y cubierto a la vez.",
+  "instructions": "Mezcla harina de teff con agua hasta obtener una masa líquida. Deja fermentar durante 1 a 3 días en un lugar cálido. Cuando burbujee, calienta una sartén grande antiadherente y vierte la mezcla en espiral desde el centro hacia afuera. Cocina solo por un lado hasta que salgan agujeritos y esté firme. No voltees. Sirve tibio.",
+  "ingredients": [
+    {
+      "name": "Harina de teff",
+      "quantity": "2",
+      "measurement": "tazas"
+    },
+    {
+      "name": "Agua",
+      "quantity": "2 1/2",
+      "measurement": "tazas"
+    },
+    {
+      "name": "Sal",
+      "quantity": "1/4",
+      "measurement": "cucharadita"
+    }
+  ]
+},
+{
+  "name": "Shiro Wat",
+  "country": "Etiopía",
+  "recipeCategory": "Comida vegetariana",
+  "preparationTime": 40,
+  "description": "Shiro Wat es un guiso espeso hecho con harina de garbanzo o lentejas, cocinado con cebolla, ajo y berbere. Es una opción vegetariana sabrosa y muy popular.",
+  "instructions": "Sofríe cebolla picada en mantequilla clarificada hasta que esté translúcida. Agrega ajo, berbere y tomate picado. Cocina unos minutos y luego añade la harina de garbanzo disuelta en agua. Revuelve constantemente hasta que espese. Cocina a fuego lento por 15 minutos más. Sirve caliente con injera.",
+  "ingredients": [
+    {
+      "name": "Harina de garbanzo",
+      "quantity": "1",
+      "measurement": "taza"
+    },
+    {
+      "name": "Cebolla",
+      "quantity": "1",
+      "measurement": "unidad"
+    },
+    {
+      "name": "Ajo",
+      "quantity": "2",
+      "measurement": "dientes"
+    },
+    {
+      "name": "Tomate",
+      "quantity": "1",
+      "measurement": "unidad"
+    },
+    {
+      "name": "Berbere",
+      "quantity": "1",
+      "measurement": "cucharada"
+    },
+    {
+      "name": "Mantequilla clarificada",
+      "quantity": "2",
+      "measurement": "cucharadas"
+    },
+    {
+      "name": "Agua",
+      "quantity": "2",
+      "measurement": "tazas"
+    },
+    {
+      "name": "Sal",
+      "quantity": "al gusto",
+      "measurement": ""
+    }
+  ]
+},
+{
+  "name": "Nyama Choma",
+  "country": "Kenia",
+  "recipeCategory": "Carne asada",
+  "preparationTime": 120,
+  "description": "Nyama Choma es el platillo nacional de Kenia. Se trata de carne (usualmente de cabra o res) asada a la parrilla, muy popular en reuniones sociales y celebraciones.",
+  "instructions": "Marina la carne con jugo de limón, ajo, jengibre, sal y pimienta durante al menos una hora. Precalienta la parrilla o brasas y cocina la carne lentamente hasta que esté bien dorada por fuera y jugosa por dentro. Sirve caliente con kachumbari o ugali.",
+  "ingredients": [
+    {
+      "name": "Carne de cabra o res",
+      "quantity": "1",
+      "measurement": "kg"
+    },
+    {
+      "name": "Jugo de limón",
+      "quantity": "3",
+      "measurement": "cucharadas"
+    },
+    {
+      "name": "Ajo",
+      "quantity": "4",
+      "measurement": "dientes"
+    },
+    {
+      "name": "Jengibre rallado",
+      "quantity": "1",
+      "measurement": "cucharada"
+    },
+    {
+      "name": "Sal",
+      "quantity": "al gusto",
+      "measurement": ""
+    },
+    {
+      "name": "Pimienta negra",
+      "quantity": "al gusto",
+      "measurement": ""
+    }
+  ]
+},
+{
+  "name": "Ugali",
+  "country": "Kenia",
+  "recipeCategory": "Acompañamiento",
+  "preparationTime": 20,
+  "description": "Ugali es un acompañamiento básico en Kenia. Consiste en una masa espesa de harina de maíz cocida en agua, similar al polenta pero más firme.",
+  "instructions": "Hierve agua en una olla grande. Agrega lentamente la harina de maíz mientras remueves constantemente para evitar grumos. Cocina y sigue revolviendo hasta que la mezcla se espese y se despegue de los bordes. Forma una bola y sirve caliente.",
+  "ingredients": [
+    {
+      "name": "Harina de maíz blanco",
+      "quantity": "2",
+      "measurement": "tazas"
+    },
+    {
+      "name": "Agua",
+      "quantity": "4",
+      "measurement": "tazas"
+    },
+    {
+      "name": "Sal",
+      "quantity": "opcional",
+      "measurement": ""
+    }
+  ]
+},
+{
+  "name": "Kachumbari",
+  "country": "Kenia",
+  "recipeCategory": "Ensalada",
+  "preparationTime": 10,
+  "description": "Kachumbari es una ensalada fresca y picante hecha con tomate, cebolla y chile. Se sirve como acompañamiento con carnes asadas como el nyama choma.",
+  "instructions": "Corta los tomates y la cebolla en rodajas finas. Pica el chile y el cilantro. Mezcla todos los ingredientes en un tazón. Agrega jugo de limón, sal y mezcla bien. Sirve fría o a temperatura ambiente.",
+  "ingredients": [
+    {
+      "name": "Tomate",
+      "quantity": "2",
+      "measurement": "unidades"
+    },
+    {
+      "name": "Cebolla morada",
+      "quantity": "1",
+      "measurement": "unidad"
+    },
+    {
+      "name": "Chile fresco",
+      "quantity": "1",
+      "measurement": "unidad"
+    },
+    {
+      "name": "Cilantro",
+      "quantity": "2",
+      "measurement": "cucharadas"
+    },
+    {
+      "name": "Jugo de limón",
+      "quantity": "2",
+      "measurement": "cucharadas"
+    },
+    {
+      "name": "Sal",
+      "quantity": "al gusto",
+      "measurement": ""
+    }
+  ]
+},
+{
+  "name": "Bobotie",
+  "country": "Sudáfrica",
+  "recipeCategory": "Plato principal",
+  "preparationTime": 90,
+  "description": "Bobotie es un plato sudafricano de carne picada al horno, sazonado con curry y cubierto con una mezcla de huevo y leche. Tiene raíces malayas y es considerado una joya de la gastronomía del país.",
+  "instructions": "Sofríe la cebolla en aceite hasta que esté dorada. Añade el ajo, la carne molida, curry, cúrcuma, sal y pimienta, cocinando hasta que la carne se dore. Agrega pan remojado en leche y pasas. Coloca la mezcla en una bandeja para hornear. Bate los huevos con leche y vierte sobre la carne. Hornea a 180°C durante 40 minutos, hasta que cuaje la capa superior.",
+  "ingredients": [
+    {
+      "name": "Carne molida de res",
+      "quantity": "500",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Cebolla",
+      "quantity": "1",
+      "measurement": "unidad"
+    },
+    {
+      "name": "Ajo",
+      "quantity": "2",
+      "measurement": "dientes"
+    },
+    {
+      "name": "Curry en polvo",
+      "quantity": "1",
+      "measurement": "cucharada"
+    },
+    {
+      "name": "Cúrcuma",
+      "quantity": "1",
+      "measurement": "cucharadita"
+    },
+    {
+      "name": "Pan",
+      "quantity": "2",
+      "measurement": "rebanadas"
+    },
+    {
+      "name": "Leche",
+      "quantity": "250",
+      "measurement": "ml"
+    },
+    {
+      "name": "Pasas",
+      "quantity": "50",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Huevos",
+      "quantity": "2",
+      "measurement": "unidades"
+    },
+    {
+      "name": "Sal y pimienta",
+      "quantity": "al gusto",
+      "measurement": ""
+    }
+  ]
+},
+{
+  "name": "Bunny Chow",
+  "country": "Sudáfrica",
+  "recipeCategory": "Comida callejera",
+  "preparationTime": 60,
+  "description": "Bunny Chow es un famoso plato callejero originario de Durban. Consiste en un pan hueco relleno de curry picante, tradicionalmente vegetariano o con carne.",
+  "instructions": "Corta la parte superior del pan y retira el interior, formando un recipiente. En una sartén, sofríe cebolla, ajo, jengibre y chile. Añade carne o garbanzos, luego incorpora tomate, curry, sal y pimienta. Cocina hasta que el curry espese. Rellena el pan con el curry caliente y sirve inmediatamente.",
+  "ingredients": [
+    {
+      "name": "Pan blanco sin cortar",
+      "quantity": "1",
+      "measurement": "unidad"
+    },
+    {
+      "name": "Cebolla",
+      "quantity": "1",
+      "measurement": "unidad"
+    },
+    {
+      "name": "Ajo",
+      "quantity": "2",
+      "measurement": "dientes"
+    },
+    {
+      "name": "Jengibre fresco",
+      "quantity": "1",
+      "measurement": "cucharada"
+    },
+    {
+      "name": "Chile verde",
+      "quantity": "1",
+      "measurement": "unidad"
+    },
+    {
+      "name": "Carne o garbanzos cocidos",
+      "quantity": "300",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Tomate triturado",
+      "quantity": "200",
+      "measurement": "ml"
+    },
+    {
+      "name": "Curry en polvo",
+      "quantity": "1",
+      "measurement": "cucharada"
+    },
+    {
+      "name": "Sal y pimienta",
+      "quantity": "al gusto",
+      "measurement": ""
+    }
+  ]
+},
+{
+  "name": "Malva Pudding",
+  "country": "Sudáfrica",
+  "recipeCategory": "Postre",
+  "preparationTime": 60,
+  "description": "El Malva Pudding es un postre tradicional sudafricano, esponjoso y húmedo, con un sabor dulce y un toque de albaricoque. Se sirve caliente con una salsa cremosa.",
+  "instructions": "Precalienta el horno a 180°C. Mezcla azúcar, huevo y mermelada de albaricoque. Agrega harina, bicarbonato, leche y vinagre, mezclando bien. Vierte en un molde engrasado y hornea durante 30-35 minutos. Mientras tanto, calienta la crema, mantequilla, azúcar y vainilla para la salsa. Al sacar el pudín, vierte la salsa caliente encima. Sirve con helado o crema.",
+  "ingredients": [
+    {
+      "name": "Azúcar",
+      "quantity": "1",
+      "measurement": "taza"
+    },
+    {
+      "name": "Huevo",
+      "quantity": "1",
+      "measurement": "unidad"
+    },
+    {
+      "name": "Mermelada de albaricoque",
+      "quantity": "1",
+      "measurement": "cucharada"
+    },
+    {
+      "name": "Harina",
+      "quantity": "1",
+      "measurement": "taza"
+    },
+    {
+      "name": "Bicarbonato de sodio",
+      "quantity": "1",
+      "measurement": "cucharadita"
+    },
+    {
+      "name": "Leche",
+      "quantity": "1",
+      "measurement": "taza"
+    },
+    {
+      "name": "Vinagre",
+      "quantity": "1",
+      "measurement": "cucharada"
+    },
+    {
+      "name": "Crema para batir",
+      "quantity": "1",
+      "measurement": "taza"
+    },
+    {
+      "name": "Mantequilla",
+      "quantity": "100",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Vainilla",
+      "quantity": "1",
+      "measurement": "cucharadita"
+    }
+  ]
+},
+{
+  "name": "Arroz Frito Yangzhou",
+  "country": "China",
+  "recipeCategory": "Plato principal",
+  "preparationTime": 30,
+  "description": "El arroz frito Yangzhou es una receta tradicional china con arroz, vegetales, huevo y carne picada, típicamente jamón o camarón. Es conocido por su colorido y sabor equilibrado.",
+  "instructions": "Cocina el arroz y déjalo enfriar. En un wok, saltea el huevo batido y resérvalo. Sofríe cebolla, zanahoria y guisantes. Agrega jamón o camarones y mezcla. Incorpora el arroz frío y fríe hasta que se dore ligeramente. Añade salsa de soya, huevo cocido y mezcla bien antes de servir.",
+  "ingredients": [
+    {
+      "name": "Arroz cocido",
+      "quantity": "3",
+      "measurement": "tazas"
+    },
+    {
+      "name": "Huevo",
+      "quantity": "2",
+      "measurement": "unidades"
+    },
+    {
+      "name": "Zanahoria",
+      "quantity": "1",
+      "measurement": "unidad"
+    },
+    {
+      "name": "Guisantes verdes",
+      "quantity": "1/2",
+      "measurement": "taza"
+    },
+    {
+      "name": "Jamón o camarones",
+      "quantity": "100",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Cebolla",
+      "quantity": "1/2",
+      "measurement": "unidad"
+    },
+    {
+      "name": "Salsa de soya",
+      "quantity": "2",
+      "measurement": "cucharadas"
+    }
+  ]
+},
+{
+  "name": "Pollo Kung Pao",
+  "country": "China",
+  "recipeCategory": "Plato principal",
+  "preparationTime": 40,
+  "description": "El Pollo Kung Pao es un plato clásico de Sichuan que combina pollo salteado, maní, vegetales y una salsa picante-dulce. Es una receta popular por su sabor audaz y picante.",
+  "instructions": "Corta el pollo en cubos y marínalo con salsa de soya, vino de arroz y maicena. Sofríe chiles secos y ajo en aceite caliente. Añade el pollo marinado y cocina hasta dorar. Incorpora pimientos, cebolla y cacahuates. Agrega salsa de soya, vinagre, azúcar y agua. Cocina hasta espesar y sirve caliente.",
+  "ingredients": [
+    {
+      "name": "Pechuga de pollo",
+      "quantity": "300",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Salsa de soya",
+      "quantity": "3",
+      "measurement": "cucharadas"
+    },
+    {
+      "name": "Vino de arroz",
+      "quantity": "1",
+      "measurement": "cucharada"
+    },
+    {
+      "name": "Maicena",
+      "quantity": "1",
+      "measurement": "cucharada"
+    },
+    {
+      "name": "Chiles secos",
+      "quantity": "5",
+      "measurement": "unidades"
+    },
+    {
+      "name": "Ajo",
+      "quantity": "2",
+      "measurement": "dientes"
+    },
+    {
+      "name": "Pimiento rojo",
+      "quantity": "1",
+      "measurement": "unidad"
+    },
+    {
+      "name": "Cacahuates tostados",
+      "quantity": "1/3",
+      "measurement": "taza"
+    },
+    {
+      "name": "Vinagre de arroz",
+      "quantity": "1",
+      "measurement": "cucharada"
+    },
+    {
+      "name": "Azúcar",
+      "quantity": "1",
+      "measurement": "cucharada"
+    }
+  ]
+},
+{
+  "name": "Jiaozi (Empanadillas Chinas)",
+  "country": "China",
+  "recipeCategory": "Entrante",
+  "preparationTime": 60,
+  "description": "Los jiaozi son empanadillas tradicionales rellenas de carne o vegetales, cocidas al vapor, hervidas o fritas. Son muy populares durante el Año Nuevo Chino.",
+  "instructions": "Mezcla carne de cerdo picada con cebollino, repollo picado, jengibre, salsa de soya y aceite de sésamo. Coloca una pequeña porción en el centro de cada envoltorio de jiaozi. Humedece los bordes y ciérralos formando pliegues. Cocina al vapor, fríe o hierve según tu preferencia. Sirve con salsa de soya y vinagre.",
+  "ingredients": [
+    {
+      "name": "Carne de cerdo molida",
+      "quantity": "250",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Repollo",
+      "quantity": "1",
+      "measurement": "taza"
+    },
+    {
+      "name": "Cebollino",
+      "quantity": "1/2",
+      "measurement": "taza"
+    },
+    {
+      "name": "Jengibre rallado",
+      "quantity": "1",
+      "measurement": "cucharadita"
+    },
+    {
+      "name": "Salsa de soya",
+      "quantity": "2",
+      "measurement": "cucharadas"
+    },
+    {
+      "name": "Aceite de sésamo",
+      "quantity": "1",
+      "measurement": "cucharadita"
+    },
+    {
+      "name": "Envolturas para jiaozi",
+      "quantity": "20",
+      "measurement": "unidades"
+    }
+  ]
+},
+{
+  "name": "Pho",
+  "country": "Vietnam",
+  "recipeCategory": "Comida",
+  "preparationTime": 120,
+  "description": "Sopa tradicional vietnamita de fideos con caldo de carne, aromatizada con hierbas frescas y especias.",
+  "instructions": "En una olla grande, hierve el hueso de res con agua durante 1 hora para obtener el caldo. Agrega jengibre, cebolla, anís estrellado, canela, clavos y sal al gusto. Cocina los fideos de arroz por separado. En un tazón, coloca los fideos cocidos, las rodajas finas de carne cruda y vierte el caldo caliente por encima. Decora con hierbas frescas, cebollín, brotes de soja, y chile rojo al gusto.",
+  "ingredients": [
+    {
+      "name": "Huesos de res",
+      "quantity": "1",
+      "measurement": "kg"
+    },
+    {
+      "name": "Fideos de arroz",
+      "quantity": "200",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Jengibre",
+      "quantity": "1",
+      "measurement": "trozo"
+    },
+    {
+      "name": "Cebolla",
+      "quantity": "1",
+      "measurement": "unidad"
+    },
+    {
+      "name": "Anís estrellado",
+      "quantity": "2",
+      "measurement": "unidades"
+    },
+    {
+      "name": "Canela",
+      "quantity": "1",
+      "measurement": "rama"
+    },
+    {
+      "name": "Clavos",
+      "quantity": "3",
+      "measurement": "unidades"
+    },
+    {
+      "name": "Sal",
+      "quantity": "al gusto",
+      "measurement": ""
+    },
+    {
+      "name": "Cebollín",
+      "quantity": "al gusto",
+      "measurement": ""
+    },
+    {
+      "name": "Brotes de soja",
+      "quantity": "al gusto",
+      "measurement": ""
+    },
+    {
+      "name": "Chile rojo",
+      "quantity": "1",
+      "measurement": "unidad"
+    }
+  ]
+},
+{
+  "name": "Bánh Mì",
+  "country": "Vietnam",
+  "recipeCategory": "Comida",
+  "preparationTime": 30,
+  "description": "Sándwich tradicional vietnamita con pan crujiente, carne, encurtidos, cilantro y mayonesa.",
+  "instructions": "Corta la baguette vietnamita y unta mayonesa en el interior. Coloca las rodajas de carne (puede ser cerdo o pollo), las zanahorias y los pepinos en rodajas, cilantro y chile al gusto. Agrega sal y pimienta al gusto y sirve inmediatamente.",
+  "ingredients": [
+    {
+      "name": "Baguette vietnamita",
+      "quantity": "1",
+      "measurement": "unidad"
+    },
+    {
+      "name": "Carne (cerdo o pollo)",
+      "quantity": "150",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Zanahorias",
+      "quantity": "1",
+      "measurement": "unidad"
+    },
+    {
+      "name": "Pepino",
+      "quantity": "1",
+      "measurement": "unidad"
+    },
+    {
+      "name": "Cilantro",
+      "quantity": "al gusto",
+      "measurement": ""
+    },
+    {
+      "name": "Chile rojo",
+      "quantity": "1",
+      "measurement": "unidad"
+    },
+    {
+      "name": "Mayonesa",
+      "quantity": "al gusto",
+      "measurement": ""
+    },
+    {
+      "name": "Sal",
+      "quantity": "al gusto",
+      "measurement": ""
+    },
+    {
+      "name": "Pimienta",
+      "quantity": "al gusto",
+      "measurement": ""
+    }
+  ]
+},
+{
+  "name": "Goi Cuon",
+  "country": "Vietnam",
+  "recipeCategory": "Comida",
+  "preparationTime": 40,
+  "description": "Rollitos frescos vietnamitas rellenos de camarones, fideos de arroz y hierbas frescas, acompañados de una salsa de maní.",
+  "instructions": "Remoja las hojas de arroz en agua tibia hasta que estén flexibles. Coloca sobre cada hoja un poco de fideos de arroz, camarones cocidos, lechuga, cilantro, menta y albahaca. Enrolla los ingredientes con cuidado. Sirve con una salsa de maní y sriracha al gusto.",
+  "ingredients": [
+    {
+      "name": "Hojas de arroz",
+      "quantity": "8",
+      "measurement": "unidades"
+    },
+    {
+      "name": "Camarones",
+      "quantity": "200",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Fideos de arroz",
+      "quantity": "100",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Lechuga",
+      "quantity": "al gusto",
+      "measurement": ""
+    },
+    {
+      "name": "Cilantro",
+      "quantity": "al gusto",
+      "measurement": ""
+    },
+    {
+      "name": "Menta",
+      "quantity": "al gusto",
+      "measurement": ""
+    },
+    {
+      "name": "Albahaca",
+      "quantity": "al gusto",
+      "measurement": ""
+    },
+    {
+      "name": "Salsa de maní",
+      "quantity": "al gusto",
+      "measurement": ""
+    },
+    {
+      "name": "Sriracha",
+      "quantity": "al gusto",
+      "measurement": ""
+    }
+  ]
+},
+{
+  "name": "Pad Thai",
+  "country": "Tailandia",
+  "recipeCategory": "Comida",
+  "preparationTime": 30,
+  "description": "Uno de los platos más conocidos de la cocina tailandesa, compuesto por fideos salteados con camarones, tofu, huevo y una mezcla de sabores dulces, salados y picantes.",
+  "instructions": "Cocina los fideos de arroz según las instrucciones del paquete. En una sartén grande, calienta aceite y fríe el tofu hasta que esté dorado. Agrega los camarones y saltea hasta que estén cocidos. Añade el huevo y revuelve hasta que esté cocido. Incorpora los fideos, la salsa de pescado, azúcar, tamarindo y jugo de limón. Cocina por unos minutos y sirve con cacahuetes picados, cebollines y cilantro.",
+  "ingredients": [
+    {
+      "name": "Fideos de arroz",
+      "quantity": "200",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Camarones",
+      "quantity": "150",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Tofu",
+      "quantity": "100",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Huevo",
+      "quantity": "1",
+      "measurement": "unidad"
+    },
+    {
+      "name": "Salsa de pescado",
+      "quantity": "2",
+      "measurement": "cucharadas"
+    },
+    {
+      "name": "Azúcar",
+      "quantity": "1",
+      "measurement": "cucharada"
+    },
+    {
+      "name": "Tamarindo",
+      "quantity": "1",
+      "measurement": "cucharada"
+    },
+    {
+      "name": "Jugo de limón",
+      "quantity": "1",
+      "measurement": "cucharada"
+    },
+    {
+      "name": "Cacahuetes picados",
+      "quantity": "al gusto",
+      "measurement": ""
+    },
+    {
+      "name": "Cebollines",
+      "quantity": "al gusto",
+      "measurement": ""
+    },
+    {
+      "name": "Cilantro",
+      "quantity": "al gusto",
+      "measurement": ""
+    }
+  ]
+},
+{
+  "name": "Tom Yum",
+  "country": "Tailandia",
+  "recipeCategory": "Comida",
+  "preparationTime": 45,
+  "description": "Sopa tailandesa picante y agria, con camarones, hierba de limón, hojas de lima kaffir y chiles, que ofrece un contraste perfecto de sabores.",
+  "instructions": "En una olla, hierve agua con hojas de lima kaffir, hierba de limón y galanga durante 10 minutos. Añade los camarones, el champiñón y las setas, y cocina hasta que los camarones estén listos. Incorpora la salsa de pescado, el jugo de lima y los chiles. Ajusta el nivel de picante y agrio al gusto. Sirve caliente con cilantro fresco.",
+  "ingredients": [
+    {
+      "name": "Camarones",
+      "quantity": "200",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Hojas de lima kaffir",
+      "quantity": "4",
+      "measurement": "unidades"
+    },
+    {
+      "name": "Hierba de limón",
+      "quantity": "2",
+      "measurement": "tallos"
+    },
+    {
+      "name": "Galanga",
+      "quantity": "1",
+      "measurement": "trozo"
+    },
+    {
+      "name": "Champiñones",
+      "quantity": "100",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Salsa de pescado",
+      "quantity": "3",
+      "measurement": "cucharadas"
+    },
+    {
+      "name": "Jugo de lima",
+      "quantity": "3",
+      "measurement": "cucharadas"
+    },
+    {
+      "name": "Chiles rojos",
+      "quantity": "2",
+      "measurement": "unidades"
+    },
+    {
+      "name": "Cilantro",
+      "quantity": "al gusto",
+      "measurement": ""
+    }
+  ]
+},
+{
+  "name": "Green Curry",
+  "country": "Tailandia",
+  "recipeCategory": "Comida",
+  "preparationTime": 60,
+  "description": "Curry tailandés picante y cremoso, con leche de coco, pasta de curry verde, pollo y verduras, servido con arroz jazmín.",
+  "instructions": "En una sartén grande, calienta aceite y fríe la pasta de curry verde hasta que suelte aroma. Agrega el pollo y fríe hasta que esté dorado. Incorpora la leche de coco, la salsa de pescado y el azúcar, y cocina a fuego lento durante 15 minutos. Añade berenjenas y albahaca tailandesa, y cocina por otros 10 minutos. Sirve con arroz jazmín y decora con hojas de albahaca.",
+  "ingredients": [
+    {
+      "name": "Pollo",
+      "quantity": "300",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Leche de coco",
+      "quantity": "400",
+      "measurement": "ml"
+    },
+    {
+      "name": "Pasta de curry verde",
+      "quantity": "2",
+      "measurement": "cucharadas"
+    },
+    {
+      "name": "Berenjenas",
+      "quantity": "2",
+      "measurement": "unidades"
+    },
+    {
+      "name": "Albahaca tailandesa",
+      "quantity": "al gusto",
+      "measurement": ""
+    },
+    {
+      "name": "Salsa de pescado",
+      "quantity": "2",
+      "measurement": "cucharadas"
+    },
+    {
+      "name": "Azúcar",
+      "quantity": "1",
+      "measurement": "cucharadita"
+    },
+    {
+      "name": "Arroz jazmín",
+      "quantity": "1",
+      "measurement": "taza"
+    }
+  ]
+},
+{
+  "name": "Nasi Lemak",
+  "country": "Malasia",
+  "recipeCategory": "Comida",
+  "preparationTime": 90,
+  "description": "El plato nacional de Malasia, consistente en arroz cocido con leche de coco, acompañado de sambal (pasta de chile), huevo duro, maní y pepino. Es un desayuno popular y se puede disfrutar a cualquier hora del día.",
+  "instructions": "Cocina el arroz en leche de coco, agua, y una hoja de pandan. Mientras tanto, fríe los maníes y prepara el sambal cocinando cebolla, ajo, jengibre, y pasta de chile hasta obtener una salsa espesa. Cocina los huevos duros y corta el pepino en rodajas finas. Sirve el arroz con los acompañamientos.",
+  "ingredients": [
+    {
+      "name": "Arroz",
+      "quantity": "2",
+      "measurement": "tazas"
+    },
+    {
+      "name": "Leche de coco",
+      "quantity": "400",
+      "measurement": "ml"
+    },
+    {
+      "name": "Huevo",
+      "quantity": "2",
+      "measurement": "unidades"
+    },
+    {
+      "name": "Sambal",
+      "quantity": "al gusto",
+      "measurement": ""
+    },
+    {
+      "name": "Maní",
+      "quantity": "1",
+      "measurement": "taza"
+    },
+    {
+      "name": "Pepino",
+      "quantity": "1",
+      "measurement": "unidad"
+    },
+    {
+      "name": "Hoja de pandan",
+      "quantity": "1",
+      "measurement": "hoja"
+    },
+    {
+      "name": "Ajo",
+      "quantity": "2",
+      "measurement": "dientes"
+    },
+    {
+      "name": "Jengibre",
+      "quantity": "1",
+      "measurement": "trozo pequeño"
+    },
+    {
+      "name": "Cebolla",
+      "quantity": "1",
+      "measurement": "unidad"
+    },
+    {
+      "name": "Pasta de chile",
+      "quantity": "2",
+      "measurement": "cucharadas"
+    }
+  ]
+},
+{
+  "name": "Satay",
+  "country": "Malasia",
+  "recipeCategory": "Comida",
+  "preparationTime": 60,
+  "description": "Brochetas de pollo marinadas en una mezcla de especias y luego asadas a la parrilla, servidas con una deliciosa salsa de maní.",
+  "instructions": "Marina el pollo con una mezcla de aceite, cebolla, ajo, cúrcuma, comino y cilantro durante al menos 30 minutos. Ensarta el pollo en brochetas y ásalas a la parrilla o en una sartén hasta que estén doradas y cocidas. Para la salsa, mezcla maní tostado, azúcar, salsa de soja, ajo, chile y agua, y cocina hasta obtener una salsa espesa. Sirve las brochetas con la salsa de maní.",
+  "ingredients": [
+    {
+      "name": "Pechuga de pollo",
+      "quantity": "500",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Cebolla",
+      "quantity": "1",
+      "measurement": "unidad"
+    },
+    {
+      "name": "Ajo",
+      "quantity": "3",
+      "measurement": "dientes"
+    },
+    {
+      "name": "Cúrcuma",
+      "quantity": "1",
+      "measurement": "cucharadita"
+    },
+    {
+      "name": "Comino",
+      "quantity": "1",
+      "measurement": "cucharadita"
+    },
+    {
+      "name": "Cilantro",
+      "quantity": "1",
+      "measurement": "cucharadita"
+    },
+    {
+      "name": "Aceite",
+      "quantity": "2",
+      "measurement": "cucharadas"
+    },
+    {
+      "name": "Salsa de soja",
+      "quantity": "2",
+      "measurement": "cucharadas"
+    },
+    {
+      "name": "Maní tostado",
+      "quantity": "1",
+      "measurement": "taza"
+    },
+    {
+      "name": "Azúcar",
+      "quantity": "1",
+      "measurement": "cucharadita"
+    },
+    {
+      "name": "Chile",
+      "quantity": "1",
+      "measurement": "unidad"
+    }
+  ]
+},
+{
+  "name": "Laksa",
+  "country": "Malasia",
+  "recipeCategory": "Comida",
+  "preparationTime": 60,
+  "description": "Sopa de fideos picante y cremosa, con una base de pasta de curry o tamarindo, acompañada de mariscos, tofu y huevo duro.",
+  "instructions": "Cocina los fideos de arroz según las instrucciones del paquete. En una sartén, fríe la pasta de curry con cebolla, ajo, jengibre y especias. Agrega leche de coco y cocina a fuego lento. Añade los camarones y el tofu, y cocina hasta que los camarones estén listos. Sirve los fideos en un tazón, vierte la sopa sobre ellos y decora con huevo duro, cilantro y cebollines.",
+  "ingredients": [
+    {
+      "name": "Fideos de arroz",
+      "quantity": "200",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Camarones",
+      "quantity": "150",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Tofu",
+      "quantity": "100",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Leche de coco",
+      "quantity": "400",
+      "measurement": "ml"
+    },
+    {
+      "name": "Pasta de curry",
+      "quantity": "2",
+      "measurement": "cucharadas"
+    },
+    {
+      "name": "Ajo",
+      "quantity": "2",
+      "measurement": "dientes"
+    },
+    {
+      "name": "Jengibre",
+      "quantity": "1",
+      "measurement": "trozo pequeño"
+    },
+    {
+      "name": "Cebolla",
+      "quantity": "1",
+      "measurement": "unidad"
+    },
+    {
+      "name": "Huevo duro",
+      "quantity": "2",
+      "measurement": "unidades"
+    },
+    {
+      "name": "Cilantro",
+      "quantity": "al gusto",
+      "measurement": ""
+    },
+    {
+      "name": "Cebollines",
+      "quantity": "al gusto",
+      "measurement": ""
+    }
+  ]
+},
+{
+  "name": "Nasi Goreng",
+  "country": "Indonesia",
+  "recipeCategory": "Comida",
+  "preparationTime": 30,
+  "description": "El plato más popular de Indonesia, es un arroz frito con pollo, camarones, verduras y especias, servido con un huevo frito encima. Es un plato sencillo y delicioso que se puede disfrutar en cualquier momento del día.",
+  "instructions": "Fría el arroz cocido en aceite con cebolla, ajo, y chile hasta que esté bien dorado. Agregue el pollo y los camarones, y cocine hasta que estén bien cocidos. Añada salsa de soja y mezcla bien. Sirva con un huevo frito encima y decore con cebollines y pepino.",
+  "ingredients": [
+    {
+      "name": "Arroz",
+      "quantity": "2",
+      "measurement": "tazas"
+    },
+    {
+      "name": "Pollo",
+      "quantity": "200",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Camarones",
+      "quantity": "150",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Cebolla",
+      "quantity": "1",
+      "measurement": "unidad"
+    },
+    {
+      "name": "Ajo",
+      "quantity": "2",
+      "measurement": "dientes"
+    },
+    {
+      "name": "Chile",
+      "quantity": "1",
+      "measurement": "unidad"
+    },
+    {
+      "name": "Salsa de soja",
+      "quantity": "2",
+      "measurement": "cucharadas"
+    },
+    {
+      "name": "Aceite",
+      "quantity": "2",
+      "measurement": "cucharadas"
+    },
+    {
+      "name": "Huevo",
+      "quantity": "1",
+      "measurement": "unidad"
+    },
+    {
+      "name": "Cebollines",
+      "quantity": "al gusto",
+      "measurement": ""
+    },
+    {
+      "name": "Pepino",
+      "quantity": "1",
+      "measurement": "unidad"
+    }
+  ]
+},
+{
+  "name": "Satay Ayam",
+  "country": "Indonesia",
+  "recipeCategory": "Comida",
+  "preparationTime": 45,
+  "description": "Brochetas de pollo marinadas con una mezcla de especias, luego asadas a la parrilla y acompañadas de una deliciosa salsa de maní.",
+  "instructions": "Marina el pollo en una mezcla de salsa de soja, ajo, cúrcuma, cilantro y aceite durante 30 minutos. Ensarta el pollo en brochetas y ásalo en la parrilla hasta que esté bien cocido. Para la salsa, mezcla maní, ajo, chile, azúcar, salsa de soja y agua en una licuadora. Cocina hasta obtener una salsa espesa. Sirve las brochetas con la salsa de maní.",
+  "ingredients": [
+    {
+      "name": "Pechuga de pollo",
+      "quantity": "500",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Ajo",
+      "quantity": "3",
+      "measurement": "dientes"
+    },
+    {
+      "name": "Cúrcuma",
+      "quantity": "1",
+      "measurement": "cucharadita"
+    },
+    {
+      "name": "Cilantro",
+      "quantity": "1",
+      "measurement": "cucharadita"
+    },
+    {
+      "name": "Salsa de soja",
+      "quantity": "2",
+      "measurement": "cucharadas"
+    },
+    {
+      "name": "Aceite",
+      "quantity": "2",
+      "measurement": "cucharadas"
+    },
+    {
+      "name": "Maní tostado",
+      "quantity": "1",
+      "measurement": "taza"
+    },
+    {
+      "name": "Chile",
+      "quantity": "1",
+      "measurement": "unidad"
+    },
+    {
+      "name": "Azúcar",
+      "quantity": "1",
+      "measurement": "cucharadita"
+    }
+  ]
+},
+{
+  "name": "Gado-Gado",
+  "country": "Indonesia",
+  "recipeCategory": "Comida",
+  "preparationTime": 45,
+  "description": "Una ensalada tradicional indonesia hecha con verduras hervidas, tofu frito, huevo duro, y una rica salsa de maní.",
+  "instructions": "Hierve las verduras como papas, zanahorias, espárragos y brotes de soja hasta que estén tiernas. Fría el tofu hasta que esté dorado. Cocina los huevos duros. Para la salsa de maní, licúa maní tostado, azúcar, salsa de soja, ajo, chile y agua hasta obtener una consistencia cremosa. Sirve las verduras, tofu y huevo en un plato y vierte la salsa de maní por encima.",
+  "ingredients": [
+    {
+      "name": "Papas",
+      "quantity": "2",
+      "measurement": "unidades"
+    },
+    {
+      "name": "Zanahorias",
+      "quantity": "2",
+      "measurement": "unidades"
+    },
+    {
+      "name": "Espárragos",
+      "quantity": "100",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Brotes de soja",
+      "quantity": "100",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Tofu",
+      "quantity": "200",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Huevo",
+      "quantity": "2",
+      "measurement": "unidades"
+    },
+    {
+      "name": "Maní tostado",
+      "quantity": "1",
+      "measurement": "taza"
+    },
+    {
+      "name": "Salsa de soja",
+      "quantity": "2",
+      "measurement": "cucharadas"
+    },
+    {
+      "name": "Ajo",
+      "quantity": "2",
+      "measurement": "dientes"
+    },
+    {
+      "name": "Chile",
+      "quantity": "1",
+      "measurement": "unidad"
+    },
+    {
+      "name": "Azúcar",
+      "quantity": "1",
+      "measurement": "cucharadita"
+    },
+    {
+      "name": "Agua",
+      "quantity": "al gusto",
+      "measurement": ""
+    }
+  ]
+},
+{
+  "name": "Bibimbap",
+  "country": "Corea del Sur",
+  "recipeCategory": "Comida",
+  "preparationTime": 30,
+  "description": "Un delicioso plato de arroz mixto con vegetales, carne, huevo y salsa de chile, muy popular en la cocina coreana. Es una comida equilibrada y sabrosa.",
+  "instructions": "Cocina el arroz y resérvalo. Saltea las verduras por separado: espinacas, zanahorias, brotes de soja, y setas, todo con un poco de aceite y ajo. Cocina el huevo frito con la yema intacta. Sirve el arroz en un tazón, coloca las verduras de manera ordenada encima y pon el huevo frito en el centro. Agrega salsa de gochujang (pasta de chile) y aceite de sésamo al gusto.",
+  "ingredients": [
+    {
+      "name": "Arroz",
+      "quantity": "2",
+      "measurement": "tazas"
+    },
+    {
+      "name": "Espinacas",
+      "quantity": "100",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Zanahorias",
+      "quantity": "1",
+      "measurement": "unidad"
+    },
+    {
+      "name": "Brotes de soja",
+      "quantity": "100",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Setas",
+      "quantity": "100",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Huevo",
+      "quantity": "1",
+      "measurement": "unidad"
+    },
+    {
+      "name": "Gochujang (pasta de chile)",
+      "quantity": "1",
+      "measurement": "cucharada"
+    },
+    {
+      "name": "Aceite de sésamo",
+      "quantity": "1",
+      "measurement": "cucharadita"
+    }
+  ]
+},
+{
+  "name": "Kimchi",
+  "country": "Corea del Sur",
+  "recipeCategory": "Comida",
+  "preparationTime": 60,
+  "description": "El kimchi es un plato tradicional coreano de verduras fermentadas, generalmente de repollo napa, con ajo, jengibre, chile y otros condimentos. Es un acompañante esencial en muchas comidas coreanas.",
+  "instructions": "Corta el repollo napa en trozos grandes y salpica con sal gruesa. Deja reposar durante unas horas hasta que el repollo se ablande. Luego enjuaga y escurre bien. Prepara una pasta con ajo, jengibre, salsa de pescado, azúcar, gochugaru (chile en polvo), y agua. Mezcla bien el repollo con la pasta y déjalo fermentar en un recipiente cerrado durante unos días a temperatura ambiente.",
+  "ingredients": [
+    {
+      "name": "Repollo napa",
+      "quantity": "1",
+      "measurement": "unidad"
+    },
+    {
+      "name": "Sal gruesa",
+      "quantity": "al gusto",
+      "measurement": ""
+    },
+    {
+      "name": "Ajo",
+      "quantity": "4",
+      "measurement": "dientes"
+    },
+    {
+      "name": "Jengibre",
+      "quantity": "1",
+      "measurement": "trozo pequeño"
+    },
+    {
+      "name": "Salsa de pescado",
+      "quantity": "2",
+      "measurement": "cucharadas"
+    },
+    {
+      "name": "Azúcar",
+      "quantity": "1",
+      "measurement": "cucharadita"
+    },
+    {
+      "name": "Gochugaru (chile en polvo)",
+      "quantity": "2",
+      "measurement": "cucharadas"
+    },
+    {
+      "name": "Agua",
+      "quantity": "1/4",
+      "measurement": "taza"
+    }
+  ]
+},
+{
+  "name": "Bulgogi",
+  "country": "Corea del Sur",
+  "recipeCategory": "Comida",
+  "preparationTime": 45,
+  "description": "El bulgogi es un plato coreano de carne marinada (generalmente res) que se cocina a la parrilla o a la sartén. Es dulce, sabroso y tiene un sabor ahumado.",
+  "instructions": "Corta la carne en tiras finas. En un bol, mezcla la salsa de soja, azúcar, aceite de sésamo, ajo, cebollines, salsa de pescado y pimienta. Marinar la carne en esta mezcla durante al menos 30 minutos. Luego, saltea la carne en una sartén con un poco de aceite hasta que esté bien cocida y dorada. Sirve con arroz y una guarnición de vegetales.",
+  "ingredients": [
+    {
+      "name": "Carne de res (filete)",
+      "quantity": "500",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Salsa de soja",
+      "quantity": "3",
+      "measurement": "cucharadas"
+    },
+    {
+      "name": "Azúcar",
+      "quantity": "1",
+      "measurement": "cucharada"
+    },
+    {
+      "name": "Aceite de sésamo",
+      "quantity": "1",
+      "measurement": "cucharada"
+    },
+    {
+      "name": "Ajo",
+      "quantity": "3",
+      "measurement": "dientes"
+    },
+    {
+      "name": "Cebollines",
+      "quantity": "2",
+      "measurement": "unidades"
+    },
+    {
+      "name": "Salsa de pescado",
+      "quantity": "1",
+      "measurement": "cucharada"
+    },
+    {
+      "name": "Pimienta",
+      "quantity": "al gusto",
+      "measurement": ""
+    },
+    {
+      "name": "Aceite",
+      "quantity": "al gusto",
+      "measurement": ""
+    }
+  ]
+},
+{
+  "name": "Sushi (Maki Sushi)",
+  "country": "Japón",
+  "recipeCategory": "Comida",
+  "preparationTime": 60,
+  "description": "El sushi es uno de los platos más emblemáticos de la gastronomía japonesa. En esta versión, el maki sushi se prepara enrollando arroz y pescado en una hoja de alga nori.",
+  "instructions": "Cocina el arroz de sushi y enfríalo a temperatura ambiente. Coloca una hoja de alga nori sobre una esterilla de bambú y extiende una capa fina de arroz sobre el alga. Añade las tiras de pescado (como atún o salmón) y otros ingredientes como pepino o aguacate. Enrolla el sushi con la esterilla y córtalo en trozos. Sirve con salsa de soja, wasabi y jengibre encurtido.",
+  "ingredients": [
+    {
+      "name": "Arroz de sushi",
+      "quantity": "2",
+      "measurement": "tazas"
+    },
+    {
+      "name": "Alga nori",
+      "quantity": "5",
+      "measurement": "hojas"
+    },
+    {
+      "name": "Atún o salmón fresco",
+      "quantity": "200",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Pepino",
+      "quantity": "1",
+      "measurement": "unidad"
+    },
+    {
+      "name": "Aguacate",
+      "quantity": "1",
+      "measurement": "unidad"
+    },
+    {
+      "name": "Salsa de soja",
+      "quantity": "al gusto",
+      "measurement": ""
+    },
+    {
+      "name": "Wasabi",
+      "quantity": "al gusto",
+      "measurement": ""
+    },
+    {
+      "name": "Jengibre encurtido",
+      "quantity": "al gusto",
+      "measurement": ""
+    }
+  ]
+},
+{
+  "name": "Ramen",
+  "country": "Japón",
+  "recipeCategory": "Comida",
+  "preparationTime": 120,
+  "description": "El ramen es una sopa de fideos japonesa que combina caldo, fideos y varios ingredientes como carne, huevo y vegetales. Es un plato reconfortante y lleno de sabor.",
+  "instructions": "Cocina los fideos de ramen según las instrucciones del paquete. En una cacerola grande, hierve el caldo de pollo o cerdo con ajo, jengibre y cebollines. Añade salsa de soja y mirin al gusto. Sirve los fideos en un tazón, vierte el caldo caliente por encima y agrega los toppings como carne de cerdo, huevo cocido, cebollines, algas nori y brotes de bambú.",
+  "ingredients": [
+    {
+      "name": "Fideos de ramen",
+      "quantity": "200",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Caldo de pollo o cerdo",
+      "quantity": "1",
+      "measurement": "litro"
+    },
+    {
+      "name": "Ajo",
+      "quantity": "3",
+      "measurement": "dientes"
+    },
+    {
+      "name": "Jengibre",
+      "quantity": "1",
+      "measurement": "trozo pequeño"
+    },
+    {
+      "name": "Cebollines",
+      "quantity": "2",
+      "measurement": "unidades"
+    },
+    {
+      "name": "Salsa de soja",
+      "quantity": "2",
+      "measurement": "cucharadas"
+    },
+    {
+      "name": "Mirin",
+      "quantity": "1",
+      "measurement": "cucharada"
+    },
+    {
+      "name": "Carne de cerdo o pollo",
+      "quantity": "200",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Huevo",
+      "quantity": "1",
+      "measurement": "unidad"
+    },
+    {
+      "name": "Algas nori",
+      "quantity": "al gusto",
+      "measurement": ""
+    },
+    {
+      "name": "Brotes de bambú",
+      "quantity": "al gusto",
+      "measurement": ""
+    }
+  ]
+},
+{
+  "name": "Tempura",
+  "country": "Japón",
+  "recipeCategory": "Comida",
+  "preparationTime": 45,
+  "description": "La tempura es un plato japonés en el que se sumergen verduras y mariscos en una masa ligera y se fríen hasta quedar crujientes. Es un plato popular tanto en Japón como en el resto del mundo.",
+  "instructions": "Prepara una mezcla ligera de masa con harina, agua fría y un poco de huevo. Corta las verduras (como zanahorias, berenjenas y calabacines) y los mariscos (como camarones) en trozos. Calienta el aceite en una sartén profunda y, una vez caliente, sumerge los ingredientes en la masa y fríelos hasta que estén dorados y crujientes. Sirve con salsa tempura o sal al gusto.",
+  "ingredients": [
+    {
+      "name": "Harina de trigo",
+      "quantity": "1",
+      "measurement": "taza"
+    },
+    {
+      "name": "Agua fría",
+      "quantity": "1/2",
+      "measurement": "taza"
+    },
+    {
+      "name": "Huevo",
+      "quantity": "1",
+      "measurement": "unidad"
+    },
+    {
+      "name": "Camarones",
+      "quantity": "200",
+      "measurement": "gramos"
+    },
+    {
+      "name": "Zanahorias",
+      "quantity": "1",
+      "measurement": "unidad"
+    },
+    {
+      "name": "Berenjenas",
+      "quantity": "1",
+      "measurement": "unidad"
+    },
+    {
+      "name": "Calabacines",
+      "quantity": "1",
+      "measurement": "unidad"
+    },
+    {
+      "name": "Aceite de oliva o vegetal",
+      "quantity": "al gusto",
+      "measurement": ""
+    },
+    {
+      "name": "Salsa tempura",
+      "quantity": "al gusto",
+      "measurement": ""
+    }
+  ]
+},
+{
+  "name": "Butter Chicken",
+  "country": "India",
+  "recipeCategory": "Comida",
+  "preparationTime": 90,
+  "description": "Uno de los platos más icónicos de la India, el pollo a la mantequilla se caracteriza por su salsa cremosa, ligeramente picante y rica en especias.",
+  "instructions": "Marina el pollo en yogur, ajo, jengibre, garam masala y jugo de limón durante al menos una hora. Luego, cocínalo en sartén hasta dorar. Aparte, derrite mantequilla, sofríe cebolla, ajo y jengibre. Añade puré de tomate y especias, cocina unos minutos y agrega crema. Incorpora el pollo a la salsa y cocina todo junto por 15 minutos. Sirve con arroz o naan.",
+  "ingredients": [
+    { "name": "Pechuga de pollo", "quantity": "500", "measurement": "gramos" },
+    { "name": "Yogur natural", "quantity": "1/2", "measurement": "taza" },
+    { "name": "Jugo de limón", "quantity": "2", "measurement": "cucharadas" },
+    { "name": "Garam masala", "quantity": "2", "measurement": "cucharaditas" },
+    { "name": "Jengibre fresco rallado", "quantity": "1", "measurement": "cucharadita" },
+    { "name": "Ajo picado", "quantity": "2", "measurement": "dientes" },
+    { "name": "Mantequilla", "quantity": "3", "measurement": "cucharadas" },
+    { "name": "Cebolla", "quantity": "1", "measurement": "unidad" },
+    { "name": "Puré de tomate", "quantity": "1", "measurement": "taza" },
+    { "name": "Crema de leche", "quantity": "1/2", "measurement": "taza" },
+    { "name": "Sal", "quantity": "al gusto", "measurement": "" },
+    { "name": "Cilantro fresco", "quantity": "al gusto", "measurement": "" }
+  ]
+},
+{
+  "name": "Chana Masala",
+  "country": "India",
+  "recipeCategory": "Comida",
+  "preparationTime": 45,
+  "description": "Un curry vegetariano picante y sabroso a base de garbanzos, muy popular en el norte de India y frecuentemente acompañado de arroz o pan plano.",
+  "instructions": "Sofríe cebolla, ajo, jengibre y chile verde hasta que estén dorados. Añade las especias y puré de tomate, y cocina hasta que se espese. Agrega los garbanzos cocidos y agua según se requiera para la consistencia. Cocina a fuego medio durante 20 minutos. Sirve con arroz basmati o chapati.",
+  "ingredients": [
+    { "name": "Garbanzos cocidos", "quantity": "2", "measurement": "tazas" },
+    { "name": "Cebolla", "quantity": "1", "measurement": "unidad" },
+    { "name": "Ajo", "quantity": "2", "measurement": "dientes" },
+    { "name": "Jengibre", "quantity": "1", "measurement": "cucharadita" },
+    { "name": "Chile verde", "quantity": "1", "measurement": "unidad" },
+    { "name": "Puré de tomate", "quantity": "1/2", "measurement": "taza" },
+    { "name": "Comino molido", "quantity": "1", "measurement": "cucharadita" },
+    { "name": "Cúrcuma", "quantity": "1/2", "measurement": "cucharadita" },
+    { "name": "Garam masala", "quantity": "1", "measurement": "cucharadita" },
+    { "name": "Agua", "quantity": "1", "measurement": "taza" },
+    { "name": "Aceite vegetal", "quantity": "2", "measurement": "cucharadas" },
+    { "name": "Sal", "quantity": "al gusto", "measurement": "" },
+    { "name": "Cilantro", "quantity": "al gusto", "measurement": "" }
+  ]
+},
+{
+  "name": "Samosas",
+  "country": "India",
+  "recipeCategory": "Entrada",
+  "preparationTime": 75,
+  "description": "Frituras rellenas de papa, arvejas y especias, muy populares como snack callejero en toda la India.",
+  "instructions": "Hierve las papas y tritúralas. Sofríe cebolla, jengibre y especias, y mezcla con las papas y arvejas. Prepara una masa con harina, aceite y agua. Divide en porciones, estira en círculos y corta por la mitad. Forma conos, rellena con la mezcla y cierra. Fríe en aceite caliente hasta dorar. Sirve con chutney.",
+  "ingredients": [
+    { "name": "Papas", "quantity": "3", "measurement": "unidades" },
+    { "name": "Arvejas", "quantity": "1/2", "measurement": "taza" },
+    { "name": "Cebolla picada", "quantity": "1", "measurement": "unidad" },
+    { "name": "Jengibre picado", "quantity": "1", "measurement": "cucharadita" },
+    { "name": "Comino", "quantity": "1", "measurement": "cucharadita" },
+    { "name": "Cúrcuma", "quantity": "1/2", "measurement": "cucharadita" },
+    { "name": "Garam masala", "quantity": "1", "measurement": "cucharadita" },
+    { "name": "Harina de trigo", "quantity": "2", "measurement": "tazas" },
+    { "name": "Agua", "quantity": "1/2", "measurement": "taza" },
+    { "name": "Aceite vegetal", "quantity": "para freír", "measurement": "" },
+    { "name": "Sal", "quantity": "al gusto", "measurement": "" }
+  ]
+}
+
 ]
