@@ -17,6 +17,7 @@ export class RecipeListComponent implements OnInit {
   @Input() areActionsAvailable = false;
   @Output() cook = new EventEmitter<IRecipe>();
   @Output() listInitialized = new EventEmitter<IRecipe[]>();
+  @Input() sectionTitle = 'Recetas';
 
   userId: number | null = null;
   itemList: IRecipe[] = [];
@@ -47,6 +48,7 @@ export class RecipeListComponent implements OnInit {
   }
 
   loadAllFallbackAnimated(count: number): void {
+    this.sectionTitle = 'Recetas locales';
     this.fallbackMode = true;
     const available = fallbackRecipes.slice(this.fallbackIndex, this.fallbackIndex + count);
     const safeCount = available.length;
@@ -66,6 +68,7 @@ export class RecipeListComponent implements OnInit {
 
   //Este metodo usa los ingredientes del localStorage para obtener recetas generadas por IA
   loadValidRecipesFromLocalStorage(count: number): void {
+    this.sectionTitle = 'Recetas generadas';
     let attempts = 0;
     let loaded = 0;
     const maxJsonAttempts = count * 50;
@@ -125,6 +128,7 @@ export class RecipeListComponent implements OnInit {
 
   //Este metodo usa el id del usuario para obtener recetas generadas por IA
   loadValidRecipes(userId: number, count: number): void {
+    this.sectionTitle = 'Recetas generadas';
     let attempts = 0;
     let loaded = 0;
     const maxJsonGenerationAttempts = count * 50;
@@ -175,6 +179,7 @@ export class RecipeListComponent implements OnInit {
   }
 
   loadRandomRecipes(count: number): void {
+    this.sectionTitle = 'Recetas aleatorias';
     if (this.skeletonList.length === 0) {
       this.loadSkeletons(count);
     }
