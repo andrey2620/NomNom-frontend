@@ -21,6 +21,7 @@ import { ToastService } from '../../services/toast.service';
 export class RecipeComponent implements OnInit, AfterViewInit {
   @ViewChild('recipeList') recipeListComponent!: RecipeListComponent;
   @ViewChild('missingIngredientsModal') missingIngredientsModal!: ModalComponent;
+  currentTitle = 'Recetas';
   public mostrarRecipeList = false;
   userId = JSON.parse(localStorage.getItem('auth_user') || '{}').id;
   selectedRecipe: IRecipe | null = null;
@@ -64,7 +65,7 @@ export class RecipeComponent implements OnInit, AfterViewInit {
     this.recipeListComponent.clearRecipes();
     this.recipeListComponent.loadSkeletons(3);
 
-    if(localStorage.getItem('mapRecipe')) {
+    if (localStorage.getItem('mapRecipe')) {
       this.selectedRecipe = JSON.parse(localStorage.getItem('mapRecipe') ?? '');
       localStorage.removeItem('mapRecipe');
     }
