@@ -1,17 +1,23 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { BaseService } from './base-service';
-import { IRecipe, ISearch, ISuggestions, IResponse } from '../interfaces';
+import { IRecipe, ISearch, ISuggestions, IResponsev2 } from '../interfaces';
 import { AuthService } from './auth.service';
-import { AlertService } from './alert.service';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
+import { ProfileService } from './profile.service';
+import { ToastService } from './toast.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RecipesService extends BaseService<IRecipe> {
   protected override source = 'recipes';
-
+  public totalItems: number[] = [];
+  private authService: AuthService = inject(AuthService);
+  private toastrService: ToastService = inject(ToastService);
+  private profileService: ProfileService = inject(ProfileService);
   private recipeListSignal = signal<IRecipe[]>([]);
+
   get recipes$() {
     return this.recipeListSignal;
   }
@@ -21,58 +27,88 @@ export class RecipesService extends BaseService<IRecipe> {
     size: 3,
   };
 
-  public totalItems: any = [];
-  private authService: AuthService = inject(AuthService);
-  private alertService: AlertService = inject(AlertService);
-
-  getAll() {
-    this.findAllWithParams({ page: this.search.page, size: this.search.size }).subscribe({
-      next: (response: any) => {
-        this.search = { ...this.search, ...response.meta };
-        this.totalItems = Array.from({ length: this.search.totalPages ?? 0 }, (_, i) => i + 1);
-        this.recipeListSignal.set(response.data);
-      },
-      error: (err: any) => {
-        console.error('Error al obtener recetas', err);
-      },
-    });
+  linkUserRecipe(userId: number, recipeId: number): Observable<IResponsev2<IRecipe>> {
+    return this.http.post<IResponsev2<IRecipe>>(`user-recipes?userId=${userId}&recipeId=${recipeId}`, {});
   }
 
-  save(recipe: IRecipe) {
-    this.add(recipe).subscribe({
-      next: (response: any) => {
-        this.alertService.displayAlert('success', response.message, 'center', 'top', ['success-snackbar']);
-        this.getAll(); // o `this.getAllByUser()` si las recetas son por usuario
-      },
-      error: (err: any) => {
-        this.alertService.displayAlert('error', 'Ocurrió un error al agregar la receta', 'center', 'top', ['error-snackbar']);
-        console.error('Error', err);
-      },
-    });
+  addRecipe(recipeDto: Partial<IRecipe>): Observable<IRecipe> {
+    return this.http.post<IRecipe>(`${this.source}`, recipeDto);
   }
 
-  delete(recipe: IRecipe) {
-    this.del(`${recipe.id_recipe}`).subscribe({
-      next: (response: any) => {
-        this.alertService.displayAlert('success', response.message, 'center', 'top', ['success-snackbar']);
-        this.getAll(); // o `this.getAllByUser()` si aplica
-      },
-      error: (err: any) => {
-        this.alertService.displayAlert('error', 'Ocurrió un error al eliminar la receta', 'center', 'top', ['error-snackbar']);
-        console.error('Error', err);
-      },
-    });
+  getRandomRecipes(): Observable<IResponsev2<IRecipe[]>> {
+    return this.http.get<IResponsev2<{ recipe: IRecipe; prompt: string }>>(`${this.source}/generator`).pipe(
+      map(res => {
+        if (environment.dev) {
+          //console.warn('[DEBUG] Prompt generado:\n', res.data.prompt);
+        }
+
+        return {
+          ...res,
+          data: [res.data.recipe],
+        };
+      })
+    );
   }
 
-  getRandomRecipes(): Observable<any> {
-    return this.findAllWithParamsAndCustomSource(`generator`);
+  getRecipesByUser(userId: number): Observable<IResponsev2<IRecipe[]>> {
+    return this.http.get<IResponsev2<{ recipe: IRecipe; prompt: string }>>(`${this.source}/generator/user/${userId}`).pipe(
+      map(res => {
+        if (environment.dev) {
+          //console.warn('[DEBUG] Prompt generado:\n', res.data.prompt);
+        }
+
+        return {
+          ...res,
+          data: [res.data.recipe],
+        };
+      })
+    );
   }
 
-  getRecipesByUser(userId: number): Observable<any> {
-    return this.findAllWithParamsAndCustomSource(`generator/user/${userId}`);
+  generateRecipeFromIngredients(ingredientNames: string[]): Observable<IResponsev2<IRecipe[]>> {
+    return this.http.post<IResponsev2<{ recipe: IRecipe; prompt: string }>>(`${this.source}/generator/ingredients`, ingredientNames).pipe(
+      map(res => {
+        if (environment.dev) {
+          //console.warn('[DEBUG] Prompt generado:\n', res.data.prompt);
+        }
+
+        return {
+          ...res,
+          data: [res.data.recipe],
+        };
+      })
+    );
   }
 
-  generateSuggestions(recipe: IRecipe): Observable<IResponse<ISuggestions>> {
-    return this.addCustomSource('generator/suggestions', recipe) as unknown as Observable<IResponse<ISuggestions>>;
+  generateSuggestions(recipe: IRecipe): Observable<IResponsev2<ISuggestions>> {
+    return this.http.post<IResponsev2<ISuggestions>>(`${this.source}/generator/suggestions`, recipe);
+  }
+
+  deleteRecipe(userId: number, recipeId: number): void {
+    this.http
+      .delete<IResponsev2<null>>(`user-recipes`, {
+        params: {
+          userId: userId.toString(),
+          recipeId: recipeId.toString(),
+        },
+      })
+      .subscribe({
+        next: () => {
+          this.toastrService.showSuccess('Receta eliminada correctamente');
+
+          // Opcional: actualizá recetas si querés refrescar la vista
+          const authUser = localStorage.getItem('auth_user');
+          if (!authUser) return;
+
+          const userId = JSON.parse(authUser).id;
+
+          if (userId) {
+            this.profileService.getUserRecipes(userId, true);
+          }
+        },
+        error: err => {
+          this.toastrService.showError('Ocurrió un error al eliminar la receta' + err.message);
+        },
+      });
   }
 }

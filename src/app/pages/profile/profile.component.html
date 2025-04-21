@@ -1,53 +1,130 @@
-<section class="w-100">
-  <div class="my-4 w-75 mx-auto">
-    <div class="shadow-sm bg-body rounded px-4 py-4 h-100">
-      <div>
-        <i class="fa-solid fa-user-tie"></i>
-      </div>
-      <div class="border-bottom my-3">
-        <label>Nombre:</label>
-        <p>{{ profileService.user$().name }}</p>
-      </div>
-      <div class="border-bottom my-3">
-        <label>Apellido:</label>
-        <p>{{ profileService.user$().lastname }}</p>
-      </div>
-      <div class="border-bottom my-3">
-        <label>Email:</label>
-        <p>{{ profileService.user$().email }}</p>
-      </div>
+<section class="container profile-container w-75 p-0 pb-4">
+  <div class="row mx-auto">
+    <div class="d-flex justify-content-between align-items-center p-0">
+      <h1 class="my-4 p-0">Perfil</h1>
+      <a href="/app/profile/edit" class="btn-edit-profile">Editar</a>
     </div>
-  </div>
+    <div class="image-profile-contaienr col-3 d-flex justify-content-center aling-items-center flex-column">
+      <figure class="image-container mx-auto img-fluid">
+        <img src="../../../assets/img/profile/default-profile.webp" alt="" />
+      </figure>
+      <button class="btn btn-change-image-profile text-center mx-auto">Cambiar imagen</button>
+    </div>
+    <div class="info-user col-9 d-flex aling-items-center justify-content-between gap-5 px-0">
+      <!-- data -->
+      <div class="d-flex aling-items-center flex-column justify-content-center ps-5 w-100">
+        <div class="d-flex justify-content-center aling-items-center flex-column w-100">
+          <span>Nombre completo:</span>
+          <p class="border-bottom border-2 border-black">
+            <span>
+              {{ profileService.user$().name }}
+            </span>
+            <span>
+              {{ profileService.user$().lastname }}
+            </span>
+          </p>
+        </div>
+        <div class="d-flex justify-content-center aling-items-center flex-column w-100">
+          <span class="">Usuario:</span>
+          <p class="border-bottom border-2 border-black">
+            <span>
+              {{ profileService.user$().name }}
+            </span>
+          </p>
+        </div>
+      </div>
+      <!-- data -->
+      <div class="col-5 p-2">
+        <div class="rounded py-2 h-100 main-container-cards">
+          <h3 class="text-center bold">Recetas Favoritas</h3>
+          <hr />
+          <div class="flex flex-column gap-5 px-2 justify-content-center align-items-center recipes-container-cards text-danger">
+            @for (recipe of profileService.user$().recipes; track recipe.id_recipe) {
+              <div class="card-recipe shadow-sm rounded py-4 px-2 border relative my-3 position-relative">
+                <!-- button delete -->
+                <app-tool-tip
+                  [tooltipText]="'Eliminar receta'"
+                  [tooltipPosition]="'below'"
+                  [iconClass]="'fa-solid fa-trash-can'"
+                  [buttonClass]="'btn-delete-recipe rounded-circle border-0'"
+                  (clicked)="deleteRecipe(recipe)">
+                </app-tool-tip>
 
-  <div class="prefrencias-main-container d-flex w-75 mx-auto flex-column">
-    <div class="d-flex gap-5 ">
-      <div class="prefrencias-second-container">
-        <h3 class="prefrencias-h3">Alergias</h3>
-        <div class="prefrencias-third-container">
-          <div *ngFor="let allergy of allergiesService.allAllergies">
-            <input type="checkbox" [checked]="allergy.isSelected" [value]="allergy.id"
-              (change)="onSelectedAllergy($event, allergy)" />
-            <label>{{ allergy.name }}</label>
+                <div class="d-flex justify-content-center align-items-center gap-2">
+                  <span class="text-center">{{ recipe.name }}</span>
+                </div>
+              </div>
+            } @empty {
+              <p class="text-muted text-center">No hay recetas...</p>
+            }
+            <div class=""></div>
           </div>
         </div>
       </div>
-
-      <div class="prefrencias-second-container">
-        <h3 class="prefrencias-h3">Preferencias Dietéticas</h3>
-        <div class="prefrencias-third-container">
-          <div *ngFor="let preference of dietPreferenceService.allDietPreferences">
-            <input type="checkbox" [checked]="preference.isSelected" [value]="preference.id"
-              (change)="onSelectedPreference($event, preference)" />
-            <label>{{ preference.name }}</label>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="botones-container my-4">
-      <button class="btn btn-preferences" (click)="updateSelections()">Guardar</button>
-      <button class="btn btn-preferences" (click)="logOut()">Cerrar Sesión</button>
     </div>
   </div>
-
+  <hr class="my-4" />
+  <div class="row mx-auto">
+    <h2 class="title p-0">Cuenta</h2>
+    <div class="col-12 d-flex aling-items-center gap-5 px-0">
+      <div class="d-flex justify-content-center aling-items-center flex-column w-100">
+        <span class="">Correo electrónico:</span>
+        <p class="border-bottom border-2 border-black">
+          <span>
+            {{ profileService.user$().email }}
+          </span>
+        </p>
+      </div>
+      <div class="d-flex justify-content-center aling-items-center flex-column w-100">
+        <span class="">Contraseña:</span>
+        <p class="border-bottom border-2 border-black">
+          <span> *************************** </span>
+        </p>
+      </div>
+    </div>
+  </div>
+  <hr class="my-4" />
+  <div class="row mx-auto">
+    <h2 class="title p-0">Alergias</h2>
+    <div class="d-flex flex-wrap gap-2 p-0">
+      @for (allergy of allergiesService.allAllergies; track allergy.id) {
+        <div
+          class="badge rounded-pill px-3 py-2"
+          [class.border]="allergy.isSelected"
+          [class.border-danger]="allergy.isSelected"
+          [class.text-danger]="allergy.isSelected"
+          [class.d-block]="allergy.isSelected"
+          [class.d-none]="!allergy.isSelected">
+          <span class="d-inline-block pe-1">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+          </span>
+          <span>{{ allergy.name }}</span>
+        </div>
+      } @empty {
+        <p class="text-muted">No hay alergias seleccionadas</p>
+      }
+    </div>
+  </div>
+  <hr class="my-4" />
+  <div class="row mx-auto">
+    <h2 class="title p-0">Preferencias Dietéticas</h2>
+    <div class="d-flex flex-wrap gap-2 p-0">
+      @for (preference of dietPreferenceService.allDietPreferences; track preference.id) {
+        <div
+          class="badge rounded-pill px-3 py-2"
+          [class.border]="preference.isSelected"
+          [class.border-success]="preference.isSelected"
+          [class.text-success]="preference.isSelected"
+          [class.d-block]="preference.isSelected"
+          [class.d-none]="!preference.isSelected">
+          <span class="d-inline-block pe-1">
+            <i class="fa-solid fa-utensils"></i>
+          </span>
+          <span>{{ preference.name }}</span>
+        </div>
+      } @empty {
+        <p class="text-muted">No hay preferencias dietéticas seleccionadas</p>
+      }
+    </div>
+  </div>
 </section>

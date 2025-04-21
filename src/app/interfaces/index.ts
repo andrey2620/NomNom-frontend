@@ -15,9 +15,22 @@ export interface IResponse<T> {
   message: string;
   meta: T;
 }
+export interface IResponsev2<T> {
+  data: T;
+  message: string;
+  meta: {
+    method: string;
+    url: string;
+    totalPages?: number;
+    totalElements?: number;
+    pageNumber?: number;
+    pageSize?: number;
+    [key: string]: unknown;
+  };
+}
 
 export interface IUser {
-  id?: number;
+  id?: number | string;
   name?: string;
   lastname?: string;
   email?: string;
@@ -30,6 +43,7 @@ export interface IUser {
   picture?: string;
   allergies?: IAllergies[];
   preferences?: IDietPreferences[];
+  recipes?: IRecipe[];
 }
 
 export interface IAuthority {
@@ -101,6 +115,8 @@ export interface IDietPreferences {
 }
 
 export interface IRecipe {
+  id?: any;
+  data?: any;
   id_recipe?: number;
   name: string;
   description?: string; // ← este
