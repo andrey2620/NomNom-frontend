@@ -30,7 +30,13 @@ export class nomNomLandingComponent implements OnInit, AfterViewInit {
             };
         };
         suppressNgWarnings();
+        const joinButton = document.getElementById("join-button");
 
+        if (joinButton && localStorage.getItem("auth_user")) {
+            const gotoapp = document.getElementById("gotoapp");
+            gotoapp?.classList.remove("d-none");
+            joinButton.setAttribute("href", "app/generateRecipes");
+        }
     }
 
     ngAfterViewInit() {
