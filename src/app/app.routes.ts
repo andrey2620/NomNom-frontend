@@ -27,12 +27,12 @@ export const routes: Routes = [
   {
     path: 'nomNomLanding',
     component: nomNomLandingComponent,
-    canActivate: [GuestGuard],
+    //canActivate: [GuestGuard],
   },
   {
     path: 'codeCollectiveLanding',
     component: codeCollectiveLandingComponent,
-    canActivate: [GuestGuard],
+    //canActivate: [GuestGuard],
   },
   {
     path: 'login',

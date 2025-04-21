@@ -6,6 +6,7 @@
         *ngIf="mostrarRecipeList"
         #recipeList
         [areActionsAvailable]="true"
+        [sectionTitle]="currentTitle"
         (cook)="onRecipeSelected($event)"
         (listInitialized)="onRecipeListInitialized($event)">
         <div class="text-end">

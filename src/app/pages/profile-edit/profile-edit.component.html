@@ -7,19 +7,20 @@
       <figure class="image-container mx-auto img-fluid">
         <img src="../../../assets/img/profile/default-profile.webp" alt="" />
       </figure>
-      <button class="btn btn-change-image-profile text-center mx-auto">Cambiar imagen</button>
+      <!-- <button class="btn btn-change-image-profile text-center mx-auto">Cambiar imagen</button> -->
     </div>
     <div class="info-user col-9 d-flex aling-items-center gap-5 px-0">
       <div class="d-flex justify-content-center aling-items-center flex-column w-100">
-        <label class="">Nombre completo:</label>
+        <label for="full-name" class="">Nombre completo:</label>
         <input
+          id="full-name"
           type="email"
           autocomplete="email"
           class="border-0 border-bottom border-2 border-black"
           value="{{ profileService.user$().name }}  {{ profileService.user$().lastname }}"
           style="outline: none" />
       </div>
-      <div class="d-flex justify-content-center aling-items-center flex-column w-100">
+      <!--       <div class="d-flex justify-content-center aling-items-center flex-column w-100">
         <label class="">Usuario:</label>
         <input
           type="email"
@@ -27,7 +28,7 @@
           class="border-0 border-bottom border-2 border-black"
           value="{{ profileService.user$().name }}"
           style="outline: none" />
-      </div>
+      </div> -->
     </div>
   </div>
   <hr class="my-4" />
@@ -44,8 +45,9 @@
           style="outline: none" />
       </div>
       <div class="d-flex justify-content-center aling-items-center flex-column w-100">
-        <label class="">Contraseña:</label>
+        <label for="password" class="">Contraseña:</label>
         <input
+          id="password"
           type="password"
           autocomplete="on"
           placeholder="******************"
@@ -53,8 +55,9 @@
           style="outline: none" />
       </div>
       <div class="d-flex justify-content-center aling-items-center flex-column w-100">
-        <label class="">Confirmar contraseña:</label>
+        <label for="confirm-password" class="">Confirmar contraseña:</label>
         <input
+          id="confirm-password"
           type="password"
           autocomplete="on"
           placeholder="******************"
