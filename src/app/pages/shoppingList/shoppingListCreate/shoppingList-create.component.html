@@ -17,20 +17,17 @@
           <input type="text" class="form-control" placeholder="Buscar receta..." />
         </div>
 
-        <div class="d-flex flex-column gap-2">
-          <div class="p-2 bg-white rounded d-flex justify-content-between align-items-center">
-            <span>Arroz con pollo</span>
-            <button class="btn btn-danger btn-sm rounded-pill">Seleccionar</button>
-          </div>
-          <div class="p-2 bg-white rounded d-flex justify-content-between align-items-center">
-            <span>Arroz con leche</span>
-            <button class="btn btn-outline-danger btn-sm rounded-pill">Seleccionar</button>
-          </div>
-          <div class="p-2 bg-white rounded d-flex justify-content-between align-items-center">
-            <span>Arroz con carne</span>
-            <button class="btn btn-outline-danger btn-sm rounded-pill">Seleccionar</button>
-          </div>
+        <!--Aqui debe traerse las recetas guardadas de un json-->
+        <div *ngFor="let recipe of ['Arroz con pollo', 'Arroz con leche', 'Arroz con carne']"
+          class="p-2 bg-white rounded d-flex justify-content-between align-items-center mb-2">
+          <span>{{ recipe }}</span>
+            <button class="btn btn-sm rounded-pill"
+                    [ngClass]="isSelected(recipe) ? 'btn-selected' : 'btn-red'"
+                    (click)="toggleSelection(recipe)">
+              {{ isSelected(recipe) ? 'Seleccionada' : 'Seleccionar' }}
+            </button>
         </div>
+
       </div>
     </div>
 

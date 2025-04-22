@@ -23,6 +23,22 @@ export class ShoppingListCreateComponent {
   goToViewLists() {
     this.router.navigate(['/app/shoppingList/view']);
   }
+
+  selectedRecipes: string[] = [];
+
+  toggleSelection(recipe: string) {
+    const index = this.selectedRecipes.indexOf(recipe);
+    if (index > -1) {
+      this.selectedRecipes.splice(index, 1); // quitar si ya estaba
+    } else {
+      this.selectedRecipes.push(recipe); // agregar si no estaba
+    }
+  }
+
+  isSelected(recipe: string): boolean {
+    return this.selectedRecipes.includes(recipe);
+  }
+
   
 
 }

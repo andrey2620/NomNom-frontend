@@ -1,7 +1,7 @@
 
 //fonts
 h1 {
-  color: #2c5530;
+  color: #bb0a21;
   font-family: 'Poppins';
   font-weight: 700;
 }
@@ -16,6 +16,10 @@ h4 {
   font-weight: bold;
 }
 
+label{
+  color: #bb0a21; 
+}
+
 
 .paso1 {
   background-color: #bb0a21;
@@ -26,6 +30,23 @@ h4 {
 
 .paso1 h1{
   color: #bb0a21;
+}
+
+.btn-red{
+color: #fff;
+background-color: #bb0a21;
+
+}
+
+.btn-red:hover{
+  color: #fff;
+  background-color: #fcb1a6;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-selected{
+  color: #fff;
+  background-color: #c3bf6d;
 }
 
 .paso2 {
