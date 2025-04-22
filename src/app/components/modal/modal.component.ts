@@ -15,7 +15,7 @@ export class ModalComponent {
   private modalRef: NgbModalRef | null = null;
 
   @ViewChild('modalContent') modalContent!: TemplateRef<unknown>;
-
+  @Input() showCloseButton = true;
   @Input() confirmAction = 'Confirmar';
   @Input() cancelAction = 'Cancelar';
   @Input() modalBodyClass = 'modal-body';
