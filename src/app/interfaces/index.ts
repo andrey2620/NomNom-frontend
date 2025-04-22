@@ -140,9 +140,25 @@ export interface IIngredients {
 
 export interface IMenu {
   id: number;
+  name: string;
+  items: IMenuItem[];
+}
+
+export interface IMenuItem {
+  id: number;
   recipe: IRecipe;
   mealType: 'BREAKFAST' | 'LUNCH' | 'SNACK' | 'DINNER';
   dayOfWeek: 'MONDAY' | 'TUESDAY' | 'WEDNESDAY' | 'THURSDAY' | 'FRIDAY' | 'SATURDAY' | 'SUNDAY';
+}
+
+export interface IMenuCreateDTO {
+  name: string;
+  userId: number;
+  items: {
+    recipeId: number;
+    mealType: string;
+    dayOfWeek: string;
+  }[];
 }
 
 export interface IIngredient {

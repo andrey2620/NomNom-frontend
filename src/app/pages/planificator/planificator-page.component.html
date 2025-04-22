@@ -13,10 +13,8 @@
           class="recipe-list"
           (cdkDropListDropped)="drop($event)">
           <div *ngFor="let menu of myMenus" class="menu-box">
-            <span>
-              {{ menu }}
-            </span>
-            <button class="menu-button">Ver</button>
+            <span>{{ menu.name }}</span>
+            <button class="menu-button" (click)="loadMenuIntoPlanner(menu)">Ver</button>
           </div>
         </div>
       </div>
@@ -47,6 +45,13 @@
   <!-- Planificator -->
   <div class="border shadow rounded py-4 flex-grow-1 w-100">
     <h2 class="text-center">Planificador Semanal</h2>
+    <button [ngClass]="selectedMenuId ? 'btn btn-warning' : 'btn btn-success'" (click)="saveCurrentPlannerAsMenu()">
+      {{ selectedMenuId ? 'Actualizar Menú' : 'Guardar Menú' }}
+    </button>
+
+    <label for="newMenuName">Nombre menú</label>
+    <input type="text" [(ngModel)]="newMenuName" />
+    <button class="btn btn-outline-primary" (click)="createNewMenu()">Nuevo Menú</button>
     <hr />
     <div class="planner-grid">
       <!-- Days of the week header row -->
