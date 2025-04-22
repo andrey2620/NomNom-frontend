@@ -123,7 +123,7 @@ export class PlanificatorPageComponent implements OnInit {
     const trimmedName = this.newMenuName.trim();
 
     if (!trimmedName) {
-      this.toast.showError('❌ El nombre del menú no puede estar vacío.');
+      this.toast.showError('El nombre del menú no puede estar vacío.');
       return;
     }
 
@@ -134,7 +134,7 @@ export class PlanificatorPageComponent implements OnInit {
     });
 
     if (nameAlreadyExists) {
-      this.toast.showError('❌ Ya existe un menú con ese nombre. Usá uno diferente.');
+      this.toast.showError('Ya existe un menú con ese nombre. Usá uno diferente.');
       return;
     }
 
@@ -160,7 +160,7 @@ export class PlanificatorPageComponent implements OnInit {
     }
 
     if (items.length === 0) {
-      this.toast.showError('❌ No hay recetas en el planificador. Agregá al menos una antes de guardar.');
+      this.toast.showError('No hay recetas en el planificador. Agregá al menos una antes de guardar.');
       return;
     }
 
@@ -170,42 +170,48 @@ export class PlanificatorPageComponent implements OnInit {
       items,
     };
 
-    // 🧠 Validar si hubo cambios
     if (this.selectedMenuId && !this.hasMenuChanged()) {
-      this.toast.showInfo('ℹ️ No hiciste ningún cambio en el menú.');
+      this.toast.showInfo('No hiciste ningún cambio en el menú.');
       return;
     }
 
-    // 🔄 lógica: si hay un menú seleccionado, actualizalo; si no, crealo
     if (this.selectedMenuId) {
       this.planificatorService.updateMenuById(this.selectedMenuId, payload).subscribe({
         next: res => {
-          this.toast.showSuccess('✅ Menú actualizado correctamente!');
+          this.toast.showSuccess('Menú actualizado correctamente!');
           this.refreshMenusFromBackend();
           this.newMenuName = payload.name;
           this.loadMenuIntoPlanner({ ...res.data });
         },
         error: err => {
-          console.error('❌ Error al actualizar el menú:', err);
-          this.toast.showError('❌ No se pudo actualizar el menú.');
+          console.error('Error al actualizar el menú:', err);
         },
       });
     } else {
       this.planificatorService.createMenu(payload).subscribe({
         next: res => {
-          this.toast.showSuccess('✅ Menú creado exitosamente!');
+          this.toast.showSuccess('Menú creado exitosamente!');
           this.refreshMenusFromBackend();
-          this.newMenuName = '';
+
+          setTimeout(() => {
+            const menuCreated = this.myMenus.find(m => m.id === res.data.id);
+            if (menuCreated) {
+              this.loadMenuIntoPlanner(menuCreated);
+              this.selectedMenuId = menuCreated.id;
+            } else {
+              this.selectedMenuId = res.data.id;
+              this.newMenuName = res.data.name;
+            }
+          }, 300);
         },
         error: err => {
-          console.error('❌ Error al crear el menú:', err);
-          this.toast.showError('❌ Error al crear el menú. Intenta nuevamente.');
+          this.toast.showError('Error al crear el menú. Intenta nuevamente.');
         },
       });
     }
   }
   private hasMenuChanged(): boolean {
-    if (!this.selectedMenuId) return true; // Es nuevo, entonces sí cambió
+    if (!this.selectedMenuId) return true;
 
     const selectedMenu = this.myMenus.find(menu => menu.id === this.selectedMenuId);
     if (!selectedMenu) return true;
@@ -214,7 +220,6 @@ export class PlanificatorPageComponent implements OnInit {
     const originalName = selectedMenu.name.trim();
     if (currentName !== originalName) return true;
 
-    // Convertir el weeklyPlan actual a una lista de strings para comparar
     const currentItems = this.getCurrentPlannerItemKeys();
     const originalItems = selectedMenu.items.map(i => `${i.dayOfWeek}-${i.mealType}-${i.recipe.id}`);
 
@@ -259,11 +264,8 @@ export class PlanificatorPageComponent implements OnInit {
         const updatedUser = { ...user, menus: res.data };
         localStorage.setItem('auth_user', JSON.stringify(updatedUser));
         this.myMenus = res.data;
-        console.log('✅ Menús actualizados desde backend');
       },
-      error: err => {
-        console.error('❌ Error al actualizar menús:', err);
-      },
+      error: err => {},
     });
   }
 
@@ -284,18 +286,17 @@ export class PlanificatorPageComponent implements OnInit {
     const isFromRecipeOrMenu = event.previousContainer.id === 'menu-list' || event.previousContainer.id === 'recipe-list';
     const isToRecipeOrMenu = event.container.id === 'menu-list' || event.container.id === 'recipe-list';
 
-    // Check max items limit
-    if (isFromRecipeOrMenu && !isToRecipeOrMenu && event.container.data.length >= 3) {
+    if (isFromRecipeOrMenu && !isToRecipeOrMenu && event.container.data.length >= 1) {
       return;
     }
 
     if (isFromRecipeOrMenu && !isToRecipeOrMenu) {
       copyArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
     } else if (isToRecipeOrMenu) {
-      return; // Prevent dragging from planner to recipes/menus
+      return;
     } else {
-      if (event.container.data.length >= 3) {
-        return; // Skip moving if the destination container already has 3 items
+      if (event.container.data.length >= 1) {
+        return;
       }
 
       const itemToMove = event.previousContainer.data[event.previousIndex];
@@ -312,7 +313,6 @@ export class PlanificatorPageComponent implements OnInit {
     this.selectedMealType = null;
   }
 
-  // ID management for drag and drop
   getDropListId(day: string, mealType: string): string {
     return `${day}-${mealType}`;
   }
@@ -327,7 +327,6 @@ export class PlanificatorPageComponent implements OnInit {
     return ids;
   }
 
-  // Delete functionality
   startDeleteTimer(day: string, mealType: string, item: IRecipe): void {
     this.cancelDeleteTimer();
     this.deleteTimer = setTimeout(() => {
@@ -357,12 +356,10 @@ export class PlanificatorPageComponent implements OnInit {
     this.cancelDeleteTimer();
   }
 
-  // UI helpers
   toggleMenuCollapse(): void {
     this.isMenuCollapsed = !this.isMenuCollapsed;
   }
 
-  // Category and image handling
   getCategoryImage(category: string): string {
     if (!category) {
       return `assets/img/recipe/meal1.png`;
