@@ -14,7 +14,8 @@
           (cdkDropListDropped)="drop($event)">
           <div *ngFor="let menu of myMenus" class="menu-box">
             <span>{{ menu.name }}</span>
-            <button class="menu-button" (click)="loadMenuIntoPlanner(menu)">Ver</button>
+            <button class="menu-button" (click)="loadMenuIntoPlanner(menu)">Mostrar</button>
+            <button class="menu-button" (click)="onDeleteClick(menu.id)">Borrar</button>
           </div>
         </div>
       </div>

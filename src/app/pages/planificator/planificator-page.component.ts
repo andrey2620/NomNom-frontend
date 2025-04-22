@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { CdkDragDrop, DragDropModule, copyArrayItem, moveItemInArray } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit, effect, inject } from '@angular/core';
+import { Component, OnInit, effect, inject } from '@angular/core';
 import { IMenu, IMenuCreateDTO, IRecipe } from '../../interfaces';
 import { ProfileService } from '../../services/profile.service';
 import { PlanificatorService } from '../../services/planificator.service';
@@ -90,13 +90,8 @@ export class PlanificatorPageComponent implements OnInit {
     this.refreshMenusFromBackend();
   }
 
-  public onDeleteClick(): void {
-    if (this.selectedMenuId === null) {
-      this.toast.showError('No hay ningún menú seleccionado para eliminar.');
-      return;
-    }
-
-    this.planificatorService.deleteMenuById(this.selectedMenuId).subscribe({
+  public onDeleteClick(menuId: number): void {
+    this.planificatorService.deleteMenuById(menuId).subscribe({
       next: () => {
         this.toast.showSuccess('Menú eliminado correctamente');
         this.refreshMenusFromBackend();
@@ -105,7 +100,7 @@ export class PlanificatorPageComponent implements OnInit {
         this.newMenuName = '';
       },
       error: err => {
-        this.toast.showError('No se pudo eliminar el menú.');
+        this.toast.showError('No se pudo eliminar el menú. ' + err);
       },
     });
   }
@@ -225,7 +220,7 @@ export class PlanificatorPageComponent implements OnInit {
           }, 300);
         },
         error: err => {
-          this.toast.showError('Error al crear el menú. Intenta nuevamente.');
+          this.toast.showError('Error al crear el menú. Intenta nuevamente.' + err);
         },
       });
     }
@@ -285,7 +280,9 @@ export class PlanificatorPageComponent implements OnInit {
         localStorage.setItem('auth_user', JSON.stringify(updatedUser));
         this.myMenus = res.data;
       },
-      error: err => {},
+      error: err => {
+        this.toast.showError('Error al obtener los menús. Intenta nuevamente.' + err);
+      },
     });
   }
 
