@@ -13,7 +13,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5); /* Ajusta la opacidad según necesites */
+  background: rgba(0, 0, 0, 0.5);
   z-index: 1;
   }
   .login-card {
@@ -53,12 +53,12 @@
 
  @media screen and (max-width: 600px) {
   .logo img {
-    width: 20vh; /* Ajusta según necesites */
+    width: 20vh;
   }
   .btn-signUp {
-    width: 80%; /* Reducimos en móviles */
+    width: 80%;
     max-width: 180px;
-    margin: 50px; /* Ajusta el espacio interno */
+    margin: 50px;
   }
 }
 
@@ -68,17 +68,20 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  width: 100%; /* O puedes usar max-width */
-  max-width: 100px; /* Para que no sea demasiado ancho */
+  width: 100%;
+  max-width: 100px;
   border-radius: 50px;
-  padding: 10px 20px; /* Ajusta el espacio interno */
+  padding: 10px 20px;
 }
-
-
 .btn-signUp:hover{
   background-color: #8c1122 !important;
   border-color: #8c1122 !important;
 }
+.btn-signUp:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.2rem rgba(139, 17, 34, 0.25);
+}
+
 
 .form-input {
   position: relative;
@@ -86,14 +89,14 @@
 
 .toggle-password {
   position: absolute;
-  right: 10px;
-  top: 50%;
+  right: 25px;
+  top: 55%;
   transform: translateY(-50%);
   background: none;
   border: none;
   cursor: pointer;
   font-size: 18px;
-  color: #bb0a21; /* Ajusta el color según tu diseño */
+  color: #bb0a21;
 }
 
 .toggle-password:focus {
@@ -105,7 +108,7 @@
 }
 
 .toggle-password:hover i {
-  color: #8c1122; /* Color más oscuro en hover */
+  color: #8c1122;
 }
 
  

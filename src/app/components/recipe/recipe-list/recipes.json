@@ -548,7 +548,7 @@
   {
     "name": "Pozole Rojo",
     "country": "México",
-    "recipeCategory": "Comida2",
+    "recipeCategory": "Comida",
     "preparationTime": 180,
     "description": "Un caldo espeso y reconfortante preparado con maíz pozolero y carne de cerdo, sazonado con chiles secos y acompañado de ingredientes frescos.",
     "instructions": "Cocina el maíz pozolero con ajo hasta que reviente. Agrega carne de cerdo y cocina hasta que esté suave. Licúa chiles secos con especias y cuela la salsa. Añade la salsa al caldo y cocina por 30 minutos más. Sirve con lechuga, rábano, cebolla, orégano y limón.",
@@ -1093,7 +1093,7 @@
   {
     "name": "Cachapas con Queso de Mano",
     "country": "Venezuela",
-    "recipeCategory": "Comida",
+    "recipeCategory": "Postre",
     "preparationTime": 30,
     "description": "Tortas dulces de maíz tierno cocidas a la plancha y rellenas con queso de mano, tradicionales en la gastronomía venezolana.",
     "instructions": "Licúa los granos de maíz tierno con leche, azúcar y sal hasta obtener una mezcla espesa. Calienta una plancha o sartén y vierte porciones de la mezcla, formando círculos. Cocina hasta que estén doradas por ambos lados. Coloca rebanadas de queso de mano sobre una cachapa caliente y cubre con otra para que el queso se derrita.",
@@ -1513,7 +1513,7 @@
   {
     "name": "Empanadas de Carne",
     "country": "Argentina",
-    "recipeCategory": "Comida",
+    "recipeCategory": "Panes",
     "preparationTime": 90,
     "description": "Las empanadas argentinas son una delicia tradicional, rellenas de carne picada sazonada y horneadas hasta obtener una masa dorada y crujiente.",
     "instructions": "En una sartén, sofríe cebolla y ajo hasta que estén transparentes. Agrega la carne picada y cocina hasta que esté dorada. Incorpora huevo duro picado, aceitunas y condimentos al gusto. Deja enfriar el relleno. Rellena las tapas de empanada con la mezcla, ciérralas y sella los bordes. Hornea a 180°C hasta que estén doradas.",
@@ -1618,7 +1618,7 @@
   {
     "name": "Empanadas de Pino",
     "country": "Chile",
-    "recipeCategory": "Comida",
+    "recipeCategory": "Panes",
     "preparationTime": 120,
     "description": "Las empanadas de pino son un ícono de la cocina chilena, especialmente populares durante las Fiestas Patrias. Se caracterizan por su relleno jugoso de carne, cebolla y especias, envuelto en una masa dorada al horno.",
     "instructions": "Prepara un sofrito con cebolla picada y ajo hasta que estén transparentes. Agrega la carne molida, comino, ají de color, sal y pimienta, y cocina hasta que la carne esté cocida. Deja enfriar el relleno. Estira la masa y corta círculos. Coloca una porción de relleno en el centro de cada círculo, añade una aceituna, un trozo de huevo duro y pasas. Dobla la masa formando una empanada y sella los bordes. Pinta con huevo batido y hornea a 180°C hasta que estén doradas.",
@@ -2413,7 +2413,7 @@
   {
     "name": "Tzatziki",
     "country": "Grecia",
-    "recipeCategory": "Acompañamiento",
+    "recipeCategory": "Comida",
     "preparationTime": 15,
     "description": "El tzatziki es una salsa griega refrescante a base de yogur, pepino y ajo. Se utiliza como acompañamiento para carnes, panes o como dip.",
     "instructions": "Ralla el pepino y escúrrelo bien. Mezcla con yogur griego, ajo picado, aceite de oliva, eneldo y jugo de limón. Refrigera por al menos 30 minutos para que los sabores se integren.",
@@ -2508,7 +2508,7 @@
   {
     "name": "Menemen",
     "country": "Turquía",
-    "recipeCategory": "Desayuno",
+    "recipeCategory": "Comida",
     "preparationTime": 20,
     "description": "Menemen es un plato típico de desayuno turco preparado con huevos, tomate, pimientos y a veces cebolla. Se sirve caliente con pan para mojar.",
     "instructions": "Sofríe cebolla y pimientos picados en aceite de oliva hasta que estén tiernos. Añade los tomates pelados y picados, cocina hasta que se forme una salsa espesa. Agrega los huevos y revuelve ligeramente hasta que cuajen al gusto. Sirve inmediatamente con pan.",
@@ -2643,7 +2643,7 @@
   {
     "name": "Injera",
     "country": "Etiopía",
-    "recipeCategory": "Pan",
+    "recipeCategory": "Panes",
     "preparationTime": 1440,
     "description": "La injera es un pan plano esponjoso y fermentado, base de muchas comidas etíopes. Tiene un sabor ligeramente ácido y se usa como plato y cubierto a la vez.",
     "instructions": "Mezcla harina de teff con agua hasta obtener una masa líquida. Deja fermentar durante 1 a 3 días en un lugar cálido. Cuando burbujee, calienta una sartén grande antiadherente y vierte la mezcla en espiral desde el centro hacia afuera. Cocina solo por un lado hasta que salgan agujeritos y esté firme. No voltees. Sirve tibio.",
@@ -2668,7 +2668,7 @@
   {
     "name": "Shiro Wat",
     "country": "Etiopía",
-    "recipeCategory": "Comida vegetariana",
+    "recipeCategory": "Comida",
     "preparationTime": 40,
     "description": "Shiro Wat es un guiso espeso hecho con harina de garbanzo o lentejas, cocinado con cebolla, ajo y berbere. Es una opción vegetariana sabrosa y muy popular.",
     "instructions": "Sofríe cebolla picada en mantequilla clarificada hasta que esté translúcida. Agrega ajo, berbere y tomate picado. Cocina unos minutos y luego añade la harina de garbanzo disuelta en agua. Revuelve constantemente hasta que espese. Cocina a fuego lento por 15 minutos más. Sirve caliente con injera.",
@@ -2718,7 +2718,7 @@
   {
     "name": "Nyama Choma",
     "country": "Kenia",
-    "recipeCategory": "Carne asada",
+    "recipeCategory": "Comida",
     "preparationTime": 120,
     "description": "Nyama Choma es el platillo nacional de Kenia. Se trata de carne (usualmente de cabra o res) asada a la parrilla, muy popular en reuniones sociales y celebraciones.",
     "instructions": "Marina la carne con jugo de limón, ajo, jengibre, sal y pimienta durante al menos una hora. Precalienta la parrilla o brasas y cocina la carne lentamente hasta que esté bien dorada por fuera y jugosa por dentro. Sirve caliente con kachumbari o ugali.",
@@ -2758,7 +2758,7 @@
   {
     "name": "Ugali",
     "country": "Kenia",
-    "recipeCategory": "Acompañamiento",
+    "recipeCategory": "Comida",
     "preparationTime": 20,
     "description": "Ugali es un acompañamiento básico en Kenia. Consiste en una masa espesa de harina de maíz cocida en agua, similar al polenta pero más firme.",
     "instructions": "Hierve agua en una olla grande. Agrega lentamente la harina de maíz mientras remueves constantemente para evitar grumos. Cocina y sigue revolviendo hasta que la mezcla se espese y se despegue de los bordes. Forma una bola y sirve caliente.",
@@ -2823,7 +2823,7 @@
   {
     "name": "Bobotie",
     "country": "Sudáfrica",
-    "recipeCategory": "Plato principal",
+    "recipeCategory": "Comida",
     "preparationTime": 90,
     "description": "Bobotie es un plato sudafricano de carne picada al horno, sazonado con curry y cubierto con una mezcla de huevo y leche. Tiene raíces malayas y es considerado una joya de la gastronomía del país.",
     "instructions": "Sofríe la cebolla en aceite hasta que esté dorada. Añade el ajo, la carne molida, curry, cúrcuma, sal y pimienta, cocinando hasta que la carne se dore. Agrega pan remojado en leche y pasas. Coloca la mezcla en una bandeja para hornear. Bate los huevos con leche y vierte sobre la carne. Hornea a 180°C durante 40 minutos, hasta que cuaje la capa superior.",
@@ -2883,7 +2883,7 @@
   {
     "name": "Bunny Chow",
     "country": "Sudáfrica",
-    "recipeCategory": "Comida callejera",
+    "recipeCategory": "Comida",
     "preparationTime": 60,
     "description": "Bunny Chow es un famoso plato callejero originario de Durban. Consiste en un pan hueco relleno de curry picante, tradicionalmente vegetariano o con carne.",
     "instructions": "Corta la parte superior del pan y retira el interior, formando un recipiente. En una sartén, sofríe cebolla, ajo, jengibre y chile. Añade carne o garbanzos, luego incorpora tomate, curry, sal y pimienta. Cocina hasta que el curry espese. Rellena el pan con el curry caliente y sirve inmediatamente.",
@@ -2998,7 +2998,7 @@
   {
     "name": "Arroz Frito Yangzhou",
     "country": "China",
-    "recipeCategory": "Plato principal",
+    "recipeCategory": "Comida",
     "preparationTime": 30,
     "description": "El arroz frito Yangzhou es una receta tradicional china con arroz, vegetales, huevo y carne picada, típicamente jamón o camarón. Es conocido por su colorido y sabor equilibrado.",
     "instructions": "Cocina el arroz y déjalo enfriar. En un wok, saltea el huevo batido y resérvalo. Sofríe cebolla, zanahoria y guisantes. Agrega jamón o camarones y mezcla. Incorpora el arroz frío y fríe hasta que se dore ligeramente. Añade salsa de soya, huevo cocido y mezcla bien antes de servir.",
@@ -3043,7 +3043,7 @@
   {
     "name": "Pollo Kung Pao",
     "country": "China",
-    "recipeCategory": "Plato principal",
+    "recipeCategory": "Comida",
     "preparationTime": 40,
     "description": "El Pollo Kung Pao es un plato clásico de Sichuan que combina pollo salteado, maní, vegetales y una salsa picante-dulce. Es una receta popular por su sabor audaz y picante.",
     "instructions": "Corta el pollo en cubos y marínalo con salsa de soya, vino de arroz y maicena. Sofríe chiles secos y ajo en aceite caliente. Añade el pollo marinado y cocina hasta dorar. Incorpora pimientos, cebolla y cacahuates. Agrega salsa de soya, vinagre, azúcar y agua. Cocina hasta espesar y sirve caliente.",
@@ -3103,7 +3103,7 @@
   {
     "name": "Jiaozi (Empanadillas Chinas)",
     "country": "China",
-    "recipeCategory": "Entrante",
+    "recipeCategory": "Comida",
     "preparationTime": 60,
     "description": "Los jiaozi son empanadillas tradicionales rellenas de carne o vegetales, cocidas al vapor, hervidas o fritas. Son muy populares durante el Año Nuevo Chino.",
     "instructions": "Mezcla carne de cerdo picada con cebollino, repollo picado, jengibre, salsa de soya y aceite de sésamo. Coloca una pequeña porción en el centro de cada envoltorio de jiaozi. Humedece los bordes y ciérralos formando pliegues. Cocina al vapor, fríe o hierve según tu preferencia. Sirve con salsa de soya y vinagre.",
@@ -4248,7 +4248,7 @@
   {
     "name": "Samosas",
     "country": "India",
-    "recipeCategory": "Entrada",
+    "recipeCategory": "Comida",
     "preparationTime": 75,
     "description": "Frituras rellenas de papa, arvejas y especias, muy populares como snack callejero en toda la India.",
     "instructions": "Hierve las papas y tritúralas. Sofríe cebolla, jengibre y especias, y mezcla con las papas y arvejas. Prepara una masa con harina, aceite y agua. Divide en porciones, estira en círculos y corta por la mitad. Forma conos, rellena con la mezcla y cierra. Fríe en aceite caliente hasta dorar. Sirve con chutney.",
@@ -4304,7 +4304,7 @@
   {
     "name": "Hummus",
     "country": "Líbano",
-    "recipeCategory": "Dip / Entrada",
+    "recipeCategory": "Comida",
     "preparationTime": 20,
     "description": "Puré de garbanzos con tahini, ajo, limón y aceite de oliva. Es un plato básico en la cocina libanesa, perfecto como aperitivo con pan pita.",
     "instructions": "Tritura los garbanzos cocidos con tahini, jugo de limón, ajo y sal hasta obtener una pasta suave. Añade agua o líquido de cocción para ajustar la textura. Sirve en un plato, rocía con aceite de oliva y espolvorea pimentón o comino si se desea. Acompaña con pan pita.",
