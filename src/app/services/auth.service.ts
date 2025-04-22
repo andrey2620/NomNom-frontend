@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { ILoginResponse, IUser, IAuthority, IRoleType, IResponse } from '../interfaces';
 import { IngredientService } from './ingredient.service';
+import { ProfileService } from './profile.service';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,8 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private ingredientService: IngredientService
+    private ingredientService: IngredientService,
+    private profileService: ProfileService
   ) {
     this.load();
   }
@@ -70,6 +72,8 @@ export class AuthService {
     this.accessToken = token;
     this.expiresIn = expiresIn;
 
+    this.profileService.userSignal.set(authUser);
+
     this.save();
   }
 
@@ -77,7 +81,8 @@ export class AuthService {
     this.user = authUser;
     this.accessToken = token;
     this.expiresIn = 3600000000;
-
+    const profileService = inject(ProfileService);
+    profileService.userSignal.set(authUser);
     this.save();
   }
 

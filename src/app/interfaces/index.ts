@@ -44,6 +44,7 @@ export interface IUser {
   allergies?: IAllergies[];
   preferences?: IDietPreferences[];
   recipes?: IRecipe[];
+  menus?: IMenu[];
 }
 
 export interface IAuthority {
@@ -135,6 +136,13 @@ export interface IIngredients {
   name?: string;
   description?: string;
   image?: string;
+}
+
+export interface IMenu {
+  id: number;
+  recipe: IRecipe;
+  mealType: 'BREAKFAST' | 'LUNCH' | 'SNACK' | 'DINNER';
+  dayOfWeek: 'MONDAY' | 'TUESDAY' | 'WEDNESDAY' | 'THURSDAY' | 'FRIDAY' | 'SATURDAY' | 'SUNDAY';
 }
 
 export interface IIngredient {

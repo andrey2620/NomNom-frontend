@@ -18,7 +18,7 @@ export class PlanificatorPageComponent implements OnInit {
   public user = inject(ProfileService);
 
   // Data properties
-  public myMenus: string[] = ['Menú de Navidad', 'vacaciones!!', 'Lista de Camping', 'Año Nuevo', 'Té de maria'];
+  public myMenus: string[] = [];
   public myRecipes: IRecipe[] = [];
   public weekDays = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
   public mealTypes = ['Desayuno', 'Almuerzo', 'Merienda', 'Cena'];
@@ -57,6 +57,23 @@ export class PlanificatorPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.initializeWeeklyPlan();
+    this.loadMenusFromLocalStorage();
+  }
+
+  private loadMenusFromLocalStorage(): void {
+    const userString = localStorage.getItem('auth_user');
+    if (!userString) return;
+
+    try {
+      const user = JSON.parse(userString);
+      if (Array.isArray(user.menus)) {
+        this.myMenus = user.menus
+          .filter((menu: { recipe: { name: any } }) => menu.recipe && menu.recipe.name)
+          .map((menu: { recipe: { name: any } }) => menu.recipe.name);
+      }
+    } catch (e) {
+      console.error('❌ Error al parsear auth_user:', e);
+    }
   }
 
   // Initialization methods
