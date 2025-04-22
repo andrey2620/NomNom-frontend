@@ -90,6 +90,26 @@ export class PlanificatorPageComponent implements OnInit {
     this.refreshMenusFromBackend();
   }
 
+  public onDeleteClick(): void {
+    if (this.selectedMenuId === null) {
+      this.toast.showError('No hay ningún menú seleccionado para eliminar.');
+      return;
+    }
+
+    this.planificatorService.deleteMenuById(this.selectedMenuId).subscribe({
+      next: () => {
+        this.toast.showSuccess('Menú eliminado correctamente');
+        this.refreshMenusFromBackend();
+        this.clearWeeklyPlan();
+        this.selectedMenuId = null;
+        this.newMenuName = '';
+      },
+      error: err => {
+        this.toast.showError('No se pudo eliminar el menú.');
+      },
+    });
+  }
+
   public loadMenuIntoPlanner(menu: IMenu): void {
     this.clearWeeklyPlan();
     this.selectedMenuId = menu.id;

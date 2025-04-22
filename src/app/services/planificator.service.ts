@@ -19,4 +19,8 @@ export class PlanificatorService extends BaseService<IMenu> {
   updateMenuById(id: number, payload: IMenuCreateDTO) {
     return this.edit(id, payload);
   }
+
+  deleteMenuById(id: number) {
+    return this.del(id);
+  }
 }
