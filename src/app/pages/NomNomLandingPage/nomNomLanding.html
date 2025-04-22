@@ -1,156 +1,157 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-
-<head>
-    <!--<script defer src="../../../assets/nomNomLanding.js"></script>-->
-    
-</head>
-
-<body>
-    <!-- Botón flotante para volver arriba -->
+  <body>
+    <!-- Navigation Components -->
     <button id="scrollToTop" class="scroll-to-top">↑</button>
 
-    <!-- Barra de navegación -->
+    <!-- Header -->
     <header class="navbar">
-        <img src="../../../assets/LogoNomNom/4.png" alt="Logo de Nom Nom Explorers" class="logo">
-        <nav>
-            <ul id="menu">
-                <li class="m-3"><a href="#home" class="active">INICIO</a></li>
-                <li class="m-3"><a href="#features">FUNCIONALIDADES</a></li>
-                <li class="m-3"><a href="#join">ÚNETE</a></li>
-                <li class="m-3"><a href="codeCollectiveLanding">TheCodeCollective</a></li>
-                <li class="gotoapp p-3 d-none" id="gotoapp"><a href="app/generateRecipes">VE AL APP</a></li>
-            </ul>
-        </nav>
-        <div class="menu-icon" onclick="toggleMenu()">☰</div>
+      <img src="../../../assets/LogoNomNom/4.png" alt="Logo de Nom Nom Explorers" class="logo" />
+      <nav>
+        <ul id="menu" class="menu-list">
+          <li class="">
+            <a [routerLink]="[]" [fragment]="'home'" (click)="scrollToSection('home')" class="active">INICIO</a>
+          </li>
+          <li class="">
+            <a [routerLink]="[]" [fragment]="'features'" (click)="scrollToSection('features')">FUNCIONALIDADES</a>
+          </li>
+          <li class="">
+            <a [routerLink]="[]" [fragment]="'join'" (click)="scrollToSection('join')">ÚNETE</a>
+          </li>
+          <li class="">
+            <a target="_blank" routerLink="/codeCollectiveLanding">TheCodeCollective</a>
+          </li>
+          <li class="gotoapp" id="gotoapp">
+            <a target="_blank" routerLink="/app/generateRecipes">Ir a la App</a>
+          </li>
+        </ul>
+      </nav>
+      <div class="menu-icon" onclick="toggleMenu()">☰</div>
     </header>
 
-    <!-- Sección Hero -->
-    <section id="home" class="hero">
+    <!-- Main Content Sections -->
+    <main>
+      <!-- Hero Section -->
+      <section id="home" class="hero">
         <div class="hero-text">
-            <h1 class="">Para niños exigentes <span>y padres amorosos</span></h1>
+          <h1 class="">Para niños exigentes <span>y padres amorosos</span></h1>
         </div>
         <div class="hero-image">
-            <img src="../../../assets/img/LandingNomNom/Food1.png" alt="Familia cocinando junta">
-            <p>Transformando la hora de la comida en una experiencia divertida y atractiva para niños y padres.</p>
+          <img src="../../../assets/img/LandingNomNom/Food1.png" alt="Familia cocinando junta" />
+          <p>Transformando la hora de la comida en una experiencia divertida y atractiva para niños y padres.</p>
         </div>
-    </section>
+      </section>
 
-    <!-- Sección Mostrar Más -->
-    <section class="show-more">
+      <!-- Features Preview Section -->
+      <section class="show-more">
         <div class="text-box1">
-            <h2>Explora nuevas formas de disfrutar la comida con tu hijo</h2>
+          <h2>Explora nuevas formas de disfrutar la comida con tu hijo</h2>
         </div>
-        <div class="show-more-content">
-            <div class="text-box">
-                <img src="../../../assets/img/LandingNomNom/Food6.png" alt="Niño cocinando">
-            </div>
-            <div class="text-box">
-                <p>Nom Nom Explorers animará a los más pequeños a probar nuevos sabores, texturas e ingredientes de una
-                    manera divertida y atractiva. Cada bocado es un paso hacia hábitos alimenticios más saludables y
-                    emocionantes descubrimientos.</p>
-            </div>
-            <div class="text-box">
-                <img src="../../../assets/img/LandingNomNom/Food5.png" alt="Niño cocinando">
-            </div>
-            <div class="text-box">
-                <p>Cocinar es más que solo preparar comida: es un momento de unión, creación de recuerdos y
-                    fortalecimiento
-                    de la confianza en la cocina. Descubre recetas interactivas, desafíos y herramientas de
-                    planificación de
-                    comidas diseñadas para hacer que cocinar sea divertido para toda la familia.</p>
-            </div>
+        <div class="show-more-container">
+          <div class="show-more-content">
+            <img src="../../../assets/img/LandingNomNom/Food6.png" alt="Niño cocinando" />
+            <p>
+              Nom Nom Explorers animará a los más pequeños a probar nuevos sabores, texturas e ingredientes de una manera divertida y atractiva. Cada
+              bocado es un paso hacia hábitos alimenticios más saludables y emocionantes descubrimientos.
+            </p>
+          </div>
+          <div class="show-more-content">
+            <img src="../../../assets/img/LandingNomNom/Food5.png" alt="Niño cocinando" />
+            <p>
+              Cocinar es más que solo preparar comida: es un momento de unión, creación de recuerdos y fortalecimiento de la confianza en la cocina.
+              Descubre recetas interactivas, desafíos y herramientas de planificación de comidas diseñadas para hacer que cocinar sea divertido para
+              toda la familia.
+            </p>
+          </div>
         </div>
+
         <!-- Botón para cuando el proyecto esté listo -->
         <div class="text-box2">
-            <p>Mostrar más → </p>
+          <p>Mostrar más →</p>
         </div>
-    </section>
+      </section>
 
-    <!-- Sección Funcionalidades -->
-    <section id="features" class="features">
+      <!-- Features Carousel Section -->
+      <section id="features" class="features">
         <div class="features-title">
-            <h2>Descubre <span>Nuestras Funcionalidades</span></h2>
-            <div class="features-box">
-                <img src="../../../assets/img/LandingNomNom/FoodHeader.png" alt="Características de la App">
-            </div>
+          <h2>Descubre <span>Nuestras Funcionalidades</span></h2>
         </div>
-
-        <!-- Contenedor del Carrusel -->
-        <section class="carousel-background">
-            <div class="carousel-container">
-                <button class="prev-btn">&#10094;</button>
-                <div class="carousel">
-                    <div class="carousel-item">
-                        <h3>Generador de Lista de Compras</h3>
-                        <img src="../../../assets/img/LandingNomNom/Food7.png" alt="Función de Lista de Compras">
-                        <p>¡Elimina las dudas al hacer las compras! Genera listas de compras inteligentes
-                            automáticamente según tus recetas favoritas.</p>
-                    </div>
-                    <div class="carousel-item">
-                        <h3>Generador de Menú Semanal</h3>
-                        <img src="../../../assets/img/LandingNomNom/Food8.png" alt="Función de Menú Semanal">
-                        <p>¡Planifica tus comidas sin esfuerzo! Obtén un menú semanal equilibrado y delicioso adaptado a
-                            las necesidades de tu familia.</p>
-                    </div>
-                    <div class="carousel-item">
-                        <h3>Sous Chef - Asistente IA</h3>
-                        <img src="../../../assets/img/LandingNomNom/Food2.png" alt="Asistente de Cocina IA">
-                        <p>Recibe orientación paso a paso mientras cocinas, haciendo que la preparación de comidas sea
-                            sencilla y sin estrés.</p>
-                    </div>
-                    <div class="carousel-item">
-                        <h3>Mapa de Exploración de Comida</h3>
-                        <img src="../../../assets/img/LandingNomNom/Food9.png" alt="Mapa de Comida Global">
-                        <p>Descubre cocinas de todo el mundo, ingredientes únicos y recetas divertidas.</p>
-                    </div>
-                    <div class="carousel-item">
-                        <h3>Desafíos para Niños</h3>
-                        <img src="../../../assets/img/LandingNomNom/Food11.png" alt="Desafíos de Comida para Niños">
-                        <p>¡Haz que la hora de la comida sea divertida con desafíos interactivos! Desde búsqueda de
-                            colores en los alimentos hasta juegos de descubrimiento de ingredientes.</p>
-                    </div>
-                    <div class="carousel-item">
-                        <h3>Opciones Saludables</h3>
-                        <img src="../../../assets/img/LandingNomNom/Food14.png" alt="Opciones Saludables">
-                        <p>¡Nutritivo, delicioso y fácil! Obtén ideas de comidas adaptadas a tu familia, asegurando una
-                            dieta balanceada y sabrosa.</p>
-                    </div>
-                    <div class="carousel-item">
-                        <h3>Recetas para Alergias</h3>
-                        <img src="../../../assets/img/LandingNomNom/Food12.png" alt="Recetas para Alergias">
-                        <p>¡Seguro y delicioso! Encuentra recetas y planes de comidas adecuados para alergias
-                            alimentarias.</p>
-                    </div>
-                </div>
-                <button class="next-btn">&#10095;</button>
+      </section>
+      <!-- Contenedor del Carrusel -->
+      <section class="carousel-background">
+        <button class="prev-btn">&#10094;</button>
+        <div class="carousel-container">
+          <div class="carousel">
+            <div class="carousel-item">
+              <h3>Generador de Lista de Compras</h3>
+              <img src="../../../assets/img/LandingNomNom/Food7.png" alt="Función de Lista de Compras" />
+              <p>¡Elimina las dudas al hacer las compras! Genera listas de compras inteligentes automáticamente según tus recetas favoritas.</p>
             </div>
-        </section>
-    </section>
+            <div class="carousel-item">
+              <h3>Generador de Menú Semanal</h3>
+              <img src="../../../assets/img/LandingNomNom/Food8.png" alt="Función de Menú Semanal" />
+              <p>¡Planifica tus comidas sin esfuerzo! Obtén un menú semanal equilibrado y delicioso adaptado a las necesidades de tu familia.</p>
+            </div>
+            <div class="carousel-item">
+              <h3>Sous Chef - Asistente IA</h3>
+              <img src="../../../assets/img/LandingNomNom/Food2.png" alt="Asistente de Cocina IA" />
+              <p>Recibe orientación paso a paso mientras cocinas, haciendo que la preparación de comidas sea sencilla y sin estrés.</p>
+            </div>
+            <div class="carousel-item">
+              <h3>Mapa de Exploración de Comida</h3>
+              <img src="../../../assets/img/LandingNomNom/Food9.png" alt="Mapa de Comida Global" />
+              <p>Descubre cocinas de todo el mundo, ingredientes únicos y recetas divertidas.</p>
+            </div>
+            <div class="carousel-item">
+              <h3>Desafíos para Niños</h3>
+              <img src="../../../assets/img/LandingNomNom/Food11.png" alt="Desafíos de Comida para Niños" />
+              <p>
+                ¡Haz que la hora de la comida sea divertida con desafíos interactivos! Desde búsqueda de colores en los alimentos hasta juegos de
+                descubrimiento de ingredientes.
+              </p>
+            </div>
+            <div class="carousel-item">
+              <h3>Opciones Saludables</h3>
+              <img src="../../../assets/img/LandingNomNom/Food14.png" alt="Opciones Saludables" />
+              <p>¡Nutritivo, delicioso y fácil! Obtén ideas de comidas adaptadas a tu familia, asegurando una dieta balanceada y sabrosa.</p>
+            </div>
+            <div class="carousel-item">
+              <h3>Recetas para Alergias</h3>
+              <img src="../../../assets/img/LandingNomNom/Food12.png" alt="Recetas para Alergias" />
+              <p>¡Seguro y delicioso! Encuentra recetas y planes de comidas adecuados para alergias alimentarias.</p>
+            </div>
+          </div>
+        </div>
+        <button class="next-btn">&#10095;</button>
+      </section>
 
-    <!-- Sección Únete -->
-    <section id="join" class="join-app">
+      <!-- Call to Action Section -->
+      <section id="join" class="join-app">
         <div class="join-title">
-            <div>
-                <h2>Únete a la App</h2>
-                <p>y comienza a disfrutar la comida con tus hijos.</p>
-            </div>
-            <div class="join-box">
-                <img src="../../../assets/img/LandingNomNom/Food19.png" alt="Plato Saludable">
-            </div>
+          <div>
+            <h2>Únete a la App</h2>
+            <p>y comienza a disfrutar la comida con tus hijos.</p>
+          </div>
+          <div class="join-box">
+            <img src="../../../assets/img/LandingNomNom/Food19.png" alt="Plato Saludable" />
+          </div>
         </div>
         <div class="join-call">
-            <p>"Miles de familias ya están disfrutando de Nom Nom Explorers. ¿Te unirás a ellas?"</p>
-            <!-- Botón para cuando el proyecto esté listo -->
-            <div class="text-box2">
-                <a id="join-button" href="login">Únete → </a>
-            </div>
+          <p>
+            "Miles de familias ya están disfrutando de Nom Nom Explorers. <br />
+            ¿Te unirás a ellas?"
+          </p>
+          <!-- Botón para cuando el proyecto esté listo -->
+          <div class="text-box2">
+            <a id="join-button" [routerLink]="['/login']">Únete → </a>
+          </div>
         </div>
-    </section>
+      </section>
 
-    <footer>
+      <footer>
         <p>© 2025 Nom Nom Explorers – Todos los derechos reservados.</p>
-    </footer>
-</body>
-
+        <p>Creado por <a target="_blank" href="http://localhost:4200/codeCollectiveLanding">TheCodeCollective</a></p>
+      </footer>
+    </main>
+  </body>
 </html>
