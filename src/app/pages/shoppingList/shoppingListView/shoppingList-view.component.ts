@@ -10,6 +10,18 @@ import { CommonModule } from '@angular/common';
 })
 export class ShoppingListViewComponent {
 
+  selectList(list: any) {
+    console.log('Click en toda la fila:', list.name);
+    // Aquí podés hacer que se cargue la lista, mostrar detalles, etc.
+  }
+  
+  viewList(event: MouseEvent, list: any) {
+    event.stopPropagation(); // Evita que el clic se propague al div
+    console.log('Click en botón Ver:', list.name);
+    // Navegar o mostrar modal, etc.
+  }
+  
+
   // Simulación de listas guardadas
   savedLists = [
     { name: 'Lista de Navidad' },
