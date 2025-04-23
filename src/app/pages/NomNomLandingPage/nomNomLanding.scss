@@ -1,5 +1,6 @@
 /* Global Styles */
 body {
+  background-color: var(--background-light);
   color: var(--text-primary);
   font-family: 'DM Sans', sans-serif;
 }
@@ -77,7 +78,7 @@ body {
 
 /* Logo */
 .logo {
-  width: 100px;
+  width: 120px;
 }
 
 /* Navigation Menu */
@@ -86,9 +87,8 @@ nav {
 }
 
 nav ul {
-  align-items: center;
   display: flex;
-  gap: 1.5rem;
+  gap: 2rem;
   justify-content: flex-end;
   list-style: none;
   margin: 0;
@@ -155,11 +155,9 @@ nav ul li a:hover {
 .hero {
   align-items: center;
   display: flex;
-  gap: 2rem;
-  height: calc(100vh - 350px);
+  gap: 2rem; /* Add spacing between text and image */
   justify-content: space-between;
-  margin: 0 auto;
-  max-width: 75rem;
+  padding: 4rem;
 }
 
 /* Hero Text */
@@ -171,7 +169,7 @@ nav ul li a:hover {
 /* Make headings responsive using clamp() */
 .hero-text h1 {
   color: var(--primary-color);
-  font-size: clamp(2.5rem, 6vw, 6.5rem); /* Scales between 2.5rem and 6rem */
+  font-size: clamp(2.5rem, 6vw, 6rem); /* Scales between 2.5rem and 6rem */
   font-weight: bold;
   line-height: 1;
 }
@@ -187,21 +185,13 @@ nav ul li a:hover {
 .hero-image {
   flex: 1;
   text-align: center; /* Center the image */
-
-  p {
-    font-size: 1.2rem;
-  }
 }
 
 .hero-image img {
   border: 3px solid var(--primary-color);
-  border-radius: 12px;
-  -webkit-border-radius: 12px;
-  -moz-border-radius: 12px;
-  -ms-border-radius: 12px;
-  -o-border-radius: 12px;
+  border-radius: 10px;
   margin-bottom: 5px;
-  max-width: 600px;
+  max-width: 500px; /* Prevents excessive stretching */
   width: 100%;
 }
 
@@ -224,15 +214,9 @@ nav ul li a:hover {
 
 /* Show More Section */
 .show-more {
-  margin: 0 auto;
-  max-width: 75rem;
+  background-color: var(--accent-light);
   padding: 3rem;
   text-align: center;
-  width: 100%;
-
-  .text-box1 {
-    margin-bottom: 72px;
-  }
 }
 
 .show-more h2 {
@@ -241,40 +225,14 @@ nav ul li a:hover {
   font-weight: bold;
   margin-bottom: 1.5rem;
 }
-.show-more-container {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  justify-content: center;
-  margin: 0 auto;
-  text-align: center;
-}
 
 /* Show More Content Grid */
 .show-more-content {
-  display: flex;
+  align-items: center;
+  display: grid;
   gap: 2rem;
+  grid-template-columns: repeat(2, 1fr); /* Two columns by default */
   justify-content: center;
-  margin: 0 auto;
-  max-width: 100%;
-
-  img {
-    border: 3px solid var(--secondary-color);
-    border-radius: 12px;
-    -webkit-border-radius: 12px;
-    -moz-border-radius: 12px;
-    -ms-border-radius: 12px;
-    -o-border-radius: 12px;
-    height: auto;
-    max-width: 400px;
-    width: 100%;
-  }
-  p {
-    font-size: 20px;
-    max-width: 400px;
-    text-align: left;
-  }
 }
 
 /* Adjust the text boxes */
@@ -298,21 +256,9 @@ nav ul li a:hover {
 /* Button/Text Box for "Show More" */
 .text-box2 {
   font-weight: bold;
-  margin-bottom: 72px;
-  margin-top: 12px;
+  margin-top: 1rem;
   max-width: 100%;
   text-align: right;
-
-  a {
-    transition: all 0.3s ease;
-    -webkit-transition: all 0.3s ease;
-    -moz-transition: all 0.3s ease;
-    -ms-transition: all 0.3s ease;
-    -o-transition: all 0.3s ease;
-    &:hover {
-      color: var(--secondary-color);
-    }
-  }
 }
 
 /* Responsive Adjustments */
@@ -341,7 +287,7 @@ nav ul li a:hover {
   display: flex;
   gap: 2rem;
   justify-content: center;
-  margin-bottom: 24px;
+  padding: 4rem 2rem;
 }
 
 .features h2 {
@@ -370,39 +316,40 @@ nav ul li a:hover {
 
 /* Carousel Styling */
 .carousel-background {
-  margin: 0 auto;
-  max-width: 800px;
-  position: relative;
+  background-color: var(--accent-light);
 }
 
 .carousel-container {
   align-items: center;
   display: flex;
   margin: auto;
-  max-width: 600px;
+  max-width: 900px;
   overflow: hidden;
   position: relative;
-  width: 100%;
+  width: 90%;
 }
 
 .carousel {
   display: flex;
   transition: transform 0.5s ease-in-out;
   width: 100%;
+  //height: 500px;
 }
 
 .carousel-item {
+  background: var(--background-light);
+  background-color: var(--accent-light);
   border-radius: 10px;
   display: block;
   min-width: 100%;
+  padding: 20px;
   text-align: center;
 }
 
 .carousel-item img {
   border: 3px solid var(--primary-color);
   border-radius: 10px;
-  margin-bottom: 8px;
-  max-width: 600px;
+  max-width: 500px;
   width: 100%;
 }
 
@@ -415,36 +362,27 @@ nav ul li a:hover {
 
 .carousel-item p {
   color: var(--text-primary);
-  font-size: 1.2rem;
+  font-size: 1rem;
   margin: 0 auto; /* Centers it horizontally */
   text-align: center; /* Ensures text is centered */
-  width: 95%; /* Keep this if you want it to be narrower */
+  width: 50%; /* Keep this if you want it to be narrower */
 }
 
 /* Carousel Buttons - Default (Desktop) */
 .prev-btn,
 .next-btn {
-  align-items: center;
   background: var(--primary-color);
   border: none;
   border-radius: 50%;
   color: var(--background-light);
   cursor: pointer;
-  display: flex;
-  font-size: 24px;
-  /*Toobigformobile!*/
-  height: 42px;
-  justify-content: center;
+  font-size: 50px; /* Too big for mobile! */
+  padding: 10px;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  -webkit-transform: translateY(-50%);
-  -moz-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  -o-transform: translateY(-50%);
   transition: background 0.3s;
-  width: 42px;
-  z-index: 10;
+  z-index: 10; /* Ensure buttons are above the carousel */
 }
 
 /* Hover Effect */
@@ -455,11 +393,11 @@ nav ul li a:hover {
 
 /* Positioning */
 .prev-btn {
-  left: 12px;
+  left: 10px;
 }
 
 .next-btn {
-  right: 12px;
+  right: 10px;
 }
 
 /* Responsive Adjustments */
@@ -467,6 +405,7 @@ nav ul li a:hover {
   .prev-btn,
   .next-btn {
     font-size: 35px; /* Reduce size on tablets */
+    padding: 8px;
   }
 }
 
@@ -474,6 +413,7 @@ nav ul li a:hover {
   .prev-btn,
   .next-btn {
     font-size: 25px; /* Reduce size further on mobile */
+    padding: 6px;
   }
 }
 
@@ -488,11 +428,10 @@ nav ul li a:hover {
 /* Join App Section */
 .join-app {
   align-items: center;
+  background-color: var(--accent-pink);
   display: flex;
   flex-direction: column;
-  margin: 0 auto;
-  margin-top: 120px;
-  max-width: 1200px;
+  padding: 4rem;
   text-align: center;
 }
 
@@ -503,7 +442,9 @@ nav ul li a:hover {
   flex-wrap: wrap;
   gap: 2rem;
   justify-content: center;
-  text-align: center;
+  padding: 4rem 2rem;
+  text-align: left;
+  width: 100%;
 }
 
 /* Heading Styles */
@@ -519,13 +460,18 @@ nav ul li a:hover {
   color: var(--secondary-color);
   font-size: clamp(1.5rem, 4vw, 3rem);
   line-height: 1.2;
+}
+
+/* Join Box - Image */
+.join-box {
   text-align: center;
+  width: 50%;
 }
 
 .join-box img {
   border: 3px solid var(--primary-color);
   border-radius: 10px;
-  max-width: 600px;
+  max-width: 500px;
   width: 100%;
 }
 
@@ -533,9 +479,9 @@ nav ul li a:hover {
 .join-call {
   align-items: center;
   display: flex;
-  flex-direction: column;
-  margin-top: 24px;
-  text-align: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  text-align: left;
 }
 
 /* Join Call Text */
@@ -544,6 +490,13 @@ nav ul li a:hover {
   font-size: clamp(1rem, 2vw, 1.2rem);
   font-weight: 500;
   max-width: 600px;
+}
+
+/* Join Call Image */
+.join-call img {
+  border: 3px solid var(--primary-color);
+  border-radius: 10px;
+  width: 150px;
 }
 
 /* Join Button */
@@ -586,31 +539,10 @@ nav ul li a:hover {
 
 /* Footer */
 footer {
-  border-top: 2px solid var(--primary-color);
-  font-size: 18px;
-  padding: 24px 0 12px 0;
+  background: var(--muted-gold);
+  font-size: 0.9rem;
+  padding: 1rem;
   text-align: center;
-  p {
-    a {
-      border-radius: 8px;
-      -webkit-border-radius: 8px;
-      -moz-border-radius: 8px;
-      -ms-border-radius: 8px;
-      -o-border-radius: 8px;
-      color: var(--primary-color);
-      padding: 2px 4px;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      -webkit-transition: all 0.3s ease;
-      -moz-transition: all 0.3s ease;
-      -ms-transition: all 0.3s ease;
-      -o-transition: all 0.3s ease;
-      &:hover {
-        background-color: var(--secondary-color);
-        color: white;
-      }
-    }
-  }
 }
 
 /* Buttons */
@@ -643,42 +575,6 @@ button.secondary:hover {
 }
 
 .gotoapp {
-  align-items: center;
-  background-color: var(--secondary-color);
-  border-radius: 8px;
-  -webkit-border-radius: 8px;
-  -moz-border-radius: 8px;
-  -ms-border-radius: 8px;
-  -o-border-radius: 8px;
-  color: #fff !important;
-  display: flex;
-  justify-content: center;
-  transition: all 0.3s ease;
-  -webkit-transition: all 0.3s ease;
-  -moz-transition: all 0.3s ease;
-  -ms-transition: all 0.3s ease;
-  -o-transition: all 0.3s ease;
-  &:hover a {
-    text-decoration: none;
-  }
-
-  a {
-    border-radius: 8px;
-    -webkit-border-radius: 8px;
-    -moz-border-radius: 8px;
-    -ms-border-radius: 8px;
-    -o-border-radius: 8px;
-    color: white !important;
-    font-size: 1rem;
-    padding: 4px 12px;
-    text-decoration: none !important;
-    transition: all 0.3s ease;
-    -webkit-transition: all 0.3s ease;
-    -moz-transition: all 0.3s ease;
-    -ms-transition: all 0.3s ease;
-    -o-transition: all 0.3s ease;
-    &:hover {
-      background-color: var(--primary-color);
-    }
-  }
+  background-color: var(--accent-light);
+  border-radius: 25px;
 }

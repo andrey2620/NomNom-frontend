@@ -1,86 +1,85 @@
 <!doctype html>
 <html lang="es">
+  <head>
+    <!--<script defer src="../../../assets/nomNomLanding.js"></script>-->
+  </head>
+
   <body>
-    <!-- Navigation Components -->
+    <!-- Botón flotante para volver arriba -->
     <button id="scrollToTop" class="scroll-to-top">↑</button>
 
-    <!-- Header -->
+    <!-- Barra de navegación -->
     <header class="navbar">
       <img src="../../../assets/LogoNomNom/4.png" alt="Logo de Nom Nom Explorers" class="logo" />
       <nav>
-        <ul id="menu" class="menu-list">
-          <li class="">
-            <a [routerLink]="[]" [fragment]="'home'" (click)="scrollToSection('home')" class="active">INICIO</a>
-          </li>
-          <li class="">
-            <a [routerLink]="[]" [fragment]="'features'" (click)="scrollToSection('features')">FUNCIONALIDADES</a>
-          </li>
-          <li class="">
-            <a [routerLink]="[]" [fragment]="'join'" (click)="scrollToSection('join')">ÚNETE</a>
-          </li>
-          <li class="">
-            <a target="_blank" routerLink="/codeCollectiveLanding">TheCodeCollective</a>
-          </li>
-          <li class="gotoapp" id="gotoapp">
-            <a target="_blank" routerLink="/app/generateRecipes">Ir a la App</a>
-          </li>
+        <ul id="menu">
+          <li class="m-3"><a href="#home" class="active">INICIO</a></li>
+          <li class="m-3"><a href="#features">FUNCIONALIDADES</a></li>
+          <li class="m-3"><a href="#join">ÚNETE</a></li>
+          <li class="m-3"><a href="codeCollectiveLanding">TheCodeCollective</a></li>
+          <li class="gotoapp p-3 d-none" id="gotoapp"><a href="app/generateRecipes">VE AL APP</a></li>
         </ul>
       </nav>
       <div class="menu-icon" onclick="toggleMenu()">☰</div>
     </header>
 
-    <!-- Main Content Sections -->
-    <main>
-      <!-- Hero Section -->
-      <section id="home" class="hero">
-        <div class="hero-text">
-          <h1 class="">Para niños exigentes <span>y padres amorosos</span></h1>
-        </div>
-        <div class="hero-image">
-          <img src="../../../assets/img/LandingNomNom/Food1.png" alt="Familia cocinando junta" />
-          <p>Transformando la hora de la comida en una experiencia divertida y atractiva para niños y padres.</p>
-        </div>
-      </section>
+    <!-- Sección Hero -->
+    <section id="home" class="hero">
+      <div class="hero-text">
+        <h1 class="">Para niños exigentes <span>y padres amorosos</span></h1>
+      </div>
+      <div class="hero-image">
+        <img src="../../../assets/img/LandingNomNom/Food1.png" alt="Familia cocinando junta" />
+        <p>Transformando la hora de la comida en una experiencia divertida y atractiva para niños y padres.</p>
+      </div>
+    </section>
 
-      <!-- Features Preview Section -->
-      <section class="show-more">
-        <div class="text-box1">
-          <h2>Explora nuevas formas de disfrutar la comida con tu hijo</h2>
+    <!-- Sección Mostrar Más -->
+    <section class="show-more">
+      <div class="text-box1">
+        <h2>Explora nuevas formas de disfrutar la comida con tu hijo</h2>
+      </div>
+      <div class="show-more-content">
+        <div class="text-box">
+          <img src="../../../assets/img/LandingNomNom/Food6.png" alt="Niño cocinando" />
         </div>
-        <div class="show-more-container">
-          <div class="show-more-content">
-            <img src="../../../assets/img/LandingNomNom/Food6.png" alt="Niño cocinando" />
-            <p>
-              Nom Nom Explorers animará a los más pequeños a probar nuevos sabores, texturas e ingredientes de una manera divertida y atractiva. Cada
-              bocado es un paso hacia hábitos alimenticios más saludables y emocionantes descubrimientos.
-            </p>
-          </div>
-          <div class="show-more-content">
-            <img src="../../../assets/img/LandingNomNom/Food5.png" alt="Niño cocinando" />
-            <p>
-              Cocinar es más que solo preparar comida: es un momento de unión, creación de recuerdos y fortalecimiento de la confianza en la cocina.
-              Descubre recetas interactivas, desafíos y herramientas de planificación de comidas diseñadas para hacer que cocinar sea divertido para
-              toda la familia.
-            </p>
-          </div>
+        <div class="text-box">
+          <p>
+            Nom Nom Explorers animará a los más pequeños a probar nuevos sabores, texturas e ingredientes de una manera divertida y atractiva. Cada
+            bocado es un paso hacia hábitos alimenticios más saludables y emocionantes descubrimientos.
+          </p>
         </div>
+        <div class="text-box">
+          <img src="../../../assets/img/LandingNomNom/Food5.png" alt="Niño cocinando" />
+        </div>
+        <div class="text-box">
+          <p>
+            Cocinar es más que solo preparar comida: es un momento de unión, creación de recuerdos y fortalecimiento de la confianza en la cocina.
+            Descubre recetas interactivas, desafíos y herramientas de planificación de comidas diseñadas para hacer que cocinar sea divertido para
+            toda la familia.
+          </p>
+        </div>
+      </div>
 
-        <!-- Botón para cuando el proyecto esté listo -->
-        <div class="text-box2">
-          <p>Mostrar más →</p>
-        </div>
-      </section>
+      <!-- Botón para cuando el proyecto esté listo -->
+      <div class="text-box2">
+        <p>Mostrar más →</p>
+      </div>
+    </section>
 
-      <!-- Features Carousel Section -->
-      <section id="features" class="features">
-        <div class="features-title">
-          <h2>Descubre <span>Nuestras Funcionalidades</span></h2>
+    <!-- Sección Funcionalidades -->
+    <section id="features" class="features">
+      <div class="features-title">
+        <h2>Descubre <span>Nuestras Funcionalidades</span></h2>
+        <div class="features-box">
+          <img src="../../../assets/img/LandingNomNom/FoodHeader.png" alt="Características de la App" />
         </div>
-      </section>
+      </div>
+
       <!-- Contenedor del Carrusel -->
       <section class="carousel-background">
-        <button class="prev-btn">&#10094;</button>
         <div class="carousel-container">
+          <button class="prev-btn">&#10094;</button>
           <div class="carousel">
             <div class="carousel-item">
               <h3>Generador de Lista de Compras</h3>
@@ -121,37 +120,33 @@
               <p>¡Seguro y delicioso! Encuentra recetas y planes de comidas adecuados para alergias alimentarias.</p>
             </div>
           </div>
-        </div>
-        <button class="next-btn">&#10095;</button>
-      </section>
-
-      <!-- Call to Action Section -->
-      <section id="join" class="join-app">
-        <div class="join-title">
-          <div>
-            <h2>Únete a la App</h2>
-            <p>y comienza a disfrutar la comida con tus hijos.</p>
-          </div>
-          <div class="join-box">
-            <img src="../../../assets/img/LandingNomNom/Food19.png" alt="Plato Saludable" />
-          </div>
-        </div>
-        <div class="join-call">
-          <p>
-            "Miles de familias ya están disfrutando de Nom Nom Explorers. <br />
-            ¿Te unirás a ellas?"
-          </p>
-          <!-- Botón para cuando el proyecto esté listo -->
-          <div class="text-box2">
-            <a id="join-button" href="/login">Únete → </a>
-          </div>
+          <button class="next-btn">&#10095;</button>
         </div>
       </section>
+    </section>
 
-      <footer>
-        <p>© 2025 Nom Nom Explorers – Todos los derechos reservados.</p>
-        <p>Creado por <a target="_blank" href="http://localhost:4200/codeCollectiveLanding">TheCodeCollective</a></p>
-      </footer>
-    </main>
+    <!-- Sección Únete -->
+    <section id="join" class="join-app">
+      <div class="join-title">
+        <div>
+          <h2>Únete a la App</h2>
+          <p>y comienza a disfrutar la comida con tus hijos.</p>
+        </div>
+        <div class="join-box">
+          <img src="../../../assets/img/LandingNomNom/Food19.png" alt="Plato Saludable" />
+        </div>
+      </div>
+      <div class="join-call">
+        <p>"Miles de familias ya están disfrutando de Nom Nom Explorers. ¿Te unirás a ellas?"</p>
+        <!-- Botón para cuando el proyecto esté listo -->
+        <div class="text-box2">
+          <a id="join-button" href="login">Únete → </a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>© 2025 Nom Nom Explorers – Todos los derechos reservados.</p>
+    </footer>
   </body>
 </html>
