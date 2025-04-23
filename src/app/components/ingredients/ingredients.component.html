@@ -3,9 +3,9 @@
     <div
       class="ingredientDiv"
       [class.selected]="item.id !== null && selectedIngredients.includes(item.id!)"
-      [class.allergy]="item.id !== null && isAllergy(item.id!)"
-      (click)="!isAllergy(item.id!) && item.id !== null && selectIngredient(item.id)"
-      (keydown)="!isAllergy(item.id!) && item.id !== null && $event.key === 'Enter' && selectIngredient(item.id)"
+      [class.allergy]="item.id !== null && isAllergy(item.name!)"
+      (click)="!isAllergy(item.name!) && item.id !== null && selectIngredient(item.id)"
+      (keydown)="!isAllergy(item.name!) && item.id !== null && $event.key === 'Enter' && selectIngredient(item.id)"
       tabindex="0">
       @if (!item.image) {
         <img class="w-100 ingredient-img rounded-2" src="assets/gifs/default.gif" alt="img{{ item.name }}" />
