@@ -158,6 +158,10 @@ body {
   font-weight: bold !important;
 }
 
+.btn{
+ border-radius: 25px;
+}
+
 .btn-success{
   background-color: #2c5530;
 }
@@ -169,10 +173,13 @@ body {
 
 .btn-outline-success{
   border-color: #2c5530;
+  color: #2c5530;
+
 }
 
 .btn-outline-success:hover{
   background-color: #c3bf6d;
+  border-color: #c3bf6d;
 }
 
 .btn-danger{
@@ -203,4 +210,14 @@ body {
   color: #fff;
   border-color: #c3bf6d;
   background-color: #c3bf6d;
+}
+
+.btn-outline-dark{
+  border-color: #2c5530;
+}
+
+.btn-outline-dark:hover{
+  border-color: #2c5530;
+  background-color: #2c5530;
+  color: #fff;
 }
