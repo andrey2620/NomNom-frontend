@@ -21,7 +21,7 @@
           (selectedChange)="onIngredientsChange($event)">
         </app-ingredients>
         <div class="d-flex gap-4 mt-3">
-          <button class="btn-green-rounded my-4" (click)="deleteIngredients()">Borrar ingredientes</button>
+          <button class="btn-green-rounded my-4" (click)="showModalDelete()">Borrar ingredientes</button>
           <button class="btn-red-rounded my-4" (click)="saveSelectedIngredients()">Guardar ingredientes</button>
         </div>
       </div>
@@ -40,8 +40,8 @@
       [cancelAction]="'Cancelar'"
       [confirmButtonClass]="'btn btn-danger'"
       [cancelButtonClass]="'btn btn-secondary'"
-      (callConfirmationMethod)="onModalConfirm()"
-      (callCancelMethod)="onModalCancel()"
+      (confirmEvent)="onModalConfirm()"
+      (cancelEvent)="onModalCancel()"
       [hideCancelOption]="false">
       <h1 class="text-center">¡OJO!</h1>
       <h2 class="text-center">¿Estás seguro de que desea eliminar todos los ingredientes?</h2>

@@ -125,7 +125,7 @@ export class GenerateRecipesComponent implements OnInit {
     return this.ingredientService.getTotalPages(this.itemsPerPage);
   }
 
-  deleteIngredients(): void {
+  showModalDelete(): void {
     this.confirmModal.showModal();
   }
 

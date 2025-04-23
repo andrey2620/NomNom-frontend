@@ -36,8 +36,8 @@
   [confirmButtonClass]="'btn btn-primary'"
   [cancelButtonClass]="'btn btn-danger'"
   [showCloseButton]="false"
-  (confirm)="onConfirmGenerateRandom()"
-  (modalCancelled)="onGoToIngredients()"
+  (confirmEvent)="onConfirmGenerateRandom()"
+  (cancelEvent)="onGoToIngredients()"
   [closeOnClickOutside]="false"
   [hideCancelOption]="false">
   <h4 class="text-center">😅 No seleccionaste ingredientes</h4>

@@ -23,7 +23,9 @@ export class ModalComponent implements AfterViewInit, OnDestroy {
   @Input() hideConfirmOption = false;
   @Input() isLoading = false;
 
-  @Output() confirm = new EventEmitter<void>();
+  @Output() confirmEvent = new EventEmitter<void>();
+  @Output() cancelEvent = new EventEmitter<void>();
+
   @Output() modalCancelled = new EventEmitter<void>();
 
   private previousActiveElement: Element | null = null;
@@ -104,12 +106,12 @@ export class ModalComponent implements AfterViewInit, OnDestroy {
   }
 
   onConfirm(): void {
-    this.confirm.emit();
-    this.closeModalWithAnimation();
+    this.confirmEvent.emit();
+    this.hideModal();
   }
 
   onCancel(): void {
-    this.modalCancelled.emit();
-    this.closeModalWithAnimation();
+    this.cancelEvent.emit();
+    this.hideModal();
   }
 }
