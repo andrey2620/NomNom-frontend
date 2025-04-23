@@ -1,9 +1,100 @@
-<div class="shopping-list-menu">
-    <h2 class="shopping-list-title">Crear Lista de Compras</h2>
-  
-    <div class="shopping-list-options">
-      <a routerLink="/shopping-list/create" class="btn-red-rounded">Crear lista nueva</a>
-      <a routerLink="/shopping-list/view" class="btn-red-rounded">Ver listas</a>
+<div class="container my-4">
+  <h1 class="text-center mb-4">Crear Nueva Lista</h1>
+
+  <div class="row g-4">
+
+    <!-- Columna Paso 1 -->
+    <div class="col-12 col-md-6">
+
+      <div class="p-3 rounded shadow paso1 mb-3">
+        <h3>Paso 1: Selecciona recetas para crear lista de compras</h3>
+      </div>
+
+      <div class="p-3 rounded shadow" style="background-color: #f5b5ab;">
+        <h1 class="text-center mb-4">Recetas  favoritas</h1>
+
+        <div class="mb-3">
+          <label class="form-label fw-bold">Buscar receta</label>
+          <input type="text" class="form-control" placeholder="Buscar receta..." />
+        </div>
+
+        <!--Aqui debe traerse las recetas guardadas de un json-->
+        <div *ngFor="let recipe of ['Arroz con pollo', 'Arroz con leche', 'Arroz con carne']"
+          class="p-2 bg-white rounded d-flex justify-content-between align-items-center mb-2">
+          <span>{{ recipe }}</span>
+            <button class="btn btn-sm rounded-pill"
+                    [ngClass]="isSelected(recipe) ? 'btn-selected' : 'btn-red'"
+                    (click)="toggleSelection(recipe)">
+              {{ isSelected(recipe) ? 'Seleccionada' : 'Seleccionar' }}
+            </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Columna Paso 2-->
+    <div class="col-12 col-md-6">
+
+      <div class="p-3 rounded shadow paso2 mb-3">
+        <h3>Paso 2: Ajusta los ingredientes generados automáticamente</h3>
+      </div>
+
+      <!-- ESTE row SEPARA los dos cuadros correctamente -->
+      <div class="row g-3">
+        <!-- Lista -->
+        <div class="col-12 col-lg-6">
+          <div class="p-3 rounded shadow" style="background-color: #daefb3;">
+            <h4 class="fw-bold mt-3">Nueva lista</h4>
+            <table class="table-sm">
+              <thead>
+                <tr>
+                  <th>Ingredientes</th>
+                  <th>Cantidad</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><input type="checkbox" checked /> Arroz</td>
+                  <td>1 kl</td>
+                  <td><button class="btn btn-sm btn-danger">✕</button></td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" checked /> Pollo</td>
+                  <td>1/2 kl</td>
+                  <td><button class="btn btn-sm btn-danger">✕</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Formulario -->
+        <div class="col-12 col-lg-6">
+          <div class="p-3 rounded shadow" style="background-color: #daefb3;">
+            <div class="mb-3">
+              <label class="fw-bold">Nuevo Ingrediente</label>
+              <input type="text" class="form-control mb-2" placeholder="Escribe ingrediente..." />
+              <button class="btn btn-success rounded-pill">Agregar ingrediente</button>
+            </div>
+
+            <div class="mb-3">
+              <label class="fw-bold">Nombre de nueva lista</label>
+              <input type="text" class="form-control" placeholder="Escribe nombre de la lista..." />
+            </div>
+
+            <div class="d-flex gap-2 flex-wrap">
+              <button class="btn btn-success">Guardar</button>
+              <button class="btn btn-outline-secondary">Descargar</button>
+              <button class="btn btn-outline-secondary">Borrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Botón ver listas -->
+      <div class="mt-4">
+        <button class="btn btn-danger rounded-pill">Ver listas guardadas</button>
+      </div>
     </div>
   </div>
-  
+</div>
