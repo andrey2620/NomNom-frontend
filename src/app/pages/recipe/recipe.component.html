@@ -35,9 +35,10 @@
   [confirmButtonClass]="'btn btn-primary'"
   [cancelButtonClass]="'btn btn-danger'"
   [showCloseButton]="false"
-  (callConfirmationMethod)="onConfirmGenerateRandom()"
-  (callCancelMethod)="onGoToIngredients()"
+  (confirmEvent)="onConfirmGenerateRandom()"
+  (cancelEvent)="onGoToIngredients()"
+  [closeOnClickOutside]="false"
   [hideCancelOption]="false">
   <h4 class="text-center">😅 No seleccionaste ingredientes</h4>
-  <p class="text-center">¿Querés generar una receta aleatoria o ir a seleccionar tus ingredientes?</p>
+  <p class="text-center">¿Quieres generar una receta aleatoria o ir a seleccionar tus ingredientes?</p>
 </app-modal>

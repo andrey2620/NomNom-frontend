@@ -1,39 +1,32 @@
-<ng-template #modalContent>
-  @if (!isLoading) {
-    <div [class]="modalContentClass" [ngClass]="{ 'custom-bg': useCustomBackGround }">
-      <div class="modal-header" *ngIf="showCloseButton">
-        <button type="button" (click)="hideModal()" class="close" aria-label="Close">
-          <span>&times;</span>
+@if (!isLoading) {
+  <dialog #modalDialog [class]="modalContentClass + (useCustomBackGround ? ' custom-bg' : '')">
+    @if (showCloseButton) {
+      <div class="modal-header-custom">
+        <button type="button" (click)="hideModal()" class="close-modal" aria-label="Close modal">
+          <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
+    }
 
-      <div [class]="modalBodyClass">
-        <ng-content></ng-content>
-      </div>
+    <div class="modal-body">
+      <ng-content></ng-content>
+    </div>
 
-      @if (!hideFooter) {
-        <div [class]="modalFooterClass">
-          <button type="button" [disabled]="loadingConfirmationMethod" (click)="callCancelMethod.emit()" [class]="cancelButtonClass">
+    @if (!hideCancelOption || !hideConfirmOption) {
+      <div class="modal-footer">
+        @if (!hideCancelOption) {
+          <button [class]="cancelButtonClass" (click)="onCancel()">
             {{ cancelAction }}
           </button>
-
-          @if (!hideConfirmAction) {
-            <button
-              type="button"
-              [disabled]="customValidation || loadingConfirmationMethod"
-              (click)="callConfirmationMethod.emit()"
-              [class]="confirmButtonClass">
-              @if (loadingConfirmationMethod === true) {
-                <app-loader />
-              } @else {
-                {{ confirmAction }}
-              }
-            </button>
-          }
-        </div>
-      }
-    </div>
-  } @else {
-    <app-loader size="full" [contrast]="true" />
-  }
-</ng-template>
+        }
+        @if (!hideConfirmOption) {
+          <button [class]="confirmButtonClass" (click)="onConfirm()">
+            {{ confirmAction }}
+          </button>
+        }
+      </div>
+    }
+  </dialog>
+} @else {
+  <app-loader size="full" [contrast]="true" />
+}

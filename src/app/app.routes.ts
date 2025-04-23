@@ -18,7 +18,6 @@ import { PlanificatorPageComponent } from './pages/planificator/planificator-pag
 import { ProfileEditComponent } from './pages/profile-edit/profile-edit.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { RecipeComponent } from './pages/recipe/recipe.component';
-import { ShoppingListComponent } from './pages/shoppingList/shoppingList.component';
 import { ShoppingListCreateComponent } from './pages/shoppingList/shoppingListCreate/shoppingList-create.component';
 import { ShoppingListViewComponent } from './pages/shoppingList/shoppingListView/shoppingList-view.component';
 import { UsersComponent } from './pages/users/users.component';
@@ -70,7 +69,7 @@ export const routes: Routes = [
     path: '',
     redirectTo: 'nomNomLanding',
     pathMatch: 'full',
-  }, 
+  },
   {
     path: 'app',
     component: AppLayoutComponent,
@@ -159,7 +158,7 @@ export const routes: Routes = [
         data: {
           authorities: [IRoleType.superAdmin, IRoleType.user],
           showInSidebar: false,
-        }
+        },
       },
       /*
       {
@@ -174,7 +173,8 @@ export const routes: Routes = [
           showInSidebar: true
         }
 
-      },*/
+      },
+			*/
     ],
   },
 ];

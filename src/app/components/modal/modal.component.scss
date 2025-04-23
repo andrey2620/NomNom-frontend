@@ -1,14 +1,140 @@
+dialog {
+  border: none;
+  border-radius: 12px;
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  -ms-border-radius: 12px;
+  -o-border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  max-height: 800px;
+  max-width: 800px;
+  overflow: hidden;
+  overflow-y: auto;
+  position: relative;
+  opacity: 1;
+  transform: scale(1);
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+
+  &.closing {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+
+  &.shake {
+    animation: shakeEffect 0.4s ease-in-out;
+  }
+
+  &.opening {
+    animation: openEffect 0.3s ease-in-out;
+  }
+
+  .modal-header-custom {
+    button.close-modal {
+      align-items: center;
+      background: none;
+      border: none;
+      display: flex;
+      font-size: 16px;
+      height: 24px;
+      justify-content: center;
+      margin: 0;
+      padding: 0;
+      position: absolute;
+      right: 6px;
+      top: 6px;
+      width: 24px;
+      z-index: 10;
+      &:hover i {
+        color: var(--primary-color);
+      }
+    }
+  }
+}
+
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}
+
 .modal-header {
+  border-bottom: none;
   display: flex;
   justify-content: end;
-  border-bottom: none;
   padding-bottom: 0px;
   .close {
     background: none;
     border: none;
   }
+  &.closing {
+    animation: shrinkAndClose 0.3s ease-in-out;
+  }
+
+  &.shake {
+    animation: shakeAnimation 0.5s ease-in-out;
+  }
+}
+.title-form {
+  font-size: 24px;
+  font-weight: 700;
 }
 
 .modal-content.custom-bg {
   background-color: var(--bg-color);
+}
+
+@keyframes shrinkAndClose {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+}
+
+@keyframes shakeAnimation {
+  0% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(0.95);
+  }
+  50% {
+    transform: scale(1);
+  }
+  75% {
+    transform: scale(0.98);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes shakeEffect {
+  0%, 100% { 
+    transform: scale(1); 
+  }
+  20% { 
+    transform: scale(0.95) rotate(-1deg); 
+  }
+  40% { 
+    transform: scale(0.98) rotate(1deg); 
+  }
+  60% { 
+    transform: scale(0.95) rotate(-1deg); 
+  }
+  80% { 
+    transform: scale(0.98) rotate(1deg); 
+  }
+}
+
+@keyframes openEffect {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }

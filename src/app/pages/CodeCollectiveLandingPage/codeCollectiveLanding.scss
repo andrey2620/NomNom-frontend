@@ -1,9 +1,16 @@
+* {
+  scroll-behavior: smooth;
+  scroll-padding-top: 200px;
+}
+
 /* ==================== ESTILOS GENERALES ==================== */
 body {
   font-family: 'Montserrat', sans-serif;
   margin: 0;
   min-height: 100vh;
   padding: 0;
+  scroll-behavior: smooth;
+  scroll-padding-top: 200px;
 }
 
 /* ==================== MEDIA QUERIES (RESPONSIVE DESIGN) ==================== */
@@ -181,18 +188,16 @@ nav ul li a:hover {
 .div-encabezado {
   align-items: center;
   background-color: #ffffff;
+  border: 0px !important;
   display: flex;
   flex-direction: column;
-  margin: 100px 0;
+  padding: 100px 0;
 }
 
-.div-encabezado h1 {
+.div-encabezado h2 {
   color: var(--body-font-color);
-  font-weight: bold;
-}
-
-h1 {
   font-size: 75px;
+  font-weight: bold;
   margin: auto;
 }
 
@@ -551,4 +556,14 @@ footer {
 
 * {
   scrollbar-width: thin !important;
+}
+
+.div-encabezado {
+  align-items: center;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  padding: 100px 0 !important;
+  h2 {
+  }
 }

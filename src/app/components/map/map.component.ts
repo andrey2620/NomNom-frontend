@@ -1,8 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, EventEmitter, Output, ViewEncapsulation } from '@angular/core';
-import * as statesData from '../../../assets/geoJSON/coords.json';
-import { IRecipe } from '../../interfaces';
 import L from 'leaflet';
+import * as statesData from '../../../assets/geoJSON/coords.json';
 
 @Component({
   selector: 'app-map',
@@ -123,17 +123,15 @@ export class MapComponent implements AfterViewInit {
       },
     });
   }
-  
-  
 
   private updateInfo(props?: any, emit: boolean = false): void {
     const div = document.querySelector('.info') as HTMLDivElement;
-  
+
     if (div) {
       if (props) {
         let content = `<h1>${props.name}</h1>`;
         div.innerHTML = `<h3>Recetas de todo el mundo!</h3>${content}`;
-  
+
         if (emit) {
           this.countrySelected.emit(props.name);
         }
@@ -142,7 +140,6 @@ export class MapComponent implements AfterViewInit {
       }
     }
   }
-  
 
   private addLegend() {
     const legend = new L.Control({ position: 'bottomright' });

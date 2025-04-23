@@ -1,15 +1,11 @@
-@defer{
+@defer {
+  <section class="interactive-map-container">
     <h1 class="pt-3">Descubre recetas del mundo</h1>
-    <div class="d-flex gap-4 mapContaier">
-        <div class="w-75">
-            <app-map (countrySelected)="onCountrySelected($event)"></app-map>
-        </div>
-        <div class="w-25">
-            <map-recipeView [country]="countrySelected" (cook)="onRecipeSelected($event)"></map-recipeView>
-        </div>
-    </div>  
-}
-
-@loading (minimum 1.5s){
-    <app-loader></app-loader>
+    <div class="d-flex gap-4 map-container w-100">
+      <app-map (countrySelected)="onCountrySelected($event)"></app-map>
+      <app-map-recipe-view [country]="countrySelected" (cook)="onRecipeSelected($event)"></app-map-recipe-view>
+    </div>
+  </section>
+} @loading (minimum 1.5s) {
+  <app-loader></app-loader>
 }

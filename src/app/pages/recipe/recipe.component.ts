@@ -1,14 +1,14 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalComponent } from '../../components/modal/modal.component';
 import { RecipeListComponent } from '../../components/recipe/recipe-list/recipe-list.component';
-import { IRecipe, IResponse } from '../../interfaces';
-import { CommonModule } from '@angular/common';
-import { ViewRecipeComponent } from '../../components/recipe/view-recipe/view-recipe.component';
 import { SousChefComponent } from '../../components/recipe/sous-chef/sous-chef.component';
+import { ViewRecipeComponent } from '../../components/recipe/view-recipe/view-recipe.component';
+import { IRecipe, IResponse } from '../../interfaces';
 import { IngredientService } from '../../services/ingredient.service';
-import { RecipesService } from '../../services/recipes.service';
 import { ProfileService } from '../../services/profile.service';
+import { RecipesService } from '../../services/recipes.service';
 import { ToastService } from '../../services/toast.service';
 
 @Component({
@@ -145,7 +145,7 @@ export class RecipeComponent implements OnInit, AfterViewInit {
           },
         });
       },
-      error: (err: any) => {
+      error: (err: Error) => {
         this.toastService.showSuccess('Error al guardar la receta:' + err);
       },
     });

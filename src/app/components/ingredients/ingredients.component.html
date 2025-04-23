@@ -1,10 +1,11 @@
-<div class="ingredientContainer" #ingredientContainer>
+<section class="ingredientContainer" #ingredientContainer>
   @for (item of ingredients; track item.id) {
     <div
       class="ingredientDiv"
       [class.selected]="item.id !== null && selectedIngredients.includes(item.id!)"
-      (click)="item.id !== null && selectIngredient(item.id)"
-      (keydown)="item.id !== null && $event.key === 'Enter' && selectIngredient(item.id)"
+      [class.allergy]="item.id !== null && isAllergy(item.id!)"
+      (click)="!isAllergy(item.id!) && item.id !== null && selectIngredient(item.id)"
+      (keydown)="!isAllergy(item.id!) && item.id !== null && $event.key === 'Enter' && selectIngredient(item.id)"
       tabindex="0">
       @if (!item.image) {
         <img class="w-100 ingredient-img rounded-2" src="assets/gifs/default.gif" alt="img{{ item.name }}" />
@@ -20,4 +21,4 @@
       <h1 class="mb-0">No hay ingredientes con ese nombre ni categoría.</h1>
     </div>
   }
-</div>
+</section>
