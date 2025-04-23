@@ -1,5 +1,6 @@
+const apiUrls = 'https://andrey.tail29d229.ts.net';
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:8080',
+  apiUrl: apiUrls,
   dev: true,
 };

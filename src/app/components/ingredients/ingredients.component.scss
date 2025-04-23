@@ -13,11 +13,10 @@
 
 .ingredient-name {
   font-family: 'Poppins', sans-serif;
-  font-weight: 500;
   font-size: 1rem;
+  font-weight: 500;
   text-align: center;
 }
-
 
 .ingredientDiv {
   align-items: center;
@@ -49,15 +48,15 @@
     transform 0.3s ease,
     box-shadow 0.3s ease;
   width: 100%;
-  width: 100%;
   &:hover {
-    background-color: #b5152a;
+    background-color: #c3bf6d;
     color: #ffffff;
     transform: scale(1.03);
     -webkit-transform: scale(1.03);
     -moz-transform: scale(1.03);
     -ms-transform: scale(1.03);
     -o-transform: scale(1.03);
+    z-index: 9999999999;
   }
 }
 
@@ -71,6 +70,42 @@
   -moz-transform: scale(1.03);
   -ms-transform: scale(1.03);
   -o-transform: scale(1.03);
+}
+.ingredientDiv.allergy {
+  background-color: #b5152a;
+  border-radius: 5px;
+  box-shadow: 0px 4px 10px rgba(85, 67, 44, 0.5);
+  color: #ffffff;
+  position: relative;
+  transform: scale(1.03);
+  -webkit-transform: scale(1.03);
+  -moz-transform: scale(1.03);
+  -ms-transform: scale(1.03);
+  -o-transform: scale(1.03);
+
+  &::after {
+    background-color: rgba(0, 0, 0, 0.877);
+    border-radius: 4px;
+    bottom: -40px;
+    color: white;
+    content: 'Este ingrediente es una alergia y no puede ser seleccionado';
+    font-size: 14px;
+    left: 50%;
+    opacity: 0;
+    padding: 8px;
+    pointer-events: none;
+    position: absolute;
+    transform: translateX(-50%);
+    transition: all 0.3s ease;
+    visibility: hidden;
+    white-space: nowrap;
+    z-index: 1000;
+  }
+
+  &:hover::after {
+    opacity: 1;
+    visibility: visible;
+  }
 }
 .ingredient-img {
 }

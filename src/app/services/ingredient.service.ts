@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { inject, Injectable, signal } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IIngredients, IResponse, ISearch } from '../interfaces';
@@ -16,8 +17,36 @@ export class IngredientService extends BaseService<IIngredients> {
 
   public search: ISearch = {
     page: 1,
-    size: 16,
+    size: this.getPageSize(),
   };
+
+  private getPageSize(): number {
+    if (typeof window !== 'undefined') {
+      const width = window.innerWidth;
+      if (width >= 1920) return 16;
+      if (width >= 1600) return 12;
+      if (width >= 1200) return 12;
+      if (width >= 1024) return 8;
+      if (width >= 768) return 6;
+      if (width >= 480) return 4;
+      return 4; // For smallest screens
+    }
+    return 10; // Default size for SSR
+  }
+
+  constructor() {
+    super();
+    // Escuchar cambios en el tamaño de la ventana
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', () => {
+        const newSize = this.getPageSize();
+        if (this.search.size !== newSize) {
+          this.search.size = newSize;
+          this.getAll(); // Recargar con el nuevo tamaño
+        }
+      });
+    }
+  }
 
   public totalItems: number[] = [];
 

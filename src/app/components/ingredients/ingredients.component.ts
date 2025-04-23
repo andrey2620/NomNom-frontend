@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { CommonModule } from '@angular/common';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { IIngredients } from '../../interfaces';
 
 @Component({
@@ -17,6 +18,7 @@ export class IngredientsComponent {
 
   selectedIngredients: number[] = [];
   localStorageIngredients: any[] = [];
+  allergies: number[] = []; // Array para almacenar IDs de alergias
 
   ngOnInit() {
     const savedIngredients = localStorage.getItem('user_ingredients');
@@ -26,10 +28,14 @@ export class IngredientsComponent {
       this.localStorageIngredients = [];
     }
 
-      // Inicializar el estado interno con lo que venga del padre (por si acaso)
-    this.selectedIngredients = [...this.selectedIds];
+    // Obtener alergias del localStorage
+    const userString = localStorage.getItem('auth_user');
+    if (userString) {
+      const user = JSON.parse(userString);
+      this.allergies = user.allergies?.map((allergy: any) => allergy.id) || [];
+    }
 
-    // Emitir los seleccionados una sola vez al inicio
+    this.selectedIngredients = [...this.selectedIds];
     this.selectedChange.emit([...this.selectedIngredients]);
   }
 
@@ -37,11 +43,9 @@ export class IngredientsComponent {
     if (changes['selectedIds']) {
       this.selectedIngredients = [...this.selectedIds];
     }
-    
   }
 
   selectIngredient(id: number | undefined | null) {
-
     if (id === undefined || id === null) return;
 
     const index = this.selectedIngredients.indexOf(id);
@@ -53,5 +57,9 @@ export class IngredientsComponent {
     }
 
     this.selectedChange.emit([...this.selectedIngredients]);
+  }
+
+  isAllergy(id: number): boolean {
+    return this.allergies.includes(id);
   }
 }
