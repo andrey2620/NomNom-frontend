@@ -1,95 +1,184 @@
 .planificator * {
   user-select: none;
 }
-.recipe-list {
-  border-radius: 4px;
-  max-height: 650px;
-  overflow-y: auto;
-  padding: 10px;
-  scrollbar-width: thin;
-  width: 100%;
+.main-section-planificator {
+  height: calc(100dvh - 80px);
 }
-
-.recipe-box {
-  background: white;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  cursor: move;
-  margin: 12px 0;
-  padding: 10px;
-
-  &:hover {
-    background: #f5f5f5;
-  }
-}
-
-.menu-box {
+.planificator-header {
   align-items: center;
-  background: white;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  border-bottom: 1px solid #ddd;
   display: flex;
-  justify-content: space-between;
-  margin: 12px 0;
-  padding: 10px;
-
-  &:hover {
-    background: #f5f5f5;
+  height: 65px;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  h2 {
+    margin: 0;
+    padding: 0;
+    text-align: center !important;
+    width: 100%;
   }
-
-  .menu-button {
-    background-color: transparent;
-    border: 1px solid red;
-    border-radius: 8px;
-    -webkit-border-radius: 8px;
-    -moz-border-radius: 8px;
-    -ms-border-radius: 8px;
-    -o-border-radius: 8px;
-    color: red;
-
-    &:hover {
-      background-color: red;
-      color: white;
+}
+.my-menu {
+  height: 100%;
+  .my-menu-header {
+    h2 {
+      margin: 0;
+      padding: 0;
+      text-align: center !important;
     }
+  }
+  .menu-list {
+    height: calc(100% - 65px);
+    overflow: hidden;
+    overflow-y: auto;
+    padding: 6px 12px;
+    scrollbar-width: thin;
+    .menu-box {
+      align-items: center;
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      -webkit-border-radius: 4px;
+      -moz-border-radius: 4px;
+      -ms-border-radius: 4px;
+      -o-border-radius: 4px;
+      display: flex;
+      justify-content: space-between;
+      margin: 12px 0;
+      padding: 10px;
+      position: relative;
+      width: 100%;
+      &:hover {
+        background: #f5f5f5;
+      }
+      .menu-box-text {
+      }
+      &:hover .menu-button {
+        opacity: 100;
+        scale: 1;
+      }
+      .menu-button {
+        align-items: center;
+        background-color: white;
+        border: 1px solid red;
+        border-radius: 200%;
+        -webkit-border-radius: 200%;
+        -moz-border-radius: 200%;
+        -ms-border-radius: 200%;
+        -o-border-radius: 200%;
+        color: red;
+        display: flex;
+        height: 22px;
+        justify-content: center;
+        opacity: 0;
+        position: absolute;
+        right: -12px;
+        scale: 0;
+        size: 22px;
+        transition: all 0.3s ease;
+        -webkit-transition: all 0.3s ease;
+        -moz-transition: all 0.3s ease;
+        -ms-transition: all 0.3s ease;
+        -o-transition: all 0.3s ease;
+        width: 24px;
+        &:hover {
+          background-color: red;
+          color: white;
+        }
+      }
+    }
+  }
+}
+.my-recipes {
+  .recipe-list {
+    height: calc(100% - 65px);
+    overflow: hidden;
+    overflow-y: auto;
+    padding: 6px 12px;
+    scrollbar-width: thin;
+    .recipe-box {
+      align-items: center;
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      cursor: move;
+      display: flex;
+      justify-content: space-between;
+      margin: 12px 0;
+      padding: 10px;
+      &:hover {
+        background: #f5f5f5;
+      }
+    }
+  }
+}
+.planificator {
+  .planificator-header {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 12px;
+    position: relative;
+    h2 {
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
+.button-planificator-container {
+  align-items: center;
+  justify-content: center;
+  button {
+    height: 42px !important;
+  }
+  div input {
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    box-shadow: none;
+    height: 42px;
+    outline: none;
+    padding: 0 4px;
   }
 }
 
 .planner-grid {
-  overflow: hidden; /* Change from overflow-x: auto to overflow: hidden */
-  position: relative;
-  width: 100%;
-}
-
-/* Add this to ensure the drag preview doesn't cause scrollbars */
-.cdk-drag-preview {
-  max-height: 100%;
-  max-width: 100%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 65px);
+  justify-content: center;
   overflow: hidden;
-  pointer-events: none;
-  position: absolute;
-  z-index: 1000;
-
-  // Hide delete button in drag preview
-  .delete-btn {
-    display: none !important;
-  }
+  overflow-y: auto;
+  padding-bottom: 6px;
+  padding-left: 6px;
+  padding-right: 12px;
+  padding-top: 6px;
+  position: relative;
+  scrollbar-width: thin;
+  width: 100%;
 }
 
 .days-header-row {
   display: grid;
   gap: 10px;
-  grid-template-columns: 100px repeat(7, 1fr);
+  grid-template-columns: 90px repeat(7, minmax(0, 1fr));
   margin-bottom: 10px;
+  width: 100%;
 }
 
 .meal-type-row {
-  align-items: center;
   display: grid;
   gap: 10px;
-  grid-template-columns: 100px repeat(7, 1fr);
-  justify-content: center;
+  grid-template-columns: 90px repeat(7, minmax(0, 1fr));
   margin-bottom: 10px;
+  max-height: 170px;
+  min-height: 170px;
   text-align: center;
+  width: 100%;
 }
 
 .meal-type-header,
@@ -109,19 +198,25 @@
 .meal-cell {
   border: 1px solid #ddd;
   border-radius: 4px;
-  max-height: 150px;
-  min-height: 150px;
-  overflow-y: auto;
-  position: relative; /* Add position relative */
-}
-.meal-cell::-webkit-scrollbar {
-  width: 0;
+  height: 100%;
+  min-height: 120px;
+  overflow: hidden; // Cambiado de overflow-y: auto a overflow: hidden
+  position: relative;
+  width: 100%;
+
+  &:hover {
+    overflow-y: auto; // Mostrar scroll solo al hacer hover
+  }
 }
 
 .meal-drop-list {
-  height: 100%; /* Ensure it fills the cell */
-  min-height: 80px;
+  height: 100%;
+  min-height: 90px;
   padding: 5px;
+  width: 100%;
+}
+.meal-cell::-webkit-scrollbar {
+  width: 0;
 }
 
 .meal-item {
@@ -145,7 +240,8 @@
 
 .meal-cell .cdk-drag-boundary {
   height: 100%;
-  min-height: 80px;
+  min-height: 90px;
+  overflow: hidden !important;
   width: 100%;
 }
 
@@ -162,8 +258,17 @@
   text-overflow: ellipsis;
 }
 
+.cdk-drag-preview {
+  .delete-btn {
+    display: none !important; // Ocultar el botón de borrar en el preview
+  }
+}
+
 .cdk-drag-placeholder {
   opacity: 0;
+  .delete-btn {
+    display: none !important; // Ocultar el botón de borrar en el placeholder
+  }
 }
 
 .cdk-drag-animating {
