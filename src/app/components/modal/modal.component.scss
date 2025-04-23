@@ -1,12 +1,58 @@
+dialog {
+  border: none;
+  border-radius: 12px;
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  -ms-border-radius: 12px;
+  -o-border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  max-height: 800px;
+  max-width: 800px;
+  overflow: hidden;
+  overflow-y: auto;
+  position: relative;
+  transform: translate(0, 0);
+  transition: transform 0.3s ease-in-out;
+  .modal-header-custom {
+    button.close-modal {
+      align-items: center;
+      background: none;
+      border: none;
+      display: flex;
+      font-size: 16px;
+      height: 24px;
+      justify-content: center;
+      margin: 0;
+      padding: 0;
+      position: absolute;
+      right: 6px;
+      top: 6px;
+      width: 24px;
+      z-index: 10;
+      &:hover i {
+        color: var(--primary-color);
+      }
+    }
+  }
+}
+
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}
+
 .modal-header {
+  border-bottom: none;
   display: flex;
   justify-content: end;
-  border-bottom: none;
   padding-bottom: 0px;
   .close {
     background: none;
     border: none;
   }
+}
+.title-form {
+  font-size: 24px;
+  font-weight: 700;
 }
 
 .modal-content.custom-bg {

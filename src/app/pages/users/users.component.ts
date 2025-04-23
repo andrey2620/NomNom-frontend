@@ -1,40 +1,36 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { CommonModule } from '@angular/common';
 import { Component, inject, ViewChild } from '@angular/core';
-import { UserListComponent } from '../../components/user/user-list/user-list.component';
-import { UserFormComponent } from '../../components/user/user-from/user-form.component';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LoaderComponent } from '../../components/loader/loader.component';
 import { ModalComponent } from '../../components/modal/modal.component';
 import { PaginationComponent } from '../../components/pagination/pagination.component';
-import { UserService } from '../../services/user.service';
-import { ModalService } from '../../services/modal.service';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UserListComponent } from '../../components/user/user-list/user-list.component';
 import { IUser } from '../../interfaces';
+import { ModalService } from '../../services/modal.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [
-    UserListComponent,
-    PaginationComponent,
-    ModalComponent,
-    LoaderComponent,
-    UserFormComponent
-  ],
+  imports: [CommonModule, ReactiveFormsModule, UserListComponent, PaginationComponent, ModalComponent, LoaderComponent],
   templateUrl: './users.component.html',
-  styleUrl: './users.component.scss'
+  styleUrl: './users.component.scss',
 })
 export class UsersComponent {
   public userService: UserService = inject(UserService);
   public modalService: ModalService = inject(ModalService);
   @ViewChild('addUsersModal') public addUsersModal: any;
+  @ViewChild('usersModal') usersModal!: ModalComponent;
   public fb: FormBuilder = inject(FormBuilder);
   userForm = this.fb.group({
     id: [''],
-    email: ['', Validators.required, Validators.email],
-    name: ['', Validators.required],
-    lastname: ['', Validators.required],
-    password: ['', Validators.required],
-    updatedAt: ['', Validators.required],
-  })
+    email: ['', [Validators.required, Validators.email]],
+    name: ['', [Validators.required]],
+    lastname: ['', [Validators.required]],
+    password: ['', [Validators.required]],
+    updatedAt: ['', [Validators.required]],
+  });
 
   constructor() {
     this.userService.search.page = 1;
@@ -59,5 +55,15 @@ export class UsersComponent {
     this.userService.update(user);
     this.modalService.closeAll();
   }
-  
+
+  callSave() {
+    if (this.userForm.valid) {
+      const userData: IUser = this.userForm.value as IUser;
+      if (userData.id) {
+        this.updateUser(userData);
+      } else {
+        this.saveUser(userData);
+      }
+    }
+  }
 }
