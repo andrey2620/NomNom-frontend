@@ -1,6 +1,6 @@
+import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, Output, ViewChild } from '@angular/core';
 import { LoaderComponent } from '../loader/loader.component';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-modal',
@@ -41,13 +41,17 @@ export class ModalComponent implements AfterViewInit, OnDestroy {
   }
 
   showModal(): void {
-    // Add a small delay to ensure the ViewChild is initialized
     setTimeout(() => {
       if (!this.modalDialog?.nativeElement) return;
-      
+
       this.previousActiveElement = document.activeElement;
       this.modalDialog.nativeElement.showModal();
-      
+      this.modalDialog.nativeElement.classList.add('opening');
+
+      setTimeout(() => {
+        this.modalDialog.nativeElement.classList.remove('opening');
+      }, 300);
+
       const firstFocusable = this.modalDialog.nativeElement.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
       if (firstFocusable instanceof HTMLElement) {
         firstFocusable.focus();
@@ -55,34 +59,57 @@ export class ModalComponent implements AfterViewInit, OnDestroy {
     }, 0);
   }
 
-  hideModal(): void {
+  private closeModalWithAnimation(): void {
     if (!this.modalDialog.nativeElement) return;
-    this.modalDialog.nativeElement.close();
 
-    if (this.previousActiveElement instanceof HTMLElement) {
-      this.previousActiveElement.focus();
-    }
+    this.modalDialog.nativeElement.classList.add('closing');
+    setTimeout(() => {
+      this.modalDialog.nativeElement.close();
+      this.modalDialog.nativeElement.classList.remove('closing');
+      if (this.previousActiveElement instanceof HTMLElement) {
+        this.previousActiveElement.focus();
+      }
+    }, 300);
   }
 
-  onConfirm(): void {
-    this.confirm.emit();
-    this.hideModal();
-  }
+  private shakeModal(): void {
+    if (!this.modalDialog.nativeElement) return;
 
-  onCancel(): void {
-    this.modalCancelled.emit();
-    this.hideModal();
+    // Evitar múltiples animaciones simultáneas
+    if (this.modalDialog.nativeElement.classList.contains('shake')) return;
+
+    this.modalDialog.nativeElement.classList.add('shake');
+    setTimeout(() => {
+      this.modalDialog.nativeElement.classList.remove('shake');
+    }, 400);
   }
 
   private handleBackdropClick(event: MouseEvent): void {
-    if (!this.closeOnClickOutside) return;
-
     const rect = this.modalDialog.nativeElement.getBoundingClientRect();
     const isInDialog =
       rect.top <= event.clientY && event.clientY <= rect.top + rect.height && rect.left <= event.clientX && event.clientX <= rect.left + rect.width;
 
     if (!isInDialog) {
-      this.hideModal();
+      if (this.closeOnClickOutside) {
+        this.closeModalWithAnimation();
+      } else {
+        this.shakeModal();
+      }
     }
+  }
+
+  hideModal(): void {
+    if (!this.modalDialog.nativeElement) return;
+    this.closeModalWithAnimation();
+  }
+
+  onConfirm(): void {
+    this.confirm.emit();
+    this.closeModalWithAnimation();
+  }
+
+  onCancel(): void {
+    this.modalCancelled.emit();
+    this.closeModalWithAnimation();
   }
 }
