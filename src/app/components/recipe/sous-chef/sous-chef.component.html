@@ -1,6 +1,19 @@
 <div class="sous-chef-panel h-100 w-100">
   <div class="sous-chef-icon text-center mb-2 mt-4">
-    <div class="icon-box">SC</div>
+    <!--Aqui va el icon de chef-->
+    <img
+      class="voice-icon"
+      [src]="currentVoiceName === 'daniela' ? 'assets/gifs/chefDaniela.gif' : 'assets/gifs/chefMau.gif'"
+      [ngClass]="{ speaking: isSpeaking }"
+      alt="Chef animado"
+    />
+  </div>
+
+  <div class="toggle-voice-container text-center mt-3 mb-3">
+    <label class="toggle-label">Elige tu Sous-Chef</label>
+    <button class="btn toggle-btn" (click)="toggleVoiceGender()">
+    {{ currentVoiceName === 'daniela' ? 'Chef Daniela' : 'Chef Mauricio' }}
+    </button>
   </div>
 
   <div class="mb-2 w-100 mx-auto px-4">
@@ -8,7 +21,7 @@
     <div class="d-flex gap-2 justify-content-center align-items-center">
       <input class="slider" type="range" id="volume" min="0" max="1" step="0.01" [(ngModel)]="volume" />
 
-      <p class="text-center porcen">{{ volume * 100 }}</p>
+      <p class="text-center porcen">{{ volume * 100 | number:'1.0-0' }}</p>
       <!-- cambiar por el porcentaje del volumen -->
     </div>
   </div>
@@ -21,14 +34,28 @@
     </div>
   </div>
 
+  <img
+    class="sound-status-gif mb-3"
+    [src]="isSpeaking ? 'assets/gifs/sound.gif' : 'assets/gifs/mute.gif'"
+    alt="Estado de sonido"
+  />
+
+
   <button
     class="btn control-btn rounded-circle d-flex align-items-center justify-content-center"
     style="width: 60px; height: 60px"
-    [ngClass]="{ 'btn-dark': isSousChefOn, 'btn-success': !isSousChefOn }"
+    [ngClass]="{
+      'btn-dark': isSousChefOn,
+      'btn-success': !isSousChefOn,
+      'speaking-animation': isSpeaking
+    }"
     (click)="toggleSousChef()">
     <i [ngClass]="isSousChefOn ? 'bi bi-stop-fill' : 'bi bi-play-fill'"></i>
   </button>
 
+
+
+    
   <label for="speed" class="form-label mt-4">Sugerencias de presentación</label>
   <div class="text-center">
     <button class="btn toggle-btn2" (click)="suggestPresentation()">Generar</button>

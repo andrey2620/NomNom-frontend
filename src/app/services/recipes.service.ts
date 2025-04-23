@@ -2,10 +2,12 @@ import { inject, Injectable, signal } from '@angular/core';
 import { BaseService } from './base-service';
 import { IRecipe, ISearch, ISuggestions, IResponsev2 } from '../interfaces';
 import { AuthService } from './auth.service';
-import { map, Observable } from 'rxjs';
+import { map, Observable, of, timer } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { ProfileService } from './profile.service';
 import { ToastService } from './toast.service';
+import { catchError, retry, throwError } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root',
@@ -36,19 +38,44 @@ export class RecipesService extends BaseService<IRecipe> {
   }
 
   getRandomRecipes(): Observable<IResponsev2<IRecipe[]>> {
-    return this.http.get<IResponsev2<{ recipe: IRecipe; prompt: string }>>(`${this.source}/generator`).pipe(
-      map(res => {
-        if (environment.dev) {
-          //console.warn('[DEBUG] Prompt generado:\n', res.data.prompt);
-        }
-
-        return {
+    if (window.location.hostname === 'localhost') {
+      console.warn('Saltando generación de receta IA en entorno local');
+      return of({
+        data: [],
+        message: 'Modo local sin IA',
+        meta: {
+          method: 'GET',
+          url: '/recipes/generator',
+          totalPages: 0,
+          totalElements: 0,
+          pageNumber: 1,
+          pageSize: 3,
+        },
+      });
+      
+    }
+  
+    return this.http
+      .get<IResponsev2<{ recipe: IRecipe; prompt: string }>>(`${this.source}/generator`)
+      .pipe(
+        retry({
+          count: 2,
+          delay: (_, retryCount) => {
+            console.warn(`Reintentando getRandomRecipes() intento #${retryCount}...`);
+            return timer(1000);
+          },
+        }),
+        map(res => ({
           ...res,
           data: [res.data.recipe],
-        };
-      })
-    );
+        })),
+        catchError(err => {
+          console.error('Falló getRandomRecipes():', err);
+          return throwError(() => new Error('Falló al conectar con IA para recetas aleatorias'));
+        })
+      );
   }
+  
 
   getRecipesByUser(userId: number): Observable<IResponsev2<IRecipe[]>> {
     return this.http.get<IResponsev2<{ recipe: IRecipe; prompt: string }>>(`${this.source}/generator/user/${userId}`).pipe(
