@@ -5,11 +5,12 @@ import { AuthService } from '../../../services/auth.service';
 import { IUser } from '../../../interfaces';
 import { CommonModule } from '@angular/common';
 import { ToastService } from '../../../services/toast.service';
+import { TooltipComponent } from '../../../components/tool-tip/tool-tip.component';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, TooltipComponent],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss',
 })

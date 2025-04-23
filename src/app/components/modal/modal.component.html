@@ -1,7 +1,7 @@
 <ng-template #modalContent>
   @if (!isLoading) {
     <div [class]="modalContentClass" [ngClass]="{ 'custom-bg': useCustomBackGround }">
-      <div class="modal-header" [hidden]="hideCancelOption">
+      <div class="modal-header" *ngIf="showCloseButton">
         <button type="button" (click)="hideModal()" class="close" aria-label="Close">
           <span>&times;</span>
         </button>

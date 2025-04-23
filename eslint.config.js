@@ -2,27 +2,22 @@
 const eslint = require('@eslint/js');
 const tseslint = require('typescript-eslint');
 const angular = require('angular-eslint');
+const prettier = require('eslint-config-prettier');
 
 module.exports = tseslint.config(
   {
     files: ['**/*.ts'],
-    extends: [eslint.configs.recommended, ...tseslint.configs.recommended, ...tseslint.configs.stylistic, ...angular.configs.tsRecommended],
+    extends: [eslint.configs.recommended, ...tseslint.configs.recommended, ...tseslint.configs.stylistic, ...angular.configs.tsRecommended, prettier],
     processor: angular.processInlineTemplates,
     rules: {
-      '@angular-eslint/directive-selector': [
+      '@angular-eslint/directive-selector': ['error', { type: 'attribute', prefix: 'app', style: 'camelCase' }],
+      '@angular-eslint/component-selector': ['error', { type: 'element', prefix: 'app', style: 'kebab-case' }],
+      'padding-line-between-statements': [
         'error',
         {
-          type: 'attribute',
-          prefix: 'app',
-          style: 'camelCase',
-        },
-      ],
-      '@angular-eslint/component-selector': [
-        'error',
-        {
-          type: 'element',
-          prefix: 'app',
-          style: 'kebab-case',
+          blankLine: 'always',
+          prev: 'function',
+          next: 'function',
         },
       ],
     },

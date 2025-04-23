@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { catchError, delay, of } from 'rxjs';
-import { IRecipe, CATEGORY_IMAGE_MAP } from '../../../interfaces';
+import { IRecipe, CATEGORY_IMAGE_MAP, IResponsev2 } from '../../../interfaces';
 import fallbackRecipes from './recipes.json';
 import { RecipesService } from '../../../services/recipes.service';
+import {} from '../../../interfaces';
 
 @Component({
   selector: 'app-recipe-list',
@@ -16,11 +17,11 @@ export class RecipeListComponent implements OnInit {
   @Input() areActionsAvailable = false;
   @Output() cook = new EventEmitter<IRecipe>();
   @Output() listInitialized = new EventEmitter<IRecipe[]>();
+  @Input() sectionTitle = 'Recetas';
 
   userId: number | null = null;
   itemList: IRecipe[] = [];
   skeletonList: null[] = [];
-
   private fallbackIndex = 0;
   private fallbackMode = false;
   private randomMode = false;
@@ -47,6 +48,7 @@ export class RecipeListComponent implements OnInit {
   }
 
   loadAllFallbackAnimated(count: number): void {
+    this.sectionTitle = 'Recetas locales';
     this.fallbackMode = true;
     const available = fallbackRecipes.slice(this.fallbackIndex, this.fallbackIndex + count);
     const safeCount = available.length;
@@ -58,44 +60,117 @@ export class RecipeListComponent implements OnInit {
         this.itemList.push(recipe);
         this.skeletonList.pop();
         this.listInitialized.emit(this.itemList);
-      }, i * 500);
+      }, i * 300);
     });
 
     this.fallbackIndex += safeCount;
   }
 
-  loadValidRecipes(userId: number, count: number): void {
+  //Este metodo usa los ingredientes del localStorage para obtener recetas generadas por IA
+  loadValidRecipesFromLocalStorage(count: number): void {
+    this.sectionTitle = 'Recetas generadas';
     let attempts = 0;
     let loaded = 0;
-    const maxAttempts = count * 4;
+    const maxJsonAttempts = count * 50;
+    const maxIaAttempts = 2;
+
+    const stored = localStorage.getItem('user_ingredients');
+    const parsed: { name: string }[] = stored ? JSON.parse(stored) : [];
+    const ingredientNames = parsed.map(i => i.name).filter(name => !!name.trim());
+
+    if (!ingredientNames.length) {
+      console.warn('⚠️ No hay ingredientes válidos en localStorage');
+      this.loadAllFallbackAnimated(count);
+      return;
+    }
+
+    const fetch = () => {
+      this.recipesService
+        .generateRecipeFromIngredients(ingredientNames)
+        .pipe(
+          catchError(err => {
+            const detail = err?.error?.detail || '';
+            const isJsonInvalid = detail.includes('JSON inválido generado por el modelo');
+            const maxAttempts = isJsonInvalid ? maxJsonAttempts : maxIaAttempts;
+
+            attempts++;
+            if (attempts < maxAttempts) {
+              setTimeout(fetch, 150);
+            } else {
+              const fallbackCount = count - loaded;
+              this.loadAllFallbackAnimated(fallbackCount);
+            }
+
+            return of(null);
+          }),
+          delay(100)
+        )
+        .subscribe(res => {
+          const recipes = res?.data ?? [];
+
+          for (const recipe of recipes) {
+            if (this.isValidRecipe(recipe)) {
+              this.itemList.push(recipe);
+              this.skeletonList.pop();
+              this.listInitialized.emit(this.itemList);
+              loaded++;
+            }
+          }
+
+          if (loaded < count && attempts < maxIaAttempts) {
+            fetch();
+          }
+        });
+    };
+
+    fetch();
+  }
+
+  //Este metodo usa el id del usuario para obtener recetas generadas por IA
+  loadValidRecipes(userId: number, count: number): void {
+    this.sectionTitle = 'Recetas generadas';
+    let attempts = 0;
+    let loaded = 0;
+    const maxJsonGenerationAttempts = count * 50;
+    const maxIaConnectionAttempts = 2;
 
     const fetchRecipe = () => {
       this.recipesService
         .getRecipesByUser(userId)
         .pipe(
           catchError(err => {
-            console.error('❌ Error al generar receta IA:', err.message);
+            const detail = err?.error?.detail || '';
+            console.error('❌ Error al generar receta IA:', detail || err.message);
+
+            const isJsonInvalid = detail.includes('JSON inválido generado por el modelo');
+            const maxAttempts = isJsonInvalid ? maxJsonGenerationAttempts : maxIaConnectionAttempts;
+
+            attempts++;
+            if (attempts < maxAttempts) {
+              setTimeout(fetchRecipe, 150);
+            } else {
+              const fallbackCount = count - loaded;
+              this.loadAllFallbackAnimated(fallbackCount);
+            }
+
             return of(null);
           }),
-          delay(300)
+          delay(100)
         )
-        .subscribe(recipe => {
-          attempts++;
+        .subscribe((res: IResponsev2<IRecipe[]> | null) => {
+          const recipes = res?.data ?? [];
 
-          if (recipe && this.isValidRecipe(recipe)) {
-            this.itemList.push(recipe);
-            this.skeletonList.pop();
-            this.listInitialized.emit(this.itemList);
-            loaded++;
+          for (const recipe of recipes) {
+            if (this.isValidRecipe(recipe)) {
+              this.itemList.push(recipe);
+              this.skeletonList.pop();
+              this.listInitialized.emit(this.itemList);
+              loaded++;
+            }
           }
 
-          if (loaded < count && attempts < maxAttempts) {
+          if (loaded < count) {
             fetchRecipe();
-          }
-
-          if (attempts >= maxAttempts && loaded < count) {
-            const fallbackCount = count - loaded;
-            this.loadAllFallbackAnimated(fallbackCount);
           }
         });
     };
@@ -104,6 +179,7 @@ export class RecipeListComponent implements OnInit {
   }
 
   loadRandomRecipes(count: number): void {
+    this.sectionTitle = 'Recetas aleatorias';
     if (this.skeletonList.length === 0) {
       this.loadSkeletons(count);
     }
@@ -111,35 +187,46 @@ export class RecipeListComponent implements OnInit {
     this.randomMode = true;
     let loaded = 0;
     let attempts = 0;
-    const maxAttempts = count * 4;
+    const maxJsonAttempts = count * 50;
+    const maxIaAttempts = 2;
 
     const fetchRandom = () => {
       this.recipesService
         .getRandomRecipes()
         .pipe(
           catchError(err => {
-            console.error('❌ Error receta aleatoria:', err.message);
+            const detail = err?.error?.detail || '';
+            console.error('❌ Error receta aleatoria:', detail || err.message);
+
+            const isJsonInvalid = detail.includes('JSON inválido generado por el modelo');
+            const maxAttempts = isJsonInvalid ? maxJsonAttempts : maxIaAttempts;
+
+            attempts++;
+            if (attempts < maxAttempts) {
+              setTimeout(fetchRandom, 150);
+            } else {
+              const fallbackCount = count - loaded;
+              this.loadAllFallbackAnimated(fallbackCount);
+            }
+
             return of(null);
           }),
-          delay(300)
+          delay(100)
         )
-        .subscribe((recipe: IRecipe | null) => {
-          attempts++;
+        .subscribe((res: IResponsev2<IRecipe[]> | null) => {
+          const recipes = res?.data ?? [];
 
-          if (recipe && this.isValidRecipe(recipe)) {
-            this.itemList.push(recipe);
-            this.skeletonList.pop();
-            this.listInitialized.emit(this.itemList);
-            loaded++;
+          for (const recipe of recipes) {
+            if (this.isValidRecipe(recipe)) {
+              this.itemList.push(recipe);
+              this.skeletonList.pop();
+              this.listInitialized.emit(this.itemList);
+              loaded++;
+            }
           }
 
-          if (loaded < count && attempts < maxAttempts) {
+          if (loaded < count) {
             fetchRandom();
-          }
-
-          if (attempts >= maxAttempts && loaded < count) {
-            const fallbackCount = count - loaded;
-            this.loadAllFallbackAnimated(fallbackCount);
           }
         });
     };
@@ -156,7 +243,7 @@ export class RecipeListComponent implements OnInit {
     } else if (this.randomMode) {
       this.loadRandomRecipes(count);
     } else {
-      this.loadValidRecipes(this.userId ?? 0, count);
+      this.loadValidRecipesFromLocalStorage(count);
     }
   }
 

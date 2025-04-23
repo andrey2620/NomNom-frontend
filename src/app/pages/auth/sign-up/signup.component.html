@@ -55,49 +55,61 @@
             <div class="form-group mb-3">
               <label for="email" class="form-label mb-2">Correo Electrónico</label>
               <input
-                #email="ngModel"
-                type="text"
-                class="form-control"
-                id="email"
-                name="email"
-                placeholder="ejemplo@nomnom.com"
-                [(ngModel)]="user.email"
-                [readonly]="isGoogleSignUp"
-                [ngClass]="{
-                  'is-invalid': email.invalid && email.touched,
-                  'is-valid': email.valid && email.touched
-                }"
-                required />
+              #email="ngModel"
+              type="email"
+              class="form-control"
+              id="email"
+              name="email"
+              placeholder="ejemplo@nomnom.com"
+              [(ngModel)]="user.email"
+              [readonly]="isGoogleSignUp"
+              [ngClass]="{
+                'is-invalid': email.invalid && email.touched,
+                'is-valid': email.valid && email.touched
+              }"
+              required
+              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" />
               <div *ngIf="email.invalid && (email.touched || frm.submitted)" class="invalid-feedback">Ingresa un correo válido</div>
             </div>
 
             <div class="form-group mb-4">
               <label for="password" class="form-label mb-2">Contraseña</label>
               <div class="form-input position-relative">
-                <input
-                  #password="ngModel"
-                  [type]="showPassword ? 'text' : 'password'"
-                  class="form-control"
-                  id="password"
-                  name="password"
-                  placeholder="Entra al menos 8 caracteres"
-                  [(ngModel)]="user.password"
-                  [ngClass]="{
-                    'is-invalid': password.invalid && password.touched,
-                    'is-valid': password.valid && password.touched
-                  }"
-                  [required]="!isGoogleSignUp" />
+              <input
+                #password="ngModel"
+                [type]="showPassword ? 'text' : 'password'"
+                class="form-control"
+                id="password"
+                name="password"
+                placeholder="Entra al menos 8 caracteres"
+                [(ngModel)]="user.password"
+                [ngClass]="{
+                'is-invalid': password.invalid && password.touched,
+                'is-valid': password.valid && password.touched
+                }"
+                [required]="!isGoogleSignUp"
+                pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" />
 
-                <button type="button" class="toggle-password" (click)="togglePassword()">
-                  <i [class]="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
-                </button>
+              <button type="button" class="toggle-password" (click)="togglePassword()">
+                <i [class]="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+              </button>
 
-                <div *ngIf="password.invalid && !isGoogleSignUp" class="invalid-feedback">Ingresa una contraseña válida</div>
+              <div *ngIf="password.invalid && password.touched && !isGoogleSignUp" class="invalid-feedback">
+                La contraseña debe tener al menos 8 caracteres, una mayúscula, un número y un carácter especial.
+              </div>
+
+              <app-tool-tip
+                style="position: absolute; right: -25px; top: 50%; transform: translateY(-50%);"
+                [tooltipText]="'Tu contraseña debe tener al menos 8 caracteres, una mayúscula, un número y un caracter especial.'"
+                [tooltipPosition]="'right'"
+                [iconClass]="'fa-solid fa-circle-info'"
+                [buttonClass]="'btn-save-recipe bg-transparent'">
+              </app-tool-tip>
               </div>
             </div>
 
             <!-- Mensaje de error o éxito justo arriba del botón -->
-            <div class="text-center mb-2">
+            <div class="text-center mb-5">
               @if (signUpError) {
                 <p class="text-danger">{{ signUpError }}</p>
               } @else if (validSignup) {

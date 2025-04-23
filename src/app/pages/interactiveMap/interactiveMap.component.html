@@ -1,9 +1,13 @@
 @defer{
     <h1 class="pt-3">Descubre recetas del mundo</h1>
-    <div class="mapContaier">
-        <app-map (recipesSelected)="onRecipesSelected($event)"></app-map>
-        <!--<app-recipe-list [itemList]="selectedRecipes"></app-recipe-list>-->
-    </div>
+    <div class="d-flex gap-4 mapContaier">
+        <div class="w-75">
+            <app-map (countrySelected)="onCountrySelected($event)"></app-map>
+        </div>
+        <div class="w-25">
+            <map-recipeView [country]="countrySelected" (cook)="onRecipeSelected($event)"></map-recipeView>
+        </div>
+    </div>  
 }
 
 @loading (minimum 1.5s){

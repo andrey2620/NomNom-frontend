@@ -1,123 +1,85 @@
-import { Component, effect, inject, OnInit } from '@angular/core';
-import { ProfileService } from '../../services/profile.service';
-import { AuthService } from '../../services/auth.service';
-import { HttpClient } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { Component, OnInit, effect, inject, signal } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { firstValueFrom } from 'rxjs';
+import { TooltipComponent } from '../../components/tool-tip/tool-tip.component';
+import { IAllergies, IDietPreferences, IRecipe, IUser } from '../../interfaces';
 import { AllergiesService } from '../../services/allergies.service';
 import { DietPreferenceService } from '../../services/dietPreference.service';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { IAllergies, IDietPreferences, IUser } from '../../interfaces';
-import { UserService } from '../../services/user.service';
-import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { ProfileService } from '../../services/profile.service';
+import { RecipesService } from '../../services/recipes.service';
 
 @Component({
   standalone: true,
   selector: 'app-profile',
+  imports: [CommonModule, TooltipComponent],
   templateUrl: './profile.component.html',
-  imports: [CommonModule],
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
-  public profileService = inject(ProfileService);
   public user!: IUser;
   public snackBar = inject(MatSnackBar);
-  selectedAllergies: Set<IAllergies> = new Set();
-  selectedPreferences: Set<IDietPreferences> = new Set();
+  public loading = signal(true);
+  public error = signal<string | null>(null);
+
+  selectedAllergies: Set<IAllergies> = new Set<IAllergies>();
+  selectedPreferences: Set<IDietPreferences> = new Set<IDietPreferences>();
+  userRecipes: Set<IRecipe> = new Set<IRecipe>();
 
   constructor(
-    private http: HttpClient,
-    private authService: AuthService,
     public dietPreferenceService: DietPreferenceService,
     public allergiesService: AllergiesService,
-    private router: Router
+    public profileService: ProfileService,
+    public recipesService: RecipesService
   ) {
-    this.profileService.getUserInfoSignal();
-    this.dietPreferenceService.getAll();
-    this.allergiesService.getAll();
-    setTimeout(() => {
-      this.user = this.profileService.user$();
-    }, 500);
+    effect(
+      () => {
+        const user = this.profileService.user$();
+        if (!user) return;
+
+        this.user = user;
+
+        if (!user.recipes) {
+          this.profileService.getUserRecipes(this.user.id);
+        }
+
+        this.selectedAllergies = new Set(this.user.allergies || []);
+        this.selectedPreferences = new Set(this.user.preferences || []);
+
+        if (this.user.recipes) {
+          this.userRecipes = new Set(this.user.recipes || []);
+        }
+      },
+      { allowSignalWrites: true }
+    );
   }
 
   ngOnInit(): void {
-    this.profileService.getUserInfoSignal();
-
-    effect(() => {
-      const user = this.profileService.user$();
-      if (user?.id) {
-        this.user = user;
-        // console.log('User cargado correctamente:', this.user);
-
-        this.selectedAllergies = new Set(this.user.allergies ?? []);
-        this.selectedPreferences = new Set(this.user.preferences ?? []);
-
-      }
-    });
+    this.loadUserData();
   }
 
-  logOut() {
-    this.authService.logout();
-    this.router.navigate(['/login']);
+  private loadUserData(): void {
+    try {
+      this.loading.set(true);
+      this.error.set(null);
+      this.profileService.getUserInfoSignal();
+      this.dietPreferenceService.getAll();
+      this.allergiesService.getAll();
+    } catch (err) {
+      console.error(err);
+      this.error.set('Failed to load user data');
+      this.loading.set(false);
+      this.snackBar.open('Error loading profile data', 'Close', { duration: 3000 });
+    }
   }
 
-  onSelectedAllergy(event: Event, allergy: IAllergies) {
-    const checked = (event.target as HTMLInputElement).checked;
-
-    if (checked) {
-      this.selectedAllergies.add(allergy);
-      allergy.isSelected = true;
+  deleteRecipe(recipe: IRecipe): void {
+    if (typeof this.user.id === 'number' && typeof recipe.id === 'number') {
+      this.recipesService.deleteRecipe(this.user.id, recipe.id);
     } else {
-      this.selectedAllergies.delete(allergy);
-      allergy.isSelected = false;
+      console.error('Invalid user ID or recipe ID');
     }
 
-    // console.log('Alergias seleccionadas:', Array.from(this.selectedAllergies));
+    // Eliminar visualmente de la lista (optimista)
+    this.userRecipes.delete(recipe);
   }
-
-  onSelectedPreference(event: Event, preference: IDietPreferences) {
-    const checked = (event.target as HTMLInputElement).checked;
-
-    if (checked) {
-      this.selectedPreferences.add(preference);
-      preference.isSelected = true;
-    } else {
-      this.selectedPreferences.delete(preference);
-      preference.isSelected = false;
-    }
-
-    // console.log('Preferencias seleccionadas:', Array.from(this.selectedPreferences));
-  }
-
-  updateSelections() {
-    const user = this.profileService.user$();
-
-    if (!user || !user.id) {
-      console.error('Error: Usuario no cargado correctamente.');
-      this.snackBar.open('Error: El usuario no está cargado correctamente.', 'Cerrar', {
-        horizontalPosition: 'right',
-        verticalPosition: 'top',
-        panelClass: ['error-snackbar'],
-      });
-      return;
-    }
-
-    // 🔍 Recolectamos TODAS las alergias que estén marcadas
-    const selectedAllergiesArray = this.allergiesService.allAllergies.filter(a => a.isSelected);
-
-    // 🔍 Recolectamos TODAS las preferencias que estén marcadas
-    const selectedPreferencesArray = this.dietPreferenceService.allDietPreferences.filter(p => p.isSelected);
-
-    const updatedUser: IUser = {
-      ...user,
-      allergies: selectedAllergiesArray,
-      preferences: selectedPreferencesArray,
-      role: user.role,
-    };
-
-    console.log('Actualizando usuario con:', updatedUser);
-    this.profileService.updateUserProfile(updatedUser);
-  }
-
 }

@@ -1,0 +1,61 @@
+<div class="custom-select-container" #selectContainer>
+  <div class="select-wrapper">
+    <div
+      class="select-trigger"
+      (click)="toggleDropdown()"
+      (keydown.enter)="toggleDropdown()"
+      (keydown.space)="toggleDropdown()"
+      tabindex="0"
+      role="button"
+      aria-haspopup="true">
+      <span class="placeholder-text" [class.has-value]="selectFormControl.value?.length > 0"
+        >{{selectFormControl.value?.length ? selectFormControl.value[0] : "Seleccione sus alergias"}}</span
+      >
+      @if (selectFormControl.value?.length > 1) {
+      <span class="additional-selection">
+        (+{{selectFormControl.value.length - 1}} {{selectFormControl.value?.length === 2 ? 'otro' : 'otros'}})
+      </span>
+      }
+    </div>
+
+    <div class="dropdown-panel" [class.open]="isOpen">
+      <div class="search-container">
+        <input
+          #search
+          type="text"
+          class="search-input"
+          autocomplete="off"
+          placeholder="Buscar"
+          [formControl]="searchTextboxControl"
+          (focus)="onSearchFocus()" />
+        @if (search.value) {
+        <button class="clear-button" (click)="clearSearch($event)">✕</button>
+        }
+      </div>
+
+      @if ((filteredOptions | async)?.length === 0) {
+      <div class="no-results">
+        <p>No se encontraron resultados</p>
+        <button class="add-option-button" (click)="addNewOption(search.value)">Agregar "{{search.value}}"</button>
+      </div>
+      }
+
+      <div class="options-container">
+        @for (option of filteredOptions | async; track option) {
+        <div
+          class="option-item"
+          [class.selected]="isSelected(option)"
+          (click)="toggleOption(option)"
+          (keydown.enter)="toggleOption(option)"
+          (keydown.space)="toggleOption(option)"
+          tabindex="0"
+          role="option"
+          [attr.aria-selected]="isSelected(option)">
+          <input type="checkbox" [checked]="isSelected(option)" (change)="toggleOption(option)" />
+          <span>{{option}}</span>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>
