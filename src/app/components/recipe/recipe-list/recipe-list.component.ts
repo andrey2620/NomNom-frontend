@@ -75,7 +75,15 @@ export class RecipeListComponent implements OnInit {
     const maxIaAttempts = 2;
 
     const stored = localStorage.getItem('user_ingredients');
-    const parsed: { name: string }[] = stored ? JSON.parse(stored) : [];
+    let parsed: { name: string }[] = [];
+
+    try {
+      parsed = stored ? JSON.parse(stored) : [];
+    } catch (e) {
+      console.warn('user_ingredients mal formateado, usando vacío');
+      parsed = [];
+    }
+
     const ingredientNames = parsed.map(i => i.name).filter(name => !!name.trim());
 
     if (!ingredientNames.length) {
@@ -191,19 +199,26 @@ export class RecipeListComponent implements OnInit {
     const maxIaAttempts = 2;
 
     const fetchRandom = () => {
+
+      if (window.location.hostname === 'localhost') {
+        console.warn('Deteniendo loop porque estamos en modo local sin IA');
+        this.loadAllFallbackAnimated(count);
+        return;
+      }
+      
       this.recipesService
         .getRandomRecipes()
         .pipe(
           catchError(err => {
             const detail = err?.error?.detail || '';
-            console.error('❌ Error receta aleatoria:', detail || err.message);
+            console.error('Error receta aleatoria:', detail || err.message);
 
             const isJsonInvalid = detail.includes('JSON inválido generado por el modelo');
             const maxAttempts = isJsonInvalid ? maxJsonAttempts : maxIaAttempts;
 
             attempts++;
             if (attempts < maxAttempts) {
-              setTimeout(fetchRandom, 150);
+              setTimeout(fetchRandom, 15);
             } else {
               const fallbackCount = count - loaded;
               this.loadAllFallbackAnimated(fallbackCount);
@@ -225,7 +240,7 @@ export class RecipeListComponent implements OnInit {
             }
           }
 
-          if (loaded < count) {
+          if (loaded < count && recipes.length > 0) {
             fetchRandom();
           }
         });

@@ -2,11 +2,13 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TooltipComponent } from '../../tool-tip/tool-tip.component';
 import { CATEGORY_IMAGE_MAP, IRecipe } from '../../../interfaces';
+import { SousChefComponent } from '../sous-chef/sous-chef.component';
+
 
 @Component({
   selector: 'app-view-recipe',
   standalone: true,
-  imports: [CommonModule, TooltipComponent],
+  imports: [CommonModule, TooltipComponent, SousChefComponent],
   templateUrl: './view-recipe.component.html',
   styleUrls: ['./view-recipe.component.scss'],
 })
