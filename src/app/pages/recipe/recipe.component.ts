@@ -162,7 +162,6 @@ export class RecipeComponent implements OnInit, AfterViewInit {
   }
 
   onGoToIngredients(): void {
-    console.log('onGoToIngredients');
     this.missingIngredientsModal.hideModal();
     this.router.navigate(['/app/generateRecipes']);
   }
