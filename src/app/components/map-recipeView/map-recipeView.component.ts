@@ -1,12 +1,10 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { catchError, delay, of } from 'rxjs';
-import { IRecipe, CATEGORY_IMAGE_MAP } from '../../interfaces';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { CATEGORY_IMAGE_MAP, IRecipe } from '../../interfaces';
 import Recipes from '../recipe/recipe-list/recipes.json';
-import { RecipesService } from '../../services/recipes.service';
 
 @Component({
-  selector: 'map-recipeView',
+  selector: 'app-map-recipe-view',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './map-recipeView.component.html',
@@ -22,25 +20,21 @@ export class MapRecipeViewComponent implements OnChanges {
   @Output() listInitialized = new EventEmitter<IRecipe[]>();
   @Output() cook = new EventEmitter<IRecipe>();
 
-  @Input() country: string = '';
-  
+  @Input() country = '';
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['country'] && this.country) {
       this.loadRecipes();
-      var recipeTitle = document.querySelector('.section-title') as HTMLHeadingElement;
+      const recipeTitle = document.querySelector('.section-title') as HTMLHeadingElement;
       if (recipeTitle) {
-        recipeTitle.innerText = `Recetas de ${this.country}`;
+        recipeTitle.innerHTML = `Recetas de <br /> ${this.country}`;
       }
     }
-    
   }
 
   loadRecipes(): void {
     const allRecipes: IRecipe[] = Recipes as IRecipe[];
-    this.itemList = allRecipes.filter(recipe =>
-      (recipe.country ?? 'Indefinido').toLowerCase() === this.country.toLowerCase()
-    );
+    this.itemList = allRecipes.filter(recipe => (recipe.country ?? 'Indefinido').toLowerCase() === this.country.toLowerCase());
   }
 
   loadSkeletons(count: number): void {
@@ -49,7 +43,6 @@ export class MapRecipeViewComponent implements OnChanges {
 
   onCook(recipe: IRecipe): void {
     this.cook.emit(recipe);
-    
   }
 
   getCategoryImage(category: string): string {
@@ -61,5 +54,4 @@ export class MapRecipeViewComponent implements OnChanges {
     const img = event.target as HTMLImageElement;
     img.src = 'assets/img/recipe/meal1.png';
   }
-  
 }
