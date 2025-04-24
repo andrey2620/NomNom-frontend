@@ -11,10 +11,23 @@ export class ShoppingListService {
     constructor(private http: HttpClient) { }
 
     createShoppingList(userId: number, name: string): Observable<any> {
-        const body = {
+        return this.http.post(`${this.apiUrl}`, {
             userId,
             name
-        };
-        return this.http.post(`${this.apiUrl}`, body);
+        });
     }
+
+    addManualItems(listId: number, items: any[]): Observable<any> {
+        return this.http.post(`${this.apiUrl}/${listId}/add-Items`, items);
+    }
+
+    downloadPdf(shoppingListId: number): Observable<Blob> {
+        return this.http.get(`http://localhost:8080/shoppingList/${shoppingListId}/download`, {
+            responseType: 'blob',
+            headers: {
+                'Accept': 'application/pdf'
+            }
+        });
+    }
+
 }
