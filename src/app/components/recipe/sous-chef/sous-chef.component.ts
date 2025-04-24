@@ -7,6 +7,7 @@ import { retry, timer } from 'rxjs';
 import { SousChefService } from '../../../services/sous-chef.service';
 import { UserService } from '../../../services/user.service';
 import { ToastService } from '../../../services/toast.service';
+import { Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-sous-chef',
@@ -16,6 +17,7 @@ import { ToastService } from '../../../services/toast.service';
   styleUrls: ['./sous-chef.component.scss'],
 })
 export class SousChefComponent implements OnInit, OnDestroy {
+  @Output() save = new EventEmitter<void>();
   @Input() recipe!: IRecipe;
 
   public volume = 0.5;
@@ -53,64 +55,10 @@ export class SousChefComponent implements OnInit, OnDestroy {
 
   // ---------- FAVORITES ----------
 
-  addToFavorites(): void {
-    if (!this.recipe?.name) {
-      this.toastService.showWarning('Receta inválida');
-      return;
-    }
-
-    this.recipesService.getRecipeByName(this.recipe.name).subscribe({
-      next: res => this.handleExistingRecipe(res),
-      error: err => this.handleMissingRecipe(err),
-    });
+  emitSave(): void {
+    this.save.emit(); // el padre lo maneja igual que el otro botón
   }
-
-  private handleExistingRecipe(response: any): void {
-    const recipeId = response.data?.id || response.data?.id_recipe;
-    if (!recipeId) {
-      this.toastService.showWarning('No se encontró ID válido');
-      return;
-    }
-
-    this.userService.saveFavoriteRecipe(recipeId).subscribe({
-      next: () => this.toastService.showSuccess('Receta guardada como favorita'),
-      error: () => this.toastService.showError('Error al guardar receta como favorita'),
-    });
-  }
-
-  private handleMissingRecipe(err: any): void {
-    console.warn('No se encontró la receta. Guardando como manual...', err);
-    const manualDto = this.buildManualRecipeDto();
-    if (!manualDto) {
-      this.toastService.showError('No se pudo construir la receta para guardar');
-      return;
-    }
-
-    this.recipesService.addManualRecipe(manualDto).subscribe({
-      next: saved => this.saveManualAsFavorite(saved),
-      error: err => this.handleManualSaveError(err),
-    });
-  }
-
-  private saveManualAsFavorite(saved: any): void {
-    const recipeId = saved?.id || saved?.id_recipe;
-    if (!recipeId) {
-      this.toastService.showError('La receta fue creada pero no tiene ID');
-      return;
-    }
-
-    this.userService.saveFavoriteRecipe(recipeId).subscribe({
-      next: () => this.toastService.showSuccess('Receta guardada como favorita'),
-      error: () => this.toastService.showError('Error al guardar receta favorita'),
-    });
-  }
-
-  private handleManualSaveError(err: any): void {
-    console.error('Error al guardar receta manual', err);
-    this.toastService.showWarning('No se pudo guardar en el servidor, se guardará localmente');
-    this.saveFavoriteToLocal(this.recipe);
-  }
-
+  
   private saveFavoriteToLocal(recipe: IRecipe): void {
     const stored = localStorage.getItem('localFavorites');
     const currentFavorites: IRecipe[] = stored ? JSON.parse(stored) : [];
@@ -123,24 +71,6 @@ export class SousChefComponent implements OnInit, OnDestroy {
     } else {
       this.toastService.showInfo('La receta ya estaba guardada localmente');
     }
-  }
-
-  private buildManualRecipeDto(): any {
-    return this.recipe
-      ? {
-          name: this.recipe.name,
-          recipeCategory: this.recipe.recipeCategory?.toUpperCase?.() || 'COMIDA',
-          preparationTime: this.recipe.preparationTime,
-          description: this.recipe.description || '',
-          nutritionalInfo: this.recipe.nutritionalInfo || '',
-          instructions: this.recipe.instructions || '',
-          recipeIngredients: this.recipe.ingredients.map(ing => ({
-            ingredient: { name: ing.name },
-            quantity: ing.quantity || '',
-            measurement: ing.measurement || '',
-          })),
-        }
-      : null;
   }
 
   // ---------- AUDIO ----------
