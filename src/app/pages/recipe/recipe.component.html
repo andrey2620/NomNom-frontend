@@ -18,12 +18,19 @@
     <ng-container *ngIf="selectedRecipe">
       <!-- vista receta -->
       <div class="app-view-recipe-container w-100 h-100">
-        <app-view-recipe [recipe]="selectedRecipe" (save)="onRecipeSaved($event)"> </app-view-recipe>
-      </div>
+        <app-view-recipe
+        *ngIf="selectedRecipe"
+        [recipe]="selectedRecipe"
+        [areActionsAvailable]="true"
+        (save)="onRecipeSaved($event)">
+      </app-view-recipe>      </div>
 
       <!-- sous chef -->
       <div class="app-sous-chef-container d-flex w-100 flex-column h-100">
-        <app-sous-chef class="h-100" [recipe]="selectedRecipe"></app-sous-chef>
+        <app-sous-chef class="h-100"
+          *ngIf="selectedRecipe"
+          [recipe]="selectedRecipe">
+        </app-sous-chef>
       </div>
     </ng-container>
   </div>
