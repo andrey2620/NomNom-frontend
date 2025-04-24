@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgModel } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { ToastService } from '../../../services/toast.service';
@@ -12,9 +12,17 @@ import { ToastService } from '../../../services/toast.service';
   templateUrl: './reset-password.component.html',
   styleUrl: './reset-password.component.scss',
 })
+
+
+
 export class ResetPasswordComponent {
   public resetForm = { password: '', confirmPassword: '' };
   private token = '';
+  public showPassword = false;
+  public showConfirmPassword = false;
+
+  @ViewChild('newPassword') passwordModel!: NgModel;
+  @ViewChild('confirmPassword') confirmPasswordModel!: NgModel;
 
   constructor(
     private route: ActivatedRoute,
@@ -33,6 +41,13 @@ export class ResetPasswordComponent {
 
     const { password, confirmPassword } = this.resetForm;
 
+    if(!this.passwordModel?.invalid) {
+      this.passwordModel.control.markAsTouched();
+    }
+    if(!this.confirmPasswordModel?.invalid) {
+      this.confirmPasswordModel.control.markAsTouched();
+    }
+
     if (!password || !confirmPassword) {
       this.toastService.showError('Todos los campos son obligatorios.');
       return;
@@ -40,6 +55,7 @@ export class ResetPasswordComponent {
 
     if (password !== confirmPassword) {
       this.toastService.showError('Las contraseñas no coinciden.');
+      this.confirmPasswordModel.control.markAsTouched();
       return;
     }
 
@@ -59,5 +75,11 @@ export class ResetPasswordComponent {
   navigateToLogin() {
     this.token = '';
     this.router.navigateByUrl('login');
+  }
+  public togglePassword() {
+    this.showPassword = !this.showPassword;
+  }
+  public toggleConfirmPassword() {
+    this.showConfirmPassword = !this.showConfirmPassword;
   }
 }
