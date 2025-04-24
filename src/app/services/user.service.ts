@@ -2,6 +2,7 @@ import { inject, Injectable, signal } from '@angular/core';
 import { ISearch, IUser } from '../interfaces';
 import { AlertService } from './alert.service';
 import { BaseService } from './base-service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -70,4 +71,11 @@ export class UserService extends BaseService<IUser> {
       },
     });
   }
+
+  saveFavoriteRecipe(recipeId: number): Observable<any> {
+    return this.http.post(`/users/me/favorites/${recipeId}`, null);
+  }
+  
+  
+
 }

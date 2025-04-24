@@ -12,7 +12,7 @@
     <header class="navbar">
       <img src="../../../assets/LogoNomNom/4.png" alt="Logo de Nom Nom Explorers" class="logo" />
       <nav>
-        <ul id="menu">
+        <ul id="menu" [class.active]="isMenuActive">
           <li class="m-3"><a href="#home" class="active">INICIO</a></li>
           <li class="m-3"><a href="#features">FUNCIONALIDADES</a></li>
           <li class="m-3"><a href="#join">ÚNETE</a></li>
@@ -20,7 +20,7 @@
           <li class="gotoapp p-3 d-none" id="gotoapp"><a href="app/generateRecipes">VE AL APP</a></li>
         </ul>
       </nav>
-      <div class="menu-icon" onclick="toggleMenu()">☰</div>
+      <button class="menu-icon" (click)="toggleMenu()">☰</button>
     </header>
 
     <!-- Sección Hero -->

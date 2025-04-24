@@ -109,13 +109,15 @@ nav ul li a:hover {
 
 /* Hamburger Menu (Hidden by Default) */
 .menu-icon {
+  background-color: transparent;
+  border: none;
   cursor: pointer;
   display: none;
   font-size: 1.8rem;
 }
 
 /* Mobile Styles */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1024px) {
   .navbar {
     align-items: center;
     flex-direction: row;
@@ -137,10 +139,11 @@ nav ul li a:hover {
     right: 0;
     top: 100%;
     width: 100%;
+    z-index: 1000;
   }
 
   /* Show Menu When Active */
-  nav ul.show {
+  nav ul.active {
     display: flex;
   }
 

@@ -18,7 +18,7 @@ export class IngredientsComponent {
 
   selectedIngredients: number[] = [];
   localStorageIngredients: any[] = [];
-  allergies: number[] = []; // Array para almacenar IDs de alergias
+  allergies: string[] = []; // Array para almacenar IDs de alergias
 
   ngOnInit() {
     const savedIngredients = localStorage.getItem('user_ingredients');
@@ -32,7 +32,7 @@ export class IngredientsComponent {
     const userString = localStorage.getItem('auth_user');
     if (userString) {
       const user = JSON.parse(userString);
-      this.allergies = user.allergies?.map((allergy: any) => allergy.id) || [];
+      this.allergies = user.allergies?.map((allergy: any) => allergy.name) || [];
     }
 
     this.selectedIngredients = [...this.selectedIds];
@@ -59,7 +59,7 @@ export class IngredientsComponent {
     this.selectedChange.emit([...this.selectedIngredients]);
   }
 
-  isAllergy(id: number): boolean {
-    return this.allergies.includes(id);
+  isAllergy(name: string): boolean {
+    return this.allergies.includes(name);
   }
 }

@@ -5,6 +5,7 @@
       <div class="d-flex align-items-start gap-2">
         <input type="text" [(ngModel)]="searchQuery" placeholder="Buscar..." (input)="filterIngredients()" class="form-control w-100 searchBar" />
         <app-dropdown-category (categorySelected)="onCategoryChange($event)"></app-dropdown-category>
+        <!-- <button class="btn btn-add-ingredient"><i class="fa-solid fa-plus"></i></button> -->
       </div>
       <div class="d-flex justify-content-between align-items-center flex-wrap">
         <h1 class="poppins-title h3 text-center text-md-start">Escoge tus ingredientes</h1>

@@ -12,6 +12,8 @@ import { filter } from 'rxjs';
   imports: [CommonModule, RouterModule],
 })
 export class nomNomLandingComponent implements OnInit, AfterViewInit {
+  isMenuActive = false;
+
   constructor(
     private router: Router,
     private viewportScroller: ViewportScroller
@@ -28,6 +30,10 @@ export class nomNomLandingComponent implements OnInit, AfterViewInit {
         }, 100);
       }
     });
+  }
+
+  toggleMenu() {
+    this.isMenuActive = !this.isMenuActive;
   }
 
   ngOnInit() {
