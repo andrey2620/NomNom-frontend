@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core'; // Asegurate de importar OnInit
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-
 import { ShoppingListService } from '../../../services/shoppingList.service';
 import { FormsModule } from '@angular/forms';
-
-
 import { IRecipe } from '../../../interfaces'; // Asegurate de importar tu interfaz
 
 
@@ -22,10 +19,17 @@ export class ShoppingListCreateComponent implements OnInit {
   public listName: string = '';
   public favoriteRecipes: IRecipe[] = [];
   public selectedRecipes: string[] = [];
+  public manualIngredients: { name: string; quantity: string }[] = [];
+
 
   title = 'Pantalla para crear lista de compras';
 
+
   constructor(private router: Router, private shoppingListService: ShoppingListService) { }
+
+  ngOnInit(): void {
+    this.loadLocalFavorites();
+  }
 
 
   goToCreateList() {
@@ -55,14 +59,10 @@ export class ShoppingListCreateComponent implements OnInit {
     return this.selectedRecipes.includes(recipeName);
   }
 
-
   newIngredient = {
     name: '',
     quantity: ''
   };
-
-  // NUEVO: lista de ingredientes agregados manualmente
-  manualIngredients: { name: string; quantity: string }[] = [];
 
   // NUEVO: método para agregar un ingrediente
   addManualIngredient() {
@@ -100,11 +100,4 @@ export class ShoppingListCreateComponent implements OnInit {
     }
   }
 
-  goToCreateList(): void {
-    this.router.navigate(['/app/shoppingList/create']);
-  }
-
-  goToViewLists(): void {
-    this.router.navigate(['/app/shoppingList/view']);
-  }
 }
