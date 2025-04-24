@@ -138,4 +138,20 @@ export class RecipesService extends BaseService<IRecipe> {
         },
       });
   }
+
+  getRecipeByName(name: string) {
+    return this.http.get(`${this.source}/by-name`, {
+      params: { name }
+    });
+  }
+
+
+  addManualRecipe(recipe: any): Observable<IRecipe> {
+    return this.http.post<IRecipe>('/recipes/manual', recipe);
+  }
+  
+  
+  
+
+  
 }

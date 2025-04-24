@@ -1,10 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IRecipe, ISuggestions } from '../../../interfaces';
 import { RecipesService } from '../../../services/recipes.service';
 import { retry, timer } from 'rxjs';
 import { SousChefService } from '../../../services/sous-chef.service';
+import { UserService } from '../../../services/user.service';
+import { ToastService } from '../../../services/toast.service';
 
 @Component({
   selector: 'app-sous-chef',
@@ -13,18 +15,15 @@ import { SousChefService } from '../../../services/sous-chef.service';
   templateUrl: './sous-chef.component.html',
   styleUrls: ['./sous-chef.component.scss'],
 })
-export class SousChefComponent implements OnInit {
+export class SousChefComponent implements OnInit, OnDestroy {
   @Input() recipe!: IRecipe;
-
-  constructor(
-    private recipesService: RecipesService,
-    private sousChefService: SousChefService
-  ) {}
 
   public volume = 0.5;
   public rate = 1;
   public isSpeaking = false;
   public isSousChefOn = false;
+  public isCreatingAudio = false;
+
   public currentVoiceName: 'daniela' | 'mauricio' = 'daniela';
   public selectedVoice: SpeechSynthesisVoice | null = null;
   public audioInstance: HTMLAudioElement | null = null;
@@ -35,12 +34,236 @@ export class SousChefComponent implements OnInit {
     kidsParticipation: [],
   };
 
+  constructor(
+    private recipesService: RecipesService,
+    private sousChefService: SousChefService,
+    private userService: UserService,
+    private toastService: ToastService
+  ) {}
+
   ngOnInit(): void {
+    console.log('Receta recibida por SousChef:', this.recipe);
     speechSynthesis.onvoiceschanged = () => this.setDefaultVoice();
     this.setDefaultVoice();
   }
 
-  private setDefaultVoice() {
+  ngOnDestroy(): void {
+    this.stop();
+  }
+
+  // ---------- FAVORITES ----------
+
+  addToFavorites(): void {
+    if (!this.recipe?.name) {
+      this.toastService.showWarning('Receta inválida');
+      return;
+    }
+
+    this.recipesService.getRecipeByName(this.recipe.name).subscribe({
+      next: res => this.handleExistingRecipe(res),
+      error: err => this.handleMissingRecipe(err),
+    });
+  }
+
+  private handleExistingRecipe(response: any): void {
+    const recipeId = response.data?.id || response.data?.id_recipe;
+    if (!recipeId) {
+      this.toastService.showWarning('No se encontró ID válido');
+      return;
+    }
+
+    this.userService.saveFavoriteRecipe(recipeId).subscribe({
+      next: () => this.toastService.showSuccess('Receta guardada como favorita'),
+      error: () => this.toastService.showError('Error al guardar receta como favorita'),
+    });
+  }
+
+  private handleMissingRecipe(err: any): void {
+    console.warn('No se encontró la receta. Guardando como manual...', err);
+    const manualDto = this.buildManualRecipeDto();
+    if (!manualDto) {
+      this.toastService.showError('No se pudo construir la receta para guardar');
+      return;
+    }
+
+    this.recipesService.addManualRecipe(manualDto).subscribe({
+      next: saved => this.saveManualAsFavorite(saved),
+      error: err => this.handleManualSaveError(err),
+    });
+  }
+
+  private saveManualAsFavorite(saved: any): void {
+    const recipeId = saved?.id || saved?.id_recipe;
+    if (!recipeId) {
+      this.toastService.showError('La receta fue creada pero no tiene ID');
+      return;
+    }
+
+    this.userService.saveFavoriteRecipe(recipeId).subscribe({
+      next: () => this.toastService.showSuccess('Receta guardada como favorita'),
+      error: () => this.toastService.showError('Error al guardar receta favorita'),
+    });
+  }
+
+  private handleManualSaveError(err: any): void {
+    console.error('Error al guardar receta manual', err);
+    this.toastService.showWarning('No se pudo guardar en el servidor, se guardará localmente');
+    this.saveFavoriteToLocal(this.recipe);
+  }
+
+  private saveFavoriteToLocal(recipe: IRecipe): void {
+    const stored = localStorage.getItem('localFavorites');
+    const currentFavorites: IRecipe[] = stored ? JSON.parse(stored) : [];
+    const exists = currentFavorites.some(r => r.name === recipe.name);
+
+    if (!exists) {
+      currentFavorites.push(recipe);
+      localStorage.setItem('localFavorites', JSON.stringify(currentFavorites));
+      this.toastService.showSuccess('Receta guardada localmente como favorita');
+    } else {
+      this.toastService.showInfo('La receta ya estaba guardada localmente');
+    }
+  }
+
+  private buildManualRecipeDto(): any {
+    return this.recipe
+      ? {
+          name: this.recipe.name,
+          recipeCategory: this.recipe.recipeCategory?.toUpperCase?.() || 'COMIDA',
+          preparationTime: this.recipe.preparationTime,
+          description: this.recipe.description || '',
+          nutritionalInfo: this.recipe.nutritionalInfo || '',
+          instructions: this.recipe.instructions || '',
+          recipeIngredients: this.recipe.ingredients.map(ing => ({
+            ingredient: { name: ing.name },
+            quantity: ing.quantity || '',
+            measurement: ing.measurement || '',
+          })),
+        }
+      : null;
+  }
+
+  // ---------- AUDIO ----------
+
+  speak(): void {
+    if (!this.recipe) return;
+    if (this.audioInstance && !this.audioInstance.paused && !this.audioInstance.ended) return;
+
+    const texto = this.buildText();
+    this.prepareAudioState();
+
+    this.cleanupPreviousAudio();
+    this.sousChefService.getAudio(texto, this.currentVoiceName).subscribe({
+      next: blob => this.playAudioBlob(blob),
+      error: err => this.handleAudioFallback(err, texto),
+    });
+  }
+
+  private prepareAudioState(): void {
+    this.isSpeaking = true;
+    this.isSousChefOn = true;
+    this.isCreatingAudio = true;
+  }
+
+  private cleanupPreviousAudio(): void {
+    if (this.audioInstance) {
+      this.audioInstance.pause();
+      this.audioInstance.src = '';
+      this.audioInstance.load();
+    }
+  }
+
+  private playAudioBlob(blob: Blob): void {
+    const audioUrl = URL.createObjectURL(blob);
+    this.audioInstance = new Audio(audioUrl);
+    this.audioInstance.volume = this.volume;
+
+    this.audioInstance.onended = () => this.resetAudioState();
+    this.audioInstance.onplay = () => {
+      this.isCreatingAudio = false;
+      this.isSpeaking = true;
+      this.isSousChefOn = true;
+    };
+
+    this.audioInstance.play();
+  }
+
+  private resetAudioState(): void {
+    this.isSpeaking = false;
+    this.isSousChefOn = false;
+    this.audioInstance = null;
+    this.isCreatingAudio = false;
+  }
+
+  private async handleAudioFallback(err: any, texto: string): Promise<void> {
+    console.warn('ElevenLabs falló, usando voz del navegador.');
+
+    if (this.currentVoiceName === 'daniela') {
+      this.currentVoiceName = 'mauricio';
+    }
+
+    if (err.error instanceof Blob) {
+      const errorText = await err.error.text();
+      console.error('Detalle del error:', errorText);
+    } else {
+      console.error('Error inesperado:', err);
+    }
+
+    const utterance = new SpeechSynthesisUtterance(texto);
+    utterance.volume = this.volume;
+    utterance.rate = this.rate;
+    utterance.lang = 'es-ES';
+    if (this.selectedVoice) utterance.voice = this.selectedVoice;
+
+    speechSynthesis.speak(utterance);
+    utterance.onend = () => this.resetAudioState();
+  }
+
+  toggleSousChef(): void {
+    if (this.audioInstance) {
+      if (this.audioInstance.paused) {
+        this.audioInstance.play();
+        this.isSpeaking = true;
+        this.isSousChefOn = true;
+      } else {
+        this.audioInstance.pause();
+        this.isSpeaking = false;
+        this.isSousChefOn = false;
+      }
+    } else {
+      this.speak();
+    }
+  }
+
+  restartAudio(): void {
+    if (this.audioInstance) {
+      this.audioInstance.pause();
+      this.audioInstance.currentTime = 0;
+      this.audioInstance.play();
+      this.isSpeaking = true;
+      this.isSousChefOn = true;
+    }
+  }
+
+  stop(): void {
+    if (this.audioInstance) {
+      this.audioInstance.pause();
+      this.audioInstance.src = '';
+      this.audioInstance.load();
+      this.audioInstance = null;
+    }
+    this.isSpeaking = false;
+    this.isSousChefOn = false;
+    speechSynthesis.cancel();
+  }
+
+  toggleVoiceGender(): void {
+    this.stop();
+    this.currentVoiceName = this.currentVoiceName === 'daniela' ? 'mauricio' : 'daniela';
+    setTimeout(() => this.speak(), 100);
+  }
+
+  private setDefaultVoice(): void {
     const voices = speechSynthesis.getVoices();
     this.selectedVoice =
       voices.find(v => v.lang === 'es-ES' && v.name.includes('Google')) ||
@@ -48,117 +271,26 @@ export class SousChefComponent implements OnInit {
       voices[0] || null;
   }
 
-  speak() {
-    if (!this.recipe) return;
-
-    const texto = this.buildText();
-    this.isSpeaking = true;
-
-    this.sousChefService.getAudio(texto, this.currentVoiceName).subscribe({
-      next: (audioBlob: Blob) => {
-        const audioUrl = URL.createObjectURL(audioBlob);
-        this.audioInstance = new Audio(audioUrl);
-        this.audioInstance.volume = this.volume;
-        this.audioInstance.play();
-
-        this.audioInstance.onended = () => {
-          this.isSpeaking = false;
-          this.audioInstance = null;
-        };
-      },
-      error: async err => {
-        console.warn('ElevenLabs falló, usando voz del navegador.');
-
-        if (this.currentVoiceName === 'daniela') {
-          console.warn('Cambiando a voz de Mauricio por fallback.');
-          this.currentVoiceName = 'mauricio';
-        }
-
-        if (err.error instanceof Blob) {
-          const errorText = await err.error.text();
-          console.error('Detalle del error 500:', errorText);
-        } else {
-          console.error('Error no esperado:', err);
-        }
-
-        // Fallback: voz del navegador
-        console.warn('Cambiando a voz de Google como Back up.');
-        const utterance = new SpeechSynthesisUtterance();
-        utterance.text = texto;
-        utterance.volume = this.volume;
-        utterance.rate = this.rate;
-        utterance.lang = 'es-ES';
-
-        if (this.selectedVoice) {
-          utterance.voice = this.selectedVoice;
-        }
-
-        speechSynthesis.speak(utterance);
-        utterance.onend = () => {
-          this.isSpeaking = false;
-        };
-      },
-    });
+  private buildText(): string {
+    const intro = `¡Bienvenido a la NomNomcocina! Hoy vamos a preparar: ${this.recipe.name}.`;
+    const lista = this.recipe.ingredients.map(i => i.name || 'ingrediente desconocido');
+    const ingredientes = `Necesitaremos ${lista.length} ingrediente(s): ${lista.join(', ')}.`;
+    const pasos = `Vamos a hacer los pasos uno por uno: ${this.recipe.instructions}.`;
+    const despedida = `¡Nos vemos en la próxima receta!`;
+    return `${intro} ${ingredientes} ${pasos} ${despedida}`;
   }
 
-  stop() {
-    if (this.audioInstance) {
-      this.audioInstance.pause();
-      this.audioInstance.currentTime = 0;
-      this.audioInstance = null;
-    }
-
-    speechSynthesis.cancel();
-    this.isSpeaking = false;
-  }
-
-  toggleSousChef() {
-    this.isSousChefOn = !this.isSousChefOn;
-
-    if (this.isSousChefOn) {
-      this.speak();
-    } else {
-      this.stop();
-    }
-  }
-
-  toggleVoiceGender(): void {
-    this.stop();
-    this.currentVoiceName =
-      this.currentVoiceName === 'daniela' ? 'mauricio' : 'daniela';
-  }
+  // ---------- SUGERENCIAS ----------
 
   suggestPresentation(): void {
     if (!this.recipe) return;
 
     this.recipesService
       .generateSuggestions(this.recipe)
-      .pipe(
-        retry({
-          count: 10,
-          delay: (_, retryCount) => timer(2000),
-        })
-      )
+      .pipe(retry({ count: 10, delay: () => timer(2000) }))
       .subscribe({
-        next: res => {
-          this.suggestions = res.data || {
-            ingredientSubstitutions: [],
-            presentationTips: [],
-            kidsParticipation: [],
-          };
-        },
-        error: err => {
-          console.error('Error al generar sugerencias:', err);
-        },
+        next: res => this.suggestions = res.data || this.suggestions,
+        error: err => console.error('Error al generar sugerencias:', err),
       });
-  }
-
-  private buildText(): string {
-    const intro = `¡Bienvenido a la NomNomcocina! ... ¿Tienes tu delantal listo? Yo soy tu Sous Chef, Hoy tenemos una receta que te va a encantar. Vamos a preparar: ${this.recipe.name}. ¡Va a ser riquísimo!`;
-    const ingredientes = `Para empezar, vamos a necesitar estos ingredientes: ${this.recipe.instructions}. ¿Estás listo?`;
-    const pasos = `Ahora, atención, porque vamos a hacer los pasos uno por uno: ${this.recipe.instructions}. ¡Buen trabajo, chef!`;
-    const despedida = `Eso fue todo por hoy. ¡Nos vemos en la próxima receta!`;
-
-    return `${intro} ${ingredientes} ${pasos} ${despedida}`;
   }
 }

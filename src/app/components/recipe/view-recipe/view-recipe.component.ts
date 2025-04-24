@@ -3,7 +3,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TooltipComponent } from '../../tool-tip/tool-tip.component';
 import { CATEGORY_IMAGE_MAP, IRecipe } from '../../../interfaces';
 import { SousChefComponent } from '../sous-chef/sous-chef.component';
-
+import { UserService } from '../../../services/user.service'; 
+import { ToastService } from '../../../services/toast.service';
 
 @Component({
   selector: 'app-view-recipe',
@@ -19,6 +20,8 @@ export class ViewRecipeComponent {
 
   @Output() save = new EventEmitter<IRecipe>();
   @Output() delete = new EventEmitter<IRecipe>();
+
+  constructor(private userService: UserService,   private toastService: ToastService) {}
 
   //el padre lo guarda
   saveRecipe(): void {

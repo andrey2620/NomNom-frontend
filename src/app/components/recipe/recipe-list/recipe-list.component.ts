@@ -87,7 +87,7 @@ export class RecipeListComponent implements OnInit {
     const ingredientNames = parsed.map(i => i.name).filter(name => !!name.trim());
 
     if (!ingredientNames.length) {
-      console.warn('⚠️ No hay ingredientes válidos en localStorage');
+      console.warn('No hay ingredientes válidos en localStorage');
       this.loadAllFallbackAnimated(count);
       return;
     }

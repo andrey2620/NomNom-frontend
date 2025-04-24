@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core'; // Asegurate de importar OnInit
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-
+import { IRecipe } from '../../../interfaces'; // Asegurate de importar tu interfaz
 
 @Component({
   selector: 'app-shopping-list-create',
@@ -10,35 +10,42 @@ import { Router } from '@angular/router';
   templateUrl: './shoppingList-create.component.html',
   styleUrls: ['./shoppingList-create.component.scss']
 })
-export class ShoppingListCreateComponent {
+export class ShoppingListCreateComponent implements OnInit {
   public listName: string = '';
+  public favoriteRecipes: IRecipe[] = [];
+  public selectedRecipes: string[] = [];
+
   title = 'Pantalla para crear lista de compras';
+
   constructor(private router: Router) {}
 
-  
-  goToCreateList() {
-    this.router.navigate(['/app/shoppingList/create']);
-  }
-  
-  goToViewLists() {
-    this.router.navigate(['/app/shoppingList/view']);
+  ngOnInit(): void {
+    this.loadLocalFavorites();
   }
 
-  selectedRecipes: string[] = [];
+  private loadLocalFavorites(): void {
+    const stored = localStorage.getItem('localFavorites');
+    this.favoriteRecipes = stored ? JSON.parse(stored) : [];
+  }
 
-  toggleSelection(recipe: string) {
-    const index = this.selectedRecipes.indexOf(recipe);
+  toggleSelection(recipeName: string): void {
+    const index = this.selectedRecipes.indexOf(recipeName);
     if (index > -1) {
-      this.selectedRecipes.splice(index, 1); // quitar si ya estaba
+      this.selectedRecipes.splice(index, 1);
     } else {
-      this.selectedRecipes.push(recipe); // agregar si no estaba
+      this.selectedRecipes.push(recipeName);
     }
   }
 
-  isSelected(recipe: string): boolean {
-    return this.selectedRecipes.includes(recipe);
+  isSelected(recipeName: string): boolean {
+    return this.selectedRecipes.includes(recipeName);
   }
 
-  
+  goToCreateList(): void {
+    this.router.navigate(['/app/shoppingList/create']);
+  }
 
+  goToViewLists(): void {
+    this.router.navigate(['/app/shoppingList/view']);
+  }
 }
