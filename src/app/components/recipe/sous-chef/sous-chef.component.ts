@@ -73,7 +73,6 @@ export class SousChefComponent implements OnInit, OnDestroy {
     }
   }
 
-  // ---------- AUDIO ----------
 
   speak(): void {
     if (!this.recipe) return;
