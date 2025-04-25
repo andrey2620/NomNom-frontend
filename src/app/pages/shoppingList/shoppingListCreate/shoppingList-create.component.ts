@@ -21,6 +21,9 @@ export class ShoppingListCreateComponent implements OnInit {
   public favoriteRecipes: IRecipe[] = [];
   public selectedRecipes: IRecipe[] = [];
   public manualIngredients: { name: string; quantity: string }[] = [];
+  public lastCreatedListId?: number;
+
+
 
 
   title = 'Pantalla para crear lista de compras';
@@ -180,22 +183,6 @@ export class ShoppingListCreateComponent implements OnInit {
 
   }
 
-  guardarLista() {
-    const userId = 2; // Este valor puede venir de tu AuthService o localStorage
-    if (!this.listName) return;
-
-    this.shoppingListService.createShoppingList(userId, this.listName).subscribe({
-      next: (res) => {
-        console.log('Lista guardada:', res);
-        alert('Lista guardada correctamente');
-      },
-      error: (err) => {
-        console.error('Error al guardar:', err);
-        alert('Ocurrió un error al guardar la lista');
-      }
-    });
-    localStorage.removeItem('shoppingList_draft');
-  }
 
   removeManualIngredient(item: { name: string; quantity: string }) {
     const index = this.manualIngredients.indexOf(item);
@@ -203,6 +190,58 @@ export class ShoppingListCreateComponent implements OnInit {
       this.manualIngredients.splice(index, 1);
     }
   }
+
+  guardarLista() {
+    const userId = 2; // Reemplaza esto en el futuro por el usuario logueado
+    if (!this.listName) {
+      alert('Debes darle un nombre a la lista');
+      return;
+    }
+
+    this.shoppingListService.createShoppingList(userId, this.listName).subscribe({
+      next: (res) => {
+        const listId = res.id;
+        this.lastCreatedListId = listId;
+
+        // Luego agregamos los ingredientes manuales
+        if (this.manualIngredients.length > 0) {
+          const itemsToAdd = this.manualIngredients.map(item => ({
+            ingredientId: null, // null o dejarlo sin enviar si no existe
+            name: item.name,
+            quantity: item.quantity,
+            measurement: null
+          }));
+
+          this.shoppingListService.addManualItems(listId, itemsToAdd).subscribe({
+            next: () => {
+              alert('Lista guardada correctamente con ingredientes manuales');
+              this.resetFormulario();
+            },
+            error: (err) => {
+              console.error('Error al agregar ingredientes:', err);
+              alert('Lista creada pero falló al agregar ingredientes');
+            }
+          });
+        } else {
+          alert('Lista guardada correctamente');
+          this.resetFormulario();
+        }
+      },
+      error: (err) => {
+        console.error('Error al guardar la lista:', err);
+        alert('Ocurrió un error al guardar la lista');
+      }
+    });
+    localStorage.removeItem('shoppingList_draft');
+  }
+
+  resetFormulario() {
+    this.listName = '';
+    this.manualIngredients = [];
+    this.newIngredient = { name: '', quantity: '' };
+    this.selectedRecipes = [];
+  }
+
 
   private saveToLocalStorage(): void {
     localStorage.setItem('shoppingList_draft', JSON.stringify({
@@ -212,5 +251,6 @@ export class ShoppingListCreateComponent implements OnInit {
     }));
   }
   
+
 
 }

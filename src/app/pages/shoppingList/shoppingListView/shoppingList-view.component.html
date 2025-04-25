@@ -8,7 +8,9 @@
         <label class="fw-bold mb-2">Buscar lista</label>
         <input type="text" class="form-control mb-3" placeholder="Buscar receta..." />
 
-        <div *ngFor="let list of savedLists" class="d-flex justify-content-between align-items-center mb-2 bg-light rounded px-3 py-2" (click)="selectList(list)">
+        <div *ngFor="let list of savedLists"
+          class="d-flex justify-content-between align-items-center mb-2 bg-light rounded px-3 py-2"
+          (click)="selectList(list)">
           <span class="fw-semibold">{{ list.name }}</span>
           <button class="btn btn-outline-dark btn-sm rounded-pill">Ver</button>
         </div>
@@ -18,7 +20,7 @@
     <!-- Columna centro: contenido de la lista -->
     <div class="col-12 col-lg-4">
       <div class=" p-3 rounded shadow bg-white">
-        <h4 class="fw-bold mb-3">Lista de Navidad</h4>
+        <h4 class="fw-bold mb-3">{{ selectedListName || 'Selecciona una lista' }}</h4>
         <ul class="list-unstyled scroll-box-items" style="max-height: 250px; overflow-y: auto;">
           <li *ngFor="let item of selectedListItems" class="d-flex justify-content-between align-items-center mb-2">
             <div>
@@ -33,7 +35,6 @@
           <label class="fw-bold mb-1">Nuevo Ingrediente</label>
           <input type="text" class="form-control mb-2" placeholder="Escribe ingrediente..." />
           <button class="btn btn-outline-success rounded-pill">Agregar ingrediente</button>
-          <button class="btn">Alison</button>
 
         </div>
       </div>
