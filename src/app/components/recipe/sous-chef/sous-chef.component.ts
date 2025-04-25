@@ -189,8 +189,9 @@ export class SousChefComponent implements OnInit, OnDestroy {
   toggleVoiceGender(): void {
     this.stop();
     this.currentVoiceName = this.currentVoiceName === 'daniela' ? 'mauricio' : 'daniela';
-    setTimeout(() => this.speak(), 100);
+    this.toastService.showInfo(`Has cambiado a ${this.currentVoiceName === 'daniela' ? 'Chef Daniela' : 'Chef Mauricio'}`);
   }
+  
 
   private setDefaultVoice(): void {
     const voices = speechSynthesis.getVoices();
