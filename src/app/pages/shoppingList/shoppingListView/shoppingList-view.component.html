@@ -27,16 +27,9 @@
               <input type="checkbox" [checked]="item.checked" />
               <span>{{ item.name }}</span>
             </div>
-            <button class="btn btn-sm btn-danger">✕</button>
           </li>
         </ul>
 
-        <div class="mt-3">
-          <label class="fw-bold mb-1">Nuevo Ingrediente</label>
-          <input type="text" class="form-control mb-2" placeholder="Escribe ingrediente..." />
-          <button class="btn btn-outline-success rounded-pill">Agregar ingrediente</button>
-
-        </div>
       </div>
     </div>
 
@@ -46,11 +39,11 @@
         <div>
           <label class="fw-bold mb-1">Edita tu lista</label>
           <input type="text" class="form-control mb-3" placeholder="Escribe nombre de la lista" />
-          <button class="btn btn-success rounded-pill w-100 mb-3">Actualizar</button>
+          <button class="btn btn-success rounded-pill w-100 mb-3" (click)="updateListName()">Actualizar</button>
         </div>
         <div class="d-grid gap-2">
-          <button class="btn rounded-pill btn-outline-secondary">Descargar</button>
-          <button class="btn rounded-pill btn-outline-secondary">Borrar</button>
+          <button class="btn rounded-pill btn-outline-secondary" (click)="downloadListPdf()">Descargar</button>
+          <button class="btn rounded-pill btn-outline-secondary" (click)="deleteSelectedList()">Borrar</button>
         </div>
       </div>
     </div>

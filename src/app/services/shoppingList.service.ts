@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { IResponse } from '../interfaces';
 
 @Injectable({
     providedIn: 'root'
@@ -33,5 +34,18 @@ export class ShoppingListService {
             }
         });
     }
+
+    getAllShoppingLists(): Observable<any> {
+        return this.http.get(`${this.apiUrl}/all`);
+    }
+
+    updateShoppingListName(listId: number, name: string): Observable<any> {
+        return this.http.put(`${this.apiUrl}/${listId}/rename`, { name });
+    }
+
+    deleteShoppingList(listId: number): Observable<any> {
+        return this.http.delete(`${this.apiUrl}/${listId}`);
+    }
+
 
 }
