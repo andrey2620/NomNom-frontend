@@ -119,6 +119,67 @@ input[type="checkbox"] {
   color: #2c5530;
 }
 
+// SCROLL 
+.scroll-recipes {
+  max-height: 290px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 6px;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #b55e5e;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+}
+
+.scroll-ingredients {
+  max-height: 260px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin-top: 1rem;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #7a9e58;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+}
+
+.table-container {
+  overflow-y: auto;
+  overflow-x: hidden;
+  flex: 1;
+  margin-top: 0.5rem;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #7a9e58;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+}
+
 
 
 @media (max-width: 768px) {
