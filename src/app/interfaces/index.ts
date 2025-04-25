@@ -15,9 +15,22 @@ export interface IResponse<T> {
   message: string;
   meta: T;
 }
+export interface IResponsev2<T> {
+  data: T;
+  message: string;
+  meta: {
+    method: string;
+    url: string;
+    totalPages?: number;
+    totalElements?: number;
+    pageNumber?: number;
+    pageSize?: number;
+    [key: string]: unknown;
+  };
+}
 
 export interface IUser {
-  id?: number;
+  id?: number | string;
   name?: string;
   lastname?: string;
   email?: string;
@@ -30,6 +43,8 @@ export interface IUser {
   picture?: string;
   allergies?: IAllergies[];
   preferences?: IDietPreferences[];
+  recipes?: IRecipe[];
+  menus?: IMenu[];
 }
 
 export interface IAuthority {
@@ -57,16 +72,6 @@ export interface IRole {
   description?: string;
   id?: number;
   name?: string;
-  updatedAt?: string;
-}
-
-export interface IGame {
-  id?: number;
-  name?: string;
-  imgURL?: string;
-  status?: string;
-  description?: string;
-  createdAt?: string;
   updatedAt?: string;
 }
 
@@ -111,20 +116,25 @@ export interface IDietPreferences {
 }
 
 export interface IRecipe {
+  id?: any;
+  data?: any;
   id_recipe?: number;
   name: string;
-  description: string;
+  description?: string; // ← este
   instructions: string;
   preparationTime: number;
-  nutritionalInfo: string;
+  nutritionalInfo?: string; // ← este
   image_url?: string;
   recipeCategory: string;
-  ingredients: {
-    name: string;
-    quantity: string;
-    measurement: string;
-  }[];
+  ingredients: IIngredient[];
   suggestion?: ISuggestions;
+  country?: string;
+}
+
+export interface IIngredient {
+  name: string;
+  quantity: string;
+  measurement?: string;
 }
 
 export interface IIngredients {
@@ -132,6 +142,29 @@ export interface IIngredients {
   name?: string;
   description?: string;
   image?: string;
+}
+
+export interface IMenu {
+  id: number;
+  name: string;
+  items: IMenuItem[];
+}
+
+export interface IMenuItem {
+  id: number;
+  recipe: IRecipe;
+  mealType: 'BREAKFAST' | 'LUNCH' | 'SNACK' | 'DINNER';
+  dayOfWeek: 'MONDAY' | 'TUESDAY' | 'WEDNESDAY' | 'THURSDAY' | 'FRIDAY' | 'SATURDAY' | 'SUNDAY';
+}
+
+export interface IMenuCreateDTO {
+  name: string;
+  userId: number;
+  items: {
+    recipeId: number;
+    mealType: string;
+    dayOfWeek: string;
+  }[];
 }
 
 export const CATEGORY_IMAGE_MAP: Record<string, string> = {

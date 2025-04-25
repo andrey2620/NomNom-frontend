@@ -1,0 +1,30 @@
+.btn {
+    border-radius: 999px;
+  }
+
+.btn:hover{
+    background-color: #fcb1a6;
+    border-color: #fcb1a6;
+    border-radius: 999px;
+}
+
+.btn:focus{
+    background-color: #bb0a21;
+    border-color: #bb0a21;
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(142, 17, 33, 0.5);
+}
+
+.scrollable-options {
+    max-height: 200px; /* o la altura que prefieras */
+    overflow-y: auto;
+}
+
+/*
+@media screen and (max-width: 768px) {
+    .btn{
+        max-width: 100px;
+    }
+    
+}
+    */

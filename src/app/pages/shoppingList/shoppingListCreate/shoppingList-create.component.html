@@ -1,0 +1,99 @@
+<div class="container my-4">
+  <h1 class="text-center mb-4">Crear Nueva Lista</h1>
+
+  <div class="row g-4">
+    <!-- Columna Paso 1 -->
+    <div class="col-12 col-md-6">
+      <div class="p-3 rounded shadow paso1 mb-3">
+        <h3>Paso 1: Selecciona recetas para crear lista de compras</h3>
+      </div>
+
+      <div class="p-3 rounded shadow" style="background-color: #f5b5ab; height: 500px; display: flex; flex-direction: column;">
+        <h1 class="text-center mb-2">Recetas favoritas</h1>
+
+        <div class="mb-3">
+          <label class="form-label fw-bold">Buscar receta</label>
+          <input type="text" class="form-control" placeholder="Buscar receta..." />
+        </div>
+
+        <!-- SOLO este div tendrá scroll -->
+        <div class="scroll-recipes flex-grow-1 mt-2">
+          <div *ngFor="let recipe of favoriteRecipes" class="p-2 bg-white rounded d-flex justify-content-between align-items-center mb-2">
+            <span>{{ recipe.name }}</span>
+            <button class="btn btn-sm rounded-pill" [ngClass]="isSelected(recipe) ? 'btn-selected' : 'btn-red'" (click)="toggleSelection(recipe)">
+              {{ isSelected(recipe) ? 'Seleccionada' : 'Seleccionar' }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Columna Paso 2 -->
+    <div class="col-12 col-md-6">
+      <div class="p-3 rounded shadow paso2 mb-3">
+        <h3>Paso 2: Ajusta los ingredientes generados automáticamente</h3>
+      </div>
+
+      <div class="row g-3">
+        <!-- Lista de ingredientes -->
+        <div class="col-12 col-lg-6">
+          <div class="p-3 rounded shadow d-flex flex-column" style="background-color: #daefb3; height: 500px;">
+            <h4 class="fw-bold mt-3">Nueva lista</h4>
+
+            <div class="table-container flex-grow-1 mt-2">
+              <table class="table-sm w-100">
+                <thead>
+                  <tr>
+                    <th>Ingredientes</th>
+                    <th>Cantidad</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of manualIngredients">
+                    <td>- {{ item.name }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>
+                      <button class="btn btn-danger p-0 px-1 py-0 rounded-circle" style="font-size: 0.75rem;" (click)="removeManualIngredient(item)">✕</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Formulario de agregar ingrediente -->
+        <div class="col-12 col-lg-6">
+          <div class="p-3 rounded shadow" style="background-color: #daefb3; height: 500px;">
+            <div class="mb-3">
+              <label class="fw-bold">Nuevo Ingrediente</label>
+              <input type="text" class="form-control mb-2" placeholder="Escribe ingrediente..." [(ngModel)]="newIngredient.name" />
+              <input type="text" class="form-control mb-2" placeholder="Cantidad..." [(ngModel)]="newIngredient.quantity" />
+              <button class="btn btn-success rounded-pill" (click)="addManualIngredient()">Agregar ingrediente</button>
+            </div>
+
+            <div class="mb-3">
+              <label class="fw-bold">Nombre de nueva lista</label>
+              <input type="text" class="form-control" placeholder="Escribe nombre de la lista..." [(ngModel)]="listName" />
+            </div>
+
+            <div class="d-flex gap-2 flex-wrap">
+              <button class="btn btn-success" (click)="guardarLista()">Guardar</button>
+            </div>
+
+            <button class="btn btn-success btn-sm mt-2" (click)="clearManualIngredients()">
+              Limpiar ingredientes
+            </button>
+            
+          </div>
+        </div>
+      </div>
+
+      <!-- Botón ver listas -->
+      <div class="mt-4">
+        <button class="btn btn-danger rounded-pill" (click)="goToSavedLists()">Ver listas guardadas</button>
+      </div>
+    </div>
+  </div>
+</div>

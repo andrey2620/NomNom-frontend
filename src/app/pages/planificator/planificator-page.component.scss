@@ -1,0 +1,336 @@
+.planificator * {
+  user-select: none;
+}
+.main-section-planificator {
+  height: calc(100dvh - 80px);
+}
+.planificator-header {
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  height: 65px;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  h2 {
+    margin: 0;
+    padding: 0;
+    text-align: center !important;
+    width: 100%;
+  }
+}
+.my-menu {
+  height: 100%;
+  .my-menu-header {
+    h2 {
+      margin: 0;
+      padding: 0;
+      text-align: center !important;
+    }
+  }
+  .menu-list {
+    height: calc(100% - 65px);
+    overflow: hidden;
+    overflow-y: auto;
+    padding: 6px 12px;
+    scrollbar-width: thin;
+    .menu-box {
+      align-items: center;
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      -webkit-border-radius: 4px;
+      -moz-border-radius: 4px;
+      -ms-border-radius: 4px;
+      -o-border-radius: 4px;
+      display: flex;
+      justify-content: space-between;
+      margin: 12px 0;
+      padding: 10px;
+      position: relative;
+      width: 100%;
+      &:hover {
+        background: #f5f5f5;
+      }
+      .menu-box-text {
+      }
+      &:hover .menu-button {
+        opacity: 100;
+        scale: 1;
+      }
+      .menu-button {
+        align-items: center;
+        background-color: white;
+        border: 1px solid red;
+        border-radius: 200%;
+        -webkit-border-radius: 200%;
+        -moz-border-radius: 200%;
+        -ms-border-radius: 200%;
+        -o-border-radius: 200%;
+        color: red;
+        display: flex;
+        height: 22px;
+        justify-content: center;
+        opacity: 0;
+        position: absolute;
+        right: -12px;
+        scale: 0;
+        size: 22px;
+        transition: all 0.3s ease;
+        -webkit-transition: all 0.3s ease;
+        -moz-transition: all 0.3s ease;
+        -ms-transition: all 0.3s ease;
+        -o-transition: all 0.3s ease;
+        width: 24px;
+        &:hover {
+          background-color: red;
+          color: white;
+        }
+      }
+    }
+  }
+}
+.my-recipes {
+  .recipe-list {
+    height: calc(100% - 65px);
+    overflow: hidden;
+    overflow-y: auto;
+    padding: 6px 12px;
+    scrollbar-width: thin;
+    .recipe-box {
+      align-items: center;
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      cursor: move;
+      display: flex;
+      justify-content: space-between;
+      margin: 12px 0;
+      padding: 10px;
+      &:hover {
+        background: #f5f5f5;
+      }
+    }
+  }
+}
+.planificator {
+  .planificator-header {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 12px;
+    position: relative;
+    h2 {
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
+.button-planificator-container {
+  align-items: center;
+  justify-content: center;
+  button {
+    height: 42px !important;
+  }
+  div input {
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    box-shadow: none;
+    height: 42px;
+    outline: none;
+    padding: 0 4px;
+  }
+}
+
+.planner-grid {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 65px);
+  justify-content: center;
+  overflow: hidden;
+  overflow-y: auto;
+  padding-bottom: 6px;
+  padding-left: 6px;
+  padding-right: 12px;
+  padding-top: 6px;
+  position: relative;
+  scrollbar-width: thin;
+  width: 100%;
+}
+
+.days-header-row {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 90px repeat(7, minmax(0, 1fr));
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.meal-type-row {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 90px repeat(7, minmax(0, 1fr));
+  margin-bottom: 10px;
+  max-height: 170px;
+  min-height: 170px;
+  text-align: center;
+  width: 100%;
+}
+
+.meal-type-header,
+.day-header {
+  align-items: center;
+  display: flex;
+  font-weight: bold;
+  height: 100%;
+  justify-content: center;
+  text-align: center;
+}
+
+.empty-cell {
+  background: transparent;
+}
+
+.meal-cell {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  height: 100%;
+  min-height: 120px;
+  overflow: hidden; // Cambiado de overflow-y: auto a overflow: hidden
+  position: relative;
+  width: 100%;
+
+  &:hover {
+    overflow-y: auto; // Mostrar scroll solo al hacer hover
+  }
+}
+
+.meal-drop-list {
+  height: 100%;
+  min-height: 90px;
+  padding: 5px;
+  width: 100%;
+}
+.meal-cell::-webkit-scrollbar {
+  width: 0;
+}
+
+.meal-item {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: move;
+  margin: 4px;
+  padding: 8px;
+  z-index: 1; /* Ensure proper stacking */
+
+  &:hover {
+    background: #f5f5f5;
+  }
+}
+
+// Add these new styles
+.cdk-drag {
+  z-index: 1;
+}
+
+.meal-cell .cdk-drag-boundary {
+  height: 100%;
+  min-height: 90px;
+  overflow: hidden !important;
+  width: 100%;
+}
+
+/* Modify the preview to be contained */
+.meal-cell .cdk-drag-preview {
+  border-radius: 4px;
+  box-shadow:
+    0 5px 5px -3px rgba(0, 0, 0, 0.2),
+    0 8px 10px 1px rgba(0, 0, 0, 0.14),
+    0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  box-sizing: border-box;
+  max-width: calc(100% - 10px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cdk-drag-preview {
+  .delete-btn {
+    display: none !important; // Ocultar el botón de borrar en el preview
+  }
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+  .delete-btn {
+    display: none !important; // Ocultar el botón de borrar en el placeholder
+  }
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+// Add these styles for the delete button
+.meal-item {
+  position: relative;
+}
+
+.delete-btn {
+  align-items: center;
+  background-color: #ff4d4f;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  font-size: 10px;
+  height: 20px;
+  justify-content: center;
+  padding: 0;
+  position: absolute;
+  right: -8px;
+  top: -8px;
+  width: 20px;
+
+  &:hover {
+    background-color: #ff7875;
+  }
+}
+
+.recipe-image {
+  border-radius: 4px;
+  height: 36px;
+  object-fit: cover;
+  width: 36px;
+}
+
+.recipe-image-preview {
+  border-radius: 4px;
+  height: 120px;
+  object-fit: cover;
+  width: 120px;
+}
+.recipe-text {
+  display: block;
+  margin: 0 auto;
+  max-width: 160px;
+  width: 100%;
+}
+
+.recipe-box,
+.meal-item {
+  align-items: center;
+  display: flex;
+}
+
+.w-0 {
+  width: 0 !important;
+}
+.w-14 {
+  width: 24px !important;
+}

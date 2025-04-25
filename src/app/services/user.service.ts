@@ -1,8 +1,8 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { BaseService } from './base-service';
 import { ISearch, IUser } from '../interfaces';
-import { Observable, catchError, tap, throwError } from 'rxjs';
 import { AlertService } from './alert.service';
+import { BaseService } from './base-service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -15,8 +15,8 @@ export class UserService extends BaseService<IUser> {
   }
   public search: ISearch = {
     page: 1,
-    size: 5
-  }
+    size: 5,
+  };
   public totalItems: any = [];
   private alertService: AlertService = inject(AlertService);
 
@@ -29,10 +29,9 @@ export class UserService extends BaseService<IUser> {
       },
       error: (err: any) => {
         console.error('error', err);
-      }
+      },
     });
   }
-
 
   save(user: IUser) {
     this.add(user).subscribe({
@@ -43,7 +42,7 @@ export class UserService extends BaseService<IUser> {
       error: (err: any) => {
         this.alertService.displayAlert('error', 'An error occurred adding the user', 'center', 'top', ['error-snackbar']);
         console.error('error', err);
-      }
+      },
     });
   }
 
@@ -56,7 +55,7 @@ export class UserService extends BaseService<IUser> {
       error: (err: any) => {
         this.alertService.displayAlert('error', 'An error occurred updating the user', 'center', 'top', ['error-snackbar']);
         console.error('error', err);
-      }
+      },
     });
   }
 
@@ -69,7 +68,14 @@ export class UserService extends BaseService<IUser> {
       error: (err: any) => {
         this.alertService.displayAlert('error', 'An error occurred deleting the user', 'center', 'top', ['error-snackbar']);
         console.error('error', err);
-      }
+      },
     });
   }
+
+  saveFavoriteRecipe(recipeId: number): Observable<any> {
+    return this.http.post(`/users/me/favorites/${recipeId}`, null);
+  }
+  
+  
+
 }

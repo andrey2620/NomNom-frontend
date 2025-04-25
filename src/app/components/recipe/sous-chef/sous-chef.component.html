@@ -1,0 +1,112 @@
+<div class="sous-chef-panel h-100 w-100 p-3 mx-auto">
+  <div class="sous-chef-icon text-center mb-2 mt-2">
+    <img
+      class="voice-icon"
+      [src]="currentVoiceName === 'daniela' ? 'assets/gifs/chefDaniela.gif' : 'assets/gifs/chefMau.gif'"
+      [ngClass]="{ speaking: isSpeaking }"
+      alt="Chef animado"
+    />
+  </div>
+
+  <div class="toggle-voice-container text-center my-2">
+    <label class="toggle-label d-block mb-1">Elige tu Sous-Chef</label>
+    <button 
+      class="btn toggle-btn py-1 px-3" 
+      (click)="toggleVoiceGender()"
+      [disabled]="isSpeaking || (audioInstance && !audioInstance.paused)">
+      {{ currentVoiceName === 'daniela' ? 'Chef Daniela' : 'Chef Mauricio' }}
+    </button>
+  </div>
+
+  <div class="w-100 px-3 mb-3">
+    <label for="volume" class="form-label mb-1">Volumen</label>
+    <div class="d-flex gap-2 justify-content-center align-items-center">
+      <input 
+        class="slider" 
+        type="range" 
+        id="volume" 
+        min="0" 
+        max="1" 
+        step="0.01" 
+        [(ngModel)]="volume"
+        [disabled]="isSpeaking || (!!audioInstance && !audioInstance.paused)" />
+      <p class="text-center porcen m-0">{{ volume * 100 | number:'1.0-0' }}</p>
+    </div>
+  </div>
+
+  <div class="w-100 px-3 mb-3">
+    <label for="speed" class="form-label mb-1">Velocidad</label>
+    <div class="d-flex gap-2 justify-content-center align-items-center">
+      <input 
+        class="slider" 
+        type="range" 
+        id="speed" 
+        min="0" 
+        max="2" 
+        step="0.1" 
+        [(ngModel)]="rate"
+        [disabled]="isSpeaking || (!!audioInstance && !audioInstance.paused)" />
+      <p class="text-center porcen m-0">{{ rate }}</p>
+    </div>
+  </div>
+
+  <!--<img
+    class="sound-status-gif my-3"
+    [src]="isSpeaking ? 'assets/gifs/sound.gif' : 'assets/gifs/mute.gif'"
+    alt="Estado de sonido"
+  />-->
+
+  <div class="btns d-flex justify-content-center align-items-center gap-2 my-2">
+    <button
+      class="btn control-btn rounded-circle d-flex align-items-center justify-content-center"
+      [ngClass]="{
+        'btn-dark': isSousChefOn,
+        'btn-success': !isSousChefOn,
+        'speaking-animation': isSpeaking
+      }"
+      [disabled]="isCreatingAudio"
+      (click)="toggleSousChef()">
+      <i [ngClass]="isSousChefOn ? 'bi bi-pause-fill' : 'bi bi-play-fill'"></i>
+    </button>
+
+    <button
+      class="btn control-btn rounded-circle"
+      (click)="restartAudio()"
+      [disabled]="!audioInstance"
+      aria-label="Reiniciar audio">
+      <i class="bi bi-arrow-counterclockwise"></i>
+    </button>
+  </div>
+
+  <div class="text-center my-3">
+    <div class="d-flex justify-content-center gap-2 flex-wrap">
+      <button class="btn btn-outline-success btn-sm px-3" (click)="emitSave()">Guardar receta</button>
+      <button class="btn btn-outline-primary btn-sm px-3" (click)="suggestPresentation()">Generar sugerencias</button>
+    </div>
+  </div>
+  
+  
+
+  <div class="p-sugestions ps-3 pt-2 mt-2">
+    <div *ngIf="suggestions.ingredientSubstitutions.length">
+      <h5 class="section-subtitle">Sustituciones de ingredientes</h5>
+      <ul>
+        <li *ngFor="let tip of suggestions.ingredientSubstitutions">{{ tip }}</li>
+      </ul>
+    </div>
+
+    <div class="mt-2" *ngIf="suggestions.presentationTips.length">
+      <h5 class="section-subtitle">Sugerencias de presentación</h5>
+      <ul>
+        <li *ngFor="let tip of suggestions.presentationTips">{{ tip }}</li>
+      </ul>
+    </div>
+
+    <div class="mt-2" *ngIf="suggestions.kidsParticipation.length">
+      <h5 class="section-subtitle">Participación de niños</h5>
+      <ul>
+        <li *ngFor="let tip of suggestions.kidsParticipation">{{ tip }}</li>
+      </ul>
+    </div>
+  </div>
+</div>

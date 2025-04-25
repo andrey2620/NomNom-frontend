@@ -1,21 +1,24 @@
-<div class="ingredientContainer h-100" #ingredientContainer>
+<section class="ingredientContainer" #ingredientContainer>
   @for (item of ingredients; track item.id) {
     <div
       class="ingredientDiv"
-      [class.selected]="item.id != null && selectedIngredients.includes(item.id)"
-      (click)="item.id != null && selectIngredient(item.id)">
-
+      [class.selected]="item.id !== null && selectedIngredients.includes(item.id!)"
+      [class.allergy]="item.id !== null && isAllergy(item.name!)"
+      (click)="!isAllergy(item.name!) && item.id !== null && selectIngredient(item.id)"
+      (keydown)="!isAllergy(item.name!) && item.id !== null && $event.key === 'Enter' && selectIngredient(item.id)"
+      tabindex="0">
       @if (!item.image) {
-        <img class="w-100" src="assets/gifs/default.gif" alt="img{{ item.name }}" />
+        <img class="w-100 ingredient-img rounded-2" src="assets/gifs/default.gif" alt="img{{ item.name }}" />
       } @else {
-        <img class="w-100" [src]="item.image" alt="img{{ item.name }}" />
+        <img class="w-100 ingredient-img rounded-2" [src]="item.image" alt="img{{ item.name }}" />
       }
 
-      <h2 class="text-center">{{ item.name }}</h2>
+      <h2 class="ingredient-name text-center">{{ item.name }}</h2>
     </div>
   } @empty {
-    <div class="d-flex justify-content-center align-items-center w-100">
-      <h2 class="mb-0">Error en el sistema. Por favor</h2>
+    <div class="w-100 errorMessage col-md-6">
+      <img src="../../../assets/img/sadChef.webp" alt="error" class="w-75 mb-2" />
+      <h1 class="mb-0">No hay ingredientes con ese nombre ni categoría.</h1>
     </div>
   }
-</div>
+</section>

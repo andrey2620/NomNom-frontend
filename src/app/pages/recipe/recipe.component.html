@@ -2,21 +2,51 @@
   <div class="d-flex h-100 gap-4 w-100 flex-md-wrap flex-lg-nowrap">
     <!-- Lista de recetas: siempre visible -->
     <div class="app-recipe-list-container h-100 w-100">
-      <app-recipe-list [areActionsAvailable]="true" (cook)="onRecipeSelected($event)" (listInitialized)="onRecipeListInitialized($event)">
+      <app-recipe-list
+        *ngIf="mostrarRecipeList"
+        #recipeList
+        [areActionsAvailable]="true"
+        [sectionTitle]="currentTitle"
+        (cook)="onRecipeSelected($event)"
+        (listInitialized)="onRecipeListInitialized($event)">
+        <div class="text-end">
+          <button class="btn btn-load-more text-white" (click)="onGenerateMore()">Cargar más</button>
+        </div>
       </app-recipe-list>
     </div>
 
-    <!-- Receta y Sous-chef: solo cuando hay receta seleccionada -->
     <ng-container *ngIf="selectedRecipe">
       <!-- vista receta -->
       <div class="app-view-recipe-container w-100 h-100">
-        <app-view-recipe [recipe]="selectedRecipe" (save)="onRecipeSaved($event)" (delete)="onRecipeDeleted($event)"> </app-view-recipe>
-      </div>
+        <app-view-recipe
+        *ngIf="selectedRecipe"
+        [recipe]="selectedRecipe"
+        [areActionsAvailable]="true"
+        (save)="onRecipeSaved($event)">
+      </app-view-recipe>      </div>
 
       <!-- sous chef -->
       <div class="app-sous-chef-container d-flex w-100 flex-column h-100">
-        <app-sous-chef class="h-100" [recipe]="selectedRecipe"></app-sous-chef>
+        <app-sous-chef class="h-100"
+          *ngIf="selectedRecipe"
+          [recipe]="selectedRecipe" (save)="onRecipeSaved(selectedRecipe!)"
+          >
+        </app-sous-chef>
       </div>
     </ng-container>
   </div>
 </div>
+<app-modal
+  #missingIngredientsModal
+  [confirmAction]="'Receta aleatoria'"
+  [cancelAction]="'Seleccionar ingredientes'"
+  [confirmButtonClass]="'btn btn-primary'"
+  [cancelButtonClass]="'btn btn-danger'"
+  [showCloseButton]="false"
+  (confirmEvent)="onConfirmGenerateRandom()"
+  (cancelEvent)="onGoToIngredients()"
+  [closeOnClickOutside]="false"
+  [hideCancelOption]="false">
+  <h4 class="text-center">😅 No seleccionaste ingredientes</h4>
+  <p class="text-center">¿Quieres generar una receta aleatoria o ir a seleccionar tus ingredientes?</p>
+</app-modal>

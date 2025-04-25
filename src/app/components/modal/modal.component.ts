@@ -1,49 +1,117 @@
-import { Component, inject, Input, ViewChild, Output, EventEmitter } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { LoaderComponent } from '../loader/loader.component';
 import { CommonModule } from '@angular/common';
+import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy, Output, ViewChild } from '@angular/core';
+import { LoaderComponent } from '../loader/loader.component';
 
 @Component({
   selector: 'app-modal',
-  standalone: true,
-  imports: [
-    LoaderComponent,
-    CommonModule
-  ],
   templateUrl: './modal.component.html',
-  styleUrl: './modal.component.scss',
+  styleUrls: ['./modal.component.scss'],
+  imports: [CommonModule, LoaderComponent],
+  standalone: true,
 })
-export class ModalComponent {
-  @Input() title?: string;
-  @Input() confirmAction: string = '';
-  @Input() cancelAction: string = '';
-  @Input() customValidation: boolean = false;
-  @Input() isLoading: boolean = false;
-  @Input() loadingConfirmationMethod: boolean = false;
-  @Input() hideConfirmAction: boolean = false;
-  @Input() useCustomBackGround: boolean = false;
-  @Input() hideCancelOption: boolean = false;
-  @Input() hideFooter: boolean = false;
-  @Input() modalBodyClass: string = "modal-body";
-  @Input() modalFooterClass: string = "modal-footer";
-  @Input() modalContentClass: string = "modal-content";
-  @Output() callCancelMethod = new EventEmitter();
-  @Output() callConfirmationMethod = new EventEmitter();
+export class ModalComponent implements AfterViewInit, OnDestroy {
+  @ViewChild('modalDialog') modalDialog!: ElementRef<HTMLDialogElement>;
+  @Input() showCloseButton = true;
+  @Input() closeOnClickOutside = true;
+  @Input() modalContentClass = '';
+  @Input() useCustomBackGround = false;
+  @Input() confirmAction = '';
+  @Input() cancelAction = '';
+  @Input() confirmButtonClass = '';
+  @Input() cancelButtonClass = '';
+  @Input() hideCancelOption = false;
+  @Input() hideConfirmOption = false;
+  @Input() isLoading = false;
 
-  public modalService: NgbModal = inject(NgbModal);
+  @Output() confirmEvent = new EventEmitter<void>();
+  @Output() cancelEvent = new EventEmitter<void>();
 
-  @ViewChild('modalContent', { static: true }) modalContent!: any;
+  @Output() modalCancelled = new EventEmitter<void>();
 
-  public show() {
-    this.modalService.open(this.modalContent, { centered: true });
+  private previousActiveElement: Element | null = null;
+
+  ngAfterViewInit() {
+    if (this.modalDialog.nativeElement) {
+      this.modalDialog.nativeElement.addEventListener('click', this.handleBackdropClick.bind(this));
+    }
   }
 
-  public hide() {
-    this.modalService.dismissAll();
+  ngOnDestroy() {
+    if (this.modalDialog.nativeElement) {
+      this.modalDialog.nativeElement.removeEventListener('click', this.handleBackdropClick.bind(this));
+    }
   }
 
-  public hideModal() {
-    this.hide();
-    this.callCancelMethod.emit();
+  showModal(): void {
+    setTimeout(() => {
+      if (!this.modalDialog?.nativeElement) return;
+
+      this.previousActiveElement = document.activeElement;
+      this.modalDialog.nativeElement.showModal();
+      this.modalDialog.nativeElement.classList.add('opening');
+
+      setTimeout(() => {
+        this.modalDialog.nativeElement.classList.remove('opening');
+      }, 300);
+
+      const firstFocusable = this.modalDialog.nativeElement.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+      if (firstFocusable instanceof HTMLElement) {
+        firstFocusable.focus();
+      }
+    }, 0);
+  }
+
+  private closeModalWithAnimation(): void {
+    if (!this.modalDialog.nativeElement) return;
+
+    this.modalDialog.nativeElement.classList.add('closing');
+    setTimeout(() => {
+      this.modalDialog.nativeElement.close();
+      this.modalDialog.nativeElement.classList.remove('closing');
+      if (this.previousActiveElement instanceof HTMLElement) {
+        this.previousActiveElement.focus();
+      }
+    }, 300);
+  }
+
+  private shakeModal(): void {
+    if (!this.modalDialog.nativeElement) return;
+
+    // Evitar múltiples animaciones simultáneas
+    if (this.modalDialog.nativeElement.classList.contains('shake')) return;
+
+    this.modalDialog.nativeElement.classList.add('shake');
+    setTimeout(() => {
+      this.modalDialog.nativeElement.classList.remove('shake');
+    }, 400);
+  }
+
+  private handleBackdropClick(event: MouseEvent): void {
+    const rect = this.modalDialog.nativeElement.getBoundingClientRect();
+    const isInDialog =
+      rect.top <= event.clientY && event.clientY <= rect.top + rect.height && rect.left <= event.clientX && event.clientX <= rect.left + rect.width;
+
+    if (!isInDialog) {
+      if (this.closeOnClickOutside) {
+        this.closeModalWithAnimation();
+      } else {
+        this.shakeModal();
+      }
+    }
+  }
+
+  hideModal(): void {
+    if (!this.modalDialog.nativeElement) return;
+    this.closeModalWithAnimation();
+  }
+
+  onConfirm(): void {
+    this.confirmEvent.emit();
+    this.hideModal();
+  }
+
+  onCancel(): void {
+    this.cancelEvent.emit();
+    this.hideModal();
   }
 }

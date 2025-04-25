@@ -1,12 +1,26 @@
-.mapContaier{
-    display: flex;
-    gap: 10px;
+.interactive-map-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: calc(100dvh - 80px); // This is already correct
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 1200px;
+  overflow: hidden;
+  overflow-y: auto;
+  padding-bottom: 1rem; // Added padding to prevent content from touching the bottom
+  h3 {
+    font-size: 32px;
+  }
+}
+.map-container {
+  height: calc(100vh - 160px); // Adjusted to account for header and padding  // Fixed typo in class name
 }
 
-app-map{
-    flex: 1;
+app-map {
+  flex: 1;
 }
 
-app-recipe-list{
-    flex: 0.5;
+app-recipe-list {
+  flex: 0.5;
 }

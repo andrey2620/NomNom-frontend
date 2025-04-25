@@ -1,0 +1,40 @@
+<section class="recipe-panelds">
+  <div class="header-section">
+    <h2 class="section-title mb-2 text-center">Recetas</h2>
+    <p class="text-muted text-center">Total recetas visibles: {{ itemList.length }}</p>
+  </div>
+
+  <div class="scrollable-content">
+    <div class="d-flex flex-column gap-4">
+      <ng-container *ngFor="let recipe of itemList">
+        <div class="card shadow-sm">
+          <img [src]="getCategoryImage(recipe.recipeCategory)" class="card-img-top" alt="Imagen de receta" (error)="onImageError($event)" />
+
+          <div class="card-body">
+            <h5 class="card-title">{{ recipe.name }}</h5>
+            <p class="card-text">
+              {{ (recipe.description || '').split('\n')[0] || 'Sin descripción' }}
+            </p>
+
+            <div class="text-center mt-3">
+              <button class="btn cook-btn" (click)="onCook(recipe)">¡Hora de cocinar!</button>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-container *ngFor="let skeleton of skeletonList">
+        <div class="card h-100 shadow-sm placeholder-card w-100">
+          <div class="card-img-top skeleton-img"></div>
+          <div class="card-body">
+            <h5 class="card-title skeleton-text w-10">&nbsp;</h5>
+            <p class="card-text skeleton-text w-75"></p>
+            <div class="text-center mt-3">
+              <div class="btn cook-btn skeleton-btn w-50"></div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</section>

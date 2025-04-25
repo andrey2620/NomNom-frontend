@@ -1,29 +1,75 @@
 @defer {
-<div class="row p-4">
-  <div class="col-12">
-    <div class="d-flex justify-content-between align-items-center">
+  <section class="users-container">
+    <header class="">
       <h2>Usuarios</h2>
-      <button (click)="modalService.displayModal('md', addUsersModal)" type="button" class="btn btn-primary"><i
-          class="fas fa-plus"></i></button>
+      <div class="">
+        <button (click)="usersModal.showModal()" type="button" class="btn btn-primary"><i class="fas fa-plus"></i></button>
+      </div>
+    </header>
+    <div class="col-12">
+      <app-user-list (callModalAction)="callEdition($event)" (callDeleteAction)="userService.delete($event)" [users]="userService.users$()" />
+      @if (userService.users$().length) {
+        <app-pagination [service]="userService" />
+      }
     </div>
-  </div>
-  <div class="col-12">
-    <app-user-list (callModalAction)="callEdition($event)" (callDeleteAction)="userService.delete($event)"
-      [users]="userService.users$()" />
-    @if(userService.users$().length) {
-    <app-pagination [service]="userService" />
-    }
-  </div>
-</div>
-} @loading (minimum 1.5s){
-<app-loader></app-loader>
+  </section>
+} @loading (minimum 1.5s) {
+  <app-loader></app-loader>
 }
-
-<ng-template #addUsersModal>
-  <app-modal [hideFooter]="true">
-    <div>
-      <app-user-form [userForm]="userForm" (callSaveMethod)="saveUser($event)"
-        (callUpdateMethod)="updateUser($event)" />
+<app-modal
+  #usersModal
+  [confirmAction]="'Save'"
+  [cancelAction]="'Cancelar'"
+  [confirmButtonClass]="'btn btn-primary'"
+  [cancelButtonClass]="'btn btn-danger'"
+  [showCloseButton]="true"
+  [closeOnClickOutside]="true"
+  [hideCancelOption]="false">
+  <form [formGroup]="userForm" class="row">
+    <div class="w-100 text-center mb-4">
+      <h2 class="mb-0 text-center title-form">Add User</h2>
     </div>
-  </app-modal>
-</ng-template>
+    <div class="d-flex gap-3">
+      <div class="mb-1 w-100">
+        <label class="mb-1" for="name">Name*</label>
+        <input id="name" formControlName="name" type="text" class="form-control" />
+        @if (userForm.controls['name'].invalid && (userForm.controls['name'].dirty || userForm.controls['name'].touched)) {
+          <p class="text-danger my-1 error-input-custom">Name is required</p>
+        } @else {
+          <p class="text-danger my-1 error-input-custom">&nbsp;</p>
+        }
+      </div>
+      <div class="mb-1 w-100">
+        <label class="mb-1" for="lastname">Lastname*</label>
+        <input id="lastname" formControlName="lastname" type="text" class="form-control" />
+        @if (userForm.controls['lastname'].invalid && (userForm.controls['lastname'].dirty || userForm.controls['lastname'].touched)) {
+          <p class="text-danger my-1 error-input-custom">Lastname is required</p>
+        } @else {
+          <p class="text-danger my-1 error-input-custom">&nbsp;</p>
+        }
+      </div>
+    </div>
+    <div class="mb-1">
+      <label class="mb-1" for="email">Email*</label>
+      <input id="email" formControlName="email" type="email" class="form-control" />
+      @if (userForm.controls['email'].invalid && (userForm.controls['email'].dirty || userForm.controls['email'].touched)) {
+        <p class="text-danger my-1 error-input-custom">Email is required</p>
+      } @else {
+        <p class="text-danger my-1 error-input-custom">&nbsp;</p>
+      }
+      @if (userForm.controls['email'].errors?.['email'] && (userForm.controls['email'].dirty || userForm.controls['email'].touched)) {
+        <p class="text-danger my-1">Invalid Email</p>
+      }
+    </div>
+
+    <div class="mb-1">
+      <label class="mb-1" for="password">Password*</label>
+      <input id="password" formControlName="password" type="password" class="form-control" />
+      @if (userForm.controls['password'].invalid && (userForm.controls['password'].dirty || userForm.controls['password'].touched)) {
+        <p class="text-danger my-1 error-input-custom">Password is required</p>
+      } @else {
+        <p class="text-danger my-1 error-input-custom">&nbsp;</p>
+      }
+    </div>
+  </form>
+</app-modal>

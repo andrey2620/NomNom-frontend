@@ -7,6 +7,7 @@
             <img width="200" class="img-fluid mb-4 logo" src="../../../../assets/icons/LogoNomNom.png" alt="Logo" />
           </a>
         </div>
+
         <div class="login-main">
           <form (ngSubmit)="handleSignup($event)" autocomplete="off" #frm="ngForm">
             <div class="mb-3">
@@ -26,11 +27,12 @@
                   [(ngModel)]="user.name"
                   [ngClass]="{
                     'is-invalid': name.invalid && name.touched,
-                    'is-valid': name.valid && name.touched,
+                    'is-valid': name.valid && name.touched
                   }"
                   required />
                 <div *ngIf="name.invalid" class="invalid-feedback">Ingresa un nombre válido</div>
               </div>
+
               <div class="form-group px-1">
                 <label for="lastname" class="form-label mb-2">Apellidos</label>
                 <input
@@ -43,7 +45,7 @@
                   [(ngModel)]="user.lastname"
                   [ngClass]="{
                     'is-invalid': lastname.invalid && lastname.touched,
-                    'is-valid': lastname.valid && lastname.touched,
+                    'is-valid': lastname.valid && lastname.touched
                   }"
                   required />
                 <div *ngIf="lastname.invalid" class="invalid-feedback">Ingresa apellidos válidos</div>
@@ -53,56 +55,72 @@
             <div class="form-group mb-3">
               <label for="email" class="form-label mb-2">Correo Electrónico</label>
               <input
-                #email="ngModel"
-                type="text"
-                class="form-control"
-                id="email"
-                name="email"
-                placeholder="ejemplo@nomnom.com"
-                [(ngModel)]="user.email"
-                [readonly]="isGoogleSignUp"
-                [ngClass]="{
-                  'is-invalid': email.invalid && email.touched,
-                  'is-valid': email.valid && email.touched,
-                }"
-                required />
-              <div *ngIf="email.invalid" class="invalid-feedback">Ingresa un correo válido</div>
+              #email="ngModel"
+              type="email"
+              class="form-control"
+              id="email"
+              name="email"
+              placeholder="ejemplo@nomnom.com"
+              [(ngModel)]="user.email"
+              [readonly]="isGoogleSignUp"
+              [ngClass]="{
+                'is-invalid': email.invalid && email.touched,
+                'is-valid': email.valid && email.touched
+              }"
+              required
+              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" />
+              <div *ngIf="email.invalid && (email.touched || frm.submitted)" class="invalid-feedback">Ingresa un correo válido</div>
             </div>
 
-            <div class="form-group mb-5">
+            <div class="form-group mb-4">
               <label for="password" class="form-label mb-2">Contraseña</label>
               <div class="form-input position-relative">
-                <input
-                  #password="ngModel"
-                  [type]="showPassword ? 'text' : 'password'"
-                  class="form-control"
-                  id="password"
-                  name="password"
-                  placeholder="Entra al menos 8 caracteres"
-                  [(ngModel)]="user.password"
-                  [ngClass]="{
-                    'is-invalid': password.invalid && password.touched,
-                    'is-valid': password.valid && password.touched,
-                  }"
-                  [required]="!isGoogleSignUp" />
+              <input
+                #password="ngModel"
+                [type]="showPassword ? 'text' : 'password'"
+                class="form-control"
+                id="password"
+                name="password"
+                placeholder="Entra al menos 8 caracteres"
+                [(ngModel)]="user.password"
+                [ngClass]="{
+                'is-invalid': password.invalid && password.touched,
+                'is-valid': password.valid && password.touched
+                }"
+                [required]="!isGoogleSignUp"
+                pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" />
 
-                <!-- Botón para mostrar/ocultar contraseña -->
-                <button type="button" class="toggle-password" (click)="togglePassword()">
-                  <i [class]="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
-                </button>
+              <button type="button" class="toggle-password" (click)="togglePassword()">
+                <i [class]="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+              </button>
 
-                <div *ngIf="password.invalid && !isGoogleSignUp" class="invalid-feedback">Ingresa una contraseña válida</div>
+              <div *ngIf="password.invalid && password.touched && !isGoogleSignUp" class="invalid-feedback">
+                La contraseña debe tener al menos 8 caracteres, una mayúscula, un número y un carácter especial.
+              </div>
+
+              <app-tool-tip
+                style="position: absolute; right: -25px; top: 50%; transform: translateY(-50%);"
+                [tooltipText]="'Tu contraseña debe tener al menos 8 caracteres, una mayúscula, un número y un caracter especial.'"
+                [tooltipPosition]="'right'"
+                [iconClass]="'fa-solid fa-circle-info'"
+                [buttonClass]="'btn-save-recipe bg-transparent'">
+              </app-tool-tip>
               </div>
             </div>
 
-            <div class="form-group mb-0 d-flex justify-content-center">
-              <button class="btn text-center red-bg btn-primary btn-block btn-signUp" type="submit">Crear</button>
+            <!-- Mensaje de error o éxito justo arriba del botón -->
+            <div class="text-center mb-5">
               @if (signUpError) {
                 <p class="text-danger">{{ signUpError }}</p>
               } @else if (validSignup) {
                 <p class="text-success">Usuario registrado, por favor inicia sesión</p>
               }
             </div>
+
+            <div class="form-group mb-3 d-flex justify-content-center">
+              <button class="btn text-center red-bg btn-primary btn-block btn-signUp" type="submit">Crear</button>
+            </div>
+
             <a href="/login" class="light-green">Ir a inicio de sesión</a>
           </form>
         </div>

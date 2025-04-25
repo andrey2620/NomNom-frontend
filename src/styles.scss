@@ -63,6 +63,7 @@
 
   /* Negrita */
   --font-weight: 400;
+  
 }
 
 body[class='dark-only'] {
@@ -151,4 +152,151 @@ body {
 
 .red {
   color: #b5152a;
+}
+
+.text-danger{
+  color: #b5152a;
+}
+
+.bold{
+  font-weight: bold !important;
+}
+
+.btn{
+ border-radius: 25px;
+}
+
+.btn-primary{
+  background-color: #2c5530;
+  border-color: #2c5530;
+
+}
+
+.btn-primary:hover{
+  background-color: #c3bf6d;
+  border-color: #c3bf6d;
+
+}
+
+.btn-primary.active {
+  background-color: #a4a94e;
+  border-color: #a4a94e;
+  color: white;
+}
+
+.btn-primary:focus{
+  background-color: #a4a94e;
+  border-color: #a4a94e;
+  color: white;
+}
+
+.btn-success{
+  background-color: #2c5530;
+}
+
+.btn-success:hover{
+  background-color: #c3bf6d;
+  border-color: #c3bf6d;
+}
+
+.btn-success:focus{
+  background-color: #c3bf6d;
+  border-color: #c3bf6d;
+}
+
+.btn-outline-success{
+  border-color: #2c5530;
+  color: #2c5530;
+
+}
+
+.btn-outline-success:hover{
+  background-color: #c3bf6d;
+  border-color: #c3bf6d;
+}
+
+.btn-danger{
+  background-color: #bb0a21;
+  color: #fff;
+}
+
+.btn-danger:hover{
+  color: #fff;
+  background-color: #fcb1a6;
+  border-color: #fcb1a6;
+}
+
+.btn-danger:focus{
+  color: #fff;
+  background-color: #fcb1a6;
+  border-color: #fcb1a6;
+}
+
+.btn-outline-danger{
+  color: #bb0a21;
+  border-color: #bb0a21;
+}
+
+.btn-outline-primary{
+  border-color: #2c5530;
+  color: #2c5530;
+}
+
+.btn-outline-primary:focus{
+  border-color: #2c5530;
+  background-color: #2c5530;
+  color: #fff;
+}
+
+.btn-outline-primary:hover{
+  border-color: #2c5530;
+  background-color: #2c5530;
+  color: #fff;
+}
+
+.btn-warning{
+  background-color: #fcb1a6;
+  color: #fff;
+}
+
+.btn-warning:hover{
+  background-color: #bb0a21;
+  color: #fff;
+}
+
+.btn-warning:focus{
+  background-color: #bb0a21;
+  color: #fff;
+}
+
+.btn-outline-secondary{
+  color: #2c5530;
+  border-color: #2c5530;
+}
+
+.btn-outline-secondary:hover{
+  color: #fff;
+  border-color: #c3bf6d;
+  background-color: #c3bf6d;
+}
+
+.btn-outline-dark{
+  border-color: #2c5530;
+}
+
+.btn-outline-dark:hover{
+  border-color: #2c5530;
+  background-color: #2c5530;
+  color: #fff;
+}
+
+.bg-light{
+  background-color: #fbfef9;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.bg-light:hover{
+  cursor: pointer;
+  background-color: #fcb1a6;
+  transition: background-color 0.2s ease-in-out;
 }

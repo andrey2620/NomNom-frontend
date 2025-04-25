@@ -1,7 +1,9 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { ILoginResponse, IUser, IAuthority, IRoleType, IResponse } from '../interfaces';
+import { IngredientService } from './ingredient.service';
+import { ProfileService } from './profile.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +13,11 @@ export class AuthService {
   private expiresIn!: number;
   private user: IUser = { email: '', authorities: [] };
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private ingredientService: IngredientService,
+    private profileService: ProfileService
+  ) {
     this.load();
   }
 
@@ -56,20 +62,28 @@ export class AuthService {
 
         this.user.picture = response.authUser.picture || 'assets/default-avatar.png';
 
-        localStorage.setItem('auth_user', JSON.stringify(this.user));
-        localStorage.setItem('access_token', response.token);
-        localStorage.setItem('expiresIn', JSON.stringify(this.expiresIn));
+        this.save();
       })
     );
   }
 
-  public setAuthData(authUser: IUser, token: string, exists: boolean): void {
+  public initializeUserSession(authUser: IUser, token: string, expiresIn = 3600000000) {
     this.user = authUser;
     this.accessToken = token;
-    this.expiresIn = 3600;
+    this.expiresIn = expiresIn;
 
-    localStorage.setItem('access_token', token);
-    localStorage.setItem('auth_user', JSON.stringify(authUser));
+    this.profileService.userSignal.set(authUser);
+
+    this.save();
+  }
+
+  public setAuthData(authUser: IUser, token: string): void {
+    this.user = authUser;
+    this.accessToken = token;
+    this.expiresIn = 3600000000;
+    const profileService = inject(ProfileService);
+    profileService.userSignal.set(authUser);
+    this.save();
   }
 
   public isAuthenticated(): boolean {
@@ -78,9 +92,7 @@ export class AuthService {
 
   public hasRole(role: string): boolean {
     const user = this.getUser();
-    if (!user || !user.authorities) {
-      return false;
-    }
+    if (!user || !user.authorities) return false;
     return user.authorities.some(authority => authority.authority === role);
   }
 
@@ -89,13 +101,13 @@ export class AuthService {
   }
 
   public getUserAuthorities(): IAuthority[] | undefined {
-    return this.getUser()?.authorities ? this.getUser()?.authorities : [];
+    return this.getUser()?.authorities ?? [];
   }
 
   public areActionsAvailable(routeAuthorities: string[]): boolean {
     let allowedUser = false;
     let isAdmin = false;
-    let userAuthorities = this.getUserAuthorities();
+    const userAuthorities = this.getUserAuthorities();
 
     for (const authority of routeAuthorities) {
       if (userAuthorities?.some(item => item.authority == authority)) {
@@ -108,19 +120,11 @@ export class AuthService {
       isAdmin = true;
     }
 
-    return allowedUser && isAdmin;
+    return !!allowedUser && !!isAdmin;
   }
 
-  public getPermittedRoutes(routes: any[]): any[] {
-    let permittedRoutes: any[] = [];
-    for (const route of routes) {
-      if (route.data && route.data.authorities) {
-        if (this.hasRole(route.data.authorities)) {
-          permittedRoutes.unshift(route);
-        }
-      }
-    }
-    return permittedRoutes;
+  public getPermittedRoutes(routes: { data?: { authorities?: string[] } }[]): { data?: { authorities?: string[] } }[] {
+    return routes.filter(route => route.data && route.data.authorities && route.data.authorities.some(auth => this.hasRole(auth)));
   }
 
   public signup(user: IUser): Observable<ILoginResponse> {
@@ -137,19 +141,18 @@ export class AuthService {
     localStorage.clear();
   }
 
-  public sendResetLink(email: string): Observable<IResponse<any>> {
-    return this.http.post<IResponse<any>>(`auth/forgot-password?email=${encodeURIComponent(email)}`, {});
+  public sendResetLink(email: string): Observable<IResponse<{ message: string }>> {
+    return this.http.post<IResponse<{ message: string }>>(`auth/forgot-password?email=${encodeURIComponent(email)}`, {});
   }
 
-  public resetPassword(token: string, newPassword: string): Observable<IResponse<any>> {
+  public resetPassword(token: string, newPassword: string): Observable<IResponse<{ success: boolean; message: string }>> {
     const params = new HttpParams().set('token', token);
-    return this.http.post<IResponse<any>>('auth/reset-password', newPassword, { params });
+    return this.http.post<IResponse<{ success: boolean; message: string }>>('auth/reset-password', newPassword, { params });
   }
 
-  getCurrentUserId(): number | null {
+  public getCurrentUserId(): number | null {
     const userJson = localStorage.getItem('auth_user');
     if (!userJson) return null;
-
     try {
       const user = JSON.parse(userJson);
       return user?.id ?? null;

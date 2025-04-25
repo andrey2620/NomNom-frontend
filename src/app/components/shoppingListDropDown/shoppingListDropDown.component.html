@@ -1,0 +1,15 @@
+<div class="nav-item position-relative " #dropdownContainer>
+  <button
+    class="nav-link dropdown-toggle custom-dropdown-button"
+    (click)="toggleDropdown()"
+    [class.active]="isOpen"
+    [ngClass]="{ active: isActive }"
+    [attr.aria-expanded]="isOpen">
+    Lista de compras
+  </button>
+
+  <div class="dropdown-menu-topbar" *ngIf="isOpen">
+    <a routerLink="/app/shoppingList" class="dropdown-link">Crear lista nueva</a>
+    <a routerLink="/app/shoppingList/view" class="dropdown-link">Ver listas</a>
+  </div>
+</div>

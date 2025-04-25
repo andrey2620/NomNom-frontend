@@ -1,41 +1,37 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './pages/auth/login/login.component';
 import { AppLayoutComponent } from './components/app-layout/app-layout.component';
-import { SignUpComponent } from './pages/auth/sign-up/signup.component';
-import { UsersComponent } from './pages/users/users.component';
-import { AuthGuard } from './guards/auth.guard';
-import { AccessDeniedComponent } from './pages/access-denied/access-denied.component';
 import { AdminRoleGuard } from './guards/admin-role.guard';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { AuthGuard } from './guards/auth.guard';
 import { GuestGuard } from './guards/guest.guard';
 import { IRoleType } from './interfaces';
-import { ProfileComponent } from './pages/profile/profile.component';
-import { GamesComponent } from './pages/games/games.component';
-import { OrdersComponent } from './pages/orders/orders.component';
-import { PreferenceListPageComponent } from './pages/preferenceList/preference-list.component';
-import { CallbackComponent } from './pages/auth/login/CallbackComponent';
-import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgotPassword.component';
-import { ResetPasswordComponent } from './pages/auth/reset-password/reset-password.component';
-
-import { RecipeFormComponent } from './components/recipe/recipe-form/recipe-form.component';
-import { RecipeListComponent } from './components/recipe/recipe-list/recipe-list.component';
-import { GenerateRecipesComponent } from './pages/generateRecipes/generateRecipes.component';
-import { RecipeComponent } from './pages/recipe/recipe.component';
-import { nomNomLandingComponent } from './pages/NomNomLandingPage/nomNomLanding';
 import { codeCollectiveLandingComponent } from './pages/CodeCollectiveLandingPage/codeCollectiveLanding';
-
+import { nomNomLandingComponent } from './pages/NomNomLandingPage/nomNomLanding';
+import { AccessDeniedComponent } from './pages/access-denied/access-denied.component';
+import { ForgotPasswordComponent } from './pages/auth/forgot-password/forgotPassword.component';
+import { CallbackComponent } from './pages/auth/login/callbackComponent';
+import { LoginComponent } from './pages/auth/login/login.component';
+import { ResetPasswordComponent } from './pages/auth/reset-password/reset-password.component';
+import { SignUpComponent } from './pages/auth/sign-up/signup.component';
+import { GenerateRecipesComponent } from './pages/generateRecipes/generateRecipes.component';
 import { InteractiveMapComponent } from './pages/interactiveMap/interactiveMap.component';
+import { PlanificatorPageComponent } from './pages/planificator/planificator-page.component';
+import { ProfileEditComponent } from './pages/profile-edit/profile-edit.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { RecipeComponent } from './pages/recipe/recipe.component';
+import { ShoppingListCreateComponent } from './pages/shoppingList/shoppingListCreate/shoppingList-create.component';
+import { ShoppingListViewComponent } from './pages/shoppingList/shoppingListView/shoppingList-view.component';
+import { UsersComponent } from './pages/users/users.component';
 
 export const routes: Routes = [
   {
     path: 'nomNomLanding',
     component: nomNomLandingComponent,
-    canActivate: [GuestGuard],
+    //canActivate: [GuestGuard],
   },
   {
     path: 'codeCollectiveLanding',
     component: codeCollectiveLandingComponent,
-    canActivate: [GuestGuard],
+    //canActivate: [GuestGuard],
   },
   {
     path: 'login',
@@ -99,7 +95,7 @@ export const routes: Routes = [
         component: GenerateRecipesComponent,
         data: {
           authorities: [IRoleType.superAdmin, IRoleType.user],
-          name: 'Generador',
+          name: 'Ingredientes',
           showInSidebar: true,
         },
       },
@@ -113,6 +109,15 @@ export const routes: Routes = [
         },
       },
       {
+        path: 'planificator',
+        component: PlanificatorPageComponent,
+        data: {
+          authorities: [IRoleType.superAdmin, IRoleType.user],
+          name: 'Planificador',
+          showInSidebar: true,
+        },
+      },
+      {
         path: 'profile',
         component: ProfileComponent,
         data: {
@@ -122,26 +127,40 @@ export const routes: Routes = [
         },
       },
       {
+        path: 'profile/edit',
+        component: ProfileEditComponent,
+        data: {
+          authorities: [IRoleType.superAdmin, IRoleType.user],
+          name: 'profile-edit',
+        },
+      },
+      {
         path: 'recipes',
         component: RecipeComponent,
         data: {
           authorities: [IRoleType.superAdmin, IRoleType.user],
-          name: 'Recetas',
+          name: 'Generar Recetas',
           showInSidebar: true,
         },
       },
-      /*       {
-        path: 'games',
-        component: GamesComponent,
+      {
+        path: 'shoppingList',
+        component: ShoppingListCreateComponent,
         data: {
-          authorities: [
-            IRoleType.superAdmin,
-            IRoleType.user,
-          ],
-          name: 'games',
-          showInSidebar: true
-        }
+          authorities: [IRoleType.superAdmin, IRoleType.user],
+          name: 'Lista de compras',
+          showInSidebar: true,
+        },
       },
+      {
+        path: 'shoppingList/view',
+        component: ShoppingListViewComponent,
+        data: {
+          authorities: [IRoleType.superAdmin, IRoleType.user],
+          showInSidebar: false,
+        },
+      },
+      /*
       {
         path: 'orders',
         component: OrdersComponent,
@@ -153,19 +172,9 @@ export const routes: Routes = [
           name: 'orders',
           showInSidebar: true
         }
+
       },
-      {
-        path: 'preference-list',
-        component: PreferenceListPageComponent,
-        data: {
-          authorities: [
-            IRoleType.superAdmin,
-            IRoleType.user,
-          ],
-          name: 'preference list',
-          showInSidebar: true
-        }
-      }, */
+			*/
     ],
   },
 ];
