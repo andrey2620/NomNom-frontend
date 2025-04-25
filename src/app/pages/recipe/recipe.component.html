@@ -29,7 +29,8 @@
       <div class="app-sous-chef-container d-flex w-100 flex-column h-100">
         <app-sous-chef class="h-100"
           *ngIf="selectedRecipe"
-          [recipe]="selectedRecipe">
+          [recipe]="selectedRecipe" (save)="onRecipeSaved(selectedRecipe!)"
+          >
         </app-sous-chef>
       </div>
     </ng-container>
