@@ -18,13 +18,12 @@
           <input type="text" class="form-control" placeholder="Buscar receta..." />
         </div>
 
-        <!--Aqui debe traerse las recetas guardadas de un json-->
         <div *ngFor="let recipe of favoriteRecipes"
           class="p-2 bg-white rounded d-flex justify-content-between align-items-center mb-2">
           <span>{{ recipe.name }}</span>
-          <button class="btn btn-sm rounded-pill" [ngClass]="isSelected(recipe.name) ? 'btn-selected' : 'btn-red'"
-            (click)="toggleSelection(recipe.name)">
-            {{ isSelected(recipe.name) ? 'Seleccionada' : 'Seleccionar' }}
+          <button class="btn btn-sm rounded-pill" [ngClass]="isSelected(recipe) ? 'btn-selected' : 'btn-red'"
+            (click)="toggleSelection(recipe)">
+            {{ isSelected(recipe) ? 'Seleccionada' : 'Seleccionar' }}
           </button>
         </div>
       </div>
@@ -37,7 +36,6 @@
         <h3>Paso 2: Ajusta los ingredientes generados automáticamente</h3>
       </div>
 
-      <!-- ESTE row SEPARA los dos cuadros correctamente -->
       <div class="row g-3">
         <!-- Lista -->
         <div class="col-12 col-lg-6">

@@ -131,6 +131,12 @@ export interface IRecipe {
   country?: string;
 }
 
+export interface IIngredient {
+  name: string;
+  quantity: string;
+  measurement?: string;
+}
+
 export interface IIngredients {
   id?: number;
   name?: string;
@@ -159,12 +165,6 @@ export interface IMenuCreateDTO {
     mealType: string;
     dayOfWeek: string;
   }[];
-}
-
-export interface IIngredient {
-  name: string;
-  quantity: string;
-  measurement?: string;
 }
 
 export const CATEGORY_IMAGE_MAP: Record<string, string> = {
