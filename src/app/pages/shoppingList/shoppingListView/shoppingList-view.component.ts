@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ShoppingListService } from '../../../services/shoppingList.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-shopping-list-view',
@@ -17,14 +18,16 @@ export class ShoppingListViewComponent implements OnInit {
   updatedListName: string = '';
 
 
-  constructor(private shoppingListService: ShoppingListService) { }
+  constructor(private shoppingListService: ShoppingListService,
+    private toastr: ToastrService
+  ) { }
 
   ngOnInit(): void {
     this.shoppingListService.getAllShoppingLists().subscribe({
       next: (res) => {
         this.savedLists = res.data ?? [];
       },
-      error: () => alert('Error al cargar las listas')
+      error: () => this.toastr.error('Error al cargar las listas', 'Error')
     });
   }
 
@@ -44,35 +47,34 @@ export class ShoppingListViewComponent implements OnInit {
       },
       error: (err) => {
         console.error('Error cargando la lista:', err);
-        alert('No se pudo cargar la lista seleccionada');
+        this.toastr.error('No se pudo cargar la lista seleccionada', 'Error');
       }
     });
   }
 
   updateListName(): void {
     if (!this.selectedListId || !this.updatedListName) {
-      alert('Selecciona una lista y escribe un nuevo nombre');
+      this.toastr.warning('Selecciona una lista y escribe un nuevo nombre', 'Advertencia');
       return;
     }
 
     this.shoppingListService.updateShoppingListName(this.selectedListId, this.updatedListName).subscribe({
       next: () => {
-        alert('Nombre actualizado correctamente');
-        // Opcional: actualizar también el nombre en la UI
+        this.toastr.success('Nombre actualizado correctamente', 'Éxito');
         const list = this.savedLists.find(l => l.id === this.selectedListId);
         if (list) list.name = this.updatedListName;
         this.selectedListName = this.updatedListName;
         this.updatedListName = '';
       },
       error: () => {
-        alert('Error al actualizar el nombre');
+        this.toastr.error('Error al actualizar el nombre', 'Error');
       }
     });
   }
 
   downloadListPdf() {
     if (!this.selectedListId) {
-      alert('Selecciona una lista para descargar');
+      this.toastr.warning('Selecciona una lista para descargar', 'Advertencia');
       return;
     }
 
@@ -86,29 +88,27 @@ export class ShoppingListViewComponent implements OnInit {
         window.URL.revokeObjectURL(url);
       },
       error: () => {
-        alert('Error al descargar el PDF');
+        this.toastr.error('Error al descargar el PDF', 'Error');
       }
     });
   }
 
   deleteSelectedList() {
     if (!this.selectedListId) {
-      alert('Primero selecciona una lista');
+      this.toastr.warning('Primero selecciona una lista', 'Advertencia');
       return;
     }
 
-    const confirmDelete = confirm('¿Estás seguro que deseas eliminar esta lista?');
-    if (!confirmDelete) return;
 
     this.shoppingListService.deleteShoppingList(this.selectedListId).subscribe({
       next: () => {
-        alert('Lista eliminada correctamente');
+        this.toastr.success('Lista eliminada correctamente', 'Éxito');
         this.savedLists = this.savedLists.filter(list => list.id !== this.selectedListId);
         this.selectedListId = undefined;
         this.selectedListName = '';
         this.selectedListItems = [];
       },
-      error: () => alert('Ocurrió un error al eliminar la lista')
+      error: () => this.toastr.error('Ocurrió un error al eliminar la lista', 'Error')
     });
   }
 
