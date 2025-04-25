@@ -46,11 +46,11 @@
         <div>
           <label class="fw-bold mb-1">Edita tu lista</label>
           <input type="text" class="form-control mb-3" placeholder="Escribe nombre de la lista" />
-          <button class="btn btn-success rounded-pill w-100 mb-3">Actualizar</button>
+          <button class="btn btn-success rounded-pill w-100 mb-3" (click)="updateListName()">Actualizar</button>
         </div>
         <div class="d-grid gap-2">
-          <button class="btn rounded-pill btn-outline-secondary">Descargar</button>
-          <button class="btn rounded-pill btn-outline-secondary">Borrar</button>
+          <button class="btn rounded-pill btn-outline-secondary" (click)="downloadListPdf()">Descargar</button>
+          <button class="btn rounded-pill btn-outline-secondary" (click)="deleteSelectedList()">Borrar</button>
         </div>
       </div>
     </div>
