@@ -41,6 +41,7 @@ export class ShoppingListViewComponent implements OnInit {
         const listData = res.data;
         this.selectedListItems = listData.items.map((item: any) => ({
           name: item.ingredient ? item.ingredient.name : item.customName,
+          quantity: item.quantity,
           checked: false,
           id: item.id
         }));
