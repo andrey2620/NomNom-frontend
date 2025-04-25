@@ -75,7 +75,10 @@ export class RecipeListComponent implements OnInit {
     const maxIaAttempts = 2;
 
     const stored = localStorage.getItem('user_ingredients');
+    const authUser = localStorage.getItem('auth_user');
+
     let parsed: { name: string }[] = [];
+    let allergyNames: string[] = [];
 
     try {
       parsed = stored ? JSON.parse(stored) : [];
@@ -84,7 +87,15 @@ export class RecipeListComponent implements OnInit {
       parsed = [];
     }
 
-    const ingredientNames = parsed.map(i => i.name).filter(name => !!name.trim());
+    try {
+      const user = authUser ? JSON.parse(authUser) : null;
+      allergyNames = user?.allergies?.map((a: any) => a.name) ?? [];
+    } catch (e) {
+      console.warn('auth_user mal formateado o sin alergias');
+    }
+
+    // Filtrar ingredientes excluyendo alergias
+    const ingredientNames = parsed.map(i => i.name).filter(name => !!name.trim() && !allergyNames.includes(name));
 
     if (!ingredientNames.length) {
       console.warn('No hay ingredientes válidos en localStorage');
@@ -199,13 +210,12 @@ export class RecipeListComponent implements OnInit {
     const maxIaAttempts = 2;
 
     const fetchRandom = () => {
-
       if (window.location.hostname === 'localhost') {
         console.warn('Deteniendo loop porque estamos en modo local sin IA');
         this.loadAllFallbackAnimated(count);
         return;
       }
-      
+
       this.recipesService
         .getRandomRecipes()
         .pipe(
