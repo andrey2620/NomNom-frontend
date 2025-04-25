@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core'; // Asegurate de importar OnInit
+import { Component, OnInit } from '@angular/core'; 
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { ShoppingListService } from '../../../services/shoppingList.service';
 import { FormsModule } from '@angular/forms';
-import { IRecipe } from '../../../interfaces'; // Asegurate de importar tu interfaz
+import { IRecipe } from '../../../interfaces'; 
 import { ProfileService } from '../../../services/profile.service';
+import { ToastService } from '../../../services/toast.service';
 
 
 @Component({
@@ -32,9 +33,20 @@ export class ShoppingListCreateComponent implements OnInit {
   constructor(
       private router: Router, 
       private shoppingListService: ShoppingListService,
-      private profileService: ProfileService
+      private profileService: ProfileService,
+      private toastService: ToastService
+
   ) { }
 
+  goToSavedLists(): void {
+    this.router.navigate(['/app/shoppingList/view']);
+  }
+
+  clearManualIngredients(): void {
+    this.manualIngredients = [];
+    this.saveToLocalStorage(); 
+  }
+  
   ngOnInit(): void {
     this.restoreFromLocalStorage();
     this.loadFavoriteRecipes();
@@ -111,7 +123,6 @@ export class ShoppingListCreateComponent implements OnInit {
   
     let ingredients = recipe.ingredients;
   
-    // Si no vienen en "ingredients", intentamos convertir "recipeIngredients"
     if (!ingredients && (recipe as any).recipeIngredients) {
       ingredients = (recipe as any).recipeIngredients.map((ri: any) => ({
         name: ri.ingredient?.name || 'Ingrediente desconocido',
@@ -126,19 +137,33 @@ export class ShoppingListCreateComponent implements OnInit {
     }
   
     ingredients.forEach(ing => {
-      const exists = this.manualIngredients.some(item => item.name === ing.name);
-      if (!exists) {
-        this.manualIngredients.push({
-          name: ing.name,
-          quantity: `${ing.quantity} ${ing.measurement || ''}`.trim()
-        });
-      }
+      this.addOrUpdateIngredient(ing.name, ing.quantity, ing.measurement);
     });
   
     this.saveToLocalStorage();
     console.log('Ingredientes agregados:', this.manualIngredients);
   }
+
+  private addOrUpdateIngredient(name: string, quantity: string, measurement?: string): void {
+    const quantityText = `${quantity} ${measurement || ''}`.trim();
+    const existing = this.manualIngredients.find(item => item.name === name);
   
+    if (existing) {
+      const currentQty = parseFloat(existing.quantity);
+      const newQty = parseFloat(quantity);
+  
+      if (!isNaN(currentQty) && !isNaN(newQty)) {
+        existing.quantity = (currentQty + newQty).toString() + (measurement ? ` ${measurement}` : '');
+      } else {
+        console.warn(`No se puede sumar "${existing.quantity}" + "${quantityText}"`);
+      }
+    } else {
+      this.manualIngredients.push({
+        name,
+        quantity: quantityText
+      });
+    }
+  }
   
   removeRecipeIngredients(recipe: IRecipe): void {
     let ingredients = recipe.ingredients;
@@ -155,14 +180,33 @@ export class ShoppingListCreateComponent implements OnInit {
     }
   
     ingredients.forEach(ing => {
-      this.manualIngredients = this.manualIngredients.filter(item => item.name !== ing.name);
+      this.removeOrDecreaseIngredient(ing.name, ing.quantity, ing.measurement);
     });
   
     this.saveToLocalStorage();
   }
-  
-  
 
+  private removeOrDecreaseIngredient(name: string, quantity: string, measurement?: string): void {
+    const existing = this.manualIngredients.find(item => item.name === name);
+  
+    if (!existing) return;
+  
+    const currentQty = parseFloat(existing.quantity);
+    const removeQty = parseFloat(quantity);
+  
+    if (!isNaN(currentQty) && !isNaN(removeQty)) {
+      const newQty = currentQty - removeQty;
+  
+      if (newQty > 0) {
+        existing.quantity = newQty.toString() + (measurement ? ` ${measurement}` : '');
+      } else {
+        this.manualIngredients = this.manualIngredients.filter(item => item.name !== name);
+      }
+    } else {
+      // Si no son numéricos, eliminamos directamente
+      this.manualIngredients = this.manualIngredients.filter(item => item.name !== name);
+    }
+  }
 
   newIngredient = {
     name: '',
@@ -173,7 +217,7 @@ export class ShoppingListCreateComponent implements OnInit {
     const { name, quantity } = this.newIngredient;
 
     if (!name || !quantity) {
-      alert('Por favor, completa el nombre y la cantidad del ingrediente.');
+      this.toastService.showWarning('Por favor, completa el nombre y la cantidad del ingrediente.');
       return;
     }
 
@@ -182,7 +226,6 @@ export class ShoppingListCreateComponent implements OnInit {
     this.saveToLocalStorage();
 
   }
-
 
   removeManualIngredient(item: { name: string; quantity: string }) {
     const index = this.manualIngredients.indexOf(item);
@@ -194,7 +237,7 @@ export class ShoppingListCreateComponent implements OnInit {
   guardarLista() {
     const userId = 2; // Reemplaza esto en el futuro por el usuario logueado
     if (!this.listName) {
-      alert('Debes darle un nombre a la lista');
+      this.toastService.showWarning('Dale un nombre a tu lista antes de guardarla');
       return;
     }
 
@@ -205,35 +248,46 @@ export class ShoppingListCreateComponent implements OnInit {
 
         // Luego agregamos los ingredientes manuales
         if (this.manualIngredients.length > 0) {
-          const itemsToAdd = this.manualIngredients.map(item => ({
-            ingredientId: null, // null o dejarlo sin enviar si no existe
-            name: item.name,
-            quantity: item.quantity,
-            measurement: null
-          }));
+          const itemsToAdd = this.manualIngredients.map(item => this.buildManualItemPayload(item));
+
+          console.log('📦 Enviando items al backend:', itemsToAdd);
 
           this.shoppingListService.addManualItems(listId, itemsToAdd).subscribe({
             next: () => {
-              alert('Lista guardada correctamente con ingredientes manuales');
+              this.toastService.showSuccess('Lista guardada con ingredientes manuales');
               this.resetFormulario();
             },
             error: (err) => {
               console.error('Error al agregar ingredientes:', err);
-              alert('Lista creada pero falló al agregar ingredientes');
+              this.toastService.showWarning('Lista creada, pero falló al agregar ingredientes.');
             }
           });
         } else {
-          alert('Lista guardada correctamente');
+          this.toastService.showSuccess('Lista guardada correctamente');
           this.resetFormulario();
         }
       },
       error: (err) => {
         console.error('Error al guardar la lista:', err);
-        alert('Ocurrió un error al guardar la lista');
+        this.toastService.showError('No se pudo guardar la lista');
       }
     });
     localStorage.removeItem('shoppingList_draft');
   }
+
+  private buildManualItemPayload(item: { name: string; quantity: string }) {
+    const qtyOnly = parseFloat(item.quantity);
+    const measurement = item.quantity.replace(/[0-9.]/g, '').trim() || 'unidad';
+  
+    return {
+      customName: item.name || '',
+      customQuantity: item.quantity || '',
+      quantity: !isNaN(qtyOnly) ? qtyOnly : 1,
+      measurement: measurement || 'unidad'
+    };
+  }
+  
+  
 
   resetFormulario() {
     this.listName = '';

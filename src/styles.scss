@@ -154,6 +154,10 @@ body {
   color: #b5152a;
 }
 
+.text-danger{
+  color: #b5152a;
+}
+
 .bold{
   font-weight: bold !important;
 }
@@ -230,6 +234,24 @@ body {
 
 .btn-outline-danger{
   color: #bb0a21;
+  border-color: #bb0a21;
+}
+
+.btn-outline-primary{
+  border-color: #2c5530;
+  color: #2c5530;
+}
+
+.btn-outline-primary:focus{
+  border-color: #2c5530;
+  background-color: #2c5530;
+  color: #fff;
+}
+
+.btn-outline-primary:hover{
+  border-color: #2c5530;
+  background-color: #2c5530;
+  color: #fff;
 }
 
 .btn-warning{
