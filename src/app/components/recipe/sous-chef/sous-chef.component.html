@@ -50,11 +50,11 @@
     </div>
   </div>
 
-  <img
+  <!--<img
     class="sound-status-gif my-3"
     [src]="isSpeaking ? 'assets/gifs/sound.gif' : 'assets/gifs/mute.gif'"
     alt="Estado de sonido"
-  />
+  />-->
 
   <div class="btns d-flex justify-content-center align-items-center gap-2 my-2">
     <button
@@ -78,15 +78,14 @@
     </button>
   </div>
 
-  <label for="guardar" class="form-label mt-3 mb-1">Guardar receta</label>
-  <div class="text-center mb-3">
-    <button class="btn toggle-btn2" (click)="emitSave()">Guardar</button>
+  <div class="text-center my-3">
+    <div class="d-flex justify-content-center gap-2 flex-wrap">
+      <button class="btn btn-outline-success btn-sm px-3" (click)="emitSave()">Guardar receta</button>
+      <button class="btn btn-outline-primary btn-sm px-3" (click)="suggestPresentation()">Generar sugerencias</button>
+    </div>
   </div>
-
-  <label for="presentacion" class="form-label mb-1">Sugerencias de presentación</label>
-  <div class="text-center mb-3">
-    <button class="btn toggle-btn2" (click)="suggestPresentation()">Generar</button>
-  </div>
+  
+  
 
   <div class="p-sugestions ps-3 pt-2 mt-2">
     <div *ngIf="suggestions.ingredientSubstitutions.length">
