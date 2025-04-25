@@ -17,6 +17,10 @@ export class ShoppingListService {
         });
     }
 
+    getShoppingListDetails(listId: number): Observable<any> {
+        return this.http.get(`${this.apiUrl}/${listId}`);
+    }
+
     addManualItems(listId: number, items: any[]): Observable<any> {
         return this.http.post(`${this.apiUrl}/${listId}/add-Items`, items);
     }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ShoppingListService } from '../../../services/shoppingList.service';
 
 @Component({
   selector: 'app-shopping-list-view',
@@ -10,33 +11,35 @@ import { CommonModule } from '@angular/common';
 })
 export class ShoppingListViewComponent {
 
-  selectList(list: any) {
-    console.log('Click en toda la fila:', list.name);
-    // Aquí podés hacer que se cargue la lista, mostrar detalles, etc.
-  }
-  
-  viewList(event: MouseEvent, list: any) {
-    event.stopPropagation(); // Evita que el clic se propague al div
-    console.log('Click en botón Ver:', list.name);
-    // Navegar o mostrar modal, etc.
-  }
-  
+  constructor(private shoppingListService: ShoppingListService) { }
 
-  // Simulación de listas guardadas
   savedLists = [
-    { name: 'Lista de Navidad' },
-    { name: 'Lista de Meriendas' },
-    { name: 'Lista de Camping' },
-    { name: 'Lista de Año Nuevo' }
+    { id: 1, name: 'Lista de Navidad' },
+    { id: 2, name: 'Lista de Meriendas' },
+    { id: 3, name: 'Lista de Camping' },
+    { id: 4, name: 'Lista de Año Nuevo' }
   ];
 
-  // Ingredientes asociados a la lista seleccionada
-  selectedListItems = [
-    { name: 'Arroz', checked: true },
-    { name: 'Pollo', checked: false },
-    { name: 'Item de lista 3', checked: false },
-    { name: 'Item de lista 4', checked: true },
-    { name: 'Item de lista 5', checked: false },
-    { name: 'Item de lista 7', checked: false }
-  ];
+  selectedListName: string = '';
+  selectedListId?: number;
+  selectedListItems: { name: string; checked: boolean; id: number }[] = [];
+
+  selectList(list: any) {
+    this.selectedListName = list.name;
+    this.selectedListId = list.id;
+
+    this.shoppingListService.getShoppingListDetails(list.id).subscribe({
+      next: (data) => {
+        this.selectedListItems = data.items.map((item: any) => ({
+          name: item.ingredient ? item.ingredient.name : item.customName,
+          checked: false,
+          id: item.id
+        }));
+      },
+      error: (err) => {
+        console.error('Error cargando la lista:', err);
+        alert('No se pudo cargar la lista seleccionada');
+      }
+    });
+  }
 }
